@@ -1,0 +1,84 @@
+{
+	"contentManagement": [
+		{
+			"tit": "GIS导航监测",
+			"icon": "icon-text",
+			"href": "page/monitorMng/detail.html",
+			"spread": false
+		}
+	],
+	"memberCenter": [
+		{
+			"tit": "构筑物管理",
+			"icon": "&#xe612;",
+			"href": "page/objMng/structure.html",
+			"spread": false
+		},
+		{
+			"tit": "监测点管理",
+			"icon": "&#xe612;",
+			"href": "page/user/userList.html",
+			"spread": false
+		},
+		{
+			"tit": "监测域管理",
+			"icon": "&#xe612;",
+			"href": "page/user/userList.html",
+			"spread": false
+		},
+		{
+			"tit": "终端管理",
+			"icon": "&#xe612;",
+			"href": "page/user/userList.html",
+			"spread": false
+		},
+		{
+			"tit": "传感器管理",
+			"icon": "&#xe612;",
+			"href": "page/user/userList.html",
+			"spread": false
+		}
+	],
+	"memberyujing": [
+		{
+			"tit": "预警参数配置",
+			"icon": "&#xe631;",
+			"href": "page/systemSetting/basicParameter.html",
+			"spread": false
+		},
+		{
+			"tit": "预警参数修改",
+			"icon": "&#xe631;",
+			"href": "page/systemSetting/basicParameter.html",
+			"spread": false
+		}
+	],
+	"news": [
+		{
+			"tit": "预警消息",
+			"icon": "&#xe631;",
+			"href": "page/systemSetting/basicParameter.html",
+			"spread": false
+		},
+		{
+			"tit": "平台公告",
+			"icon": "&#xe631;",
+			"href": "page/systemSetting/basicParameter.html",
+			"spread": false
+		}
+	],
+	"systemeSttings": [
+		{
+			"tit": "账户隶属设置",
+			"icon": "&#xe631;",
+			"href": "page/systemSetting/basicParameter.html",
+			"spread": false
+		},
+		{
+			"tit": "账户管理",
+			"icon": "&#xe631;",
+			"href": "page/systemSetting/basicParameter.html",
+			"spread": false
+		}
+	]
+}
