@@ -20,7 +20,7 @@ layui.use(['form','layer'],function(){
         // })
         setTimeout(function(){
             top.layer.close(index);
-            top.layer.msg("构筑物添加成功！");
+            top.layer.msg("监测点添加成功！");
             layer.closeAll("iframe");
             //刷新父页面
             parent.location.reload();

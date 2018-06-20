@@ -4,7 +4,8 @@ layui.use(['form','layer','table','laytpl'],function(){
         $ = layui.jquery,
         laytpl = layui.laytpl,
         table = layui.table;
-    //列表
+
+    //用户列表
     var tableIns = table.render({
         elem: '#itemListtable',
         url : '../../../json/userList.json',
@@ -23,10 +24,11 @@ layui.use(['form','layer','table','laytpl'],function(){
             {field: 'userSex', title: '地理位置纬度', align:'center'},
             {field: 'userSex', title: '行别', align:'center'},
             {field: 'userSex', title: '监测维度', align:'center'},
-            {field: 'userSex', title: '监测体类型', align:'center',minWidth:150},
-            {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
+            {field: 'userSex', title: '桥墩总数(总编号)', align:'center',minWidth:150},
+            {title: '操作', minWidth:175, templet:'#userListBar',fixed:"right",align:"center"}
         ]]
     });
+
     //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
     $(".search_btn").on("click",function(){
         if($(".searchVal").val() != ''){
@@ -42,12 +44,13 @@ layui.use(['form','layer','table','laytpl'],function(){
             layer.msg("请输入搜索的内容");
         }
     });
-    //添加构筑物
+
+    //添加监测点
     function addItem(){
         var index = layui.layer.open({
-            title : "添加构筑物",
+            title : "添加监测点",
             type : 2,
-            content : "addStructure.html",
+            content : "addPoint.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
 //              if(edit){
@@ -59,7 +62,6 @@ layui.use(['form','layer','table','laytpl'],function(){
 //                  body.find(".userDesc").text(edit.userDesc);    //用户简介
 //                  form.render();
 //              }
- 				getStationname();
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -76,12 +78,12 @@ layui.use(['form','layer','table','laytpl'],function(){
     $(".addItem_btn").click(function(){
         addItem();
     })
-    //修改构筑物
+    //修改监测点
     function editItem(data){
         var index = layui.layer.open({
-            title : "编辑构筑物",
+            title : "编辑监测点",
             type : 2,
-            content : "editStructure.html",
+            content : "editPoint.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(data){                   
@@ -102,12 +104,12 @@ layui.use(['form','layer','table','laytpl'],function(){
             layui.layer.full(index);
         })
     }
-    //查看构筑物详情
+    //查看监测点详情
     function showItem(data){
         var index = layui.layer.open({
-            title : "构筑物详情",
+            title : "监测点详情",
             type : 2,
-            content : "detailStructure.html",
+            content : "detailPoint.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(data){                   
@@ -147,57 +149,5 @@ layui.use(['form','layer','table','laytpl'],function(){
             });
         }
     });
-	//查找公路局
-	function getStationname(){
-		console.log(23)
-		var param ={};
-		param.action_flag ="w_query";
-		param.sub_flag ="bureau";
-		param.isFlur = false;
-		param.isReserve = false;
-		param.isDivide = false;
-		param.hasForeign = false;
-		net.sendRequest(net.SystemServlet,param,function(data){
-			console.log(data)
-		})
-	}
-	var net={};
-	net.url = "http://192.168.0.202:8080";
-	net.SystemServlet ="StructureMonitoring/SystemServlet";
-	net.sendRequest = function(_service, body, callback) {	
-		console.log(56)
-		var actionStr = net.url + "/" + _service;		
-		$.ajax({
-			url: actionStr,
-			type: 'post',
-			data: JSON.stringify(body),
-			dataType: 'json',
-//			async: false,
-			contentType: 'application/json',
-			success: function(data, status, xhr) {
-				//返回包判断
-				if(data != null && data != undefined) {
-					callback(data)
-					console.log(data)
-				} else {
-					return;
-				}
-
-			},
-			error: function(data, status, xhr) {
-				//			// handle the error.
-				//			alert(exception.toString());
-				
-			},
-			statusCode: {
-				500: function() {
-			    	removeLoadingBox(loadType);
-			    	layer.msg('服务器连接失败');
-				}
-			}
-		});
-	}
-
-
 
 })
