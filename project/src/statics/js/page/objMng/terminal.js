@@ -25,7 +25,7 @@ layui.use(['form','layer','table','laytpl'],function(){
             {field: 'userSex', title: '行别', align:'center'},
             {field: 'userSex', title: '监测维度', align:'center'},
             {field: 'userSex', title: '桥墩总数(总编号)', align:'center',minWidth:150},
-            {title: '操作', minWidth:175, templet:'#userListBar',fixed:"right",align:"center"}
+            {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
 

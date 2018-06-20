@@ -11,31 +11,31 @@
 		{
 			"tit": "构筑物管理",
 			"icon": "&#xe612;",
-			"href": "page/objMng/structure.html",
+			"href": "page/objMng/structure/structureList.html",
 			"spread": false
 		},
 		{
 			"tit": "监测点管理",
 			"icon": "&#xe612;",
-			"href": "page/user/userList.html",
+			"href": "page/objMng/point/pointList.html",
 			"spread": false
 		},
 		{
-			"tit": "检测域管理",
+			"tit": "监测域管理",
 			"icon": "&#xe612;",
-			"href": "page/user/userList.html",
+			"href": "page/objMng/file/fileList.html",
 			"spread": false
 		},
 		{
-			"tit": "终端管理",
+			"tit": "终端",
 			"icon": "&#xe612;",
-			"href": "page/user/userList.html",
+			"href": "page/objMng/terminal/terminalList.html",
 			"spread": false
 		},
 		{
-			"tit": "传感器管理",
+			"tit": "传感器",
 			"icon": "&#xe612;",
-			"href": "page/user/userList.html",
+			"href": "page/objMng/sensor/sensorList.html",
 			"spread": false
 		}
 	],
