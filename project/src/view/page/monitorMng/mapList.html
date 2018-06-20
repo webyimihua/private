@@ -29,6 +29,7 @@
 <body>
 	<div id="allmap"></div>
 </body>
+<script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript">
 	// 百度地图API功能
 	var map = new BMap.Map("allmap",{minZoom:6});    // 创建Map实例
@@ -111,7 +112,8 @@
 						// var lat = $(this).find(".bubble").attr("lat");
 						// //点击改变缩放级别
 						// map.panTo(new BMap.Point(lng,lat));  
-						map.setZoom(16);
+//						map.setZoom(16);
+                        openDetails()
 					});
 				})();
 		}
@@ -124,6 +126,35 @@
    ]
    firstMap(maplist)
 
-</script>
 
+
+layui.use(['element','layer','jquery'],function(){
+	$ = layui.$;
+	 function openDetails(){
+	    var index = layui.layer.open({
+	        title : "构筑物详情",
+	        type : 2,
+	        content : "detail.html",
+	        success : function(layero, index){
+	            var body = layui.layer.getChildFrame('body', index);
+	            Timeout(function(){
+	                layui.layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {
+	                    tips: 3
+	                });
+	            },500)
+	        }
+	    })
+	    layui.layer.full(index);
+	    //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+	    $(window).on("resize",function(){
+	        layui.layer.full(index);
+	    })
+	}
+	 $(".overlays1").click(function(){
+        openDetails();
+    })
+	
+})
+
+</script>
 </html>

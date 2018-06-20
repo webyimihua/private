@@ -1,39 +1,39 @@
 {
 	"contentManagement": [
 		{
-			"tit": "GISµ¼º½¼à²â",
+			"tit": "GISå¯¼èˆªç›‘æµ‹",
 			"icon": "icon-text",
-			"href": "page/monitorMng/detail.html",
+			"href": "page/monitorMng/mapList.html",
 			"spread": false
 		}
 	],
 	"memberCenter": [
 		{
-			"tit": "¹¹ÖşÎï¹ÜÀí",
+			"tit": "æ„ç­‘ç‰©ç®¡ç†",
 			"icon": "&#xe612;",
 			"href": "page/objMng/structure.html",
 			"spread": false
 		},
 		{
-			"tit": "¼à²âµã¹ÜÀí",
+			"tit": "ç›‘æµ‹ç‚¹ç®¡ç†",
 			"icon": "&#xe612;",
 			"href": "page/user/userList.html",
 			"spread": false
 		},
 		{
-			"tit": "¼à²âÓò¹ÜÀí",
+			"tit": "æ£€æµ‹åŸŸç®¡ç†",
 			"icon": "&#xe612;",
 			"href": "page/user/userList.html",
 			"spread": false
 		},
 		{
-			"tit": "ÖÕ¶Ë¹ÜÀí",
+			"tit": "ç»ˆç«¯ç®¡ç†",
 			"icon": "&#xe612;",
 			"href": "page/user/userList.html",
 			"spread": false
 		},
 		{
-			"tit": "´«¸ĞÆ÷¹ÜÀí",
+			"tit": "ä¼ æ„Ÿå™¨ç®¡ç†",
 			"icon": "&#xe612;",
 			"href": "page/user/userList.html",
 			"spread": false
@@ -41,13 +41,13 @@
 	],
 	"memberyujing": [
 		{
-			"tit": "Ô¤¾¯²ÎÊıÅäÖÃ",
+			"tit": "é¢„è­¦å‚æ•°é…ç½®",
 			"icon": "&#xe631;",
 			"href": "page/systemSetting/basicParameter.html",
 			"spread": false
 		},
 		{
-			"tit": "Ô¤¾¯²ÎÊıĞŞ¸Ä",
+			"tit": "é¢„è­¦å‚æ•°ä¿®æ”¹",
 			"icon": "&#xe631;",
 			"href": "page/systemSetting/basicParameter.html",
 			"spread": false
@@ -55,13 +55,13 @@
 	],
 	"news": [
 		{
-			"tit": "Ô¤¾¯ÏûÏ¢",
+			"tit": "é¢„è­¦æ¶ˆæ¯",
 			"icon": "&#xe631;",
 			"href": "page/systemSetting/basicParameter.html",
 			"spread": false
 		},
 		{
-			"tit": "Æ½Ì¨¹«¸æ",
+			"tit": "å¹³å°å…¬å‘Š",
 			"icon": "&#xe631;",
 			"href": "page/systemSetting/basicParameter.html",
 			"spread": false
@@ -69,13 +69,13 @@
 	],
 	"systemeSttings": [
 		{
-			"tit": "ÕË»§Á¥ÊôÉèÖÃ",
+			"tit": "è´¦æˆ·éš¶å±è®¾ç½®",
 			"icon": "&#xe631;",
 			"href": "page/systemSetting/basicParameter.html",
 			"spread": false
 		},
 		{
-			"tit": "ÕË»§¹ÜÀí",
+			"tit": "è´¦æˆ·ç®¡ç†",
 			"icon": "&#xe631;",
 			"href": "page/systemSetting/basicParameter.html",
 			"spread": false
