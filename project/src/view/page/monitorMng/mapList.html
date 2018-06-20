@@ -35,6 +35,7 @@
 	var map = new BMap.Map("allmap",{minZoom:6});    // 创建Map实例
 	map.centerAndZoom("西安",7);          // 设置地图显示的城市 此项是必须设置的
 	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+	map.disableDoubleClickZoom()  //禁止鼠标双击放大地图
 
 	//1、定义构造函数并继承Overlay
 //定义自定义覆盖物的构造函数  
@@ -150,7 +151,7 @@ layui.use(['element','layer','jquery'],function(){
 	        layui.layer.full(index);
 	    })
 	}
-	 $(".overlays1").click(function(){
+	 $(".overlays1").dblclick(function(){
         openDetails();
     })
 	
