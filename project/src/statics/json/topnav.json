@@ -69,15 +69,39 @@
 	],
 	"systemeSttings": [
 		{
-			"tit": "账户隶属设置",
+			"tit": "账户管理",
 			"icon": "&#xe631;",
-			"href": "page/systemSetting/basicParameter.html",
+			"href": "page/systemSetting/account/memberAccount.html",
 			"spread": false
 		},
 		{
-			"tit": "账户管理",
+			"tit": "铁路线管理",
 			"icon": "&#xe631;",
-			"href": "page/systemSetting/basicParameter.html",
+			"href": "page/systemSetting/line/railwayLine.html",
+			"spread": false
+		},
+		{
+			"tit": "铁路局管理",
+			"icon": "&#xe631;",
+			"href": "page/systemSetting/station/railwayStation.html",
+			"spread": false
+		},
+		{
+			"tit": "监测体类型管理",
+			"icon": "&#xe631;",
+			"href": "page/systemSetting/body/monitorBody.html",
+			"spread": false
+		},
+		{
+			"tit": "监测域类型管理",
+			"icon": "&#xe631;",
+			"href": "page/systemSetting/area/monitorArea.html",
+			"spread": false
+		},
+		{
+			"tit": "传感器类型管理",
+			"icon": "&#xe631;",
+			"href": "page/systemSetting/sensor/sensorType.html",
 			"spread": false
 		}
 	]
