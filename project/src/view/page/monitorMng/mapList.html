@@ -135,11 +135,12 @@ layui.use(['element','layer','jquery'],function(){
 	    var index = layui.layer.open({
 	        title : false,
 	        type : 2,
+	        closeBtn: 0,
 	        content : "detail.html",
 	        success : function(layero, index){
 	            var body = layui.layer.getChildFrame('body', index);
 	            Timeout(function(){
-	                layui.layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {
+	                layui.layer.tips('点击此处返回', '.layui-layer-setwin .layui-layer-close', {
 	                    tips: 3
 	                });
 	            },500)
@@ -151,9 +152,10 @@ layui.use(['element','layer','jquery'],function(){
 	        layui.layer.full(index);
 	    })
 	}
-	 $(".overlays1").dblclick(function(){
+	$(".overlays1").dblclick(function(){
         openDetails();
     })
+    
 	
 })
 
