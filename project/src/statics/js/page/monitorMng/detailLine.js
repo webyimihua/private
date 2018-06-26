@@ -18,7 +18,7 @@ layui.use(['element','layer','jquery'],function(){
 	        title : false,
 	        type : 2,
 	        closeBtn: 0,
-	        content : "detailLine.html",
+	        content : "detail.html",
 	        success : function(layero, index){
 	            var body = layui.layer.getChildFrame('body', index);
 	            Timeout(function(){
