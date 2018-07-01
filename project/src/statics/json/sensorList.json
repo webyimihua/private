@@ -1,0 +1,28 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 3,
+  "data": [
+    {
+      "index": "1",     
+      "sensorNo": "0011",      
+      "sensorName": "倾角传感器1",
+      "sensorType": "倾角传感器",
+      "ower" : "002",
+      "number" : "**",
+      "distance" : "12.3",
+      "stause" : "正常",
+      "mark" : "1122"
+    },{
+      "index": "2",     
+      "sensorNo": "0011",      
+      "sensorName": "倾角传感器1",
+      "sensorType": "倾角传感器",
+      "ower" : "002",
+      "number" : "**",
+      "distance" : "12.3",
+      "stause" : "正常",
+      "mark" : "1122"
+    }    
+  ]
+}

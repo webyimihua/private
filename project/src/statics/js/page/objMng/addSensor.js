@@ -2,7 +2,9 @@ layui.use(['form','layer'],function(){
     var form = layui.form
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery;
-
+        $("#sensorType").on("change",function(){
+        	console.log(1123)
+        })
     form.on("submit(addUser)",function(data){
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});

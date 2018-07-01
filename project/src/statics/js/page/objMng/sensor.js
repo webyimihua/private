@@ -8,23 +8,24 @@ layui.use(['form','layer','table','laytpl'],function(){
     //用户列表
     var tableIns = table.render({
         elem: '#itemListtable',
-        url : '../../../json/userList.json',
-        cellMinWidth : 95,
+        url : '../../../json/sensorList.json',
+//      cellMinWidth : 95,
         page : true,
         height : "full-125",
         limits : [10,15,20,25],
         limit : 20,
         id : "itemListtable",
         cols : [[
-            {type: "checkbox", fixed:"left", width:50},
-            {field: 'userName', title: '构筑物名称', minWidth:180, align:"center"},
-            {field: 'userEmail', title: '所属铁路局', minWidth:200, align:'center'},
-            {field: 'userSex', title: '所属铁路局线路', align:'center'},
-            {field: 'userSex', title: '地理位置经度', align:'center'},
-            {field: 'userSex', title: '地理位置纬度', align:'center'},
-            {field: 'userSex', title: '行别', align:'center'},
-            {field: 'userSex', title: '监测维度', align:'center'},
-            {field: 'userSex', title: '桥墩总数(总编号)', align:'center',minWidth:150},
+//          {type: "checkbox", fixed:"left", width:50},
+            {field: 'index', title: '序号', width:80, align:"center"},
+            {field: 'sensorNo', title: '传感器编号', minWidth:120, align:"center"},
+            {field: 'sensorName', title: '传感器名称', minWidth:100, align:'center'},
+            {field: 'sensorType', title: '传感器类型', align:'center'},
+            {field: 'ower', title: '所属终端', align:'center'},
+            {field: 'number', title: '分站号', align:'center'},
+            {field: 'distance', title: '里程', align:'center'},
+            {field: 'stause', title: '状态', align:'center'},
+            {field: 'mark', title: '备注', align:'center',minWidth:150},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
@@ -52,11 +53,6 @@ layui.use(['form','layer','table','laytpl'],function(){
             type : 2,
             content : "addSensor.html",
             success : function(layero, index){
-                var body = layui.layer.getChildFrame('body', index);
-                body.find("#otherForm").load("station.html",function(){
-		                	
-		                })
-                
 //              if(edit){
 //                  body.find(".userName").val(edit.userName);  //登录名
 //                  body.find(".userEmail").val(edit.userEmail);  //邮箱
@@ -78,7 +74,7 @@ layui.use(['form','layer','table','laytpl'],function(){
         $(window).on("resize",function(){
             layui.layer.full(index);
         })
-    }
+    }   
     $(".addItem_btn").click(function(){
         addItem();
     })
