@@ -20,9 +20,19 @@
 			<div class="layui-inline">
 				<div class="layui-input-inline">
 					<select  class="layui-select searchVal">
-						<option value="">检测体名称筛选</option>
-						<option value="1">凤凰山特大桥</option>
-						<option value="2">鸭绿江高架桥</option>
+						<option value="">选择构筑物</option>
+						<option value="1">鸭绿江大桥</option>
+						<option value="2">鸭绿江大桥</option>
+					</select>
+				</div>
+				<a class="layui-btn search_btn" data-type="reload">搜索</a>
+			</div>
+			<div class="layui-inline">
+				<div class="layui-input-inline">
+					<select  class="layui-select searchVal">
+						<option value="">选择监测维度</option>
+						<option value="1">水平位移监测</option>
+						<option value="2">相对位移监测</option>
 					</select>
 				</div>
 				<a class="layui-btn search_btn" data-type="reload">搜索</a>
@@ -33,15 +43,13 @@
 		</form>
 	</blockquote>
 	<table id="itemListtable" lay-filter="itemList"></table>
-
 	<!--操作-->
 	<script type="text/html" id="handleListBar">
 		<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-		<a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">查看</a>
-		<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+		<a class="layui-btn layui-btn-xs layui-btn--danger" lay-event="del">删除</a>
 	</script>
 </form>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
-<script type="text/javascript" src="../../../js/page/objMng/structure.js"></script>
+<script type="text/javascript" src="../../../js/page/warnSet/warn.js"></script>
 </body>
 </html>

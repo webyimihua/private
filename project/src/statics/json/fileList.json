@@ -1,0 +1,24 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 3,
+  "data": [
+    {
+      "usersId": "1",
+      "index": "1",     
+      "fileName": "#32墩",
+      "filetype": "桥墩",
+      "structureName": "凤凰山特大桥",
+      "startnum": "765.236",
+      "endtnum" : "775.365"
+    },{
+      "usersId": "1",
+      "index": "2",     
+      "fileName": "#34墩",
+      "filetype": "桥墩",
+      "structureName": "凤凰山特大桥",
+      "startnum": "715.236",
+      "endtnum" : "725.365"
+    }    
+  ]
+}

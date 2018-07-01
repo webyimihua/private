@@ -8,7 +8,7 @@ layui.use(['form','layer','table','laytpl'],function(){
     //用户列表
     var tableIns = table.render({
         elem: '#itemListtable',
-        url : '../../../json/fileList.json',
+        url : '../../../json/warnList.json',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
@@ -16,13 +16,13 @@ layui.use(['form','layer','table','laytpl'],function(){
         limit : 20,
         id : "itemListtable",
         cols : [[
-            {type: "checkbox", fixed:"left", width:50},
             {field: 'index', title: '序号', width:80, align:"center"},
-            {field: 'fileName', title: '监测域名称', minWidth:180, align:"center"},
-            {field: 'filetype', title: '监测域类型', minWidth:200, align:'center'},
-            {field: 'structureName', title: '所属构筑物', align:'center'},
-            {field: 'startnum', title: '起始里程', align:'center'},
-            {field: 'endtnum', title: '终止里程', align:'center'},           
+            {field: 'itemNum', title: '监测点编号', minWidth:200, align:'center'},
+            {field: 'itemStructure', title: '所属构筑物', align:'center'},
+            {field: 'itemType', title: '检测物维度', align:'center'},
+            {field: 'itemName', title: '监测点名称', align:'center'},
+            {field: 'warnMin', title: '初级预警值', align:'center'},
+            {field: 'warnMax', title: '高级预警值', align:'center'},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
@@ -42,12 +42,13 @@ layui.use(['form','layer','table','laytpl'],function(){
             layer.msg("请输入搜索的内容");
         }
     });
-//添加构筑物
+
+    //添加监测点
     function addItem(){
         var index = layui.layer.open({
-            title : "添加监测域",
+            title : "新增预警参数配置",
             type : 2,
-            content : "addFile.html",
+            content : "addWarn.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
 //              if(edit){
@@ -60,7 +61,7 @@ layui.use(['form','layer','table','laytpl'],function(){
 //                  form.render();
 //              }
                 setTimeout(function(){
-                    layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
+                    layui.layer.tips('点击此处返回监测点预警参数列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
                 },500)
@@ -75,12 +76,12 @@ layui.use(['form','layer','table','laytpl'],function(){
     $(".addItem_btn").click(function(){
         addItem();
     })
-    //修改构筑物
+    //修改监测点
     function editItem(data){
         var index = layui.layer.open({
-            title : "编辑监测域",
+            title : "编辑预警参数配置",
             type : 2,
-            content : "editFile.html",
+            content : "editWarn.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(data){                   
@@ -89,7 +90,7 @@ layui.use(['form','layer','table','laytpl'],function(){
                     form.render();
                 }
                 setTimeout(function(){
-                    layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
+                    layui.layer.tips('点击此处返回监测点预警参数列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
                 },500)
@@ -100,33 +101,7 @@ layui.use(['form','layer','table','laytpl'],function(){
         $(window).on("resize",function(){
             layui.layer.full(index);
         })
-    }
-    //查看构筑物详情
-    function showItem(data){
-        var index = layui.layer.open({
-            title : "监测域详情",
-            type : 2,
-            content : "detailFile.html",
-            success : function(layero, index){
-                var body = layui.layer.getChildFrame('body', index);
-                if(data){                   
-                    body.find(".userEmail").val(data.userEmail);  //邮箱
-                    body.find(".userSex input[value="+data.userSex+"]").prop("checked","checked");  //性别                    
-                    form.render();
-                }
-                setTimeout(function(){
-                    layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
-                        tips: 3
-                    });
-                },500)
-            }
-        })
-        layui.layer.full(index);
-        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
-        $(window).on("resize",function(){
-            layui.layer.full(index);
-        })
-    }
+    }   
     //列表操作
     table.on('tool(itemList)', function(obj){
         var layEvent = obj.event,

@@ -41,9 +41,9 @@
 	],
 	"memberyujing": [
 		{
-			"tit": "预警参数配置",
+			"tit": "配置预警参数",
 			"icon": "&#xe631;",
-			"href": "page/systemSetting/basicParameter.html",
+			"href": "page/warnSet/warnList.html",
 			"spread": false
 		},
 		{
