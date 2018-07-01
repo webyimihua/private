@@ -10,19 +10,68 @@
 	    	padding:0;
 	    	height:100%;
 	    }
+	    ul,li{
+	    	padding: 0;
+	    	margin: 0;
+	    	list-style:none;
+	    }
         #allmap{
         	width:100%;
         	height:100%;
         }
         .labelBubble .bubble{
-        	width:100px;
-        	height:100px;
+        	position: relative;
+        	width:80px;
+        	height:80px;
         	border-radius:50%;
         	background:rgba(255,102,0,0.8);
         	color: #fff;
         	font-size:14px;
         	text-align: center;
-        	line-height:100px;
+        	line-height:80px;
+        }
+        .labelBubble .bubble .pName{
+        	width:80px;
+        	text-overflow:ellipsis;
+        	overflow: hidden;
+        	white-space: nowrap;
+        }
+        .detail_hide_box{
+        	display:none;
+        	position: absolute;
+        	padding: 15px;
+        	top:-10px;
+        	right:-228px;
+        	width:180px;
+        	height: 230px;
+        	background: #fff;
+        	box-shadow: 1px 1px  5px #000;
+        	border-radius: 10px;
+        	color: #333;
+        	font-size: 12px;
+        	z-index: 999999999999;
+        }
+        .labelBubble .bubble:hover .detail_hide_box{
+        	display:block;
+        }
+        .detail_hide_box li{
+           width: 100%
+           height: 20px;
+           line-height: 20px;
+           text-align: left;
+           margin-bottom:5px;
+        }
+        .green{
+        	color:green;
+        }
+        .blue{
+        	color:blue;
+        }
+        .orange{
+        	color:orange;
+        }
+        .red{
+        	color:red;
         }
 	</style>
 </head>
@@ -101,10 +150,24 @@
 		for(var i=0;i<arr.length;i++){
 			var arrdate=arr[i];
 				(function(){
+					var html = '';
 					var lng=arrdate.lng;
 					var lat=arrdate.lat;
 					var name =arrdate.name;
-					var html="<div class='overlays1 bubble' lng='"+lng+"' lat='"+lat+"'><p class='pName'>"+name+"</p></div>";
+					html+="<div class='overlays1 bubble' lng='"+lng+"' lat='"+lat+"'>";
+					     html+="<p class='pName'>"+name+"</p>";
+					     html+="<ul class='detail_hide_box'>";
+					            html+="<li>某某大桥</li>";
+					            html+="<li>延西线</li>";
+					            html+="<li>西安铁路局</li>";
+					            html+="<li>上下行</li>";
+					            html+="<li><span>起始里程</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class='green'>K125+100</span></li>";
+					            html+="<li><span>结束里程</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class='green'>K125+100</span></li>";
+					            html+="<li><span class='blue'>E 125.332145</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class='blue'>E 125.332145</span></li>";
+					            html+="<li class='orange'>橙色预警1个</li>";
+					            html+="<li class='red'>红色预警1个</li>";
+					     html+="</ul>"
+					html+="</div>";
 					var point=new BMap.Point(lng,lat);
 					var mySquare=new SquareOverlay(point,90,html,lng,lat);
 					map.addOverlay(mySquare);
@@ -121,7 +184,7 @@
 	};
 
    var maplist=[
-      {lng:109.615397,lat:34.198883,name:"西安大桥"},
+      {lng:109.615397,lat:34.198883,name:"西安大桥盐两段"},
       {lng:107.260543,lat:29.393101,name:"重庆大桥"},
       {lng:116.60637,lat:28.584296,name:"南昌大桥"}
    ]
