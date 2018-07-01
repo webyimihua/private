@@ -24,19 +24,47 @@
 		</div>	
 	</div>	
 	<div class="layui-row">
+         <div class="layui-form-item layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">监测域类型</label>
+			<div class="layui-input-block">
+				<select name="userGrade" class="userGrade" lay-filter="userGrade">
+					<option value="">请选择监测域类型</option>
+					<option value="0">桥墩</option>
+					<option value="1">桥面</option>					
+				</select>
+			</div>
+		</div>
+    </div>
+    <div class="layui-row">
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">所属构筑物</label>
 			<div class="layui-input-block">
 				<select name="userGrade" class="userGrade" lay-filter="userGrade">
 					<option value="">请选择监测点所属铁路局</option>
-					<option value="0">注册会员</option>
+					<option value="0">西安铁路局</option>
 					<option value="1">西安铁路局</option>
-					<option value="2">高级会员</option>
-					<option value="3">钻石会员</option>
-					<option value="4">超级会员</option>
+					<option value="2">西安铁路局</option>
+					<option value="3">西安铁路局</option>
+					<option value="4">西安铁路局</option>
 				</select>
 			</div>
 		</div>
+    </div>
+	<div class="layui-row">
+        <div class="layui-form-item layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">起始里程</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input " lay-verify="required">
+			</div>
+		</div>	
+    </div>
+	<div class="layui-row">
+        <div class="layui-form-item layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">终止里程</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input " lay-verify="required">
+			</div>
+		</div>	
     </div>
 	<div class="layui-form-item layui-row layui-col-xs12">
 		<div class="layui-input-block">

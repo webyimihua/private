@@ -8,23 +8,23 @@ layui.use(['form','layer','table','laytpl'],function(){
     //用户列表
     var tableIns = table.render({
         elem: '#itemListtable',
-        url : '../../../json/userList.json',
-        cellMinWidth : 95,
+        url : '../../../json/pointList.json',
+//      cellMinWidth : 95,
         page : true,
         height : "full-125",
         limits : [10,15,20,25],
         limit : 20,
         id : "itemListtable",
         cols : [[
-            {type: "checkbox", fixed:"left", width:50},
-            {field: 'userName', title: '构筑物名称', minWidth:180, align:"center"},
-            {field: 'userEmail', title: '所属铁路局', minWidth:200, align:'center'},
-            {field: 'userSex', title: '所属铁路局线路', align:'center'},
-            {field: 'userSex', title: '地理位置经度', align:'center'},
-            {field: 'userSex', title: '地理位置纬度', align:'center'},
-            {field: 'userSex', title: '行别', align:'center'},
-            {field: 'userSex', title: '监测维度', align:'center'},
-            {field: 'userSex', title: '桥墩总数(总编号)', align:'center',minWidth:150},
+//          {type: "checkbox", fixed:"left", width:50},
+            {field: 'index', title: '序号', width:80, align:"center"},
+            {field: 'pointNo', title: '监测点编号', minWidth:200, align:'center'},
+            {field: 'structureName', title: '所属构筑物', align:'center'},
+            {field: 'height', title: '高度', align:'center'},
+            {field: 'fileName', title: '所属监测域', align:'center'},
+            {field: 'sensor', title: '对应传感器', align:'center'},
+            {field: 'distance', title: '里程', align:'center'},
+            {field: 'watchType', title: '监测维度', align:'center',minWidth:150},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });

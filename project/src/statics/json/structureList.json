@@ -4,19 +4,21 @@
   "count": 3,
   "data": [
     {
-      "usersId": "1",
-      "fileName": "凤凰山特大桥",
-      "filetype": "桥墩",
-      "structureName": "凤凰山特大桥",
-      "startnum": "765.236",
-      "endtnum" : "775.365"
+      "index": "1",
+      "structrueName": "凤凰山特大桥",
+      "station": "凤凰山特大桥",
+      "line": "福建铁路局",
+      "mileage": "K125+100——K125+601",
+      "type" : "上行",
+      "watchType" : "桥梁"
     },{
-      "usersId": "1",
-      "fileName": "凤凰山特大桥",
-      "filetype": "桥墩",
-      "structureName": "凤凰山特大桥",
-      "startnum": "715.236",
-      "endtnum" : "725.365"
+      "index": "2",
+      "structrueName": "凤凰山特大桥",
+      "station": "凤凰山特大桥",
+      "line": "福建铁路局",
+      "mileage": "K125+100——K125+601",
+      "type" : "下行",
+      "watchType" : "桥梁"
     }    
   ]
 }

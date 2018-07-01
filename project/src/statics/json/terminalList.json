@@ -1,0 +1,26 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 2,
+  "data": [
+    {
+      "index": "1",     
+      "itemNum": "10012",
+      "itemTime": "10",
+      "itemStructure": "凤凰山特大桥",
+      "itemIp": "192.168.0.201",
+      "itemNo": "7003*",
+     "itemOther" : "5300",
+      "stause" : "正常"
+    },{
+     "index": "2",     
+      "itemNum": "KJD20356",
+      "itemTime": "10",
+      "itemStructure": "浐灞大桥",
+       "itemIp": "192.168.0.200",
+      "itemNo": "7005",
+      "itemOther" : "5300",
+      "stause" : "故障"
+    }    
+  ]
+}

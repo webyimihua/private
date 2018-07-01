@@ -16,7 +16,6 @@ layui.use(['form','layer','table','laytpl'],function(){
         limit : 20,
         id : "itemListtable",
         cols : [[
-            {type: "checkbox", fixed:"left", width:50},
             {field: 'index', title: '序号', width:80, align:"center"},
             {field: 'fileName', title: '监测域名称', minWidth:180, align:"center"},
             {field: 'filetype', title: '监测域类型', minWidth:200, align:'center'},

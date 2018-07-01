@@ -10,3 +10,6 @@ html,body,ul,li{
 .layui-table thead tr,.layui-table-header{
 	background-color: #e4e4e4!important;
 }
+.noborder{
+	border: none !important;
+}

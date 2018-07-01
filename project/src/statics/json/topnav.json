@@ -45,12 +45,6 @@
 			"icon": "&#xe631;",
 			"href": "page/warnSet/warnList.html",
 			"spread": false
-		},
-		{
-			"tit": "预警参数修改",
-			"icon": "&#xe631;",
-			"href": "page/systemSetting/basicParameter.html",
-			"spread": false
 		}
 	],
 	"news": [

@@ -8,23 +8,21 @@ layui.use(['form','layer','table','laytpl'],function(){
     //用户列表
     var tableIns = table.render({
         elem: '#itemListtable',
-        url : '../../../json/userList.json',
-        cellMinWidth : 95,
+        url : '../../../json/terminalList.json',
         page : true,
         height : "full-125",
         limits : [10,15,20,25],
         limit : 20,
         id : "itemListtable",
-        cols : [[
-            {type: "checkbox", fixed:"left", width:50},
-            {field: 'userName', title: '构筑物名称', minWidth:180, align:"center"},
-            {field: 'userEmail', title: '所属铁路局', minWidth:200, align:'center'},
-            {field: 'userSex', title: '所属铁路局线路', align:'center'},
-            {field: 'userSex', title: '地理位置经度', align:'center'},
-            {field: 'userSex', title: '地理位置纬度', align:'center'},
-            {field: 'userSex', title: '行别', align:'center'},
-            {field: 'userSex', title: '监测维度', align:'center'},
-            {field: 'userSex', title: '桥墩总数(总编号)', align:'center',minWidth:150},
+        cols : [[           
+            {field: 'index', title: '序号', width:80, align:"center"},
+            {field: 'itemNum', title: '终端编号', minWidth:200, align:'center'},
+            {field: 'itemTime', title: '采样间隔', align:'center'},
+            {field: 'itemStructure', title: '所属监测体', align:'center'},
+            {field: 'itemIp', title: 'IP地址', align:'center'},
+            {field: 'itemNo', title: '端口号(全站仪)', align:'center'},
+            {field: 'itemOther', title: '端口号(其他)', align:'center'},
+            {field: 'stause', title: '状态', align:'center',minWidth:150},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
