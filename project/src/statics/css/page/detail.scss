@@ -5,14 +5,15 @@ html,body{
 }
 .bradge-box{
 	width:100%;
-	 padding:60px;
+	 padding:20px;
+	 padding-top:0px;
 	.canvas-contai{
 	   padding:20px;
 	   overflow:auto;
 	   .bradge-items{
 	      float:left;
-	      width:160px;
-	      height:340px;
+	      width:140px;
+	      height:320px;
 	      background-image:url(../../images/mapdetail/bradge.png);
 	      background-repeat:no-repeat;
 	      background-size:100%;
@@ -33,19 +34,19 @@ html,body{
 	           height:25px;
 	           border-radius:50%;
 	           position:absolute;
-	           left:8px;
+	           left:-2px;
 	           cursor:pointer;
 	           border:1px solid #fff;
 	           user-select:none;
 	        }
 	        .top{
-	           top:20px;
+	           top:5px;
 	        }
 	        .middle{
-	           top:100px;
+	           top:70px;
 	        }
 	        .bottom{
-	           top:180px;
+	           top:140px;
 	        }
 	        .sel_red{
                 background:red;
@@ -68,6 +69,21 @@ html,body{
 	width:100%;
 	height:60px;
 	background:#f5f5f5;
+	.sel_box{
+	  float:left;
+	  .tips{
+	    line-height:60px;
+	    font-size:14px;
+	    color:#333;
+	    margin:0 15px;
+	  }
+	  select{
+	     width:180px;
+	     height:25px;
+	     color:#333;
+	     font-size:14px;
+	  }
+	}
 	.close_btn{
 	   float:right;
 	   font-size:20px;
@@ -75,5 +91,47 @@ html,body{
 	   margin-right:20px;
 	   margin-top:15px;
 	   cursor:pointer;
+	}
+}
+.top_title_box{
+	padding-top:70px;
+	margin-left:40px;
+	font-size:12px;
+	color:#333;
+	.list_item{
+	  margin-bottom:8px;
+	}
+}
+.point_box{
+    width:400px;
+    height:40px;
+	margin:0 auto;
+	.point{
+	   float:left;
+	   margin-right:20px;
+	   .circles{
+	      float:left;
+	      width:25px;
+	      height:25px;
+	      border-radius:50%;
+	      border:1px solid #fff;
+	      box-shadow:1px 1px 5px #000;
+	   }
+	   em{
+	     float:left;
+	     font-style:normal;
+	     font-size:12px;
+	     line-height:30px;
+	     margin-left:10px;
+	   }
+	   .green{
+	      background:green;
+	   }
+	   .red{
+	      background:red;
+	   }
+	   .orange{
+	      background:orange;
+	   }
 	}
 }
