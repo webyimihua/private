@@ -29,35 +29,15 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 					},
 					statusCode: {
 						500: function() {
-							removeLoading(loadType);
 							layer.msg('服务器连接失败');
 						}
-					},
-					beforeSend: function() {
-						if(loadType) {
-							addLoading(loadType);
-						}
-					},
-					complete: function() {
-						if(loadType) {
-							removeLoading(loadType);
-						}
-					},
+					}
 				});
-
 			},
-			addLoading: function(loadType) {
-				if(loadType) {
-					layer.load(2);
-				}
+			//初始化下拉数据
+			initOptionitem:function(div,data){
+				
 			},
-			removeLoading: function(loadType) {
-				if(loadType) {
-					layer.closeAll('loading');
-				}
-			},
-			//根据id获取form表单数据返回json
-
 		};
 	exports("tools", Tools);
 });
