@@ -22,15 +22,14 @@ layui.use(['form','layer','tools'],function(){
         param.sub_flag ="object_type";
         param.name=data.name;
         tools.sendRequest(net.SystemServlet,param,function(res){
-           if(res == '1'){
-                console.log(res)
-                // setTimeout(function(){
-                //     top.layer.close(index);
-                //     top.layer.msg("添加监测体成功");
-                //     layer.closeAll("iframe");
-                //     //刷新父页面
-                //     parent.location.reload();
-                // },2000);
+           if(res == 1){
+                setTimeout(function(){
+                    top.layer.close(index);
+                    top.layer.msg("添加监测体成功");
+                    layer.closeAll("iframe");
+                    //刷新父页面
+                    parent.location.reload();
+                },2000);
             }else{
                 top.layer.close(index);
                 top.layer.msg("添加监测体失败");
