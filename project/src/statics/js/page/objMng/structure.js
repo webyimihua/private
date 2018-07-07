@@ -162,7 +162,7 @@ layui.use(['form','layer','table','laytpl'],function(){
 		})
 	}
 	var net={};
-	net.url = "http://192.168.0.202:8080";
+	net.url = "http://132.232.0.172:8080";
 	net.SystemServlet ="StructureMonitoring/SystemServlet";
 	net.sendRequest = function(_service, body, callback) {	
 		console.log(56)
