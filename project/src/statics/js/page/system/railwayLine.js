@@ -1,3 +1,8 @@
+layui.config({
+    base : "../../../js/"
+}).extend({
+    "tools" : "tools"
+})
 layui.use(['form','layer','table','laytpl'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
@@ -52,7 +57,6 @@ layui.use(['form','layer','table','laytpl'],function(){
 //                  body.find(".userDesc").text(edit.userDesc);    //用户简介
 //                  form.render();
 //              }
- 				getStationname();
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -115,57 +119,5 @@ layui.use(['form','layer','table','laytpl'],function(){
             });
         }
     });
-	//查找公路局
-	function getStationname(){
-		console.log(23)
-		var param ={};
-		param.action_flag ="w_query";
-		param.sub_flag ="bureau";
-		param.isFlur = false;
-		param.isReserve = false;
-		param.isDivide = false;
-		param.hasForeign = false;
-		net.sendRequest(net.SystemServlet,param,function(data){
-			console.log(data)
-		})
-	}
-	var net={};
-	net.url = "http://192.168.0.202:8080";
-	net.SystemServlet ="StructureMonitoring/SystemServlet";
-	net.sendRequest = function(_service, body, callback) {	
-		console.log(56)
-		var actionStr = net.url + "/" + _service;		
-		$.ajax({
-			url: actionStr,
-			type: 'post',
-			data: JSON.stringify(body),
-			dataType: 'json',
-//			async: false,
-			contentType: 'application/json',
-			success: function(data, status, xhr) {
-				//返回包判断
-				if(data != null && data != undefined) {
-					callback(data)
-					console.log(data)
-				} else {
-					return;
-				}
-
-			},
-			error: function(data, status, xhr) {
-				//			// handle the error.
-				//			alert(exception.toString());
-				
-			},
-			statusCode: {
-				500: function() {
-			    	removeLoadingBox(loadType);
-			    	layer.msg('服务器连接失败');
-				}
-			}
-		});
-	}
-
-
 
 })
