@@ -1,10 +1,15 @@
-layui.use(['form','layer','table','laytpl'],function(){
+layui.config({
+	base: "../../../js/"
+}).extend({
+	"tools": "tools"
+})
+layui.use(['form','layer','table','laytpl','tools'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
         laytpl = layui.laytpl,
         table = layui.table;
-
+        tools = layui.tools;
     //用户列表
     var tableIns = table.render({
         elem: '#itemListtable',
@@ -16,12 +21,12 @@ layui.use(['form','layer','table','laytpl'],function(){
         limit : 20,
         id : "itemListtable",
         cols : [[
-            {field: 'index', title: '序号', width:80, align:"center"},
-            {field: 'fileName', title: '监测域名称', minWidth:180, align:"center"},
-            {field: 'filetype', title: '监测域类型', minWidth:200, align:'center'},
-            {field: 'structureName', title: '所属构筑物', align:'center'},
-            {field: 'startnum', title: '起始里程', align:'center'},
-            {field: 'endtnum', title: '终止里程', align:'center'},           
+            {field: 'ordinal', title: '序号', width:80, align:"center"},
+            {field: 'name', title: '监测域名称', minWidth:180, align:"center"},
+            {field: 'domain_typeId', title: '监测域类型', minWidth:200, align:'center'},
+            {field: 'objectId', title: '所属构筑物', align:'center'},
+            {field: 'startMileage', title: '起始里程', align:'center'},
+            {field: 'endMileage', title: '终止里程', align:'center'},           
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
@@ -83,9 +88,8 @@ layui.use(['form','layer','table','laytpl'],function(){
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(data){                   
-                    body.find(".userEmail").val(data.userEmail);  //邮箱
-                    body.find(".userSex input[value="+data.userSex+"]").prop("checked","checked");  //性别                    
-                    form.render();
+                   var editForm = body.find("#editDataform");
+                	tools.setOlddataToform(editForm,data);
                 }
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
@@ -108,10 +112,9 @@ layui.use(['form','layer','table','laytpl'],function(){
             content : "detailFile.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-                if(data){                   
-                    body.find(".userEmail").val(data.userEmail);  //邮箱
-                    body.find(".userSex input[value="+data.userSex+"]").prop("checked","checked");  //性别                    
-                    form.render();
+                if(data){
+                	var showForm = body.find("#showDataform");
+                	tools.setOlddataToform(showForm,data);
                 }
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {

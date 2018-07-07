@@ -1,8 +1,13 @@
-layui.use(['form','layer'],function(){
+layui.config({
+    base : "../../../../js/"
+}).extend({
+    "tools" : "tools"
+})
+layui.use(['form','layer','tools'],function(){
     var form = layui.form
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery;
-
+        tools = layui.tools;
     form.on("submit(addUser)",function(data){
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
@@ -18,6 +23,10 @@ layui.use(['form','layer'],function(){
         // },function(res){
         //
         // })
+	var param ={};
+        tools.sendRequest(net.SystemServlet,param,function(data){
+			console.log(2222)
+		})
         setTimeout(function(){
             top.layer.close(index);
             top.layer.msg("构筑物添加成功！");

@@ -29,35 +29,33 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 					},
 					statusCode: {
 						500: function() {
-							removeLoading(loadType);
 							layer.msg('服务器连接失败');
 						}
-					},
-					beforeSend: function() {
-						if(loadType) {
-							addLoading(loadType);
-						}
-					},
-					complete: function() {
-						if(loadType) {
-							removeLoading(loadType);
-						}
-					},
+					}
 				});
+			},
+			//初始化下拉数据
+			initOptionitem: function(div, data) {
 
 			},
-			addLoading: function(loadType) {
-				if(loadType) {
-					layer.load(2);
+			//根据name覆盖老数据修改、详情使用(不适合多选、单选)
+			setOlddataToform: function(div, data) {
+				var key, value, tagName, type;
+				for(x in data) {
+					key = x;
+					value = data[x];
+					$(div).find("[name='" + key + "'],[name='" + key + "[]']").each(function() {
+						tagName = $(this)[0].tagName;
+						type = $(this).attr('type');
+						if(tagName == 'INPUT' && type == 'text') {
+							$(this).val(value);
+						} else if(tagName == 'SELECT' || tagName == 'TEXTAREA') {
+							$(this).val(value);
+						}
+					});
 				}
 			},
-			removeLoading: function(loadType) {
-				if(loadType) {
-					layer.closeAll('loading');
-				}
-			},
-			//根据id获取form表单数据返回json
-
+			//
 		};
 	exports("tools", Tools);
 });

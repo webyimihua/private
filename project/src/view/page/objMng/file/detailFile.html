@@ -14,12 +14,12 @@
 	<link rel="stylesheet" href="../../../css/base.css" media="all" />
 </head>
 <body class="childrenBody">
-<form class="layui-form" style="width:80%;">
+<form class="layui-form" id="showDataform" style="width:80%;">
     <div class="layui-row">
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">监测域编号</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input noborder" readonly="readonly" value="1131">
+				<input type="text" name="name" class="layui-input noborder" readonly="readonly" value="">
 			</div>
 		</div>	
 	</div>	
@@ -27,7 +27,7 @@
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">监测域类型</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input noborder" readonly="readonly" value="桥面">
+				<input type="text" name="domain_typeId" class="layui-input noborder" readonly="readonly" value="">
 			</div>
 		</div>
     </div>	
@@ -35,7 +35,7 @@
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">所属构筑物</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input noborder" readonly="readonly" value="1131">
+				<input type="text" name="objectId" class="layui-input noborder" readonly="readonly" value="">
 			</div>
 		</div>
     </div>	
@@ -43,7 +43,7 @@
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">起始里程</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input noborder" readonly="readonly" value="1131">
+				<input type="text" name="startMileage" class="layui-input noborder" readonly="readonly" value="">
 			</div>
 		</div>
     </div>	
@@ -51,10 +51,18 @@
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">终止里程</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input noborder" readonly="readonly" value="1131">
+				<input type="text" name="endMileage" class="layui-input noborder" readonly="readonly" value="">
 			</div>
 		</div>
-    </div>	
+    </div>
+    <!--<div class="layui-row">
+        <div class="layui-form-item layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">排序序号</label>
+			<div class="layui-input-block">
+				<input type="text" name="ordinal" class="layui-input" readonly="readonly">
+			</div>
+		</div>	
+    </div>-->
 </form>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
 <script type="text/javascript" src="../../../js/page/objMng/addFile.js"></script>
