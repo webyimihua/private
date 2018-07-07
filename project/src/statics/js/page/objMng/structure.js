@@ -1,9 +1,15 @@
-layui.use(['form','layer','table','laytpl'],function(){
+layui.config({
+    base : "../../../js/"
+}).extend({
+    "tools" : "tools"
+})
+layui.use(['form','layer','table','laytpl','tools'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
         laytpl = layui.laytpl,
         table = layui.table;
+        tools = layui.tools;
     //列表
     var tableIns = table.render({
         elem: '#itemListtable',
@@ -156,47 +162,8 @@ layui.use(['form','layer','table','laytpl'],function(){
 		param.isReserve = false;
 		param.isDivide = false;
 		param.hasForeign = false;
-		net.sendRequest(net.SystemServlet,param,function(data){
+		tools.sendRequest(net.SystemServlet,param,function(data){
 			console.log(data)
 		})
 	}
-	var net={};
-	net.url = "http://192.168.0.202:8080";
-	net.SystemServlet ="StructureMonitoring/SystemServlet";
-	net.sendRequest = function(_service, body, callback) {	
-		console.log(56)
-		var actionStr = net.url + "/" + _service;		
-		$.ajax({
-			url: actionStr,
-			type: 'post',
-			data: JSON.stringify(body),
-			dataType: 'json',
-//			async: false,
-			contentType: 'application/json',
-			success: function(data, status, xhr) {
-				//返回包判断
-				if(data != null && data != undefined) {
-					callback(data)
-					console.log(data)
-				} else {
-					return;
-				}
-
-			},
-			error: function(data, status, xhr) {
-				//			// handle the error.
-				//			alert(exception.toString());
-				
-			},
-			statusCode: {
-				500: function() {
-			    	removeLoadingBox(loadType);
-			    	layer.msg('服务器连接失败');
-				}
-			}
-		});
-	}
-
-
-
 })
