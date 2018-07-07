@@ -15,7 +15,10 @@ layui.use(['form','layer','table','laytpl'],function(){
         limit : 20,
         id : "itemListtable",
         cols : [[
-            {type: "checkbox", fixed:"left", width:50},
+            // {type: "checkbox", fixed:"left", width:50},
+             {field: 'index', title: '序号', width:80, align:"center",templet: function(d){
+                return d.LAY_TABLE_INDEX + 1;
+            }},
             {field: 'userName', title: '传感器类型名称', minWidth:280, align:"center"},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
