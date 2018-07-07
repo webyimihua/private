@@ -23,7 +23,7 @@ layui.use(['form','layer','tools'],function(){
         param.sub_flag ="railway_line";
         param.name=data.name;
         tools.sendRequest(net.SystemServlet,param,function(res){
-           if(res == '1'){
+           if(res == 1){
                 setTimeout(function(){
                     top.layer.close(index);
                     top.layer.msg("添加铁路线成功");

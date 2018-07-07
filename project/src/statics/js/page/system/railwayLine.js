@@ -3,12 +3,13 @@ layui.config({
 }).extend({
     "tools" : "tools"
 })
-layui.use(['form','layer','table','laytpl'],function(){
+layui.use(['form','layer','table','laytpl','tools'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
         laytpl = layui.laytpl,
         table = layui.table;
+        tools = layui.tools;
     //列表
     var tableIns = table.render({
         elem: '#itemListtable',
@@ -19,8 +20,16 @@ layui.use(['form','layer','table','laytpl'],function(){
         limits : [10,15,20,25],
         limit : 20,
         id : "itemListtable",
+        where: {token: 'sasasas', id: 123},
+        request: {
+          pageName: 'curr', //页码的参数名称，默认：page
+          limitName: 'nums' //每页数据量的参数名，默认：limit
+        },
         cols : [[
-            {type: "checkbox", fixed:"left", width:50},
+            // {type: "checkbox", fixed:"left", width:50},
+            {field: 'index', title: '序号', width:80, align:"center",templet: function(d){
+                return d.LAY_TABLE_INDEX + 1;
+            }},
             {field: 'userName', title: '铁路线', minWidth:280, align:"center"},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
@@ -48,15 +57,6 @@ layui.use(['form','layer','table','laytpl'],function(){
             content : "add.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-//              if(edit){
-//                  body.find(".userName").val(edit.userName);  //登录名
-//                  body.find(".userEmail").val(edit.userEmail);  //邮箱
-//                  body.find(".userSex input[value="+edit.userSex+"]").prop("checked","checked");  //性别
-//                  body.find(".userGrade").val(edit.userGrade);  //会员等级
-//                  body.find(".userStatus").val(edit.userStatus);    //用户状态
-//                  body.find(".userDesc").text(edit.userDesc);    //用户简介
-//                  form.render();
-//              }
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -119,5 +119,19 @@ layui.use(['form','layer','table','laytpl'],function(){
             });
         }
     });
+    
+    getrailwayLineData();
+    function getrailwayLineData(){
+        var param ={};
+        param.action_flag ="w_query";
+        param.sub_flag ="railway_line";
+        param.isFlur = false;
+        param.isReserve = false;
+        param.isDivide = false;
+        param.hasForeign = false;
+        tools.sendRequest(net.SystemServlet,param,function(res){
+            console.log(res)
+        })
+    }
 
 })
