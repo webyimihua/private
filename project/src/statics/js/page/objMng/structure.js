@@ -9,7 +9,8 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		$ = layui.jquery,
 		laytpl = layui.laytpl,
 		table = layui.table;
-	tools = layui.tools;
+		tools = layui.tools;
+		getStationlist();
 	//查找公路局
 	function getStationlist() {
 		var param = {};
@@ -24,8 +25,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 			//列表
 			var tableIns = table.render({
 				elem: '#itemListtable',
-				url: '..',
-				data: data,
+				url: '../../../json/structureList.json',
 				cellMinWidth: 95,
 				page: true,
 				height: "full-125",
@@ -171,9 +171,8 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 			success: function(layero, index) {
 				var body = layui.layer.getChildFrame('body', index);
 				if(data) {
-					body.find(".userEmail").val(data.userEmail); //邮箱
-					body.find(".userSex input[value=" + data.userSex + "]").prop("checked", "checked"); //性别                    
-					form.render();
+					console.log(data);
+					
 				}
 				setTimeout(function() {
 					layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
@@ -209,19 +208,5 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 				// })
 			});
 		}
-	});
-	//查找公路局
-	function getStationname() {
-		var param = {};
-		param.action_flag = "w_query";
-		param.sub_flag = "bureau";
-		param.isFlur = false;
-		param.isReserve = false;
-		param.isDivide = false;
-		param.hasForeign = false;
-		tools.sendRequest(net.SystemServlet, param, function(data) {
-			console.log(data)
-		})
-	}
-
+	});	
 })

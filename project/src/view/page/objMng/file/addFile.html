@@ -20,7 +20,7 @@
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">监测域编号</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写监测域编号">
+				<input type="text" name="name" class="layui-input " lay-verify="required" placeholder="请填写监测域编号">
 			</div>
 		</div>	
 	</div>	
@@ -28,7 +28,7 @@
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">监测域类型</label>
 			<div class="layui-input-block">
-				<select name="userGrade" class="userGrade" lay-filter="userGrade">
+				<select name="domain_typeId" id="fileType" lay-filter="domain_typeId">
 					<option value="">请选择监测域类型</option>
 					<option value="0">桥墩</option>
 					<option value="1">桥面</option>					
@@ -40,7 +40,7 @@
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">所属构筑物</label>
 			<div class="layui-input-block">
-				<select name="userGrade" class="userGrade" lay-filter="userGrade">
+				<select name="objectId" id="objectList" lay-filter="objectId">
 					<option value="">请选择监测点所属铁路局</option>
 					<option value="0">西安铁路局</option>
 					<option value="1">西安铁路局</option>
@@ -55,7 +55,7 @@
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">起始里程</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写起始里程">
+				<input type="text" name="startMileage" class="layui-input " lay-verify="required" placeholder="请填写起始里程">
 			</div>
 		</div>	
     </div>
@@ -63,10 +63,18 @@
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">终止里程</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写终止里程">
+				<input type="text" name="endMileage" class="layui-input " lay-verify="required" placeholder="请填写终止里程">
 			</div>
 		</div>	
     </div>
+	<!--<div class="layui-row">
+        <div class="layui-form-item layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">排序序号</label>
+			<div class="layui-input-block">
+				<input type="text" name="ordinal" class="layui-input " lay-verify="required" placeholder="请填排序序号">
+			</div>
+		</div>	
+    </div>-->
 	<div class="layui-form-item layui-row layui-col-xs12">
 		<div class="layui-input-block">
 			<button class="layui-btn layui-btn-lg" lay-submit="" lay-filter="addUser">新增监测域提交</button>

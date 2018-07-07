@@ -35,9 +35,27 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 				});
 			},
 			//初始化下拉数据
-			initOptionitem:function(div,data){
-				
+			initOptionitem: function(div, data) {
+
 			},
+			//根据name覆盖老数据修改、详情使用(不适合多选、单选)
+			setOlddataToform: function(div, data) {
+				var key, value, tagName, type;
+				for(x in data) {
+					key = x;
+					value = data[x];
+					$(div).find("[name='" + key + "'],[name='" + key + "[]']").each(function() {
+						tagName = $(this)[0].tagName;
+						type = $(this).attr('type');
+						if(tagName == 'INPUT' && type == 'text') {
+							$(this).val(value);
+						} else if(tagName == 'SELECT' || tagName == 'TEXTAREA') {
+							$(this).val(value);
+						}
+					});
+				}
+			},
+			//
 		};
 	exports("tools", Tools);
 });

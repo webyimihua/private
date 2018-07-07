@@ -19,47 +19,29 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		param.isReserve = false;
 		param.isDivide = false;
 		param.hasForeign = false;
-		tools.sendRequest(net.SystemServlet, param, function(data) {
-//			var  data = JSON.stringify(data);
-//			console.log(data)
-			console.log(data)
-//			var  newdata = {"bureau":[{"id": "1", "name": "西安铁路局"}]};
-//			
-//			console.log(newdata)
-//			console.log(newdata.bureau)
-//			console.log(data.bureau);
+		var requestSet= {
+			  pageName: 'curr' //页码的参数名称，默认：page
+			  ,limitName: 'nums' //每页数据量的参数名，默认：limit
+			  ,statusName: 'status' //数据状态的字段名称，默认：code
+			  ,statusCode: 200 //成功的状态码，默认：0
+			  ,msgName: 'hint' //状态信息的字段名称，默认：msg
+			  ,countName: 'total' //数据总数的字段名称，默认：count
+			  ,dataName: 'data' //数据列表的字段名称，默认：data
+			}      
+		var serverUrl = net.baseurl + "/" + net.SystemServlet;
 			//列表
 			var tableIns = table.render({
 				elem: '#itemListtable',
-				url: '..',
-				data: data,
+				url: serverUrl,
+				method:'post',
+				where:param,
+				request:requestSet,
 				cellMinWidth: 95,
 				page: true,
 				height: "full-125",
 				limits: [10, 15, 20, 25],
 				limit: 5,
 				id: "itemListtable",
-//				cols: [
-//					[{
-//							type: "checkbox",
-//							fixed: "left",
-//							width: 50
-//						},
-//						{
-//							field: 'userName',
-//							title: '铁路局',
-//							minWidth: 280,
-//							align: "center"
-//						},
-//						{
-//							title: '操作',
-//							minWidth: 175,
-//							templet: '#handleListBar',
-//							fixed: "right",
-//							align: "center"
-//						}
-//					]
-//				]
 				cols: [
 					[{
 							type: "checkbox",
@@ -67,13 +49,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 							width: 50
 						},
 						{
-							field: 'id',
-							title: '铁路局',
-							minWidth: 280,
-							align: "center"
-						},
-						{
-							field: 'name',
+							field: 'userName',
 							title: '铁路局',
 							minWidth: 280,
 							align: "center"
@@ -87,7 +63,6 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 						}
 					]
 				]
-			});
 		});
 	};
 	//搜索【此功能需要后台配合，所以暂时没有动态效果演示】
