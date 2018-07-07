@@ -7,7 +7,7 @@ layui.use(['form','layer','table','laytpl'],function(){
     //列表
     var tableIns = table.render({
         elem: '#itemListtable',
-        url : '../../../json/userList.json',
+        url : '../../../json/structureList.json',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
@@ -15,15 +15,14 @@ layui.use(['form','layer','table','laytpl'],function(){
         limit : 20,
         id : "itemListtable",
         cols : [[
-            {type: "checkbox", fixed:"left", width:50},
-            {field: 'userName', title: '构筑物名称', minWidth:180, align:"center"},
-            {field: 'userEmail', title: '所属铁路局', minWidth:200, align:'center'},
-            {field: 'userSex', title: '所属铁路局线路', align:'center'},
-            {field: 'userSex', title: '地理位置经度', align:'center'},
-            {field: 'userSex', title: '地理位置纬度', align:'center'},
-            {field: 'userSex', title: '行别', align:'center'},
-            {field: 'userSex', title: '监测维度', align:'center'},
-            {field: 'userSex', title: '监测体类型', align:'center',minWidth:150},
+//          {type: "checkbox", fixed:"left", width:50},
+            {field: 'index', title: '序号', width:80, align:"center"},
+            {field: 'structrueName', title: '构筑物名称', minWidth:180, align:"center"},
+            {field: 'station', title: '所属铁路局', minWidth:200, align:'center'},
+            {field: 'line', title: '所属铁路局线路', align:'center'},
+            {field: 'mileage', title: '起始里程 - 结束里程', align:'center'},
+            {field: 'type', title: '行别', align:'center'},
+            {field: 'watchType', title: '监测体类型', align:'center',minWidth:150},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });

@@ -1,6 +1,6 @@
 //获取系统时间
 var newDate = '';
-getLangDate();
+//getLangDate();
 //值小于10时，在前面补0
 function dateFilter(date){
     if(date < 10){return "0"+date;}
@@ -28,6 +28,22 @@ layui.use(['form','element','layer','jquery'],function(){
         layer = parent.layer === undefined ? layui.layer : top.layer,
         element = layui.element;
         $ = layui.jquery;
+        
+       login()
+    function login(){
+    	$.ajax({
+            url :'http://47.95.13.55:8080/StructureMonitoring/LoginServlet',
+//          dataType: 'json',
+//		    contentType: 'application/json',
+            type: 'post',
+            data: {action_flag:"w_login",username:"admin",password:"111"},
+//          dataType: 'jsonp',
+//          crossDomain: true,
+            success : function(data){
+                console.log(data)
+            }
+        })
+    }
     //上次登录时间【此处应该从接口获取，实际使用中请自行更换】
     $(".loginTime").html(newDate.split("日")[0]+"日</br>"+newDate.split("日")[1]);
     //icon动画

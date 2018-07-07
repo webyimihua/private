@@ -3,3 +3,13 @@ html,body,ul,li{
 	margin:0;
 	list-style: none;
 }
+/*覆盖样式*/
+.layui-layer-title,.layui-elem-quote{
+	background-color: #e4e4e4!important;
+	}
+.layui-table thead tr,.layui-table-header{
+	background-color: #e4e4e4!important;
+}
+.noborder{
+	border: none !important;
+}

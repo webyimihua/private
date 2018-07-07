@@ -11,6 +11,8 @@
 	<meta name="format-detection" content="telephone=no">
 	<link rel="stylesheet" href="../../../layui/css/layui.css" media="all" />
 	<link rel="stylesheet" href="../../../css/public.css" media="all" />
+	<link rel="stylesheet" href="../../../css/base.css" media="all" />
+	<link rel="stylesheet" href="../../../css/page/objMng/common.css" media="all" />	
 </head>
 <body class="childrenBody">
 <form class="layui-form" style="width:80%;">
@@ -38,35 +40,24 @@
 			<label class="layui-form-label">所属构筑物</label>
 			<div class="layui-input-block">
 				<select name="userGrade" class="userGrade" lay-filter="userGrade">
-					<option value="">请选择监测点所属铁路局</option>
-					<option value="0">注册会员</option>
-					<option value="1">西安铁路局</option>
-					<option value="2">高级会员</option>
-					<option value="3">钻石会员</option>
-					<option value="4">超级会员</option>
+					<option value="">请选择监测点所属构筑物</option>
+					<option value="0">鸭绿江大桥</option>					
 				</select>
 			</div>
 		</div>
-        <div class="layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">监测点类型</label>
+         <div class="layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">高度</label>
 			<div class="layui-input-block">
-				<select name="userGrade" class="userGrade" lay-filter="userGrade">
-					<option value="">请选择监测点所属铁路局</option>
-					<option value="0">注册会员</option>
-					<option value="1">西安铁路局</option>
-					<option value="2">高级会员</option>
-					<option value="3">钻石会员</option>
-					<option value="4">超级会员</option>
-				</select>
+				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写高度">
 			</div>
 		</div>
     </div>
 	<div class="layui-row">
 		<div class="magb15 layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">桥墩编号</label>
+			<label class="layui-form-label">所属监测域</label>
 			<div class="layui-input-block">
 				<select name="userGrade" class="userGrade" lay-filter="userGrade">					
-					<option value="">请选择所在桥墩的编号</option>
+					<option value="">请选择所属监测域</option>
 					<option value="0">0</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -77,7 +68,7 @@
 			<label class="layui-form-label">监测维度</label>
 			<div class="layui-input-block">
 				<select name="userStatus" class="userStatus" lay-filter="userStatus">
-					<option value="">请选择要进行的监测维度</option>
+					<option value="">请选择监测维度</option>
 					<option value="0">上行</option>
 					<option value="1">下行</option>
 				</select>
@@ -88,7 +79,7 @@
         <div class="layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">监测点里程</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写监测点里程">
+				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写监测点地理位置精度">
 			</div>
 		</div>
 		<div class="layui-col-md5 layui-col-xs12">
@@ -102,6 +93,14 @@
 			</div>
 		</div>
     </div>   
+	<div class="layui-row layui-form-item">
+        <div class="layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">初始监测日期</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input " lay-verify="required" placeholder="请选择初始监测日期" id="watchFirsttime">
+			</div>
+		</div>		
+    </div>   
 	<div class="layui-form-item layui-row layui-col-xs12">
 		<div class="layui-input-block">
 			<button class="layui-btn layui-btn-lg" lay-submit="" lay-filter="addUser">新增监测点提交</button>
@@ -111,5 +110,14 @@
 </form>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
 <script type="text/javascript" src="../../../js/page/objMng/addPoint.js"></script>
+<script>
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;	
+		//执行一个laydate实例
+		laydate.render({
+			elem: '#watchFirsttime' //指定元素
+		});
+	});
+</script>
 </body>
 </html>

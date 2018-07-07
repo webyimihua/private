@@ -1,0 +1,24 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 2,
+  "data": [
+    {
+      "index": "1",     
+      "itemNum": "JVD22002",
+      "itemStructure": "凤凰山特大桥",
+      "itemType": "风向风压",
+      "itemName": "****",
+      "warnMin" : "6",
+      "warnMax" : "15"
+    },{
+     "index": "2",     
+      "itemNum": "KJD20356",
+      "itemStructure": "浐灞大桥",
+      "itemType": "沉降监测",
+      "itemName": "****",
+      "warnMin" : "6",
+      "warnMax" : "15"
+    }    
+  ]
+}

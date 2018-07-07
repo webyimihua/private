@@ -11,6 +11,7 @@
 	<meta name="format-detection" content="telephone=no">
 	<link rel="stylesheet" href="../../../layui/css/layui.css" media="all" />
 	<link rel="stylesheet" href="../../../css/public.css" media="all" />
+	<link rel="stylesheet" href="../../../css/base.css" media="all" />
 </head>
 <body class="childrenBody">
 <form class="layui-form" style="width:80%;">
@@ -26,11 +27,8 @@
 			<div class="layui-input-block">
 				<select name="userGrade" class="userGrade" lay-filter="userGrade">
 					<option value="">请选择行别</option>
-					<option value="0">注册会员</option>
-					<option value="1">中级会员</option>
-					<option value="2">高级会员</option>
-					<option value="3">钻石会员</option>
-					<option value="4">超级会员</option>
+					<option value="0">上行</option>
+					<option value="1">下行</option>
 				</select>
 			</div>
 		</div>
@@ -41,18 +39,19 @@
 			<div class="layui-input-block">
 				<select name="userGrade" class="userGrade" lay-filter="userGrade">
 					<option value="">请选择所属铁路局</option>
-					<option value="0">注册会员</option>
+					<option value="0">上海铁路局</option>
 					<option value="1">西安铁路局</option>
-					<option value="2">高级会员</option>
-					<option value="3">钻石会员</option>
-					<option value="4">超级会员</option>
 				</select>
 			</div>
 		</div>
         <div class="layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">桥墩总数</label>
+			<label class="layui-form-label">类型</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写构筑物的桥墩总数">
+				<select name="userGrade" class="userGrade" lay-filter="userGrade">
+					<option value="">请选择所监测体类型</option>
+					<option value="0">桥梁</option>
+					<option value="1">高架..</option>
+				</select>
 			</div>
 		</div>
     </div>
@@ -62,11 +61,9 @@
 			<div class="layui-input-block">
 				<select name="userGrade" class="userGrade" lay-filter="userGrade">
 					<option value="">请选择构筑物所属铁路线</option>
-					<option value="0">高级会员</option>
+					<option value="0">京九线</option>
 					<option value="1">延西线</option>
-					<option value="2">高级会员</option>
-					<option value="3">钻石会员</option>
-					<option value="4">超级会员</option>
+					<option value="2">西宝线</option>
 				</select>
 			</div>
 		</div>

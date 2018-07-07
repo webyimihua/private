@@ -8,7 +8,7 @@ layui.use(['form','layer','table','laytpl'],function(){
     //用户列表
     var tableIns = table.render({
         elem: '#itemListtable',
-        url : '../../../json/userList.json',
+        url : '../../../json/fileList.json',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
@@ -16,12 +16,12 @@ layui.use(['form','layer','table','laytpl'],function(){
         limit : 20,
         id : "itemListtable",
         cols : [[
-            {type: "checkbox", fixed:"left", width:50},
-            {field: 'userName', title: '监测域名称', minWidth:180, align:"center"},
-            {field: 'userEmail', title: '监测域类型', minWidth:200, align:'center'},
-            {field: 'userSex', title: '所属构筑物', align:'center'},
-            {field: 'userSex', title: '起始里程', align:'center'},
-            {field: 'userSex', title: '终止里程', align:'center'},           
+            {field: 'index', title: '序号', width:80, align:"center"},
+            {field: 'fileName', title: '监测域名称', minWidth:180, align:"center"},
+            {field: 'filetype', title: '监测域类型', minWidth:200, align:'center'},
+            {field: 'structureName', title: '所属构筑物', align:'center'},
+            {field: 'startnum', title: '起始里程', align:'center'},
+            {field: 'endtnum', title: '终止里程', align:'center'},           
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
