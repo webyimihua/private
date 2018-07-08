@@ -7,9 +7,14 @@ html,body{
 	width:100%;
 	 padding:20px;
 	 padding-top:0px;
+	 padding-left:0px;
 	.canvas-contai{
 	   padding:20px;
 	   overflow:auto;
+	   background-image:url(../../images/mapdetail/water.gif);
+		 background-size:100% 30%;
+		 background-repeat:no-repeat;
+		 background-position:left bottom;
 	   .bradge-items{
 	      float:left;
 	      width:140px;

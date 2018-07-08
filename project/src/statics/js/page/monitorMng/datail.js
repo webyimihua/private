@@ -1,8 +1,13 @@
 var $ ;
 layui.use(['element','layer','jquery'],function(){
 	$ = layui.$;
+	var winWidth = $(window).width();
 	var b_nums = $(".canvas-contai .bradge-items").length;
-	$(".canvas-contai").width(160*b_nums + "px");
+	if( b_nums*160 > winWidth){
+         $(".canvas-contai").width(160*b_nums + "px");
+	}else{
+		 $(".canvas-contai").width(winWidth);
+	}
 	// $(".bradge-box").width(160*b_nums + "px");
     $.get("../../json/detail.json",function(data){
          console.log(data)
