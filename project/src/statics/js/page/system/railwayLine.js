@@ -123,11 +123,13 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
     getrailwayLineData();
     function getrailwayLineData(){
         var param ={};
+        param.pageNum=1;
+        param.pageSize=20;
         param.action_flag ="w_query";
         param.sub_flag ="railway_line";
         param.isFlur = false;
         param.isReserve = false;
-        param.isDivide = false;
+        param.isDivide = true;
         param.hasForeign = false;
         tools.sendRequest(net.SystemServlet,param,function(res){
             console.log(res)
