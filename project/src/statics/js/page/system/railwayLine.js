@@ -13,17 +13,28 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
     //列表
     var tableIns = table.render({
         elem: '#itemListtable',
-        url : '../../../json/userList.json',
+        url : 'http://47.95.13.55:8080//StructureMonitoring/SystemServlet',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
         limits : [10,15,20,25],
         limit : 20,
         id : "itemListtable",
-        where: {token: 'sasasas', id: 123},
+        method: 'post',
+        where: {
+        	action_flag:"w_query",
+            sub_flag:"railway_line",
+            isFlur:false,
+            isReserve:false,
+            isDivide:true,
+            hasForeign:false,
+        },
         request: {
-          pageName: 'curr', //页码的参数名称，默认：page
-          limitName: 'nums' //每页数据量的参数名，默认：limit
+          pageName: 'pageNum', //页码的参数名称，默认：page
+          limitName: 'pageSize' //每页数据量的参数名，默认：limit
+        },
+        response: {
+        	
         },
         cols : [[
             // {type: "checkbox", fixed:"left", width:50},
@@ -120,7 +131,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         }
     });
     
-    getrailwayLineData();
+//  getrailwayLineData();
     function getrailwayLineData(){
         var param ={};
         param.pageNum=1;
