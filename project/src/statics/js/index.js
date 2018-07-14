@@ -16,6 +16,11 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 			url : "json/topnav.json" //获取菜单json地址
 		});
 
+	 $("#signOut").click(function(){
+         localStorage.removeItem('login');
+         parent.window.location.href="../page/login/login.html"
+     })
+
 	//通过顶部菜单获取左侧二三级菜单   注：此处只做演示之用，实际开发中通过接口传参的方式获取导航数据
 	function getData(json){
 		$.get("../../json/topnav.json",function(data){
@@ -147,13 +152,3 @@ function addTab(_this){
 	tab.tabAdd(_this);
 }
 
-//图片管理弹窗
-function showImg(){
-    $.getJSON('json/images.json', function(json){
-        var res = json;
-        layer.photos({
-            photos: res,
-            anim: 5
-        });
-    });
-}

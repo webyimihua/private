@@ -6,20 +6,44 @@ layui.use(['form','layer','table','laytpl'],function(){
         table = layui.table;
     //列表
     var tableIns = table.render({
-        elem: '#itemListtable',
-        url : '../../../json/userList.json',
+         elem: '#itemListtable',
+        url : 'http://47.95.13.55:8080//StructureMonitoring/SystemServlet',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
         limits : [10,15,20,25],
-        limit : 20,
+        limit :10,
         id : "itemListtable",
+        method: 'post',
+        where: {
+            action_flag:"w_query",
+            sub_flag:"user",
+            isFlur:false,
+            isReserve:false,
+            isDivide:true,
+            hasForeign:false,
+        },
+        request: {
+          pageName: 'pageNum', //页码的参数名称，默认：page
+          limitName: 'pageSize' //每页数据量的参数名，默认：limit
+        },
+        response: {
+           statusName: 'result' //数据状态的字段名称，默认：code
+          ,statusCode: 1 //成功的状态码，默认：0
+          ,msgName: 'message' //状态信息的字段名称，默认：msg
+          ,countName: 'count' //数据总数的字段名称，默认：count
+          ,dataName: 'data' //数据列表的字段名称，默认：data 
+        },
+        done: function(res, curr, count){
+          $("[data-field='id']").css('display','none');
+        },
         cols : [[
-            {type: "checkbox", fixed:"left", width:50},
-            {field: 'userName', title: '姓名', minWidth:180, align:"center"},
-            {field: 'userEmail', title: '登陆账户', minWidth:200, align:'center'},
-            {field: 'userSex', title: '账户等级', align:'center'},
-            {field: 'userSex', title: '所属铁路局', align:'center'},
+            {field: 'index', title: '序号', width:80, align:"center",type:"numbers"},
+            {field: 'id', title: '序号', width:1, align:"center"},
+            {field: 'username', title: '姓名', minWidth:180, align:"center"},
+            {field: 'phoneNum', title: '登陆账户', minWidth:200, align:'center'},
+            {field: 'role', title: '账户等级', align:'center'},
+            {field: 'bureau', title: '所属铁路局', align:'center'},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
