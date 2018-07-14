@@ -40,21 +40,25 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 		  ,countName: 'count' //数据总数的字段名称，默认：count
 		  ,dataName: 'data' //数据列表的字段名称，默认：data	
         },
+        done: function(res, curr, count){
+          $("[data-field='id']").css('display','none');
+        },
         cols : [[
             // {type: "checkbox", fixed:"left", width:50},
-            {field: 'index', title: '序号', width:80, align:"center",templet: function(d){
-                return d.LAY_TABLE_INDEX + 1;
-            }},
+            {field: 'index', title: '序号', width:80, align:"center",type:"numbers"},
+            {field: 'id', title: '序号', width:1, align:"center"},
             {field: 'name', title: '铁路线', minWidth:280, align:"center"},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
-    //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
+
+    //搜索
     $(".search_btn").on("click",function(){
         if($(".searchVal").val() != ''){
-            table.reload("newsListTable",{
+            table.reload("itemListtable",{
+                url : 'http://47.95.13.55:8080//StructureMonitoring/SystemServlet',
                 page: {
-                    curr: 1 //重新从第 1 页开始
+                    pageName: 1 //重新从第 1 页开始
                 },
                 where: {
                     key: $(".searchVal").val()  //搜索的关键字
@@ -64,6 +68,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             layer.msg("请输入搜索的内容");
         }
     });
+    
     //添加构筑物
     function addItem(){
         var index = layui.layer.open({
@@ -96,9 +101,9 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             content : "edit.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-                if(data){                   
-                    body.find(".userEmail").val(data.userEmail);  //邮箱
-                    body.find(".userSex input[value="+data.userSex+"]").prop("checked","checked");  //性别                    
+                if(data){           
+                    body.find(".lineName").val(data.name);  
+                    body.find(".ids").val(data.id);                  
                     form.render();
                 }
                 setTimeout(function(){
@@ -125,29 +130,26 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             showItem(data);
         }else if(layEvent === 'del'){ //删除
             layer.confirm('确定删除此信息？',{icon:3, title:'提示信息'},function(index){
-                // $.get("删除文章接口",{
-                //     newsId : data.newsId  //将需要删除的newsId作为参数传入
-                // },function(data){
+                    deleterailwayLineData(data)
                     tableIns.reload();
                     layer.close(index);
-                // })
             });
         }
     });
     
-//  getrailwayLineData();
-    function getrailwayLineData(){
+    
+    function deleterailwayLineData(data){
         var param ={};
-        param.pageNum=1;
-        param.pageSize=20;
-        param.action_flag ="w_query";
-        param.sub_flag ="railway_line";
-        param.isFlur = false;
-        param.isReserve = false;
-        param.isDivide = true;
-        param.hasForeign = false;
+        param.action_flag="w_delete";
+        param.sub_flag="railway_line";
+        param.id=data.id;
         tools.sendRequest(net.SystemServlet,param,function(res){
-            console.log(res)
+            if(res.result){
+                 tableIns.reload();
+                 layer.msg('删除成功')
+             }else{
+                 layer.msg('删除失败')
+             }
         })
     }
 

@@ -26,18 +26,19 @@
         <div class="layui-col-md6 layui-col-xs12">
 			<label class="layui-form-label">传感器类型名称</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="传感器类型名称">
+			    <input type="hidden" name="id" class="ids">
+				<input name="name" type="text" class="layui-input sensorName" lay-verify="required" placeholder="传感器类型名称">
 			</div>
 		</div>
    </div>
 	<div class="layui-form-item layui-row layui-col-xs12">
 		<div class="layui-input-block">
-			<button class="layui-btn layui-btn" lay-submit="" lay-filter="addUser">提交</button>
+			<button class="layui-btn layui-btn" lay-submit="" lay-filter="editSensor">提交</button>
 			<button type="reset" class="layui-btn layui-btn layui-btn-primary">取消</button>
 		</div>
 	</div>
 </form>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
-<script type="text/javascript" src="../../../js/page/system/account/edit.js"></script>
+<script type="text/javascript" src="../../../js/page/system/sensor/edit.js"></script>
 </body>
 </html>

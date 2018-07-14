@@ -23,7 +23,6 @@ layui.use(['form','layer','tools'],function(){
         param.sub_flag ="railway_line";
         param.name=data.name;
         tools.sendRequest(net.SystemServlet,param,function(res){
-        	console.log(res.result)
            if(res.result == 1){
                 setTimeout(function(){
                     top.layer.close(index);

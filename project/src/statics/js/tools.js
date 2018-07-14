@@ -19,7 +19,7 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 					success: function(data) {
 						//返回包判断
 						if(data != null && data != undefined) {
-							callback(data)
+							callback(JSON.parse(data))
 						} else {
 							return;
 						}

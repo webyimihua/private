@@ -23,14 +23,12 @@ layui.use(['form','layer','tools'],function(){
         param.sub_flag ="domain_type";
         param.name=data.name;
         tools.sendRequest(net.SystemServlet,param,function(res){
-           if(res == 1){
-                setTimeout(function(){
+           if(res.result == 1){
                     top.layer.close(index);
                     top.layer.msg("添加监测域成功");
                     layer.closeAll("iframe");
                     //刷新父页面
                     parent.location.reload();
-                },2000);
             }else{
                 top.layer.close(index);
                 top.layer.msg("添加监测域失败");

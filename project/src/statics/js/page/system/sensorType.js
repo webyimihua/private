@@ -1,34 +1,62 @@
-layui.use(['form','layer','table','laytpl'],function(){
+layui.config({
+    base : "../../../js/"
+}).extend({
+    "tools" : "tools"
+})
+
+layui.use(['form','layer','table','laytpl','tools'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
         laytpl = layui.laytpl,
         table = layui.table;
+        tools = layui.tools;
     //列表
     var tableIns = table.render({
         elem: '#itemListtable',
-        url : '../../../json/userList.json',
+        url : 'http://47.95.13.55:8080//StructureMonitoring/SystemServlet',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
         limits : [10,15,20,25],
-        limit : 20,
+        limit :15,
         id : "itemListtable",
+        method: 'post',
+        where: {
+            action_flag:"w_query",
+            sub_flag:"sensor_type",
+            isFlur:false,
+            isReserve:false,
+            isDivide:true,
+            hasForeign:false,
+        },
+        request: {
+          pageName: 'pageNum', //页码的参数名称，默认：page
+          limitName: 'pageSize' //每页数据量的参数名，默认：limit
+        },
+        response: {
+           statusName: 'result' //数据状态的字段名称，默认：code
+          ,statusCode: 1 //成功的状态码，默认：0
+          ,msgName: 'message' //状态信息的字段名称，默认：msg
+          ,countName: 'count' //数据总数的字段名称，默认：count
+          ,dataName: 'data' //数据列表的字段名称，默认：data 
+        },done: function(res, curr, count){
+          $("[data-field='id']").css('display','none');
+        },
         cols : [[
-            // {type: "checkbox", fixed:"left", width:50},
-             {field: 'index', title: '序号', width:80, align:"center",templet: function(d){
-                return d.LAY_TABLE_INDEX + 1;
-            }},
-            {field: 'userName', title: '传感器类型名称', minWidth:280, align:"center"},
+            {field: 'index', title: '序号', width:80, align:"center",type:"numbers"},
+            {field: 'id', title: '序号', width:1, align:"center"},
+            {field: 'name', title: '传感器类型', minWidth:280, align:"center"},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
-    //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
+    //搜索
     $(".search_btn").on("click",function(){
         if($(".searchVal").val() != ''){
-            table.reload("newsListTable",{
+            table.reload("itemListtable",{
+                url : 'http://47.95.13.55:8080//StructureMonitoring/SystemServlet',
                 page: {
-                    curr: 1 //重新从第 1 页开始
+                    pageName: 1 //重新从第 1 页开始
                 },
                 where: {
                     key: $(".searchVal").val()  //搜索的关键字
@@ -46,16 +74,6 @@ layui.use(['form','layer','table','laytpl'],function(){
             content : "add.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-//              if(edit){
-//                  body.find(".userName").val(edit.userName);  //登录名
-//                  body.find(".userEmail").val(edit.userEmail);  //邮箱
-//                  body.find(".userSex input[value="+edit.userSex+"]").prop("checked","checked");  //性别
-//                  body.find(".userGrade").val(edit.userGrade);  //会员等级
-//                  body.find(".userStatus").val(edit.userStatus);    //用户状态
-//                  body.find(".userDesc").text(edit.userDesc);    //用户简介
-//                  form.render();
-//              }
- 				getStationname();
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -81,8 +99,8 @@ layui.use(['form','layer','table','laytpl'],function(){
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(data){                   
-                    body.find(".userEmail").val(data.userEmail);  //邮箱
-                    body.find(".userSex input[value="+data.userSex+"]").prop("checked","checked");  //性别                    
+                    body.find(".sensorName").val(data.name);  
+                    body.find(".ids").val(data.id);                    
                     form.render();
                 }
                 setTimeout(function(){
@@ -105,69 +123,30 @@ layui.use(['form','layer','table','laytpl'],function(){
             data = obj.data;
         if(layEvent === 'edit'){ //编辑
             editItem(data);
-        }else if(layEvent === 'detail'){ //详情
-            showItem(data);
         }else if(layEvent === 'del'){ //删除
             layer.confirm('确定删除此信息？',{icon:3, title:'提示信息'},function(index){
-                // $.get("删除文章接口",{
-                //     newsId : data.newsId  //将需要删除的newsId作为参数传入
-                // },function(data){
-                    tableIns.reload();
-                    layer.close(index);
-                // })
+                deleterailwaySensorData(data)
+                tableIns.reload();
+                layer.close(index); 
             });
         }
-    });
-	//查找公路局
-	function getStationname(){
-		console.log(23)
-		var param ={};
-		param.action_flag ="w_query";
-		param.sub_flag ="bureau";
-		param.isFlur = false;
-		param.isReserve = false;
-		param.isDivide = false;
-		param.hasForeign = false;
-		net.sendRequest(net.SystemServlet,param,function(data){
-			console.log(data)
-		})
-	}
-	var net={};
-	net.url = "http://192.168.0.202:8080";
-	net.SystemServlet ="StructureMonitoring/SystemServlet";
-	net.sendRequest = function(_service, body, callback) {	
-		console.log(56)
-		var actionStr = net.url + "/" + _service;		
-		$.ajax({
-			url: actionStr,
-			type: 'post',
-			data: JSON.stringify(body),
-			dataType: 'json',
-//			async: false,
-			contentType: 'application/json',
-			success: function(data, status, xhr) {
-				//返回包判断
-				if(data != null && data != undefined) {
-					callback(data)
-					console.log(data)
-				} else {
-					return;
-				}
 
-			},
-			error: function(data, status, xhr) {
-				//			// handle the error.
-				//			alert(exception.toString());
-				
-			},
-			statusCode: {
-				500: function() {
-			    	removeLoadingBox(loadType);
-			    	layer.msg('服务器连接失败');
-				}
-			}
-		});
-	}
+    });
+
+     function deleterailwaySensorData(data){
+        var param ={};
+        param.action_flag="w_delete";
+        param.sub_flag="sensor_type";
+        param.id=data.id;
+        tools.sendRequest(net.SystemServlet,param,function(res){
+            if(res.result){
+                 tableIns.reload();
+                 layer.msg('删除成功')
+             }else{
+                 layer.msg('删除失败')
+             }
+        })
+    }
 
 
 

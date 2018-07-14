@@ -80,6 +80,7 @@
 	<div id="allmap"></div>
 </body>
 <script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/jquery.js"></script>
 <script type="text/javascript">
 	// 百度地图API功能
 	var map = new BMap.Map("allmap",{minZoom:6});    // 创建Map实例
@@ -152,18 +153,18 @@
 			var arrdate=arr[i];
 				(function(){
 					var html = '';
-					var lng=arrdate.lng;
-					var lat=arrdate.lat;
+					var lng=arrdate.longitude;
+					var lat=arrdate.latitude;
 					var name =arrdate.name;
 					html+="<div class='overlays1 bubble' lng='"+lng+"' lat='"+lat+"'>";
 					     html+="<p class='pName'>"+name+"</p>";
 					     html+="<ul class='detail_hide_box'>";
-					            html+="<li>某某大桥</li>";
+					            html+="<li>"+name+"</li>";
 					            html+="<li>延西线</li>";
 					            html+="<li>西安铁路局</li>";
-					            html+="<li>上下行</li>";
-					            html+="<li><span>起始里程</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class='green'>K125+100</span></li>";
-					            html+="<li><span>结束里程</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class='green'>K125+100</span></li>";
+					            html+="<li>"+arrdate.direction+"</li>";
+					            html+="<li><span>起始里程</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class='green'>"+arrdate.startMileage+"</span></li>";
+					            html+="<li><span>结束里程</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class='green'>"+arrdate.endMileage+"</span></li>";
 					            html+="<li><span class='blue'>E 125.332145</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class='blue'>E 125.332145</span></li>";
 					            html+="<li class='orange'>橙色预警1个</li>";
 					            html+="<li class='red'>红色预警1个</li>";
@@ -184,13 +185,26 @@
 		}
 	};
 
-   var maplist=[
-      {lng:109.615397,lat:34.198883,name:"西安大桥盐两段"},
-      {lng:107.260543,lat:29.393101,name:"重庆大桥"},
-      {lng:116.60637,lat:28.584296,name:"南昌大桥"}
-   ]
-   firstMap(maplist)
-
+   // var maplist=[
+   //    {lng:109.615397,lat:34.198883,name:"西安大桥盐两段"},
+   //    {lng:107.260543,lat:29.393101,name:"重庆大桥"},
+   //    {lng:116.60637,lat:28.584296,name:"南昌大桥"}
+   // ]
+   
+   $.post('http://47.95.13.55:8080/StructureMonitoring/DataServlet',{
+      action_flag:"w_query",
+      sub_flag:"object",
+      isFlur:"false",
+      isReserve:"false",
+      isDivide:"false",
+      hasForeign:"ture",
+      fKey:"{'object':['name']}",
+      userId:"1",
+   },function(res){
+   	  var data = JSON.parse(res)
+   	  console.log(data.data)
+      firstMap(data.data);
+   })
 
 
 layui.use(['element','layer','jquery'],function(){
