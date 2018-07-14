@@ -51,13 +51,13 @@
 		{
 			"tit": "预警消息",
 			"icon": "&#xe631;",
-			"href": "page/systemSetting/basicParameter.html",
+			"href": "page/news/basicParameter.html",
 			"spread": false
 		},
 		{
 			"tit": "平台公告",
 			"icon": "&#xe631;",
-			"href": "page/systemSetting/basicParameter.html",
+			"href": "page/news/notice.html",
 			"spread": false
 		}
 	],

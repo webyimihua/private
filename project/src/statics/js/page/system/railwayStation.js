@@ -10,46 +10,47 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		laytpl = layui.laytpl,
 		table = layui.table;
 		tools = layui.tools;
+
 		var tableIns = table.render({
-        elem: '#itemListtable',
-        url : 'http://47.95.13.55:8080//StructureMonitoring/SystemServlet',
-        cellMinWidth : 95,
-        page : true,
-        height : "full-125",
-        limits : [10,15,20,25],
-        limit :10,
-        id : "itemListtable",
-        method: 'post',
-        where: {
-        	action_flag:"w_query",
-            sub_flag:"bureau",
-            isFlur:false,
-            isReserve:false,
-            isDivide:true,
-            hasForeign:false,
-        },
-        request: {
-          pageName: 'pageNum', //页码的参数名称，默认：page
-          limitName: 'pageSize' //每页数据量的参数名，默认：limit
-        },
-        response: {
-    	   statusName: 'result' //数据状态的字段名称，默认：code
-		  ,statusCode: 1 //成功的状态码，默认：0
-		  ,msgName: 'message' //状态信息的字段名称，默认：msg
-		  ,countName: 'count' //数据总数的字段名称，默认：count
-		  ,dataName: 'data' //数据列表的字段名称，默认：data	
-        },
-        done: function(res, curr, count){
-          $("[data-field='id']").css('display','none');
-        },
-        cols : [[
-            // {type: "checkbox", fixed:"left", width:50},
-            {field: 'index', title: '序号', width:80, align:"center",type:"numbers"},
-            {field: 'id', title: '序号', width:1, align:"center"},
-            {field: 'name', title: '铁路局', minWidth:280, align:"center"},
-            {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
-        ]]
-    });
+	        elem: '#itemListtable',
+	        url : 'http://47.95.13.55:8080//StructureMonitoring/SystemServlet',
+	        cellMinWidth : 95,
+	        page : true,
+	        height : "full-125",
+	        limits : [10,15,20,25],
+	        limit :10,
+	        id : "itemListtable",
+	        method: 'post',
+	        where: {
+	        	action_flag:"w_query",
+	            sub_flag:"bureau",
+	            isFlur:false,
+	            isReserve:false,
+	            isDivide:true,
+	            hasForeign:false,
+	        },
+	        request: {
+	          pageName: 'pageNum', //页码的参数名称，默认：page
+	          limitName: 'pageSize' //每页数据量的参数名，默认：limit
+	        },
+	        response: {
+	    	   statusName: 'result' //数据状态的字段名称，默认：code
+			  ,statusCode: 1 //成功的状态码，默认：0
+			  ,msgName: 'message' //状态信息的字段名称，默认：msg
+			  ,countName: 'count' //数据总数的字段名称，默认：count
+			  ,dataName: 'data' //数据列表的字段名称，默认：data	
+	        },
+	        done: function(res, curr, count){
+	          $("[data-field='id']").css('display','none');
+	        },
+	        cols : [[
+	            // {type: "checkbox", fixed:"left", width:50},
+	            {field: 'index', title: '序号', width:80, align:"center",type:"numbers"},
+	            {field: 'id', title: '序号', width:1, align:"center"},
+	            {field: 'name', title: '铁路局', minWidth:280, align:"center"},
+	            {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
+	        ]]
+	    });
 	//搜索
     $(".search_btn").on("click",function(){
         if($(".searchVal").val() != ''){
