@@ -27,7 +27,31 @@ layui.use(['form','layer'],function(){
         },2000);
         return false;
     })
-
+    //新增监测域
+	function addFileData(data,index){
+        var param ={};
+        param.action_flag ="w_add";
+        param.sub_flag ="railway_line";
+        param.name=data.name;
+        tools.sendRequest(net.SystemServlet,param,function(res){
+           if(res.result == 1){
+                setTimeout(function(){
+                    top.layer.close(index);
+                    top.layer.msg("添加铁路线成功");
+                    layer.closeAll("iframe");
+                    //刷新父页面
+                    parent.location.reload();
+                },2000);
+            }else{
+                top.layer.close(index);
+                top.layer.msg("添加铁路线失败");
+            }
+        })
+    }
+	
+	
+	
+	
     //格式化时间
     function filterTime(val){
         if(val < 10){

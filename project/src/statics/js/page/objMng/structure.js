@@ -9,83 +9,108 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		$ = layui.jquery,
 		laytpl = layui.laytpl,
 		table = layui.table;
-		tools = layui.tools;
-		getStationlist();
-	//查找公路局
-	function getStationlist() {
-		var param = {};
-		param.action_flag = "w_query";
-		param.sub_flag = "bureau";
-		param.isFlur = false;
-		param.isReserve = false;
-		param.isDivide = false;
-		param.hasForeign = false;
-		tools.sendRequest(net.SystemServlet, param, function(data) {
-			console.log(data)
-			//列表
-			var tableIns = table.render({
-				elem: '#itemListtable',
-				url: '../../../json/structureList.json',
-				cellMinWidth: 95,
-				page: true,
-				height: "full-125",
-				limits: [10, 15, 20, 25],
-				limit: 20,
-				id: "itemListtable",
-				cols: [
-					[
-						//          {type: "checkbox", fixed:"left", width:50},
-						{
-							field: 'index',
-							title: '序号',
-							width: 80,
-							align: "center"
-						},
-						{
-							field: 'structrueName',
-							title: '构筑物名称',
-							minWidth: 180,
-							align: "center"
-						},
-						{
-							field: 'station',
-							title: '所属铁路局',
-							minWidth: 200,
-							align: 'center'
-						},
-						{
-							field: 'line',
-							title: '所属铁路局线路',
-							align: 'center'
-						},
-						{
-							field: 'mileage',
-							title: '起始里程 - 结束里程',
-							align: 'center'
-						},
-						{
-							field: 'type',
-							title: '行别',
-							align: 'center'
-						},
-						{
-							field: 'watchType',
-							title: '监测体类型',
-							align: 'center',
-							minWidth: 150
-						},
-						{
-							title: '操作',
-							minWidth: 175,
-							templet: '#handleListBar',
-							fixed: "right",
-							align: "center"
-						}
-					]
-				]
-			});
-		})
-	}
+	tools = layui.tools;
+	//查找构筑物列表	
+	var tableIns = table.render({
+		elem: '#itemListtable',
+		url: net.baseurl + "/" + net.SystemServlet,
+		//		cellMinWidth: 95,
+		page: true,
+		height: "full-125",
+		limits: [10, 15, 20, 25],
+		limit: 10,
+		id: "itemListtable",
+		method: 'post',
+		where: {
+			action_flag: "w_query",
+			sub_flag: "object",
+			isFlur: false,
+			isReserve: false,
+			isDivide: true,
+			hasForeign: false,
+		},
+		request: {
+			pageName: 'pageNum', //页码的参数名称，默认：page
+			limitName: 'pageSize' //每页数据量的参数名，默认：limit
+		},
+		response: {
+			statusName: 'result' //数据状态的字段名称，默认：code
+				,
+			statusCode: 1 //成功的状态码，默认：0
+				,
+			msgName: 'message' //状态信息的字段名称，默认：msg
+				,
+			countName: 'count' //数据总数的字段名称，默认：count
+				,
+			dataName: 'data' //数据列表的字段名称，默认：data	
+		},
+		done: function(res, curr, count) {
+			$("[data-field='id']").css('display', 'none');
+		},
+		cols: [
+			[
+				//          {type: "checkbox", fixed:"left", width:50},
+				{
+					field: 'index',
+					title: '序号',
+					width: 80,
+					align: "center",
+					type: "numbers"
+				},
+				{
+					field: 'id',
+					title: '序号',
+					width: "",
+					align: "center",
+				},
+				{
+					field: 'name',
+					title: '构筑物名称',
+					minWidth: 180,
+					align: "center"
+				},
+				{
+					field: 'bureauId',
+					title: '所属铁路局',
+					minWidth: 200,
+					align: 'center'
+				},
+				{
+					field: 'railway_lineId',
+					title: '所属铁路局线路',
+					align: 'center'
+				},
+				{
+					field: 'startMileage',
+					title: '起始里程',
+					align: 'center'
+				},
+				{
+					field: 'endMileage',
+					title: '结束里程',
+					align: 'center'
+				},
+				{
+					field: 'direction',
+					title: '行别',
+					align: 'center'
+				},
+				{
+					field: 'object_typeId',
+					title: '监测体类型',
+					align: 'center',
+					minWidth: 150
+				},
+				{
+					title: '操作',
+					minWidth: 175,
+					templet: '#handleListBar',
+					fixed: "right",
+					align: "center"
+				}
+			]
+		]
+	});
 
 	//搜索【此功能需要后台配合，所以暂时没有动态效果演示】
 	$(".search_btn").on("click", function() {
@@ -110,16 +135,6 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 			content: "addStructure.html",
 			success: function(layero, index) {
 				var body = layui.layer.getChildFrame('body', index);
-				//              if(edit){
-				//                  body.find(".userName").val(edit.userName);  //登录名
-				//                  body.find(".userEmail").val(edit.userEmail);  //邮箱
-				//                  body.find(".userSex input[value="+edit.userSex+"]").prop("checked","checked");  //性别
-				//                  body.find(".userGrade").val(edit.userGrade);  //会员等级
-				//                  body.find(".userStatus").val(edit.userStatus);    //用户状态
-				//                  body.find(".userDesc").text(edit.userDesc);    //用户简介
-				//                  form.render();
-				//              }
-				getStationname();
 				setTimeout(function() {
 					layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
 						tips: 3
@@ -137,17 +152,16 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		addItem();
 	})
 	//修改构筑物
-	function editItem(data) {
+	function editItem(id) {
 		var index = layui.layer.open({
 			title: "编辑构筑物",
 			type: 2,
 			content: "editStructure.html",
 			success: function(layero, index) {
 				var body = layui.layer.getChildFrame('body', index);
-				if(data) {
-					body.find(".userEmail").val(data.userEmail); //邮箱
-					body.find(".userSex input[value=" + data.userSex + "]").prop("checked", "checked"); //性别                    
-					form.render();
+				var editForm = body.find("#editStructure");
+				if(id) {
+					getStructuredetail(id, editForm, 1);
 				}
 				setTimeout(function() {
 					layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
@@ -163,16 +177,16 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		})
 	}
 	//查看构筑物详情
-	function showItem(data) {
+	function showItem(id) {
 		var index = layui.layer.open({
 			title: "构筑物详情",
 			type: 2,
 			content: "detailStructure.html",
 			success: function(layero, index) {
 				var body = layui.layer.getChildFrame('body', index);
-				if(data) {
-					console.log(data);
-					
+				var showForm = body.find("#showDataform");
+				if(id) {
+					getStructuredetail(id, showForm,0);
 				}
 				setTimeout(function() {
 					layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
@@ -190,23 +204,70 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 	//列表操作
 	table.on('tool(itemList)', function(obj) {
 		var layEvent = obj.event,
-			data = obj.data;
+			id = obj.data.id;
 		if(layEvent === 'edit') { //编辑
-			editItem(data);
+			editItem(id);
 		} else if(layEvent === 'detail') { //详情
-			showItem(data);
+			showItem(id);
 		} else if(layEvent === 'del') { //删除
 			layer.confirm('确定删除此信息？', {
 				icon: 3,
 				title: '提示信息'
 			}, function(index) {
-				// $.get("删除文章接口",{
-				//     newsId : data.newsId  //将需要删除的newsId作为参数传入
-				// },function(data){
-				tableIns.reload();
-				layer.close(index);
-				// })
+				delStructuredata(id, index);
 			});
 		}
-	});	
+	});
+
+	//查询构筑物详情信息
+	function getStructuredetail(id, showdiv, type) {
+		var param = {};
+		param.action_flag = "w_show_object";
+		param.sub_flag = "object";
+		if(type ==0){
+			param.flag = "add";
+			param.userId = tools.getUsermessage('id');
+		}else{
+			param.flag = "update";
+		}		
+		param.id = id;
+		tools.sendRequest(net.SystemServlet, param, function(res) {
+			if(res.result == 1) {
+				var data = res.data;
+				if(data.length > 0) {
+
+					if(type == 1) {
+						tools.setOlddataToform(showForm, data, function() {
+							form.render;
+						});
+					} else {
+						tools.setOlddataToform(showForm, data);
+					}
+				} else {
+					layer.msg("数据查询失败");
+				};
+			}
+		})
+	}
+	//删除构筑物
+	function delStructuredata(id, index) {
+		var param = {};
+		param.action_flag = "w_delete";
+		param.sub_flag = "object";
+		param.id = id;
+		tools.sendRequest(net.SystemServlet, param, function(res) {
+			if(res.result == 1) {
+				if(res.message) {
+					layer.msg(res.message);
+				}
+				tableIns.reload();
+				layer.close(index);
+			} else {
+				if(res.message) {
+					layer.msg(res.message);
+				}
+			}
+		})
+	}
+
 })

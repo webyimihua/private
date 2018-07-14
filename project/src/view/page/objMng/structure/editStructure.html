@@ -14,21 +14,23 @@
 	<link rel="stylesheet" href="../../../css/base.css" media="all" />
 </head>
 <body class="childrenBody">
-<form class="layui-form" style="width:80%;">
+<form class="layui-form" id="editStructure" lay-filter="editStructure" style="width:80%;">
+	<input type="hidden" name="alarmStatus" value="正常" />
     <div class="layui-row">
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">构筑物名称</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input userName" lay-verify="required" >
+				<input type="text" name="name" class="layui-input" lay-verify="required" >
 			</div>
 		</div>
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">行别</label>
 			<div class="layui-input-block">
-				<select name="userGrade" class="userGrade" lay-filter="userGrade">
+				<select name="direction" lay-verify="required">
 					<option value="">请选择行别</option>
-					<option value="0">上行</option>
-					<option value="1">下行</option>
+					<option value="上">上</option>
+					<option value="中">中</option>
+					<option value="下">下</option>
 				</select>
 			</div>
 		</div>
@@ -37,20 +39,16 @@
       <div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">所属铁路局</label>
 			<div class="layui-input-block">
-				<select name="userGrade" class="userGrade" lay-filter="userGrade">
-					<option value="">请选择所属铁路局</option>
-					<option value="0">上海铁路局</option>
-					<option value="1">西安铁路局</option>
+				<select name="bureauId" id="allStation"  lay-verify="required">
+					<option value="">请选择所属铁路局</option>					
 				</select>
 			</div>
 		</div>
        <div class="layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">类型</label>
 			<div class="layui-input-block">
-				<select name="userGrade" class="userGrade" lay-filter="userGrade">
-					<option value="">请选择检测体类型</option>
-					<option value="0">桥梁</option>
-					<option value="1">高架</option>					
+				<select name="object_typeId" id="watchtype"  lay-verify="required">
+					<option value="">请选择检测体类型</option>								
 				</select>
 		</div>
 		</div>
@@ -59,20 +57,18 @@
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">所属铁路线</label>
 			<div class="layui-input-block">
-				<select name="userGrade" class="userGrade" lay-filter="userGrade">
-					<option value="">请选择构筑物所属铁路线</option>
-					<option value="0">西宝线</option>
-					<option value="1">延西线</option>					
+				<select name="railway_lineId" id="addLine" lay-filter="userGrade">
+					<option value="">请选择构筑物所属铁路线</option>									
 				</select>
 			</div>
 		</div>
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">监测维度</label>
 			<div class="layui-input-block">
-				<select name="userStatus" class="userStatus" lay-filter="userStatus">
+				<select name="dimensionIds" lay-verify="required">
 					<option value="">请选择要进行的监测维度</option>
-					<option value="0">上行</option>
-					<option value="1">下行</option>
+					<option value="0">AAA</option>
+					<option value="1">BBB</option>
 				</select>
 			</div>
 		</div>
@@ -81,13 +77,13 @@
         <div class="layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">经度</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input userName" lay-verify="required" />
+				<input type="text" name="latitude" class="layui-input " lay-verify="required" />
 			</div>
 		</div>
 		<div class="layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">起始里程</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input userName" lay-verify="required" />
+				<input type="text" name="startMileage" class="layui-input " lay-verify="required" />
 			</div>
 		</div>
     </div>
@@ -95,30 +91,31 @@
         <div class="layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">纬度</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input userName" lay-verify="required" />
+				<input type="text" name="longitude" class="layui-input " lay-verify="required" />
 			</div>
 		</div>
 		<div class="layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">结束里程</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input userName" lay-verify="required" />
+				<input type="text" name="endMileage" class="layui-input " lay-verify="required" />
 			</div>
 		</div>
    </div>    
 	<div class="layui-form-item layui-row layui-col-xs12">
 		<div class="layui-input-block">
+			<input type="hidden" name="image" id="imageUrl" value="" />
 			<img src=""/ class="picitem">
 			<span class="layui-btn layui-btn-lg layui-btn-green" >上传构筑物照片</span>
 		</div>
 	</div>
 	<div class="layui-form-item layui-row layui-col-xs12">
 		<div class="layui-input-block">
-			<button class="layui-btn layui-btn-lg" lay-submit="" lay-filter="addUser">编辑构筑物提交</button>
+			<button class="layui-btn layui-btn-lg" lay-submit="" lay-filter="editStructure">编辑构筑物提交</button>
 			<button type="reset" class="layui-btn layui-btn-lg layui-btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;&nbsp;&nbsp;&nbsp;</button>
 		</div>
 	</div>
 </form>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
-<script type="text/javascript" src="../../../js/page/objMng/addStructure.js"></script>
+<script type="text/javascript" src="../../../js/page/objMng/editStructure.js"></script>
 </body>
 </html>
