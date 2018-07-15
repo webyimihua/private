@@ -23,7 +23,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         method: 'post',
         where: {
         	action_flag:"w_query",
-            sub_flag:"notice",
+            sub_flag:"object_alarm",
             isFlur:false,
             isReserve:false,
             isDivide:true,
@@ -49,8 +49,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             {field: 'id', title: 'id', width:1, align:"center"},
             {field: 'time', title: '发布日期', width:200, align:"center"},
             {field: 'content', title: '发布内容', minWidth:100, align:"center"},
-            {field: 'userId', title: '发布者', width:150, align:"center"},
-            {title: '操作', width:120, templet:'#handleListBar',fixed:"right",align:"center"}
+            {field: 'objectId', title: '预警对象', width:150, align:"center"}
         ]]
     });
 

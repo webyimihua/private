@@ -25,9 +25,9 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 	function getData(json){
 		$.get("../../json/topnav.json",function(data){
 			if(json == "contentManagement"){
-				dataStr = data.contentManagement;
+				// dataStr = data.contentManagement;
 				//重新渲染左侧菜单
-				tab.render();
+				// tab.render();
 			}else if(json == "memberCenter"){
 				dataStr = data.memberCenter;
 				//重新渲染左侧菜单

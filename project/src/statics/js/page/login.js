@@ -9,6 +9,8 @@ layui.use(['form','layer','jquery','tools'],function(){
         $ = layui.jquery;
         tools = layui.tools;
     //登录按钮
+    //清除缓存
+    window.localStorage.clear();
     form.on("submit(login)",function(data){
         userLogin(data.field)
         return false;

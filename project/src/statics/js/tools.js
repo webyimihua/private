@@ -3,6 +3,8 @@ var net = {
 	baseurl: "http://47.95.13.55:8080",
 	SystemServlet: "StructureMonitoring/SystemServlet",
 	LoginServlet: "StructureMonitoring/LoginServlet",
+	MessageServlet:"StructureMonitoring/MessageServlet",
+	DataServlet:"StructureMonitoring/DataServlet",
 	MessageServlet: "StructureMonitoring/MessageServlet"
 };
 layui.define(["form", "element", "layer", "jquery"], function(exports) {
