@@ -9,7 +9,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		$ = layui.jquery,
 		laytpl = layui.laytpl,
 		table = layui.table;
-	tools = layui.tools;
+		tools = layui.tools;
 	//查找构筑物列表	
 	var tableIns = table.render({
 		elem: '#itemListtable',
