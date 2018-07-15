@@ -1,6 +1,12 @@
+layui.config({
+    base : "../../../js/"
+}).extend({
+    "tools" : "tools"
+})
 var $ ;
-layui.use(['element','layer','jquery'],function(){
+layui.use(['element','layer','jquery','tools'],function(){
 	$ = layui.$;
+	 tools = layui.tools;
 	var winWidth = $(window).width();
 	var b_nums = $(".canvas-contai .bradge-items").length;
 	if( b_nums*160 > winWidth){
@@ -8,38 +14,23 @@ layui.use(['element','layer','jquery'],function(){
 	}else{
 		 $(".canvas-contai").width(winWidth);
 	}
-	// $(".bradge-box").width(160*b_nums + "px");
-    $.get("../../json/detail.json",function(data){
-         console.log(data)
+	
+	$(function(){
+		findBridgeList()
 	})
 
-	$(".close_btn").click(function(){
-    	var index = parent.layer.getFrameIndex(window.name);
-        parent.layer.close(index);
-    })
-	
-	function openDetails(){
-	    var index = layui.layer.open({
-	        title : false,
-	        type : 2,
-	        closeBtn: 0,
-	        content : "detailLine.html",
-	        success : function(layero, index){
-	            var body = layui.layer.getChildFrame('body', index);
-	            Timeout(function(){
-	                layui.layer.tips('点击此处返回', '.layui-layer-setwin .layui-layer-close', {
-	                    tips: 3
-	                });
-	            },500)
-	        }
-	    })
-	    layui.layer.full(index);
-	    //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
-	    $(window).on("resize",function(){
-	        layui.layer.full(index);
-	    })
+
+	function findBridgeList(){
+        var param ={};
+        param.action_flag="w_get_object_detail";
+        param.dimensionId="null";
+        param.userId=1;
+        param.id=$(".brageIds").val();
+        tools.sendRequest(net.DataServlet,param,function(res){
+            if(res.result){
+            	console.log(res.data)
+             }
+        })
 	}
-	$(".circle").dblclick(function(){
-        openDetails();
-    })
+
 })

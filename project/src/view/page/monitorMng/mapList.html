@@ -156,7 +156,8 @@
 					var lng=arrdate.longitude;
 					var lat=arrdate.latitude;
 					var name =arrdate.name;
-					html+="<div class='overlays1 bubble' lng='"+lng+"' lat='"+lat+"'>";
+          var ids = arrdate.id;
+					html+="<div class='overlays1 bubble' id='"+ids+"' lng='"+lng+"' lat='"+lat+"'>";
 					     html+="<p class='pName'>"+name+"</p>";
 					     html+="<ul class='detail_hide_box'>";
 					            html+="<li>"+name+"</li>";
@@ -202,14 +203,13 @@
       userId:"1",
    },function(res){
    	  var data = JSON.parse(res)
-   	  console.log(data.data)
       firstMap(data.data);
    })
 
 
 layui.use(['element','layer','jquery'],function(){
 	$ = layui.$;
-	 function openDetails(){
+	 function openDetails(ids){
 	    var index = layui.layer.open({
 	        title : false,
 	        type : 2,
@@ -217,6 +217,7 @@ layui.use(['element','layer','jquery'],function(){
 	        content : "detail.html",
 	        success : function(layero, index){
 	            var body = layui.layer.getChildFrame('body', index);
+              body.find(".brageIds").val(ids); 
 	            Timeout(function(){
 	                layui.layer.tips('点击此处返回', '.layui-layer-setwin .layui-layer-close', {
 	                    tips: 3
@@ -231,7 +232,8 @@ layui.use(['element','layer','jquery'],function(){
 	    })
 	}
 	$(".overlays1").dblclick(function(){
-        openDetails();
+       var ids = $(this).attr("id");
+        openDetails(ids);
     })
     
 	
