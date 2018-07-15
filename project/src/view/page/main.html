@@ -188,22 +188,17 @@
 					var mySquare=new SquareOverlay(point,90,html,lng,lat);
 					map.addOverlay(mySquare);
 					mySquare.addEventListener("click",function(){
+            var ids = $(this).find(".bubble").attr("id");
 						// var lng = $(this).find(".bubble").attr("lng");
 						// var lat = $(this).find(".bubble").attr("lat");
 						// //点击改变缩放级别
 						// map.panTo(new BMap.Point(lng,lat));  
 //						map.setZoom(16);
-                        openDetails()
+             openDetails(ids)
 					});
 				})();
 		}
 	};
-
-   // var maplist=[
-   //    {lng:109.615397,lat:34.198883,name:"西安大桥盐两段"},
-   //    {lng:107.260543,lat:29.393101,name:"重庆大桥"},
-   //    {lng:116.60637,lat:28.584296,name:"南昌大桥"}
-   // ]
    
    $.post('http://47.95.13.55:8080/StructureMonitoring/DataServlet',{
       action_flag:"w_query",
@@ -220,37 +215,29 @@
    })
 
 
-layui.use(['element','layer','jquery'],function(){
-	$ = layui.$;
-	 function openDetails(ids){
-	    var index = layui.layer.open({
-	        title : false,
-	        type : 2,
-	        closeBtn: 0,
-	        content : "monitorMng/detail.html",
-	        success : function(layero, index){
-	            var body = layui.layer.getChildFrame('body', index);
+   function openDetails(ids){
+      var index = layui.layer.open({
+          title : false,
+          type : 2,
+          closeBtn: 0,
+          content : "monitorMng/detail.html",
+          success : function(layero, index){
+              var body = layui.layer.getChildFrame('body', index);
               body.find(".brageIds").val(ids); 
-	            Timeout(function(){
-	                layui.layer.tips('点击此处返回', '.layui-layer-setwin .layui-layer-close', {
-	                    tips: 3
-	                });
-	            },500)
-	        }
-	    })
-	    layui.layer.full(index);
-	    //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
-	    $(window).on("resize",function(){
-	        layui.layer.full(index);
-	    })
-	}
-	$(".overlays1").dblclick(function(){
-       var ids = $(this).attr("id");
-        openDetails(ids);
-    })
-    
-	
-})
+              setTimeout(function(){
+                  layui.layer.tips('点击此处返回', '.layui-layer-setwin .layui-layer-close', {
+                      tips: 3
+                  });
+              },500)
+          }
+      })
+      layui.layer.full(index);
+      //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+      $(window).on("resize",function(){
+          layui.layer.full(index);
+      })
+  }
+
 
 </script>
 </html>
