@@ -4,7 +4,7 @@ var net = {
 	SystemServlet: "StructureMonitoring/SystemServlet",
 	LoginServlet: "StructureMonitoring/LoginServlet",
 	MessageServlet:"StructureMonitoring/MessageServlet",
-	DataServlet:"StructureMonitoring/DataServlet"
+	DataServlet:"StructureMonitoring/DataServlet",
 	MessageServlet: "StructureMonitoring/MessageServlet"
 };
 layui.define(["form", "element", "layer", "jquery"], function(exports) {
