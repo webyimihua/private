@@ -15,22 +15,23 @@
 	<link rel="stylesheet" href="../../../css/page/objMng/common.css" media="all" />	
 </head>
 <body class="childrenBody">
-<form class="layui-form" style="width:80%;">
+<form class="layui-form" id="addpoint" style="width:80%;">
+	<input type="hidden" name="alarmLevel"  value="0" />
     <div class="layui-row">
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">监测点编号</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写监测点编号">
+				<input type="text" name="code" class="layui-input " lay-verify="required" placeholder="请填写监测点编号">
 			</div>
 		</div>
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">位置</label>
 			<div class="layui-input-block">
-				<select name="userGrade" class="userGrade" lay-filter="userGrade">
+				<select name="position"  lay-filter="userGrade" lay-verify="required">
 					<option value="">请选择位置</option>
-					<option value="0">上</option>
-					<option value="1">中</option>
-					<option value="2">下</option>
+					<option value="上">上</option>
+					<option value="中">中</option>
+					<option value="下">下</option>
 				</select>
 			</div>
 		</div>
@@ -39,16 +40,15 @@
         <div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">所属构筑物</label>
 			<div class="layui-input-block">
-				<select name="userGrade" class="userGrade" lay-filter="userGrade">
-					<option value="">请选择监测点所属构筑物</option>
-					<option value="0">鸭绿江大桥</option>					
+				<select name="objectId" id="allStructure" lay-filter="userGrade">
+					<option value="">请选择监测点所属构筑物</option>		
 				</select>
 			</div>
 		</div>
          <div class="layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">高度</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写高度">
+				<input type="text" name="height" class="layui-input " lay-verify="required" placeholder="请填写高度">
 			</div>
 		</div>
     </div>
@@ -56,21 +56,18 @@
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">所属监测域</label>
 			<div class="layui-input-block">
-				<select name="userGrade" class="userGrade" lay-filter="userGrade">					
+				<select name="domainId" id="allFile" lay-verify="required">					
 					<option value="">请选择所属监测域</option>
-					<option value="0">0</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
 				</select>
 			</div>
 		</div>
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">监测维度</label>
 			<div class="layui-input-block">
-				<select name="userStatus" class="userStatus" lay-filter="userStatus">
-					<option value="">请选择监测维度</option>
-					<option value="0">上行</option>
-					<option value="1">下行</option>
+				<select name="dimensionId" lay-verify="required">
+					<option value="">请选择监测维度</option >
+					<option value="0">AAA</option>
+					<option value="1">BBB</option>
 				</select>
 			</div>
 		</div>
@@ -79,16 +76,14 @@
         <div class="layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">监测点里程</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写监测点地理位置精度">
+				<input type="text" name="mileage" class="layui-input " lay-verify="required" placeholder="请填写监测点地理位置精度">
 			</div>
 		</div>
 		<div class="layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">对应传感器</label>
 			<div class="layui-input-block">
-				<select name="userStatus" class="userStatus" lay-filter="userStatus">
+				<select name="sensorId" id="Allsensor" lay-verify="required">
 					<option value="">请选择对应传感器</option>
-					<option value="0">上行</option>
-					<option value="1">下行</option>
 				</select>
 			</div>
 		</div>
@@ -97,13 +92,13 @@
         <div class="layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">初始监测日期</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请选择初始监测日期" id="watchFirsttime">
+				<input type="text" name="initialDate" class="layui-input " lay-verify="required" placeholder="请选择初始监测日期" id="watchFirsttime">
 			</div>
 		</div>		
     </div>   
 	<div class="layui-form-item layui-row layui-col-xs12">
 		<div class="layui-input-block">
-			<button class="layui-btn layui-btn-lg" lay-submit="" lay-filter="addUser">新增监测点提交</button>
+			<button class="layui-btn layui-btn-lg" lay-submit="" lay-filter="addpoint">新增监测点提交</button>
 			<button type="reset" class="layui-btn layui-btn-lg layui-btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;&nbsp;&nbsp;&nbsp;</button>
 		</div>
 	</div>

@@ -15,18 +15,18 @@
 	<link rel="stylesheet" href="../../../css/page/objMng/common.css" media="all" />
 </head>
 <body class="childrenBody">
-<form class="layui-form" style="width:80%;">
+<form class="layui-form" id="addTerminal" style="width:80%;">
     <div class="layui-row">
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">网关编号</label>
+			<label class="layui-form-label">终端 ID </label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请输入网关编号">
+				<input type="text" name="id" class="layui-input " lay-verify="required" maxlength="2" placeholder="请输入终端 ID(1-99整数)">
 			</div>
 		</div>
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">IP地址</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请输入IP地址">
+				<input type="text" name="ip" class="layui-input " lay-verify="required" placeholder="请输入IP地址">
 			</div>
 		</div>
    </div>
@@ -34,13 +34,13 @@
         <div class="layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">采样间隔</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请输入采样间隔">
+				<input type="text" name="sampleInterval" class="layui-input " lay-verify="required" placeholder="请输入采样间隔">
 			</div>
 		</div>
 		<div class="layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">端口号(全站仪)</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请输入端口号">
+				<input type="text" name="portForStation" class="layui-input " lay-verify="required" placeholder="请输入端口号">
 			</div>
 		</div>
     </div>   
@@ -48,17 +48,15 @@
         <div class="layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">所属监测体</label>
 			<div class="layui-input-block">
-				<select name="userStatus" class="userStatus" lay-filter="userStatus">
+				<select name="objectId" id="allStructure" lay-verify="required">
 					<option value="">请选择检测体</option>
-					<option value="0">凤凰山大桥</option>
-					<option value="1">***</option>
 				</select>
 			</div>
 		</div>
 		<div class="layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">端口号(其他)</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请输入采样间隔">
+				<input type="text" name="portForOther" class="layui-input " lay-verify="required" placeholder="请输入采样间隔">
 			</div>
 		</div>
     </div>  
@@ -66,7 +64,7 @@
         <div class="layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">终端状态</label>
 			<div class="layui-input-block">
-				<select name="userStatus" class="userStatus" lay-filter="userStatus">
+				<select name="status"  lay-verify="required">
 					<option value="0">正常</option>
 					<option value="1">故障</option>
 				</select>
@@ -76,12 +74,12 @@
 	
 	<div class="layui-form-item layui-row layui-col-xs12">
 		<div class="layui-input-block">
-			<button class="layui-btn layui-btn-lg" lay-submit="" lay-filter="addUser">新增终端提交</button>
+			<button class="layui-btn layui-btn-lg" lay-submit="" lay-filter="addTerminal">新增终端提交</button>
 			<button type="reset" class="layui-btn layui-btn-lg layui-btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;&nbsp;&nbsp;&nbsp;</button>
 		</div>
 	</div>
 </form>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
-<script type="text/javascript" src="../../../js/page/objMng/addPoint.js"></script>
+<script type="text/javascript" src="../../../js/page/objMng/addTerminal.js"></script>
 </body>
 </html>

@@ -1,28 +1,61 @@
-layui.use(['form','layer','table','laytpl'],function(){
+layui.config({
+	base: "../../../js/"
+}).extend({
+	"tools": "tools"
+})
+layui.use(['form','layer','table','laytpl','tools'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
         laytpl = layui.laytpl,
         table = layui.table;
-
-    //用户列表
-    var tableIns = table.render({
-        elem: '#itemListtable',
-        url : '../../../json/terminalList.json',
-        page : true,
-        height : "full-125",
-        limits : [10,15,20,25],
-        limit : 20,
-        id : "itemListtable",
+        tools = layui.tools;    
+	var tableIns = table.render({
+		elem: '#itemListtable',
+		url: net.baseurl + "/" + net.SystemServlet,
+		//		cellMinWidth: 95,
+		page: true,
+		height: "full-125",
+		limits: [10, 15, 20, 25],
+		limit: 10,
+		id: "itemListtable",
+		method: 'post',
+		where: {
+			action_flag: "w_query",
+			sub_flag: "gateway",
+			isFlur: false,
+			isReserve: false,
+			isDivide: true,
+			hasForeign: false,
+		},
+		request: {
+			pageName: 'pageNum', //页码的参数名称，默认：page
+			limitName: 'pageSize' //每页数据量的参数名，默认：limit
+		},
+		response: {
+			statusName: 'result' //数据状态的字段名称，默认：code
+				,
+			statusCode: 1 //成功的状态码，默认：0
+				,
+			msgName: 'message' //状态信息的字段名称，默认：msg
+				,
+			countName: 'count' //数据总数的字段名称，默认：count
+				,
+			dataName: 'data' //数据列表的字段名称，默认：data	
+		},
+		done: function(res, curr, count) {
+			$("[data-field='id']").css('display', 'none');
+		},
         cols : [[           
-            {field: 'index', title: '序号', width:80, align:"center"},
+            {field: 'index', title: '序号', width:80, align:"center",type: "numbers"},
+            {field: 'id',title: '序号',width: "",align: "center",},
             {field: 'itemNum', title: '终端编号', minWidth:200, align:'center'},
-            {field: 'itemTime', title: '采样间隔', align:'center'},
-            {field: 'itemStructure', title: '所属监测体', align:'center'},
-            {field: 'itemIp', title: 'IP地址', align:'center'},
-            {field: 'itemNo', title: '端口号(全站仪)', align:'center'},
-            {field: 'itemOther', title: '端口号(其他)', align:'center'},
-            {field: 'stause', title: '状态', align:'center',minWidth:150},
+            {field: 'sampleInterval', title: '采样间隔', align:'center'},
+            {field: 'objectId', title: '所属监测体', align:'center'},
+            {field: 'ip', title: 'IP地址', align:'center'},
+            {field: 'portForStation', title: '端口号(全站仪)', align:'center'},
+            {field: 'portForOther', title: '端口号(其他)', align:'center'},
+            {field: 'status', title: '状态', align:'center',minWidth:150},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });

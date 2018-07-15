@@ -46,7 +46,7 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 					str += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
 				}
 				$(div).append(str);
-				if(callback){					
+				if(typeof callback == 'function'){					
 					callback();
 				}
 			},
@@ -66,7 +66,7 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 						}
 					});
 				}
-				if(callback){					
+				if(typeof callback == 'function'){					
 					callback();
 				}
 			},

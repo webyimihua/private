@@ -1,23 +1,57 @@
-layui.use(['form','layer','table','laytpl'],function(){
+layui.config({
+	base: "../../../js/"
+}).extend({
+	"tools": "tools"
+})
+layui.use(['form','layer','table','laytpl','tools'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
         laytpl = layui.laytpl,
         table = layui.table;
+         tools = layui.tools;
 
-    //用户列表
-    var tableIns = table.render({
-        elem: '#itemListtable',
-        url : '../../../json/pointList.json',
-//      cellMinWidth : 95,
-        page : true,
-        height : "full-125",
-        limits : [10,15,20,25],
-        limit : 20,
-        id : "itemListtable",
+   //查找构筑物列表	
+	var tableIns = table.render({
+		elem: '#itemListtable',
+		url: net.baseurl + "/" + net.SystemServlet,
+		//		cellMinWidth: 95,
+		page: true,
+		height: "full-125",
+		limits: [10, 15, 20, 25],
+		limit: 10,
+		id: "itemListtable",
+		method: 'post',
+		where: {
+			action_flag: "w_query",
+			sub_flag: "unit",
+			isFlur: false,
+			isReserve: false,
+			isDivide: true,
+			hasForeign: false,
+		},
+		request: {
+			pageName: 'pageNum', //页码的参数名称，默认：page
+			limitName: 'pageSize' //每页数据量的参数名，默认：limit
+		},
+		response: {
+			statusName: 'result' //数据状态的字段名称，默认：code
+				,
+			statusCode: 1 //成功的状态码，默认：0
+				,
+			msgName: 'message' //状态信息的字段名称，默认：msg
+				,
+			countName: 'count' //数据总数的字段名称，默认：count
+				,
+			dataName: 'data' //数据列表的字段名称，默认：data	
+		},
+		done: function(res, curr, count) {
+			$("[data-field='id']").css('display', 'none');
+		},
         cols : [[
 //          {type: "checkbox", fixed:"left", width:50},
-            {field: 'index', title: '序号', width:80, align:"center"},
+            {field: 'index', title: '序号', width:80, align:"center",type: "numbers"},
+            {field: 'id',title: '序号',width: "",align: "center",},
             {field: 'pointNo', title: '监测点编号', minWidth:200, align:'center'},
             {field: 'structureName', title: '所属构筑物', align:'center'},
             {field: 'height', title: '高度', align:'center'},
