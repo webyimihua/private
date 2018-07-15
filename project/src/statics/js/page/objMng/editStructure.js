@@ -10,7 +10,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 	tools = layui.tools;
 	getAllStationname("#allStation");
 	getAllLinename("#addLine");
-	getAllWatchtype("#watchtype");
+	getAllWatchtype("#watchtype");	
 	form.on("submit(addStructure)", function(data) {
 		//弹出loading
 		var index = top.layer.msg('数据提交中，请稍候', {
