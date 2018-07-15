@@ -51,7 +51,7 @@
 		{
 			"tit": "预警消息",
 			"icon": "&#xe631;",
-			"href": "page/news/basicParameter.html",
+			"href": "page/news/alarm.html",
 			"spread": false
 		},
 		{
