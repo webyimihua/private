@@ -27,10 +27,8 @@
          <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">监测域类型</label>
 			<div class="layui-input-block">
-				<select name="domain_typeId" id="editFiletype" lay-filter="editFiletype">
-					<option value="">请选择监测域类型</option>
-					<option value="0">桥墩</option>
-					<option value="1">桥面</option>					
+				<select name="domain_typeId" id="fileType" lay-verify="required">
+					<option value="">请选择监测域类型</option>		
 				</select>
 			</div>
 		</div>
@@ -39,13 +37,8 @@
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">所属构筑物</label>
 			<div class="layui-input-block">
-				<select name="objectId"  lay-filter="objectId">
-					<option value="">请选择监测点所属铁路局</option>
-					<option value="0">西安铁路局</option>
-					<option value="1">西安铁路局</option>
-					<option value="2">西安铁路局</option>
-					<option value="3">西安铁路局</option>
-					<option value="4">西安铁路局</option>
+				<select name="objectId" id="Allstructuret"  lay-verify="required">
+					<option value="">请选择所属构筑物</option>
 				</select>
 			</div>
 		</div>
@@ -76,7 +69,7 @@
     </div>
 	<div class="layui-form-item layui-row layui-col-xs12">
 		<div class="layui-input-block">
-			<button class="layui-btn layui-btn-lg" lay-submit="" lay-filter="addUser">编辑监测域提交</button>
+			<button class="layui-btn layui-btn-lg" lay-submit="" lay-filter="editFile">编辑监测域提交</button>
 			<button type="reset" class="layui-btn layui-btn-lg layui-btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;&nbsp;&nbsp;&nbsp;</button>
 		</div>
 	</div>

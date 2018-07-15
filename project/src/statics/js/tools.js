@@ -38,16 +38,18 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 			},
 			//初始化下拉数据
 			initOptionitem: function(div,data,callback) {
-//				$(div).empty();
+				console.log(data)
 				var str = "";
 				for(var i = 0; i < data.length; i++) {
 					str += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
 				}
 				$(div).append(str);
-				callback();
+				if(callback){					
+					callback();
+				}
 			},
 			//根据name覆盖老数据修改、详情使用(不适合多选、单选)
-			setOlddataToform: function(div, data,callback) {
+			setOlddataToform: function(div, data,callback){
 				var key, value, tagName, type;
 				for(x in data) {
 					key = x;
@@ -62,7 +64,9 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 						}
 					});
 				}
-				callback();
+				if(callback){					
+					callback();
+				}
 			},
 			//根据formid,name处理对应数据为json
 			getFormallData: function(div) {

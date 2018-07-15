@@ -152,7 +152,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		addItem();
 	})
 	//修改构筑物
-	function editItem(id) {
+	function editItem(data) {
 		var index = layui.layer.open({
 			title: "编辑构筑物",
 			type: 2,
@@ -160,8 +160,13 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 			success: function(layero, index) {
 				var body = layui.layer.getChildFrame('body', index);
 				var editForm = body.find("#editStructure");
-				if(id) {
-					getStructuredetail(id, editForm, 1);
+				if(data) {
+					getAllStationname("#allStation");
+					getAllLinename("#addLine");
+					getAllWatchtype("#watchtype");	
+					tools.setOlddataToform(editForm, data, function() {
+							form.render;
+						});
 				}
 				setTimeout(function() {
 					layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
@@ -177,7 +182,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		})
 	}
 	//查看构筑物详情
-	function showItem(id) {
+	function showItem(data) {
 		var index = layui.layer.open({
 			title: "构筑物详情",
 			type: 2,
@@ -185,8 +190,8 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 			success: function(layero, index) {
 				var body = layui.layer.getChildFrame('body', index);
 				var showForm = body.find("#showDataform");
-				if(id) {
-					getStructuredetail(id, showForm,0);
+				if(data) {
+					tools.setOlddataToform(showForm, data);
 				}
 				setTimeout(function() {
 					layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
@@ -204,51 +209,21 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 	//列表操作
 	table.on('tool(itemList)', function(obj) {
 		var layEvent = obj.event,
-			id = obj.data.id;
+			data = obj.data;
 		if(layEvent === 'edit') { //编辑
-			editItem(id);
+			editItem(data);
 		} else if(layEvent === 'detail') { //详情
-			showItem(id);
+			showItem(data);
 		} else if(layEvent === 'del') { //删除
 			layer.confirm('确定删除此信息？', {
 				icon: 3,
 				title: '提示信息'
 			}, function(index) {
-				delStructuredata(id, index);
+				delStructuredata(data.id, index);
 			});
 		}
 	});
-
-	//查询构筑物详情信息
-	function getStructuredetail(id, showdiv, type) {
-		var param = {};
-		param.action_flag = "w_show_object";
-		param.sub_flag = "object";
-		if(type ==0){
-			param.flag = "add";
-			param.userId = tools.getUsermessage('id');
-		}else{
-			param.flag = "update";
-		}		
-		param.id = id;
-		tools.sendRequest(net.SystemServlet, param, function(res) {
-			if(res.result == 1) {
-				var data = res.data;
-				if(data.length > 0) {
-
-					if(type == 1) {
-						tools.setOlddataToform(showForm, data, function() {
-							form.render;
-						});
-					} else {
-						tools.setOlddataToform(showForm, data);
-					}
-				} else {
-					layer.msg("数据查询失败");
-				};
-			}
-		})
-	}
+	
 	//删除构筑物
 	function delStructuredata(id, index) {
 		var param = {};
@@ -266,6 +241,75 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 				if(res.message) {
 					layer.msg(res.message);
 				}
+			}
+		})
+	}
+	
+	//初始化查询铁路局下拉菜单
+	function getAllStationname(div) {
+		var param = {};
+		param.action_flag = "w_query";
+		param.sub_flag = "bureau";
+		param.isFlur = false;
+		param.isReserve = false;
+		param.isDivide = true;
+		param.hasForeign = false;
+		tools.sendRequest(net.SystemServlet, param, function(res) {
+			if(res.result == 1) {
+				var data = res.data;
+				if(data.length > 0) {
+					tools.initOptionitem(div,data,function(){
+						form.render('select');
+					});					
+				} else {
+					layer.msg("请先新增铁路局数据");
+				};
+			}
+		})
+	}
+	
+	//初始化查询铁路线路下拉菜单
+	function getAllLinename(div) {
+		var param = {};
+		param.action_flag = "w_query";
+		param.sub_flag = "railway_line";
+		param.isFlur = false;
+		param.isReserve = false;
+		param.isDivide = true;
+		param.hasForeign = false;
+		tools.sendRequest(net.SystemServlet, param, function(res) {
+			if(res.result == 1) {
+				var data = res.data;
+				if(data.length > 0) {
+					tools.initOptionitem(div, data,function(){
+						form.render('select');
+					});					
+				} else {
+					layer.msg("请先新增铁路线路数据");
+				};
+			}
+		})
+	}	
+	
+	//初始化查询检测类型下拉菜单
+	function getAllWatchtype(div) {
+		var param = {};
+		param.action_flag = "w_query";
+		param.sub_flag = "object_type";
+		param.isFlur = false;
+		param.isReserve = false;
+		param.isDivide = true;
+		param.hasForeign = false;
+		tools.sendRequest(net.SystemServlet, param, function(res) {
+			if(res.result == 1) {
+				var data = res.data;
+				if(data.length > 0) {
+					tools.initOptionitem(div, data,function(){
+						form.render('select');
+					});					
+				} else {
+					layer.msg("请先新增检测类型");
+				};
 			}
 		})
 	}

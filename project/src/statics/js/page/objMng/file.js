@@ -49,7 +49,9 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 			$("[data-field='id']").css('display', 'none');
 		},
         cols : [[
-            {field: 'ordinal', title: '序号', width:80, align:"center"},
+        	{field: 'ordinal',title: '序号',width: 80,align: "center",},
+			{field: 'id',title: '序号',width: "",align: "center",},
+//          {field: 'ordinal', title: '序号', width:80, align:"center"},
             {field: 'name', title: '监测域名称', minWidth:180, align:"center"},
             {field: 'domain_typeId', title: '监测域类型', minWidth:200, align:'center'},
             {field: 'objectId', title: '所属构筑物', align:'center'},
@@ -106,7 +108,9 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             content : "editFile.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-                if(data){                   
+                if(data){ 
+                	getAllFiletype("#fileType");
+                	getAllstructuretype("#Allstructuret");
                    var editForm = body.find("#editDataform");
                 	tools.setOlddataToform(editForm,data);
                 }
@@ -157,15 +161,80 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         }else if(layEvent === 'detail'){ //详情
             showItem(data);
         }else if(layEvent === 'del'){ //删除
-            layer.confirm('确定删除此信息？',{icon:3, title:'提示信息'},function(index){
-                // $.get("删除文章接口",{
-                //     newsId : data.newsId  //将需要删除的newsId作为参数传入
-                // },function(data){
-                    tableIns.reload();
-                    layer.close(index);
-                // })
-            });
+           layer.confirm('确定删除此信息？', {
+				icon: 3,
+				title: '提示信息'
+			}, function(index) {
+				delFiledata(data.id, index);
+			});
         }
     });
+    
+    //删除监测域
+	function delFiledata(id, index) {
+		var param = {};
+		param.action_flag = "w_delete";
+		param.sub_flag = "domain_type";
+		param.id = id;
+		tools.sendRequest(net.SystemServlet, param, function(res) {
+			if(res.result == 1) {
+				if(res.message) {
+					layer.msg(res.message);
+				}
+				tableIns.reload();
+				layer.close(index);
+			} else {
+				if(res.message) {
+					layer.msg(res.message);
+				}
+			}
+		})
+	}
+	//初始化查询构筑物域类型下拉菜单
+	function getAllFiletype(div) {
+		var param = {};
+		param.action_flag = "w_query";
+		param.sub_flag = "domain_type";
+		param.isFlur = false;
+		param.isReserve = false;
+		param.isDivide = true;
+		param.hasForeign = false;
+		tools.sendRequest(net.SystemServlet, param, function(res) {
+			if(res.result == 1) {
+				var data = res.data;
+				if(data.length > 0) {
+					tools.initOptionitem(div, data,function(){
+						form.render('select');
+					});					
+				} else {
+					layer.msg("请先新增筑物域类型");
+				};
+			}
+		})
+	}
+	//初始化查询构筑物下拉菜单
+	function getAllstructuretype(div) {
+		var param = {};
+		param.action_flag = "w_query";
+		param.sub_flag = "object";
+		param.isFlur = false;
+		param.isReserve = false;
+		param.isDivide = true;
+		param.hasForeign = false;		
+		tools.sendRequest(net.SystemServlet, param, function(res) {
+			console.log(res)
+			if(res.result == 1) {
+				var data = res.data;
+				if(data.length > 0) {
+					tools.initOptionitem(div, data,function(){
+						form.render('select');
+					});					
+				} else {
+					layer.msg("请先新增构筑物");
+				};
+			}
+		})
+	}
+
 
 })
