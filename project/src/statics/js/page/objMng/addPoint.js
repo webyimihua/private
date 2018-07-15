@@ -1,43 +1,106 @@
-layui.use(['form','layer'],function(){
+layui.config({
+	base: "../../../js/"
+}).extend({
+	"tools": "tools"
+})
+layui.use(['form','layer', 'tools'],function(){
     var form = layui.form
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery;
-
-    form.on("submit(addUser)",function(data){
+		tools = layui.tools;
+		getAllstructuretype("#allStructure");
+		getAllfile("#allFile");
+		getAllsensor("#Allsensor");
+    form.on("submit(addpoint)",function(data){
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
-        // 实际使用时的提交信息
-        // $.post("上传路径",{
-        //     userName : $(".userName").val(),  //登录名
-        //     userEmail : $(".userEmail").val(),  //邮箱
-        //     userSex : data.field.sex,  //性别
-        //     userGrade : data.field.userGrade,  //会员等级
-        //     userStatus : data.field.userStatus,    //用户状态
-        //     newsTime : submitTime,    //添加时间
-        //     userDesc : $(".userDesc").text(),    //用户简介
-        // },function(res){
-        //
-        // })
-        setTimeout(function(){
-            top.layer.close(index);
-            top.layer.msg("监测点添加成功！");
-            layer.closeAll("iframe");
-            //刷新父页面
-            parent.location.reload();
-        },2000);
+         var param = tools.getFormallData("#addpoint");
+		addPointData(param, index);
         return false;
     })
-
-    //格式化时间
-    function filterTime(val){
-        if(val < 10){
-            return "0" + val;
-        }else{
-            return val;
-        }
+	//新增监测点
+	function addPointData(param,index){
+        param.action_flag ="w_add";
+        param.sub_flag ="unit";
+        tools.sendRequest(net.SystemServlet,param,function(res){
+           if(res.result == 1) {
+				setTimeout(function() {
+					top.layer.close(index);
+					top.layer.msg("添加监测点成功");
+					layer.closeAll("iframe");
+					//刷新父页面
+					parent.location.reload();
+				}, 2000);
+			} else {
+				top.layer.close(index);
+				top.layer.msg("添加监测点失败");
+			}
+        })
     }
-    //定时发布
-    var time = new Date();
-    var submitTime = time.getFullYear()+'-'+filterTime(time.getMonth()+1)+'-'+filterTime(time.getDate())+' '+filterTime(time.getHours())+':'+filterTime(time.getMinutes())+':'+filterTime(time.getSeconds());
-
+	//初始化查询构筑物下拉菜单
+	function getAllstructuretype(div) {
+		var param = {};
+		param.action_flag = "w_query";
+		param.sub_flag = "object";
+		param.isFlur = false;
+		param.isReserve = false;
+		param.isDivide = true;
+		param.hasForeign = false;		
+		tools.sendRequest(net.SystemServlet, param, function(res) {
+			if(res.result == 1) {
+				var data = res.data;
+				if(data.length > 0) {
+					tools.initOptionitem(div, data,function(){
+						form.render('select');
+					});					
+				} else {
+					layer.msg("请先新增构筑物");
+				};
+			}
+		})
+	}
+	//初始化查询监测域下拉菜单
+	function getAllfile(div) {
+		var param = {};
+		param.action_flag = "w_query";
+		param.sub_flag = "domain";
+		param.isFlur = false;
+		param.isReserve = false;
+		param.isDivide = true;
+		param.hasForeign = false;		
+		tools.sendRequest(net.SystemServlet, param, function(res) {
+			if(res.result == 1) {
+				var data = res.data;
+				if(data.length > 0) {
+					tools.initOptionitem(div, data,function(){
+						form.render('select');
+					});					
+				} else {
+					layer.msg("请先新增监测域");
+				};
+			}
+		})
+	}
+	//初始化查询监测域下拉菜单
+	function getAllsensor(div) {
+		var param = {};
+		param.action_flag = "w_query";
+		param.sub_flag = "sensor";
+		param.isFlur = false;
+		param.isReserve = false;
+		param.isDivide = true;
+		param.hasForeign = false;		
+		tools.sendRequest(net.SystemServlet, param, function(res) {
+			if(res.result == 1) {
+				var data = res.data;
+				if(data.length > 0) {
+					tools.initOptionitem(div, data,function(){
+						form.render('select');
+					});					
+				} else {
+					layer.msg("请先新增传感器");
+				};
+			}
+		})
+	}
 })
