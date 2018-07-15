@@ -11,15 +11,43 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         table = layui.table;
         tools = layui.tools;
     //用户列表
-    var tableIns = table.render({
-        elem: '#itemListtable',
-        url : '../../../json/fileList.json',
-        cellMinWidth : 95,
-        page : true,
-        height : "full-125",
-        limits : [10,15,20,25],
-        limit : 20,
-        id : "itemListtable",
+    //查找构筑物列表	
+	var tableIns = table.render({
+		elem: '#itemListtable',
+		url: net.baseurl + "/" + net.SystemServlet,
+		//		cellMinWidth: 95,
+		page: true,
+		height: "full-125",
+		limits: [10, 15, 20, 25],
+		limit: 10,
+		id: "itemListtable",
+		method: 'post',
+		where: {
+			action_flag: "w_query",
+			sub_flag: "domain",
+			isFlur: false,
+			isReserve: false,
+			isDivide: true,
+			hasForeign: false,
+		},
+		request: {
+			pageName: 'pageNum', //页码的参数名称，默认：page
+			limitName: 'pageSize' //每页数据量的参数名，默认：limit
+		},
+		response: {
+			statusName: 'result' //数据状态的字段名称，默认：code
+				,
+			statusCode: 1 //成功的状态码，默认：0
+				,
+			msgName: 'message' //状态信息的字段名称，默认：msg
+				,
+			countName: 'count' //数据总数的字段名称，默认：count
+				,
+			dataName: 'data' //数据列表的字段名称，默认：data	
+		},
+		done: function(res, curr, count) {
+			$("[data-field='id']").css('display', 'none');
+		},
         cols : [[
             {field: 'ordinal', title: '序号', width:80, align:"center"},
             {field: 'name', title: '监测域名称', minWidth:180, align:"center"},
@@ -54,15 +82,6 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             content : "addFile.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-//              if(edit){
-//                  body.find(".userName").val(edit.userName);  //登录名
-//                  body.find(".userEmail").val(edit.userEmail);  //邮箱
-//                  body.find(".userSex input[value="+edit.userSex+"]").prop("checked","checked");  //性别
-//                  body.find(".userGrade").val(edit.userGrade);  //会员等级
-//                  body.find(".userStatus").val(edit.userStatus);    //用户状态
-//                  body.find(".userDesc").text(edit.userDesc);    //用户简介
-//                  form.render();
-//              }
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
