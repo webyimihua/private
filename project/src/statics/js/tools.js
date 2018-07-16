@@ -1,6 +1,7 @@
 //公共模块
 var net = {
 	baseurl: "http://47.95.13.55:8080",
+	ObjectServlet: "StructureMonitoring/ObjectServlet",
 	SystemServlet: "StructureMonitoring/SystemServlet",
 	LoginServlet: "StructureMonitoring/LoginServlet",
 	MessageServlet:"StructureMonitoring/MessageServlet",
@@ -40,7 +41,6 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 			},
 			//初始化下拉数据
 			initOptionitem: function(div,data,callback) {
-				console.log(data)
 				var str = "";
 				for(var i = 0; i < data.length; i++) {
 					str += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
@@ -97,7 +97,78 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 					return oval;
 				}
 			},
-			//
+			//查询铁路局
+			getAllstation:function(div){
+				var param = {};
+				param.action_flag = "w_show_option";
+				param.sub_flag = "bureau";
+				tools.sendRequest(net.ObjectServlet, param, function(res) {
+					if(res.result == 1) {
+						var data = res.data;
+						if(data.length > 0) {
+							tools.initOptionitem(div,data,function(){
+								form.render('select');
+							});					
+						} else {
+							layer.msg("请先新增铁路局数据");
+						};
+					}
+				})
+			},
+			//查询所有的铁路线路
+			getAllLine:function(div){
+				var param = {};
+				param.action_flag = "w_show_option";
+				param.sub_flag = "railway_line";
+				tools.sendRequest(net.ObjectServlet, param, function(res) {
+					if(res.result == 1) {
+						var data = res.data;
+						if(data.length > 0) {
+							tools.initOptionitem(div,data,function(){
+								form.render('select');
+							});					
+						} else {
+							layer.msg("请先新增铁路线路数据");
+						};
+					}
+				})
+			},
+			//查询所有的监测类型
+			getAllWatchtype:function(div){
+				var param = {};
+				param.action_flag = "w_show_option";
+				param.sub_flag = "object_type";
+				tools.sendRequest(net.ObjectServlet, param, function(res) {
+					if(res.result == 1) {
+						var data = res.data;
+						if(data.length > 0) {
+							tools.initOptionitem(div,data,function(){
+								form.render('select');
+							});					
+						} else {
+							layer.msg("请先新增检测类型");
+						};
+					}
+				})
+			},
+			//查询所有的监测维度
+			getWatchdimension:function(div){
+				var param = {};
+				param.action_flag = "w_show_option";
+				param.sub_flag = "dimension";
+				tools.sendRequest(net.ObjectServlet, param, function(res) {
+					if(res.result == 1) {
+						var data = res.data;
+						if(data.length > 0) {
+							tools.initOptionitem(div,data,function(){
+								form.render('select');
+							});					
+						}
+					}
+				})
+			},
+			
+			
 		};
 	exports("tools", Tools);
 });

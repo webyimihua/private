@@ -23,7 +23,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 	function addStructureData(param, index) {
 		param.action_flag = "w_add";
 		param.sub_flag = "object";
-		tools.sendRequest(net.SystemServlet, param, function(res) {
+		tools.sendRequest(net.ObjectServlet, param, function(res) {
 			if(res.result == 1) {
 				setTimeout(function() {
 					top.layer.close(index);

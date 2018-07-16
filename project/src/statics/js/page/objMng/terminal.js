@@ -12,7 +12,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         tools = layui.tools;    
 	var tableIns = table.render({
 		elem: '#itemListtable',
-		url: net.baseurl + "/" + net.SystemServlet,
+		url: net.baseurl + "/" + net.ObjectServlet,
 		//		cellMinWidth: 95,
 		page: true,
 		height: "full-125",

@@ -14,7 +14,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
     //查找构筑物列表	
 	var tableIns = table.render({
 		elem: '#itemListtable',
-		url: net.baseurl + "/" + net.SystemServlet,
+		url: net.baseurl + "/" + net.ObjectServlet,
 		//		cellMinWidth: 95,
 		page: true,
 		height: "full-125",
@@ -176,7 +176,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 		param.action_flag = "w_delete";
 		param.sub_flag = "domain_type";
 		param.id = id;
-		tools.sendRequest(net.SystemServlet, param, function(res) {
+		tools.sendRequest(net.ObjectServlet, param, function(res) {
 			if(res.result == 1) {
 				if(res.message) {
 					layer.msg(res.message);
@@ -199,7 +199,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 		param.isReserve = false;
 		param.isDivide = true;
 		param.hasForeign = false;
-		tools.sendRequest(net.SystemServlet, param, function(res) {
+		tools.sendRequest(net.ObjectServlet, param, function(res) {
 			if(res.result == 1) {
 				var data = res.data;
 				if(data.length > 0) {
@@ -221,7 +221,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 		param.isReserve = false;
 		param.isDivide = true;
 		param.hasForeign = false;		
-		tools.sendRequest(net.SystemServlet, param, function(res) {
+		tools.sendRequest(net.ObjectServlet, param, function(res) {
 			console.log(res)
 			if(res.result == 1) {
 				var data = res.data;

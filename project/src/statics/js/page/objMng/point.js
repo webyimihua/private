@@ -14,7 +14,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
    //查找构筑物列表	
 	var tableIns = table.render({
 		elem: '#itemListtable',
-		url: net.baseurl + "/" + net.SystemServlet,
+		url: net.baseurl + "/" + net.ObjectServlet,
 		//		cellMinWidth: 95,
 		page: true,
 		height: "full-125",

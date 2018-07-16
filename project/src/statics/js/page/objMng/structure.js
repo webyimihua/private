@@ -10,11 +10,12 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		laytpl = layui.laytpl,
 		table = layui.table;
 		tools = layui.tools;
-	//查找构筑物列表	
+	//查找构筑物列表
+	    
 	var tableIns = table.render({
 		elem: '#itemListtable',
-		url: net.baseurl + "/" + net.SystemServlet,
-		//		cellMinWidth: 95,
+		url: net.baseurl + "/" + net.ObjectServlet,
+		cellMinWidth: 95,
 		page: true,
 		height: "full-125",
 		limits: [10, 15, 20, 25],
@@ -27,7 +28,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 			isFlur: false,
 			isReserve: false,
 			isDivide: true,
-			hasForeign: false,
+			userId:1,
 		},
 		request: {
 			pageName: 'pageNum', //页码的参数名称，默认：page
@@ -46,10 +47,12 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		},
 		done: function(res, curr, count) {
 			$("[data-field='id']").css('display', 'none');
+			$("[data-field='bureauId']").css('display', 'none');
+			$("[data-field='railway_lineId']").css('display', 'none');
+			$("[data-field='object_typeId']").css('display', 'none');
 		},
 		cols: [
 			[
-				//          {type: "checkbox", fixed:"left", width:50},
 				{
 					field: 'index',
 					title: '序号',
@@ -72,11 +75,23 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 				{
 					field: 'bureauId',
 					title: '所属铁路局',
+					width: "",
+					align: 'center'
+				},
+				{
+					field: 'bureauname',
+					title: '所属铁路局',
 					minWidth: 200,
 					align: 'center'
 				},
 				{
 					field: 'railway_lineId',
+					title: '所属铁路局线路',
+					width: "",
+					align: 'center'
+				},
+				{
+					field: 'railway_linename',
 					title: '所属铁路局线路',
 					align: 'center'
 				},
@@ -97,6 +112,11 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 				},
 				{
 					field: 'object_typeId',
+					title: '监测体类型',
+					align: 'center',					
+				},
+				{
+					field: 'object_typename',
 					title: '监测体类型',
 					align: 'center',
 					minWidth: 150
@@ -161,9 +181,10 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 				var body = layui.layer.getChildFrame('body', index);
 				var editForm = body.find("#editStructure");
 				if(data) {
-					getAllStationname("#allStation");
-					getAllLinename("#addLine");
-					getAllWatchtype("#watchtype");	
+					tools.getAllstation("#allStation");
+					tools.getAllLine("#addLine");
+					tools.getAllWatchtype("#watchtype");	
+					tools.getWatchdimension("#dimension");	
 					tools.setOlddataToform(editForm, data, function() {
 							form.render;
 						});
@@ -230,7 +251,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		param.action_flag = "w_delete";
 		param.sub_flag = "object";
 		param.id = id;
-		tools.sendRequest(net.SystemServlet, param, function(res) {
+		tools.sendRequest(net.ObjectServlet, param, function(res) {
 			if(res.result == 1) {
 				if(res.message) {
 					layer.msg(res.message);
@@ -245,73 +266,4 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		})
 	}
 	
-	//初始化查询铁路局下拉菜单
-	function getAllStationname(div) {
-		var param = {};
-		param.action_flag = "w_query";
-		param.sub_flag = "bureau";
-		param.isFlur = false;
-		param.isReserve = false;
-		param.isDivide = true;
-		param.hasForeign = false;
-		tools.sendRequest(net.SystemServlet, param, function(res) {
-			if(res.result == 1) {
-				var data = res.data;
-				if(data.length > 0) {
-					tools.initOptionitem(div,data,function(){
-						form.render('select');
-					});					
-				} else {
-					layer.msg("请先新增铁路局数据");
-				};
-			}
-		})
-	}
-	
-	//初始化查询铁路线路下拉菜单
-	function getAllLinename(div) {
-		var param = {};
-		param.action_flag = "w_query";
-		param.sub_flag = "railway_line";
-		param.isFlur = false;
-		param.isReserve = false;
-		param.isDivide = true;
-		param.hasForeign = false;
-		tools.sendRequest(net.SystemServlet, param, function(res) {
-			if(res.result == 1) {
-				var data = res.data;
-				if(data.length > 0) {
-					tools.initOptionitem(div, data,function(){
-						form.render('select');
-					});					
-				} else {
-					layer.msg("请先新增铁路线路数据");
-				};
-			}
-		})
-	}	
-	
-	//初始化查询检测类型下拉菜单
-	function getAllWatchtype(div) {
-		var param = {};
-		param.action_flag = "w_query";
-		param.sub_flag = "object_type";
-		param.isFlur = false;
-		param.isReserve = false;
-		param.isDivide = true;
-		param.hasForeign = false;
-		tools.sendRequest(net.SystemServlet, param, function(res) {
-			if(res.result == 1) {
-				var data = res.data;
-				if(data.length > 0) {
-					tools.initOptionitem(div, data,function(){
-						form.render('select');
-					});					
-				} else {
-					layer.msg("请先新增检测类型");
-				};
-			}
-		})
-	}
-
 })

@@ -20,7 +20,7 @@ layui.use(['form','layer', 'tools'],function(){
 	function addTerminalData(param,index){
         param.action_flag ="w_add";
         param.sub_flag ="gateway";
-        tools.sendRequest(net.SystemServlet,param,function(res){
+        tools.sendRequest(net.ObjectServlet,param,function(res){
            if(res.result == 1) {
 				setTimeout(function() {
 					top.layer.close(index);
@@ -44,7 +44,7 @@ layui.use(['form','layer', 'tools'],function(){
 		param.isReserve = false;
 		param.isDivide = true;
 		param.hasForeign = false;		
-		tools.sendRequest(net.SystemServlet, param, function(res) {
+		tools.sendRequest(net.ObjectServlet, param, function(res) {
 			console.log(res)
 			if(res.result == 1) {
 				var data = res.data;
