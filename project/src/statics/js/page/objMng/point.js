@@ -57,7 +57,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             {field: 'height', title: '高度', align:'center'},
             {field: 'fileName', title: '所属监测域', align:'center'},
             {field: 'sensor', title: '对应传感器', align:'center'},
-            {field: 'distance', title: '里程', align:'center'},
+            {field: 'mileage', title: '里程', align:'center'},
             {field: 'watchType', title: '监测维度', align:'center',minWidth:150},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
