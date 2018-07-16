@@ -30,16 +30,12 @@ layui.use(['form','layer'],function(){
         return false;
     })
 
-    //格式化时间
-    function filterTime(val){
-        if(val < 10){
-            return "0" + val;
+    form.on('select(sensorTypes)',function(data){
+        if(data.value == 2){
+            $(".qzyhide").hide();
         }else{
-            return val;
+            $(".qzyhide").show();
         }
-    }
-    //定时发布
-    var time = new Date();
-    var submitTime = time.getFullYear()+'-'+filterTime(time.getMonth()+1)+'-'+filterTime(time.getDate())+' '+filterTime(time.getHours())+':'+filterTime(time.getMinutes())+':'+filterTime(time.getSeconds());
+    });
 
 })

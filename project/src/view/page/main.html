@@ -86,15 +86,45 @@
         .red{
         	color:red;
         }
+        .mapselect{
+          position: absolute;
+          z-index: 9999;
+          left: 20px;
+          top:20px;
+          width: 160px;
+          height: 30px;
+          border-color: #eee;
+          line-height: 30px;
+          color: #666;
+          outline:0;
+        }
 	</style>
 </head>
-<body class="childrenBody">
+<body class="childrenBody" style="position:relative;">
+  <select class="mapselect" id="mapselect">
+       <option value="">请选择构筑物</option>
+  </select>
 	<div id="allmap"></div>	
 </body>
 <script type="text/javascript" src="../layui/layui.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
 <script type="text/javascript" src="../../js/jquery.js"></script>
 <script type="text/javascript">
+
+$(function(){
+  $("#mapselect").change(function(){
+     var target = $(this).val();
+     map.setZoom(10);
+     if(target){
+        var arrays = target.split(",");
+        map.panTo(new BMap.Point(arrays[0],arrays[1]));
+     }else{
+        layer.msg('请选择构筑物')
+     }
+     
+  })
+})
+
 	// 百度地图API功能
 	var map = new BMap.Map("allmap",{minZoom:6});    // 创建Map实例
 	map.centerAndZoom("西安",7);          // 设置地图显示的城市 此项是必须设置的
@@ -160,7 +190,6 @@
 	function firstMap(arry){
 		map.clearOverlays();		
 		var arr=arry || [];
-		 console.log(arr)
 		//添加覆盖物
 		for(var i=0;i<arr.length;i++){
 			var arrdate=arr[i];
@@ -170,7 +199,8 @@
 					var lat=arrdate.latitude;
 					var name =arrdate.name;
           var ids = arrdate.id;
-					html+="<div class='overlays1 bubble' id='"+ids+"' lng='"+lng+"' lat='"+lat+"'>";
+          var dimensionId = arrdate.dimensionIds;
+					html+="<div class='overlays1 bubble' dimensionId='"+dimensionId+"' id='"+ids+"' lng='"+lng+"' lat='"+lat+"'>";
 					     html+="<p class='pName'>"+name+"</p>";
 					     html+="<ul class='detail_hide_box'>";
 					            html+="<li>"+name+"</li>";
@@ -187,15 +217,23 @@
 					var point=new BMap.Point(lng,lat);
 					var mySquare=new SquareOverlay(point,90,html,lng,lat);
 					map.addOverlay(mySquare);
-					mySquare.addEventListener("click",function(){
+					mySquare.addEventListener("dblclick",function(){
             var ids = $(this).find(".bubble").attr("id");
-						// var lng = $(this).find(".bubble").attr("lng");
-						// var lat = $(this).find(".bubble").attr("lat");
-						// //点击改变缩放级别
-						// map.panTo(new BMap.Point(lng,lat));  
-//						map.setZoom(16);
-             openDetails(ids)
+            var dimensionId = $(this).find(".bubble").attr("dimensionId");
+						var lng = $(this).find(".bubble").attr("lng");
+						var lat = $(this).find(".bubble").attr("lat");
+						map.panTo(new BMap.Point(lng,lat));
+             findBridgeList(ids,dimensionId)
+             return false;
 					});
+
+          mySquare.addEventListener("click",function(){
+            var lng = $(this).find(".bubble").attr("lng");
+            var lat = $(this).find(".bubble").attr("lat");
+            map.panTo(new BMap.Point(lng,lat));
+            return false;
+          });
+
 				})();
 		}
 	};
@@ -212,10 +250,38 @@
    },function(res){
    	  var data = JSON.parse(res)
       firstMap(data.data);
+      pullSelectList(data.data)
    })
 
+   function pullSelectList(data){
+      var str = '<option value="">请选择构筑物</option>';
+      for(var i in data){
+         str+='<option value="'+data[i].longitude+','+data[i].latitude+'">'+data[i].name+'</option>'
+      }
+      $("#mapselect").html(str);
+   }
 
-   function openDetails(ids){
+
+   function findBridgeList(ids,dimensionId){
+         $.post('http://47.95.13.55:8080/StructureMonitoring/DataServlet',{
+            action_flag:"get_drawing_data",
+            objectId:ids,
+            dimensionId:dimensionId,
+         },function(res){
+             var ress = JSON.parse(res)
+             if(ress.result == 1){
+                var data = ress.data;
+                if(data.length > 0){
+                  openDetails(res)
+                }else{
+                  layer.msg('监测体没有绑定监测域，请绑定后点击！！！');
+                }
+             }
+         })
+  }
+
+
+   function openDetails(data){
       var index = layui.layer.open({
           title : false,
           type : 2,
@@ -223,7 +289,7 @@
           content : "monitorMng/detail.html",
           success : function(layero, index){
               var body = layui.layer.getChildFrame('body', index);
-              body.find(".brageIds").val(ids); 
+              body.find(".brageIds").val(data); 
               setTimeout(function(){
                   layui.layer.tips('点击此处返回', '.layui-layer-setwin .layui-layer-close', {
                       tips: 3

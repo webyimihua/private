@@ -149,7 +149,6 @@
 	function firstMap(arry){
 		map.clearOverlays();		
 		var arr=arry || [];
-		 console.log(arr)
 		//添加覆盖物
 		for(var i=0;i<arr.length;i++){
 			var arrdate=arr[i];
@@ -159,7 +158,8 @@
 					var lat=arrdate.latitude;
 					var name =arrdate.name;
           var ids = arrdate.id;
-					html+="<div class='overlays1 bubble' id='"+ids+"' lng='"+lng+"' lat='"+lat+"'>";
+          var dimensionId = arrdate.dimensionId;
+					html+="<div class='overlays1 bubble' dimensionI='"+dimensionId+"' id='"+ids+"' lng='"+lng+"' lat='"+lat+"'>";
 					     html+="<p class='pName'>"+name+"</p>";
 					     html+="<ul class='detail_hide_box'>";
 					            html+="<li>"+name+"</li>";
