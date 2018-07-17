@@ -21,6 +21,7 @@ layui.use(['form','layer', 'tools'],function(){
 	function addFileData(param,index){
         param.action_flag ="w_add";
         param.sub_flag ="domain";
+        param.userId= tools.getUsermessage("id");
         tools.sendRequest(net.ObjectServlet,param,function(res){
            if(res.result == 1) {
 				setTimeout(function() {

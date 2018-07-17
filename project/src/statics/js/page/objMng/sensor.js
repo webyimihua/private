@@ -9,12 +9,13 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         $ = layui.jquery,
         laytpl = layui.laytpl,
         table = layui.table;
-         tools = layui.tools;
+        tools = layui.tools;
 
    //查找构筑物列表	
+   	var userid = tools.getUsermessage("id");
 	var tableIns = table.render({
 		elem: '#itemListtable',
-		url: net.baseurl + "/" + net.SystemServlet,
+		url: net.baseurl + "/" + net.ObjectServlet,
 		//		cellMinWidth: 95,
 		page: true,
 		height: "full-125",
@@ -28,7 +29,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 			isFlur: false,
 			isReserve: false,
 			isDivide: true,
-			hasForeign: false,
+			userId:userid,
 		},
 		request: {
 			pageName: 'pageNum', //页码的参数名称，默认：page

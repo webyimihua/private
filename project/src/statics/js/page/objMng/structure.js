@@ -11,7 +11,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		table = layui.table;
 		tools = layui.tools;
 	//查找构筑物列表
-	    
+	var userid = tools.getUsermessage("id");
 	var tableIns = table.render({
 		elem: '#itemListtable',
 		url: net.baseurl + "/" + net.ObjectServlet,
@@ -28,7 +28,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 			isFlur: false,
 			isReserve: false,
 			isDivide: true,
-			userId:1,
+			userId:userid,
 		},
 		request: {
 			pageName: 'pageNum', //页码的参数名称，默认：page
@@ -98,11 +98,13 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 				{
 					field: 'startMileage',
 					title: '起始里程',
+					minWidth: 200,
 					align: 'center'
 				},
 				{
 					field: 'endMileage',
 					title: '结束里程',
+					minWidth: 200,
 					align: 'center'
 				},
 				{
@@ -251,6 +253,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		param.action_flag = "w_delete";
 		param.sub_flag = "object";
 		param.id = id;
+		param.userId= tools.getUsermessage("id");
 		tools.sendRequest(net.ObjectServlet, param, function(res) {
 			if(res.result == 1) {
 				if(res.message) {

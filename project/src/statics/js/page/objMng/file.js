@@ -12,6 +12,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         tools = layui.tools;
     //用户列表
     //查找构筑物列表	
+    var userid = tools.getUsermessage("id");
 	var tableIns = table.render({
 		elem: '#itemListtable',
 		url: net.baseurl + "/" + net.ObjectServlet,
@@ -28,7 +29,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 			isFlur: false,
 			isReserve: false,
 			isDivide: true,
-			hasForeign: false,
+			userId:userid,
 		},
 		request: {
 			pageName: 'pageNum', //页码的参数名称，默认：page
@@ -47,6 +48,8 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 		},
 		done: function(res, curr, count) {
 			$("[data-field='id']").css('display', 'none');
+			$("[data-field='domain_typeId']").css('display', 'none');
+			$("[data-field='objectId']").css('display', 'none');
 		},
         cols : [[
         	{field: 'ordinal',title: '序号',width: 80,align: "center",},
@@ -54,7 +57,9 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 //          {field: 'ordinal', title: '序号', width:80, align:"center"},
             {field: 'name', title: '监测域名称', minWidth:180, align:"center"},
             {field: 'domain_typeId', title: '监测域类型', minWidth:200, align:'center'},
+            {field: 'domain_typename', title: '监测域类型', minWidth:200, align:'center'},
             {field: 'objectId', title: '所属构筑物', align:'center'},
+            {field: 'objectname', title: '所属构筑物', align:'center'},
             {field: 'startMileage', title: '起始里程', align:'center'},
             {field: 'endMileage', title: '终止里程', align:'center'},           
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
@@ -176,6 +181,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 		param.action_flag = "w_delete";
 		param.sub_flag = "domain_type";
 		param.id = id;
+		param.userId= tools.getUsermessage("id");
 		tools.sendRequest(net.ObjectServlet, param, function(res) {
 			if(res.result == 1) {
 				if(res.message) {

@@ -12,6 +12,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
          tools = layui.tools;
 
    //查找构筑物列表	
+   	var userid = tools.getUsermessage("id");
 	var tableIns = table.render({
 		elem: '#itemListtable',
 		url: net.baseurl + "/" + net.ObjectServlet,
@@ -28,7 +29,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 			isFlur: false,
 			isReserve: false,
 			isDivide: true,
-			hasForeign: false,
+			userId:userid,
 		},
 		request: {
 			pageName: 'pageNum', //页码的参数名称，默认：page

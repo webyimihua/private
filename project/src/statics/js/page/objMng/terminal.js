@@ -9,7 +9,8 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         $ = layui.jquery,
         laytpl = layui.laytpl,
         table = layui.table;
-        tools = layui.tools;    
+        tools = layui.tools; 
+    var userid = tools.getUsermessage("id");
 	var tableIns = table.render({
 		elem: '#itemListtable',
 		url: net.baseurl + "/" + net.ObjectServlet,
@@ -26,7 +27,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 			isFlur: false,
 			isReserve: false,
 			isDivide: true,
-			hasForeign: false,
+			userId:userid,
 		},
 		request: {
 			pageName: 'pageNum', //页码的参数名称，默认：page
@@ -44,14 +45,14 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 			dataName: 'data' //数据列表的字段名称，默认：data	
 		},
 		done: function(res, curr, count) {
-			$("[data-field='id']").css('display', 'none');
+			$("[data-field='objectId']").css('display', 'none');
 		},
         cols : [[           
             {field: 'index', title: '序号', width:80, align:"center",type: "numbers"},
-            {field: 'id',title: '序号',width: "",align: "center",},
-            {field: 'itemNum', title: '终端编号', minWidth:200, align:'center'},
+            {field: 'id', title: '终端编号', minWidth:200, align:'center'},
             {field: 'sampleInterval', title: '采样间隔', align:'center'},
             {field: 'objectId', title: '所属监测体', align:'center'},
+            {field: 'objectname', title: '所属监测体', align:'center'},
             {field: 'ip', title: 'IP地址', align:'center'},
             {field: 'portForStation', title: '端口号(全站仪)', align:'center'},
             {field: 'portForOther', title: '端口号(其他)', align:'center'},
@@ -84,15 +85,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             content : "addTerminal.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-//              if(edit){
-//                  body.find(".userName").val(edit.userName);  //登录名
-//                  body.find(".userEmail").val(edit.userEmail);  //邮箱
-//                  body.find(".userSex input[value="+edit.userSex+"]").prop("checked","checked");  //性别
-//                  body.find(".userGrade").val(edit.userGrade);  //会员等级
-//                  body.find(".userStatus").val(edit.userStatus);    //用户状态
-//                  body.find(".userDesc").text(edit.userDesc);    //用户简介
-//                  form.render();
-//              }
+
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -143,11 +136,10 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             content : "detailTerminal.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-                if(data){                   
-                    body.find(".userEmail").val(data.userEmail);  //邮箱
-                    body.find(".userSex input[value="+data.userSex+"]").prop("checked","checked");  //性别                    
-                    form.render();
-                }
+               var showForm = body.find("#showDataform");
+				if(data) {
+					tools.setOlddataToform(showForm, data);
+				}
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -170,15 +162,36 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         }else if(layEvent === 'detail'){ //详情
             showItem(data);
         }else if(layEvent === 'del'){ //删除
-            layer.confirm('确定删除此信息？',{icon:3, title:'提示信息'},function(index){
-                // $.get("删除文章接口",{
-                //     newsId : data.newsId  //将需要删除的newsId作为参数传入
-                // },function(data){
-                    tableIns.reload();
-                    layer.close(index);
-                // })
-            });
+            layer.confirm('确定删除此信息？', {
+				icon: 3,
+				title: '提示信息'
+			}, function(index) {
+				delTerminaldata(data.id, index);
+			});
         }
     });
+    
+    //删除终端
+	function delTerminaldata(id, index) {
+		var param = {};
+		param.action_flag = "w_delete";
+		param.sub_flag = "gateway";
+		param.id = id;
+		param.userId= tools.getUsermessage("id");
+		tools.sendRequest(net.ObjectServlet, param, function(res) {
+			if(res.result == 1) {
+				if(res.message) {
+					layer.msg(res.message);
+				}
+				tableIns.reload();
+				layer.close(index);
+			} else {
+				if(res.message) {
+					layer.msg(res.message);
+				}
+			}
+		})
+	}
+    
 
 })

@@ -43,7 +43,7 @@ layui.use(['form','layer', 'tools'],function(){
 		param.isFlur = false;
 		param.isReserve = false;
 		param.isDivide = true;
-		param.hasForeign = false;		
+		param.userId= tools.getUsermessage("id");
 		tools.sendRequest(net.ObjectServlet, param, function(res) {
 			console.log(res)
 			if(res.result == 1) {
