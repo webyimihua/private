@@ -13,21 +13,66 @@ layui.use(['element','layer','jquery','tools'],function(){
 	})
 
 	$(function(){
-		findBridgeLists()
+		findBridgeLists(JSON.parse($(".brageIds").val()))
+		$("#selectAreas").change(function(){
+			var dimensionId = $(this).val();
+			var ids = $(".selbrageIds").val();
+			findBridgeSelectList(ids,dimensionId)
+		})
 	})
 
 
-	function findBridgeLists(){
+	function findBridgeSelectList(ids,dimensionId){
+         $.post('http://47.95.13.55:8080/StructureMonitoring/DataServlet',{
+            action_flag:"get_drawing_data",
+            objectId:ids,
+            dimensionId:dimensionId,
+         },function(res){
+             var ress = JSON.parse(res);
+             if(ress.result == 1){
+               findBridgeLists(ress)
+             }
+         })
+    }
+
+
+	function findBridgeLists(data){
+		    $(".canvas-contai").html('');
 		    var str = '';
-        	var res = JSON.parse($(".brageIds").val());
+        	var res = data;
         	var data = res.data;
         	for(var i in data){
         		str+='<li class="bradge-items">';
 	                str+='<div class="mark-num">'+data[i].name+'</div>';
 	                str+='<ul class="splot-box">';
-	                   str+='<li class="top sel_red circle"></li>';
-	                   str+='<li class="middle sel_orange circle"></li>';
-	                   str+='<li class="bottom sel_red circle"></li>';
+	                    var point = data[i].unit;
+	                    for(var j in point){
+	                    	if(point[j].position == "上"){
+	                    		if(point[j].alarmLevel == 1){
+	                    			str+='<li class="top sel_green circle" title="'+point[j].name+'"></li>';
+	                    		}else if(point[j].alarmLevel == 2){
+                                    str+='<li class="top sel_orange circle" title="'+point[j].name+'"></li>';
+	                    		}else{
+                                    str+='<li class="top sel_red circle" title="'+point[j].name+'"></li>';
+	                    		}
+	                    	}else if(point[j].position == "中"){
+	                    		if(point[j].alarmLevel == 1){
+	                    			str+='<li class="middle sel_green circle" title="'+point[j].name+'"></li>';
+	                    		}else if(point[j].alarmLevel == 2){
+                                    str+='<li class="middle sel_orange circle" title="'+point[j].name+'"></li>';
+	                    		}else{
+                                    str+='<li class="middle sel_red circle" title="'+point[j].name+'"></li>';
+	                    		}
+	                    	}else if(point[j].position == "下"){
+	                    		if(point[j].alarmLevel == 1){
+	                    			str+='<li class="bottom sel_green circle" title="'+point[j].name+'"></li>';
+	                    		}else if(point[j].alarmLevel == 2){
+                                    str+='<li class="bottom sel_orange circle" title="'+point[j].name+'"></li>';
+	                    		}else{
+                                    str+='<li class="bottom sel_red circle" title="'+point[j].name+'"></li>';
+	                    		}
+	                    	}
+	                    }
 	                str+='</ul>';
                 str+='</li>';
         	}
