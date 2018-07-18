@@ -102,7 +102,7 @@
 </head>
 <body class="childrenBody" style="position:relative;">
   <select class="mapselect" id="mapselect">
-       <option value="">请选择构筑物</option>
+       <option value="">请选择构筑物</option> 
   </select>
 	<div id="allmap"></div>	
 </body>
@@ -263,16 +263,17 @@ $(function(){
 
 
    function findBridgeList(ids,dimensionId){
+         var idss = JSON.parse(dimensionId)[0]
          $.post('http://47.95.13.55:8080/StructureMonitoring/DataServlet',{
             action_flag:"get_drawing_data",
             objectId:ids,
-            dimensionId:dimensionId,
+            dimensionId:idss,
          },function(res){
              var ress = JSON.parse(res)
              if(ress.result == 1){
                 var data = ress.data;
                 if(data.length > 0){
-                  openDetails(res)
+                  openDetails(res,dimensionId,ids)
                 }else{
                   layer.msg('监测体没有绑定监测域，请绑定后点击！！！');
                 }
@@ -281,7 +282,7 @@ $(function(){
   }
 
 
-   function openDetails(data){
+   function openDetails(data,dimensionId,ids){
       var index = layui.layer.open({
           title : false,
           type : 2,
@@ -289,7 +290,9 @@ $(function(){
           content : "monitorMng/detail.html",
           success : function(layero, index){
               var body = layui.layer.getChildFrame('body', index);
-              body.find(".brageIds").val(data); 
+              body.find(".brageIds").val(data);
+              body.find(".selbrageIds").val(ids); 
+              selectDimensionId(dimensionId,body)
               setTimeout(function(){
                   layui.layer.tips('点击此处返回', '.layui-layer-setwin .layui-layer-close', {
                       tips: 3
@@ -302,6 +305,35 @@ $(function(){
       $(window).on("resize",function(){
           layui.layer.full(index);
       })
+  }
+
+
+  function selectDimensionId(dimensionId,body){
+     var str = '';
+     var target = JSON.parse(dimensionId);
+     var selArry = [];
+     var initArry = [
+     {id:"1",name:"沉降监测"},
+     {id:"2",name:"相对位移监测"},
+     {id:"3",name:"温度监测"},
+     {id:"4",name:"湿度监测"},
+     {id:"5",name:"水平位移监测"},
+     {id:"6",name:"姿态变化监测"},
+     {id:"7",name:"气压监测"},
+     {id:"8",name:"风速风向监测"},
+     ]
+     for(var i in initArry){
+       for(var j in target){
+          if(initArry[i].id == target[j]){
+           selArry.push(initArry[i]);
+          }
+       }
+     }
+     for(var i in selArry){
+        str+='<option value="'+selArry[i].id+'">'+selArry[i].name+'</option>';
+     }
+     body.find("#selectAreas").html(str);
+
   }
 
 
