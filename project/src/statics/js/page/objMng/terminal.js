@@ -110,11 +110,10 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             content : "editTerminal.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-                if(data){                   
-                    body.find(".userEmail").val(data.userEmail);  //邮箱
-                    body.find(".userSex input[value="+data.userSex+"]").prop("checked","checked");  //性别                    
-                    form.render();
-                }
+                 var editForm = body.find("#editTerminal");
+               	if(data) {
+					tools.setOlddataToform(editForm, data);
+				}
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3

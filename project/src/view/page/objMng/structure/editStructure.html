@@ -16,6 +16,7 @@
 <body class="childrenBody">
 <form class="layui-form" id="editStructure" lay-filter="editStructure" style="width:80%;">
 	<input type="hidden" name="alarmStatus" value="正常" />
+	<input type="hidden" name="id" id="editid" value="" />
     <div class="layui-row">
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">构筑物名称</label>
@@ -39,7 +40,7 @@
       <div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">所属铁路局</label>
 			<div class="layui-input-block">
-				<select name="bureauId" id="allStation"  lay-verify="required">
+				<select name="bureauId" id="allStation" lay-filter="allStation"  lay-verify="required">
 					<option value="">请选择所属铁路局</option>					
 				</select>
 			</div>
@@ -47,7 +48,7 @@
        <div class="layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">类型</label>
 			<div class="layui-input-block">
-				<select name="object_typeId" id="watchtype"  lay-verify="required">
+				<select name="object_typeId" id="watchtype" lay-filter="watchtype"  lay-verify="required">
 					<option value="">请选择检测体类型</option>								
 				</select>
 		</div>
@@ -57,7 +58,7 @@
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">所属铁路线</label>
 			<div class="layui-input-block">
-				<select name="railway_lineId" id="addLine" lay-filter="userGrade">
+				<select name="railway_lineId" id="addLine" lay-filter="addLine" lay-filter="userGrade">
 					<option value="">请选择构筑物所属铁路线</option>									
 				</select>
 			</div>
@@ -65,7 +66,7 @@
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">监测维度</label>
 			<div class="layui-input-block">
-				<select name="dimensionIds" id="dimension" lay-verify="required">
+				<select name="dimensionIds" id="dimension" lay-filter="dimension"  lay-verify="required">
 					<option value="">请选择要进行的监测维度</option>					
 				</select>
 			</div>

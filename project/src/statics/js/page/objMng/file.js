@@ -113,9 +113,10 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             content : "editFile.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
+                var userid = tools.getUsermessage("id");
                 if(data){ 
-                	getAllFiletype("#fileType");
-                	getAllstructuretype("#Allstructuret");
+                	tools.getAllfileType("#fileType");
+                	tools.getThatstructure("#Allstructuret",userid);
                    var editForm = body.find("#editDataform");
                 	tools.setOlddataToform(editForm,data);
                 }
@@ -196,51 +197,4 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 			}
 		})
 	}
-	//初始化查询构筑物域类型下拉菜单
-	function getAllFiletype(div) {
-		var param = {};
-		param.action_flag = "w_query";
-		param.sub_flag = "domain_type";
-		param.isFlur = false;
-		param.isReserve = false;
-		param.isDivide = true;
-		param.hasForeign = false;
-		tools.sendRequest(net.ObjectServlet, param, function(res) {
-			if(res.result == 1) {
-				var data = res.data;
-				if(data.length > 0) {
-					tools.initOptionitem(div, data,function(){
-						form.render('select');
-					});					
-				} else {
-					layer.msg("请先新增筑物域类型");
-				};
-			}
-		})
-	}
-	//初始化查询构筑物下拉菜单
-	function getAllstructuretype(div) {
-		var param = {};
-		param.action_flag = "w_query";
-		param.sub_flag = "object";
-		param.isFlur = false;
-		param.isReserve = false;
-		param.isDivide = true;
-		param.hasForeign = false;		
-		tools.sendRequest(net.ObjectServlet, param, function(res) {
-			console.log(res)
-			if(res.result == 1) {
-				var data = res.data;
-				if(data.length > 0) {
-					tools.initOptionitem(div, data,function(){
-						form.render('select');
-					});					
-				} else {
-					layer.msg("请先新增构筑物");
-				};
-			}
-		})
-	}
-
-
 })
