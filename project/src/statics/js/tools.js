@@ -42,7 +42,7 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 			},
 			//初始化下拉数据
 			initOptionitem: function(div,data,callback) {
-				var str = '<option value="">请选择</option>';
+				var str = '';
 				for(var i = 0; i < data.length; i++) {
 					str += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
 				}
@@ -53,7 +53,6 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 			},
 			//根据name覆盖老数据修改、详情使用(不适合多选、单选)
 			setOlddataToform: function(div, data,callback){
-				console.log(data)
 				var key, value, tagName, type;
 				for(x in data) {
 					key = x;
@@ -100,8 +99,8 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 					return oval;
 				}
 			},
-			//查询铁路局
-			getAllstation:function(div){
+			//1查询铁路局
+			getAllstation:function(div,callback){
 				var param = {};
 				param.action_flag = "w_show_option";
 				param.sub_flag = "bureau";
@@ -111,6 +110,7 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 						if(data.length > 0) {
 							tools.initOptionitem(div,data,function(){
 								form.render('select');
+								callback();
 							});					
 						} else {
 							layer.msg("请先新增铁路局数据");
@@ -118,8 +118,8 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 					}
 				})
 			},
-			//查询所有的铁路线路
-			getAllLine:function(div){
+			//2查询所有的铁路线路
+			getAllLine:function(div,callback){
 				var param = {};
 				param.action_flag = "w_show_option";
 				param.sub_flag = "railway_line";
@@ -129,6 +129,7 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 						if(data.length > 0) {
 							tools.initOptionitem(div,data,function(){
 								form.render('select');
+								callback();
 							});					
 						} else {
 							layer.msg("请先新增铁路线路数据");
@@ -136,8 +137,8 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 					}
 				})
 			},
-			//查询所有的监测类型
-			getAllWatchtype:function(div){
+			//4查询所有的监测类型
+			getAllWatchtype:function(div,callback){
 				var param = {};
 				param.action_flag = "w_show_option";
 				param.sub_flag = "object_type";
@@ -147,6 +148,7 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 						if(data.length > 0) {
 							tools.initOptionitem(div,data,function(){
 								form.render('select');
+								callback();
 							});					
 						} else {
 							layer.msg("请先新增检测类型");
@@ -154,41 +156,27 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 					}
 				})
 			},
-			//查询当前用户所有的构筑域
-			getThatstructure:function(div,id){
+			//5查询所有的传感器类型
+			getAllSensorype:function(div,callback){
 				var param = {};
 				param.action_flag = "w_show_option";
-				param.sub_flag = "object";
-				param.userId = id;
+				param.sub_flag = "sensor_type";
 				tools.sendRequest(net.ObjectServlet, param, function(res) {
 					if(res.result == 1) {
 						var data = res.data;
 						if(data.length > 0) {
 							tools.initOptionitem(div,data,function(){
 								form.render('select');
+								callback();
 							});					
-						}
+						} else {
+							layer.msg("请先新增传感器类型");
+						};
 					}
 				})
 			},
-			//查询所有的监测维度
-			getWatchdimension:function(div){
-				var param = {};
-				param.action_flag = "w_show_option";
-				param.sub_flag = "dimension";
-				tools.sendRequest(net.ObjectServlet, param, function(res) {
-					if(res.result == 1) {
-						var data = res.data;
-						if(data.length > 0) {
-							tools.initOptionitem(div,data,function(){
-								form.render('select');
-							});					
-						}
-					}
-				})
-			},
-//			//查询构筑域类型
-			getAllfileType:function(div){
+			//6查询构筑域类型
+			getAllfileType:function(div,callback){
 				var param = {};
 				param.action_flag = "w_show_option";
 				param.sub_flag = "domain_type";
@@ -198,6 +186,95 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 						if(data.length > 0) {
 							tools.initOptionitem(div,data,function(){
 								form.render('select');
+								callback();
+							});					
+						}
+					}
+				})
+			},
+			//7查询所有的监测维度
+			getWatchdimension:function(div,callback){
+				var param = {};
+				param.action_flag = "w_show_option";
+				param.sub_flag = "dimension";
+				tools.sendRequest(net.ObjectServlet, param, function(res) {
+					if(res.result == 1) {
+						var data = res.data;
+						if(data.length > 0) {
+							tools.initOptionitem(div,data,function(){
+								form.render('select');
+								callback();
+							});					
+						}
+					}
+				})
+			},
+			//8查询所有的监测点位置 上中下
+//			getPointposition:function(div){
+//				var param = {};
+//				param.action_flag = "w_show_option";
+//				param.sub_flag = "unit_position";
+//				tools.sendRequest(net.ObjectServlet, param, function(res) {
+//					if(res.result == 1) {
+//						var data = res.data;
+//						if(data.length > 0) {
+//							tools.initOptionitem(div,data,function(){
+//								form.render('select');
+//							});					
+//						}
+//					}
+//				})
+//			},
+//			//9查询当前用户所有的构筑域
+			getThatstructure:function(div,id,callback){
+				var param = {};
+				param.action_flag = "w_show_option";
+				param.sub_flag = "object";
+				param.id = id;
+				tools.sendRequest(net.ObjectServlet, param, function(res) {
+					console.log(res)
+					if(res.result == 1) {
+						var data = res.data;
+						if(data.length > 0) {
+							tools.initOptionitem(div,data,function(){
+								form.render('select');
+								callback();
+							});					
+						}
+					}
+				})
+			},
+			//10查询某一监测体的所有监测域列表
+			getThatstructureFile:function(div,id,callback){
+				var param = {};
+				param.action_flag = "w_show_option";
+				param.sub_flag = "domain";
+				param.id = id;
+				tools.sendRequest(net.ObjectServlet, param, function(res) {
+					if(res.result == 1) {
+						var data = res.data;
+						if(data.length > 0) {
+							tools.initOptionitem(div,data,function(){
+								form.render('select');
+								callback();
+							});					
+						}
+					}
+				})
+			},
+			//11查询某一监测体的所有传感器列表
+			getThatpointSensor:function(div,id,callback){
+				var param = {};
+				param.action_flag = "w_show_option";
+				param.sub_flag = "sensor";
+				param.id = id;
+				tools.sendRequest(net.ObjectServlet, param, function(res) {
+					if(res.result == 1) {
+						var data = res.data;
+						if(data.length > 0) {
+							tools.initOptionitem(div,data,function(){
+								form.render('select');
+								callback();
 							});					
 						}
 					}

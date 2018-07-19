@@ -8,11 +8,33 @@ layui.use(['form','layer', 'tools'],function(){
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery;
         tools = layui.tools;
-		getAllstructuretype("#allStructure");
+       	var userId = tools.getUsermessage("id");
+		tools.getThatstructure("#allStructure",userId,setOlddataShow);
+		function setOlddataShow(){
+			var id = $("#editId").val();
+        	var editForm = $("#editDataform");
+        	var userid = tools.getUsermessage("id");
+            var param = {};
+				param.action_flag = "w_show_edit";
+				param.sub_flag = "gateway";
+				param.id = id;
+				param.userId= userid;
+				tools.sendRequest(net.ObjectServlet, param, function(res) {
+					if(res.result == 1) {
+						var data =res.data;							
+				    	tools.setOlddataToform(editForm,data);
+				    	form.render('select');
+					} else {
+						if(res.message) {
+							layer.msg(res.message);
+						}
+					}
+				})
+		}
     form.on("submit(editTerminal)",function(data){
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
-        var param = tools.getFormallData("#editTerminal");
+        var param = tools.getFormallData("#editDataform");
 		addTerminalData(param, index);
         return false;
     })
@@ -20,7 +42,7 @@ layui.use(['form','layer', 'tools'],function(){
 	function addTerminalData(param,index){
         param.action_flag ="w_update";
         param.sub_flag ="gateway";
-        param.userId= tools.getUsermessage("id");
+//      param.userId= tools.getUsermessage("id");
         tools.sendRequest(net.ObjectServlet,param,function(res){
            if(res.result == 1) {
 				setTimeout(function() {
@@ -36,27 +58,5 @@ layui.use(['form','layer', 'tools'],function(){
 			}
         })
     }
-	//初始化查询构筑物下拉菜单
-	function getAllstructuretype(div) {
-		var param = {};
-		param.action_flag = "w_query";
-		param.sub_flag = "object";
-		param.isFlur = false;
-		param.isReserve = false;
-		param.isDivide = true;
-		param.userId= tools.getUsermessage("id");
-		tools.sendRequest(net.ObjectServlet, param, function(res) {
-			console.log(res)
-			if(res.result == 1) {
-				var data = res.data;
-				if(data.length > 0) {
-					tools.initOptionitem(div, data,function(){
-						form.render('select');
-					});					
-				} else {
-					layer.msg("请先新增构筑物");
-				};
-			}
-		})
-	}
+	
 })

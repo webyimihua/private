@@ -174,23 +174,14 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		addItem();
 	})
 	//修改构筑物
-	function editItem(data) {
+	function editItem(id) {
 		var index = layui.layer.open({
 			title: "编辑构筑物",
 			type: 2,
 			content: "editStructure.html",
 			success: function(layero, index) {
 				var body = layui.layer.getChildFrame('body', index);
-				var editForm = body.find("#editStructure");
-				if(data) {	
-					body.find("#editid").val(data.id);
-					tools.setOlddataToform(editForm, data, function() {		
-//						body.find("#allStation option[value="+data.bureauId+"]").prop("selected","selected");
-						form.render;
-					});
-				}
-				
-				form.render;
+				body.find("#editId").val(id);
 				setTimeout(function() {						
 				layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
 					tips: 3
@@ -234,7 +225,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		var layEvent = obj.event,
 			data = obj.data;
 		if(layEvent === 'edit') { //编辑
-			editItem(data);
+			editItem(data.id);
 		} else if(layEvent === 'detail') { //详情
 			showItem(data);
 		} else if(layEvent === 'del') { //删除
