@@ -182,19 +182,19 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 			success: function(layero, index) {
 				var body = layui.layer.getChildFrame('body', index);
 				var editForm = body.find("#editStructure");
-				if(data) {
-					tools.getAllstation("#allStation");
-					tools.getAllLine("#addLine");
-					tools.getAllWatchtype("#watchtype");	
-					tools.getWatchdimension("#dimension");	
-					tools.setOlddataToform(editForm, data, function() {
-							form.render;
-						});
-				}
-				setTimeout(function() {
-					layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
-						tips: 3
+				if(data) {	
+					body.find("#editid").val(data.id);
+					tools.setOlddataToform(editForm, data, function() {		
+//						body.find("#allStation option[value="+data.bureauId+"]").prop("selected","selected");
+						form.render;
 					});
+				}
+				
+				form.render;
+				setTimeout(function() {						
+				layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
+					tips: 3
+				});
 				}, 500)
 			}
 		})

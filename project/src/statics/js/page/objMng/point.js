@@ -47,19 +47,25 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 			dataName: 'data' //数据列表的字段名称，默认：data	
 		},
 		done: function(res, curr, count) {
-			$("[data-field='id']").css('display', 'none');
+			$("[data-field='objectId']").css('display', 'none');
+			$("[data-field='domainId']").css('display', 'none');
+			$("[data-field='dimensionId']").css('display', 'none');
+			$("[data-field='sUnitId']").css('display', 'none');
 		},
         cols : [[
 //          {type: "checkbox", fixed:"left", width:50},
             {field: 'index', title: '序号', width:80, align:"center",type: "numbers"},
-            {field: 'id',title: '序号',width: "",align: "center",},
-            {field: 'pointNo', title: '监测点编号', minWidth:200, align:'center'},
-            {field: 'structureName', title: '所属构筑物', align:'center'},
+            {field: 'id', title: '监测点编号', minWidth:200, align:'center'},
+            {field: 'objectId', title: '所属构筑物', align:'center'},
+            {field: 'objectname', title: '所属构筑物', align:'center'},
             {field: 'height', title: '高度', align:'center'},
-            {field: 'fileName', title: '所属监测域', align:'center'},
-            {field: 'sensor', title: '对应传感器', align:'center'},
+            {field: 'domainId', title: '所属监测域', align:'center'},
+            {field: 'domainname', title: '所属监测域', align:'center'},
+            {field: 'sensorname', title: '对应传感器', align:'center'},
+            {field: 'sUnitId', title: '对应传感器', align:'center'},
             {field: 'mileage', title: '里程', align:'center'},
-            {field: 'watchType', title: '监测维度', align:'center',minWidth:150},
+            {field: 'dimensionId', title: '监测维度', align:'center',minWidth:150},
+            {field: 'dimensionname', title: '监测维度', align:'center',minWidth:150},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
@@ -147,10 +153,9 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             content : "detailPoint.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-                if(data){                   
-                    body.find(".userEmail").val(data.userEmail);  //邮箱
-                    body.find(".userSex input[value="+data.userSex+"]").prop("checked","checked");  //性别                    
-                    form.render();
+                if(data){
+                	var showForm = body.find("#showDataform");
+                	tools.setOlddataToform(showForm,data);
                 }
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {

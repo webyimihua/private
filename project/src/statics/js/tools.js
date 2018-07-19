@@ -53,6 +53,7 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 			},
 			//根据name覆盖老数据修改、详情使用(不适合多选、单选)
 			setOlddataToform: function(div, data,callback){
+				console.log(data)
 				var key, value, tagName, type;
 				for(x in data) {
 					key = x;
@@ -65,6 +66,7 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 						} else if(tagName == 'SELECT' || tagName == 'TEXTAREA') {
 							$(this).val(value);
 						}
+						form.render;
 					});
 				}
 				if(typeof callback == 'function'){					
@@ -152,11 +154,44 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 					}
 				})
 			},
+			//查询当前用户所有的构筑域
+			getThatstructure:function(div,id){
+				var param = {};
+				param.action_flag = "w_show_option";
+				param.sub_flag = "object";
+				param.userId = id;
+				tools.sendRequest(net.ObjectServlet, param, function(res) {
+					if(res.result == 1) {
+						var data = res.data;
+						if(data.length > 0) {
+							tools.initOptionitem(div,data,function(){
+								form.render('select');
+							});					
+						}
+					}
+				})
+			},
 			//查询所有的监测维度
 			getWatchdimension:function(div){
 				var param = {};
 				param.action_flag = "w_show_option";
 				param.sub_flag = "dimension";
+				tools.sendRequest(net.ObjectServlet, param, function(res) {
+					if(res.result == 1) {
+						var data = res.data;
+						if(data.length > 0) {
+							tools.initOptionitem(div,data,function(){
+								form.render('select');
+							});					
+						}
+					}
+				})
+			},
+//			//查询构筑域类型
+			getAllfileType:function(div){
+				var param = {};
+				param.action_flag = "w_show_option";
+				param.sub_flag = "domain_type";
 				tools.sendRequest(net.ObjectServlet, param, function(res) {
 					if(res.result == 1) {
 						var data = res.data;
