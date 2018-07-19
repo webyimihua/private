@@ -6,7 +6,8 @@ var net = {
 	LoginServlet: "StructureMonitoring/LoginServlet",
 	MessageServlet:"StructureMonitoring/MessageServlet",
 	DataServlet:"StructureMonitoring/DataServlet",
-	MessageServlet: "StructureMonitoring/MessageServlet"
+	MessageServlet: "StructureMonitoring/MessageServlet",
+	AlarmServlet: "StructureMonitoring/AlarmServlet"
 };
 layui.define(["form", "element", "layer", "jquery"], function(exports) {
 	var form = layui.form,
@@ -41,7 +42,7 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 			},
 			//初始化下拉数据
 			initOptionitem: function(div,data,callback) {
-				var str = "";
+				var str = '<option value="">请选择</option>';
 				for(var i = 0; i < data.length; i++) {
 					str += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
 				}

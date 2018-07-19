@@ -19,20 +19,15 @@
 		<form class="layui-form">
 			<div class="layui-inline">
 				<div class="layui-input-inline">
-					<select  class="layui-select searchVal">
+					<select  class="layui-select" lay-filter="monitorBody" id="monitorBody">
 						<option value="">选择构筑物</option>
 						<option value="1">鸭绿江大桥</option>
 						<option value="2">鸭绿江大桥</option>
 					</select>
 				</div>
 				<div class="layui-input-inline">
-					<select  class="layui-select searchVal">
-						<option value="">选择监测维度</option>
-						<option value="1">水平位移监测</option>
-						<option value="2">相对位移监测</option>
-					</select>
+					<select class="layui-select" lay-filter="dimensionVal"  id="dimensionBox"></select>
 				</div>
-				<a class="layui-btn search_btn" data-type="reload">搜索</a>
 			</div>			
 			<div class="layui-inline">
 				<a class="layui-btn layui-btn-normal addItem_btn">新增</a>
