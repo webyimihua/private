@@ -25,50 +25,67 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
     if(!loginInfo){
         parent.window.location.href="../page/login/login.html"
     }else{
+        $(".adminName").html(loginInfo.username);
+        $(".userName").html(loginInfo.username);
     	var users = [
-    	{name:"监测中心",url:"page/main.html",target:"contentManagement"},
-    	{name:"消息中心",url:"page/news/alarm.html",target:"news"}
+    	{name:"监测中心",oname:"监测中心",url:"page/main.html",target:"contentManagement"},
+    	{name:"消息中心",oname:"预警消息",url:"page/news/alarm.html",target:"news"}
     	]
     	var sbs = [
-    	{name:"监测中心",url:"page/main.html",target:"contentManagement"},
-    	{name:"对象管理中心",url:"page/objMng/structure/structureList.html",target:"memberCenter"},
-    	{name:"预警配置中心",url:"page/warnSet/warnList.html",target:"memberyujing"},
-    	{name:"消息中心",url:"page/news/alarm.html",target:"news"}
+    	{name:"监测中心",oname:"监测中心",url:"page/main.html",target:"contentManagement"},
+    	{name:"对象管理中心",oname:"构筑物管理",url:"page/objMng/structure/structureList.html",target:"memberCenter"},
+    	{name:"预警配置中心",oname:"配置预警参数",url:"page/warnSet/warnList.html",target:"memberyujing"},
+    	{name:"消息中心",oname:"预警消息",url:"page/news/alarm.html",target:"news"}
     	]             
     	var sys = [
-    	{name:"监测中心",url:"page/main.html",target:"contentManagement"},
-    	{name:"对象管理中心",url:"page/objMng/structure/structureList.html",target:"memberCenter"},
-    	{name:"预警配置中心",url:"page/warnSet/warnList.html",target:"memberyujing"},
-    	{name:"消息中心",url:"page/news/alarm.html",target:"news"},
-    	{name:"系统设置中心",url:"page/systemSetting/account/memberAccount.html",target:"systemeSttings"}
+    	{name:"监测中心",oname:"监测中心",url:"page/main.html",target:"contentManagement"},
+    	{name:"对象管理中心",oname:"构筑物管理",url:"page/objMng/structure/structureList.html",target:"memberCenter"},
+    	{name:"预警配置中心",oname:"配置预警参数",url:"page/warnSet/warnList.html",target:"memberyujing"},
+    	{name:"消息中心",oname:"预警消息",url:"page/news/alarm.html",target:"news"},
+    	{name:"系统设置中心",oname:"账户管理",url:"page/systemSetting/account/memberAccount.html",target:"systemeSttings"}
     	]
     	var str = '';
     	if(loginInfo.roleId == 3){
     		for(var i in users){
-    			str+='<li class="layui-nav-item" data-menu="'+users[i].target+'">';
+                    if(i == 0){
+                        str+='<li class="layui-nav-item layui-this" data-menu="'+users[i].target+'">';
+                    }else{
+                        str+='<li class="layui-nav-item" data-menu="'+users[i].target+'">';
+                    }
 					str+='<a href="javascript:;" data-url="'+users[i].url+'">';
 					  str+='<i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i>';
-					  str+='<cite>'+users[i].name+'</cite>';
+                      str+='<span>'+users[i].name+'</span>';
+					  str+='<cite style="display:none;">'+users[i].oname+'</cite>';
 					str+='</a>';
 				str+='</li>';
     		}
     		$("#topLevelMenus").html(str);
     	}else if(loginInfo.roleId == 2){
             for(var i in sbs){
-    			str+='<li class="layui-nav-item" data-menu="'+sbs[i].target+'">';
+    			    if(i == 0){
+                        str+='<li class="layui-nav-item layui-this" data-menu="'+sbs[i].target+'">';
+                    }else{
+                        str+='<li class="layui-nav-item" data-menu="'+sbs[i].target+'">';
+                    }
 					str+='<a href="javascript:;" data-url="'+sbs[i].url+'">';
 					  str+='<i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i>';
-					  str+='<cite>'+sbs[i].name+'</cite>';
+					  str+='<span>'+sbs[i].name+'</span>';
+                      str+='<cite style="display:none;">'+sbs[i].oname+'</cite>';
 					str+='</a>';
 				str+='</li>';
     		}
     		$("#topLevelMenus").html(str);
     	}else if(loginInfo.roleId == 1){
             for(var i in sys){
-    			str+='<li class="layui-nav-item" data-menu="'+sys[i].target+'">';
+    			   if(i == 0){
+                        str+='<li class="layui-nav-item layui-this" data-menu="'+sys[i].target+'">';
+                    }else{
+                        str+='<li class="layui-nav-item" data-menu="'+sys[i].target+'">';
+                    }
 					str+='<a href="javascript:;" data-url="'+sys[i].url+'">';
 					  str+='<i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i>';
-					  str+='<cite>'+sys[i].name+'</cite>';
+					  str+='<span>'+sys[i].name+'</span>';
+                      str+='<cite style="display:none;">'+sys[i].oname+'</cite>';
 					str+='</a>';
 				str+='</li>';
     		}

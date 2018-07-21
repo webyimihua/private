@@ -6,8 +6,9 @@ html,body{
 .bradge-box{
 	width:100%;
 	 padding:20px;
-	 padding-top:0px;
+	 padding-top:140px;
 	 padding-left:0px;
+	 padding-bottom:0px;
 	.canvas-contai{
 	   padding:20px;
 	   overflow:auto;
@@ -18,7 +19,7 @@ html,body{
 	   .bradge-items{
 	      float:left;
 	      width:140px;
-	      height:320px;
+	      height:310px;
 	      background-image:url(../../images/mapdetail/bradge.png);
 	      background-repeat:no-repeat;
 	      background-size:100%;
@@ -87,6 +88,8 @@ html,body{
 	     height:25px;
 	     color:#333;
 	     font-size:14px;
+	     border:1px solid #333;
+	     border-radius:3px;
 	  }
 	}
 	.close_btn{
@@ -99,8 +102,9 @@ html,body{
 	}
 }
 .top_title_box{
-	padding-top:70px;
-	margin-left:40px;
+    position:fixed;
+    top:70px;
+    left:40px;
 	font-size:12px;
 	color:#333;
 	.list_item{
@@ -108,9 +112,11 @@ html,body{
 	}
 }
 .point_box{
+    position:fixed;
+    top:95px;
+    left:390px;
     width:400px;
     height:40px;
-	margin:0 auto;
 	.point{
 	   float:left;
 	   margin-right:20px;
