@@ -25,6 +25,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             action_flag:"w_query",
             sub_flag:"alarm",
             userId:1,
+            isDivide:true,
         },
         request: {
           pageName: 'pageNum', //页码的参数名称，默认：page
@@ -41,14 +42,14 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
           $("[data-field='id']").css('display','none');
         },
         cols : [[
-            {field: 'index', title: '序号', width:80, align:"center"},
-            {field: 'id', title: '序号', width:1, align:"center"},
-            {field: 'itemNum', title: '监测点编号', minWidth:200, align:'center'},
-            {field: 'itemStructure', title: '所属构筑物', align:'center'},
-            {field: 'itemType', title: '检测物维度', align:'center'},
-            {field: 'itemName', title: '监测点名称', align:'center'},
-            {field: 'warnMin', title: '初级预警值', align:'center'},
-            {field: 'warnMax', title: '高级预警值', align:'center'},
+            {field: 'index', title: '序号', width:40, align:"center",type:"numbers"},
+            {field: 'id', title: 'id', width:1, align:"center"},
+            {field: 'unitId', title: '监测点编号', minWidth:100, align:'center'},
+            {field: 'objectName', title: '所属构筑物', align:'center'},
+            {field: 'dimensionName', title: '检测物维度', align:'center'},
+            {field: 'dimensionName', title: '监测点名称', align:'center'},
+            {field: 'lowLevel', title: '初级预警值',width:100, align:'center'},
+            {field: 'highLevel', title: '高级预警值',width:100, align:'center'},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
@@ -68,7 +69,33 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             layer.msg("请输入搜索的内容");
         }
     });
-  
+
+     //添加构筑物
+    function addItem(){
+        var index = layui.layer.open({
+            title : "新增预警参数配置",
+            type : 2,
+            content : "addWarn.html",
+            success : function(layero, index){
+                var body = layui.layer.getChildFrame('body', index);
+                setTimeout(function(){
+                    layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
+                        tips: 3
+                    });
+                },500)
+            }
+        })
+        layui.layer.full(index);
+        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+        $(window).on("resize",function(){
+            layui.layer.full(index);
+        })
+    }
+    
+    $(".addItem_btn").click(function(){
+        addItem();
+    })
+
     //列表操作
     table.on('tool(itemList)', function(obj){
         var layEvent = obj.event,
@@ -129,6 +156,18 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             },
             where: {
                 dimensionId: data.value //搜索的关键字
+            }
+        })
+    });
+
+    form.on('select(monitorBody)',function(data){
+        table.reload("itemListtable",{
+            url : 'http://47.95.13.55:8080//StructureMonitoring/AlarmServlet',
+            page: {
+                pageName: 1 //重新从第 1 页开始
+            },
+            where: {
+                objectId: data.value //搜索的关键字
             }
         })
     });

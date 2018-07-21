@@ -30,7 +30,7 @@ layui.use(['form','layer','tools'],function(){
                     parent.location.reload();
             }else{
                 top.layer.close(index);
-                top.layer.msg("添加铁路局成功");
+                top.layer.msg("添加铁路局失败");
             }
         })
     }

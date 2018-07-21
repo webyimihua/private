@@ -1,9 +1,15 @@
-layui.use(['form','layer','table','laytpl'],function(){
+layui.config({
+    base : "../../../js/"
+}).extend({
+    "tools" : "tools"
+})
+layui.use(['form','layer','table','laytpl','tools'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
         laytpl = layui.laytpl,
         table = layui.table;
+        tools = layui.tools;
     //列表
     var tableIns = table.render({
          elem: '#itemListtable',
@@ -14,14 +20,13 @@ layui.use(['form','layer','table','laytpl'],function(){
         limits : [10,15,20,25],
         limit :10,
         id : "itemListtable",
-        method: 'post',
+        method: 'get',
         where: {
             action_flag:"w_query",
             sub_flag:"user",
-            isFlur:false,
-            isReserve:false,
             isDivide:true,
-            hasForeign:false,
+            hasForeign:true,
+            fKey:"{'role':['name'],'bureau':['name']}",
         },
         request: {
           pageName: 'pageNum', //页码的参数名称，默认：page
@@ -42,8 +47,8 @@ layui.use(['form','layer','table','laytpl'],function(){
             {field: 'id', title: '序号', width:1, align:"center"},
             {field: 'username', title: '姓名', minWidth:180, align:"center"},
             {field: 'phoneNum', title: '登陆账户', minWidth:200, align:'center'},
-            {field: 'role', title: '账户等级', align:'center'},
-            {field: 'bureau', title: '所属铁路局', align:'center'},
+            {field: 'rolename', title: '账户等级', align:'center'},
+            {field: 'bureauname', title: '所属铁路局', align:'center'},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
@@ -70,16 +75,6 @@ layui.use(['form','layer','table','laytpl'],function(){
             content : "add.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-//              if(edit){
-//                  body.find(".userName").val(edit.userName);  //登录名
-//                  body.find(".userEmail").val(edit.userEmail);  //邮箱
-//                  body.find(".userSex input[value="+edit.userSex+"]").prop("checked","checked");  //性别
-//                  body.find(".userGrade").val(edit.userGrade);  //会员等级
-//                  body.find(".userStatus").val(edit.userStatus);    //用户状态
-//                  body.find(".userDesc").text(edit.userDesc);    //用户简介
-//                  form.render();
-//              }
- 				getStationname();
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -105,8 +100,11 @@ layui.use(['form','layer','table','laytpl'],function(){
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(data){                   
-                    body.find(".userEmail").val(data.userEmail);  //邮箱
-                    body.find(".userSex input[value="+data.userSex+"]").prop("checked","checked");  //性别                    
+                    body.find(".username").val(data.username);  
+                    body.find(".phoneNum").val(data.phoneNum); 
+                    body.find(".roleId").val(data.roleId);     
+                    body.find(".ids").val(data.id);   
+                    body.find(".bureauIds").val(data.bureauId);                     
                     form.render();
                 }
                 setTimeout(function(){
@@ -133,67 +131,25 @@ layui.use(['form','layer','table','laytpl'],function(){
             showItem(data);
         }else if(layEvent === 'del'){ //删除
             layer.confirm('确定删除此信息？',{icon:3, title:'提示信息'},function(index){
-                // $.get("删除文章接口",{
-                //     newsId : data.newsId  //将需要删除的newsId作为参数传入
-                // },function(data){
-                    tableIns.reload();
-                    layer.close(index);
-                // })
+                deleteAccountData(data)
             });
         }
     });
 
-	//查找公路局
-	function getStationname(){
-		console.log(23)
-		var param ={};
-		param.action_flag ="w_query";
-		param.sub_flag ="bureau";
-		param.isFlur = false;
-		param.isReserve = false;
-		param.isDivide = false;
-		param.hasForeign = false;
-		net.sendRequest(net.SystemServlet,param,function(data){
-			console.log(data)
-		})
-	}
-	var net={};
-	net.url = "http://192.168.0.202:8080";
-	net.SystemServlet ="StructureMonitoring/SystemServlet";
-	net.sendRequest = function(_service, body, callback) {	
-		console.log(56)
-		var actionStr = net.url + "/" + _service;		
-		$.ajax({
-			url: actionStr,
-			type: 'post',
-			data: JSON.stringify(body),
-			dataType: 'json',
-//			async: false,
-			contentType: 'application/json',
-			success: function(data, status, xhr) {
-				//返回包判断
-				if(data != null && data != undefined) {
-					callback(data)
-					console.log(data)
-				} else {
-					return;
-				}
-
-			},
-			error: function(data, status, xhr) {
-				//			// handle the error.
-				//			alert(exception.toString());
-				
-			},
-			statusCode: {
-				500: function() {
-			    	removeLoadingBox(loadType);
-			    	layer.msg('服务器连接失败');
-				}
-			}
-		});
-	}
-
+    function deleteAccountData(data){
+        var param ={};
+        param.action_flag="w_delete";
+        param.sub_flag="user";
+        param.id=data.id;
+        tools.sendRequest(net.SystemServlet,param,function(res){
+            if(res.result){
+                 tableIns.reload();
+                 layer.msg('删除用户成功')
+             }else{
+                 layer.msg('删除用户失败')
+             }
+        })
+    }
 
 
 })
