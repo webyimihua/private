@@ -47,6 +47,24 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 			dataName: 'data' //数据列表的字段名称，默认：data	
 		},
 		done: function(res, curr, count) {
+			var data = res.data;
+			if(data.length>0){
+				for(var i= 0;i<data.length;i++){
+					if(data[i].sensor_typeId == 12){
+						if(data[i].isRunning == 1){
+							$(".openitembtn").eq(i).css('display', 'none');
+						}else{
+							$(".stopitembtn").eq(i).css('display', 'none');
+						}
+					}else{
+						$(".setdatabtn").eq(i).css('display', 'none');
+						$(".settimebtn").eq(i).css('display', 'none');
+						$(".openitembtn").eq(i).css('display', 'none');
+						$(".stopitembtn").eq(i).css('display', 'none');
+					}
+				}
+			}
+			
 		},
         cols : [[
             {field: 'index', title: '序号', width:80, align:"center",type: "numbers"},
@@ -125,6 +143,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             content : contentUrl,
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
+                console.log(data.id)
                 body.find("editId").val(data.id);
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {

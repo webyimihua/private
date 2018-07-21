@@ -39,7 +39,7 @@
 
 .addtimebox .timebox {
 	width: 400px;
-	height:200px;
+	height: 200px;
 	background: #FFFFFF;
 	position: absolute;
 	z-index: 9999;
@@ -84,11 +84,13 @@
 .addtimebox .timebox .title .close_btn:hover {
 	color: #333333;
 }
+
 .addtimebox .timebox .timeitem {
 	float: left;
 	margin: 15px 20px;
 	color: #333333;
 }
+
 .addtimebox .timebox .timeitem .addtime {
 	float: left;
 	width: 290px;
@@ -96,5 +98,23 @@
 	margin-top: 30px;
 	text-indent: 10px;
 	color: #333333;
-	border:1px solid #E6E6E6;
+	border: 1px solid #E6E6E6;
+}
+.settimetable {
+	margin: 30px 0 20px 0;
+	border: 1px solid #E6E6E6;
+}
+.settimetable .listtop,.settimetable .listitem {
+	border: 1px solid #E6E6E6;
+}
+.settimetable .tritem {
+	font-weight: normal;
+	height: 34px;
+	line-height: 34px;
+	text-align: center;
+	border-right: 1px solid #E6E6E6;
+}
+.delbtn{
+	height: 24px;
+	line-height: 24px;
 }

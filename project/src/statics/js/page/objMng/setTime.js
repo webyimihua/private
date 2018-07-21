@@ -24,11 +24,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 				if(data.times.length > 0) {
 					readerTabledata(data.times);
 					var timeInfo = JSON.stringify(data.times);
-					localStorage.setItem('timeInfo', timeInfo);
-				}else{
-					var odata = [];
-					var timeInfo = JSON.stringify(odata);
-					localStorage.setItem('timeInfo', timeInfo);
+					sessionStorage.setItem('timeInfo', timeInfo);
 				}
 			} else {
 				if(res.message) {
@@ -40,6 +36,13 @@ layui.use(['form', 'layer', 'tools'], function() {
 	//新增时间配置
 	function addSettimeData(param, index) {
 		var userid = tools.getUsermessage("id");
+		if(sessionStorage.getItem('timeInfo')){
+			var olddata = JSON.parse(sessionStorage.getItem('timeInfo'));
+		}
+		if(!olddata){
+			olddata ={};
+		}
+		param.times = param.times.concat(olddata);
 		param.action_flag = "w_update";
 		param.sub_flag = "schedule";
 		param.userId = userid;
@@ -60,12 +63,12 @@ layui.use(['form', 'layer', 'tools'], function() {
 	function readerTabledata(data) {
 		$("#setTimeList").html("");
 		if(data) {
-			var str = '<th width="80">序号</th><th width="400">测量时刻（小时：分钟）</th><th width="100">操作</th>';
+			var str = '<tr class="listtop"><th class="tritem" width="120">序号</th><th class="tritem" width="500">测量时刻（小时：分钟）</th><th class="tritem" width="200">操作</th></tr>';
 			for(var i = 0; i < data.length; i++) {
 				str += '<tr class="listitem" tabindex="' + i + '">';
 				str += '<td class="tritem">' + i + 1 + '</td>';
 				str += '<td class="tritem">' + data[i] + '</td>';
-				str += '<td class="tritem" onclick="delThatitem(this)">删除</td>';
+				str += '<td class="tritem delitem"><span class="delbtn layui-btn layui-btn">删除</span></td>';
 				str += '</tr>';
 			}
 			$("#setTimeList").html(str);
@@ -77,31 +80,34 @@ layui.use(['form', 'layer', 'tools'], function() {
 		layui.use('layer', function() {
 			var layer = layui.layer;
 			layer.confirm('是否要删除当前测量时刻?', function(index) {
-				var item = $(el).parent(".listitem").attr("tabindex");
-				var olddata = JSON.parse(localStorage.getItem('timeInfo'));
+				var item = $(el).parents(".listitem").attr("tabindex");
+				var olddata = JSON.parse(sessionStorage.getItem('timeInfo'));
 				param = olddata.splice(item, 1);
 				addSettimeData(param);
 				layer.close(index);
 			});
 		});
 	}
+	$(".delbtn").on("click",function(){
+       var odiv = $(this);
+       delThatitem(odiv);
+   })
 	$(".addItem_btn").click(function(){
        $(".addtimebox").fadeIn();
-    })
-	layui.use('layer', function(){
-       	var laydate = layui.laydate;
-		  laydate.render({
-		    elem: '#timedate',
-		    type: 'time',
-		    format:'HH:mm'
-		  });
-       })
+   })
+	
 	$(".addTimebtn").click(function(){
 		var oval = $("#timedate").val();
-       	var olddata = JSON.parse(localStorage.getItem('timeInfo'));
-		var data = olddata.push(oval);
-		addSettimeData(data);
-		$(".addtimebox").fadeOut();
+		if(oval){
+			var param ={};
+			var olddata = [];
+			olddata.push(oval);
+			param.times = olddata;
+			addSettimeData(param);
+			$(".addtimebox").fadeOut();
+		}else{
+			layer.msg('请选择时间')
+		}
     })
 	$(".cancelBtn").click(function(){
       $(".addtimebox").fadeOut();

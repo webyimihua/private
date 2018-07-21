@@ -19,14 +19,25 @@
 	<body class="childrenBody">
 		<input type="hidden" id="sensorId" value="" />
 		<button class="layui-btn layui-btn-lg addItem_btn">添加时刻</button>
-		<table id="setTimeList">
+		<table class="settimetable" id="setTimeList">
+			<tr class="listtop">
+				<th class="tritem" width="120">序号</th>
+				<th class="tritem" width="500">测量时刻（小时：分钟）</th>
+				<th class="tritem" width="200">操作</th>
+			</tr>	
+			<tr class="listitem" tabindex="' + i + '">
+				<td class="tritem">1</td>
+				<td class="tritem">12:00</td>
+				<td class="tritem delitem"><span class="delbtn layui-btn layui-btn">删除</span></td>
+			</tr>
+			
 		</table>
 		<div class="addtimebox">
 			<div class="made"></div>
 			<div class="timebox">
 				<span class="title">选择时间</span>
 				<div class="timeitem">
-					<input type="text" class="addtime" id="timedate" readonly="readonly" value="选择时刻"/>
+					<input type="text" class="addtime" id="timedate" readonly="readonly" value="" placeholder="选择时刻"/>
 				</div>
 				<div class="timeitem">
 					<button class="layui-btn layui-btn addTimebtn">添加</button>
@@ -36,6 +47,16 @@
 		</div>	
 		<script type="text/javascript" src="../../../layui/layui.js"></script>
 		<script type="text/javascript" src="../../../js/page/objMng/setTime.js"></script>
+		<script>
+			layui.use('laydate', function() {
+				var laydate = layui.laydate;
+				laydate.render({ 
+				 	elem: '#timedate'
+			    	,type: 'time'
+			    	,format:'HH:mm'
+				})
+			});
+		</script>
 	</body>
 
 </html>

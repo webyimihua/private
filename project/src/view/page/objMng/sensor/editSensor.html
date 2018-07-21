@@ -15,37 +15,38 @@
 	<link rel="stylesheet" href="../../../css/page/objMng/common.css" media="all" />
 </head>
 <body class="childrenBody">
-<form class="layui-form" style="width:80%;">
-	<input type="hidden" name="id" id="editId" value="" />
+<form class="layui-form" id="editDataform" style="width:80%;">
+	<input type="hidden" id="editId" value="" />
 	<input type="hidden" name="status" id="status" value="正常" />
     <div class="layui-row">       
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">传感器类型</label>
 			<div class="layui-input-block">
-				<select name="userGrade" class="userGrade" lay-filter="userGrade" id="sensorType">					
-					<option value="1">全站仪</option>
-					<option value="2">其他传感器</option>
+				<select name="sensor_typeId" id="allSensor" lay-filter="sensorTypes" lay-verify="required">
+					<option>请选择传感器</option>
 				</select>
 			</div>
 		</div>
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">传感器名称</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写监测点里程">
+				<input type="text" name="name" class="layui-input " lay-verify="required" placeholder="请填写传感器名称">
 			</div>
 		</div>
     </div>
    <div class="layui-row">       
 		<div class="magb15 layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">网关号</label>
+			<label class="layui-form-label">所属终端</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写网关号">
+				<select name="gatewayId" id="AllTerminal" >
+					<option >请选择终端</option>
+				</select>
 			</div>
 		</div>
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">里程</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写里程">
+				<input type="text" name="mileage" class="layui-input " lay-verify="required" placeholder="请填写里程">
 			</div>
 		</div>	
     </div>	
@@ -53,28 +54,22 @@
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">分站号</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写分站号">
+				<input type="text" name="subId" class="layui-input " lay-verify="required" placeholder="请填写分站号">
 			</div>
 		</div>
-		<div class="magb15 layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">仪器高度</label>
-			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写z坐标">
-			</div>
-		</div>		
 	</div>
 	<div class="layui-row">
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">备注</label>
 			<div class="layui-input-block">
-				<textarea class="layui-textarea "></textarea>
+				<textarea name="remark" class="layui-textarea" maxlength="50" onchange="this.value=this.value.substring(0, 50)" onkeydown="this.value=this.value.substring(0,50)" onkeyup="this.value=this.value.substring(0,50)"></textarea>
 			</div>
 		</div>		
 	</div>   
 	<div class="layui-form-item layui-row layui-col-xs12">
 		<div class="layui-input-block">
 			<button class="layui-btn layui-btn-lg" lay-submit="" lay-filter="addUser">编辑传感器提交</button>
-			<button type="reset" class="layui-btn layui-btn-lg layui-btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;&nbsp;&nbsp;&nbsp;</button>
+			<button class="layui-btn layui-btn-lg cancel">&nbsp;&nbsp;&nbsp;&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;&nbsp;&nbsp;&nbsp;</button>
 		</div>
 	</div>
 </form>

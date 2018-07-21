@@ -87,7 +87,7 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 			},
 			//根据localStorage查找用户信息
 			getUsermessage:function(name){
-				var messStr = localStorage.getItem('login');
+				var messStr = sessionStorage.getItem('login');
 				if(messStr){
 					var mess = JSON.parse(messStr);
 					var oval="";
@@ -110,7 +110,9 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 						if(data.length > 0) {
 							tools.initOptionitem(div,data,function(){
 								form.render('select');
-								callback();
+								if(typeof callback == 'function'){					
+									callback();
+								}
 							});					
 						} else {
 							layer.msg("请先新增铁路局数据");
@@ -129,7 +131,9 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 						if(data.length > 0) {
 							tools.initOptionitem(div,data,function(){
 								form.render('select');
-								callback();
+								if(typeof callback == 'function'){					
+									callback();
+								}
 							});					
 						} else {
 							layer.msg("请先新增铁路线路数据");
@@ -148,7 +152,9 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 						if(data.length > 0) {
 							tools.initOptionitem(div,data,function(){
 								form.render('select');
-								callback();
+								if(typeof callback == 'function'){					
+									callback();
+								}
 							});					
 						} else {
 							layer.msg("请先新增监测类型");
@@ -167,7 +173,9 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 						if(data.length > 0) {
 							tools.initOptionitem(div,data,function(){
 								form.render('select');
-								callback();
+								if(typeof callback == 'function'){					
+									callback();
+								}
 							});					
 						} else {
 							layer.msg("请先新增传感器类型");
@@ -186,7 +194,9 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 						if(data.length > 0) {
 							tools.initOptionitem(div,data,function(){
 								form.render('select');
-								callback();
+								if(typeof callback == 'function'){					
+									callback();
+								}
 							});					
 						}
 					}
@@ -203,7 +213,9 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 						if(data.length > 0) {
 							tools.initOptionitem(div,data,function(){
 								form.render('select');
-								callback();
+								if(typeof callback == 'function'){					
+									callback();
+								}
 							});					
 						}
 					}
@@ -232,13 +244,14 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 				param.sub_flag = "object";
 				param.id = id;
 				tools.sendRequest(net.ObjectServlet, param, function(res) {
-					console.log(res)
 					if(res.result == 1) {
 						var data = res.data;
 						if(data.length > 0) {
 							tools.initOptionitem(div,data,function(){
 								form.render('select');
-								callback();
+								if(typeof callback == 'function'){					
+									callback();
+								}
 							});					
 						}
 					}
@@ -256,7 +269,9 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 						if(data.length > 0) {
 							tools.initOptionitem(div,data,function(){
 								form.render('select');
-								callback();
+								if(typeof callback == 'function'){					
+									callback();
+								}
 							});					
 						}
 					}
@@ -274,7 +289,9 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 						if(data.length > 0) {
 							tools.initOptionitem(div,data,function(){
 								form.render('select');
-								callback();
+								if(typeof callback == 'function'){					
+									callback();
+								}
 							});					
 						}
 					}

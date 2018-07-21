@@ -19,7 +19,7 @@ layui.use(['form','layer','tools'],function(){
     
     $(".cancel").click(function(){
        layer.closeAll("iframe");
-                    //刷新父页面
+       //刷新父页面
        parent.location.reload();
         return false;
     })

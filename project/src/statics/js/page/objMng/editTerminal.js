@@ -57,6 +57,11 @@ layui.use(['form','layer', 'tools'],function(){
 				top.layer.msg("编辑终端失败");
 			}
         })
-    }
-	
+    }	
+	$(".cancel").click(function(){
+       layer.closeAll("iframe");
+       //刷新父页面
+       parent.location.reload();
+        return false;
+    })
 })
