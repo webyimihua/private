@@ -33,7 +33,7 @@ layui.use(['form','layer', 'tools'],function(){
 					}
 				})
 		}
-    form.on("submit(editTerminal)",function(data){
+    form.on("submit(editStation)",function(data){
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
         var param = tools.getFormallData("#editDataform");
