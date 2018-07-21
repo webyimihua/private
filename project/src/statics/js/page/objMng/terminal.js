@@ -84,8 +84,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             type : 2,
             content : "addTerminal.html",
             success : function(layero, index){
-                var body = layui.layer.getChildFrame('body', index);
-
+                var body = layui.layer.getChildFrame('body', index);					
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -103,17 +102,14 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         addItem();
     })
     //修改构筑物
-    function editItem(data){
+    function editItem(id){
         var index = layui.layer.open({
             title : "编辑终端",
             type : 2,
             content : "editTerminal.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-                 var editForm = body.find("#editTerminal");
-               	if(data) {
-					tools.setOlddataToform(editForm, data);
-				}
+                body.find("#editId").val(id);
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -157,7 +153,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         var layEvent = obj.event,
             data = obj.data;
         if(layEvent === 'edit'){ //编辑
-            editItem(data);
+            editItem(data.id);
         }else if(layEvent === 'detail'){ //详情
             showItem(data);
         }else if(layEvent === 'del'){ //删除

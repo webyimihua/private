@@ -8,10 +8,37 @@ layui.use(['form', 'layer', 'tools'], function() {
 	layer = parent.layer === undefined ? layui.layer : top.layer,
 	$ = layui.jquery;
 	tools = layui.tools;
-	tools.getAllstation("#allStation");
-	tools.getAllLine("#addLine");
-	tools.getAllWatchtype("#watchtype");	
-	tools.getWatchdimension("#dimension");
+	tools.getAllstation("#allStation",getAllLine);
+	function getAllLine(){
+		tools.getAllLine("#addLine",getAllWatchtype);
+	}
+	function getAllWatchtype(){
+		tools.getAllWatchtype("#watchtype",getWatchdimension);
+	}
+	function getWatchdimension(){
+		tools.getWatchdimension("#dimension",setOlddataShow);
+	}
+	function setOlddataShow(){
+			var id = $("#editId").val();
+        	var editForm = $("#editDataform");
+        	var userid = tools.getUsermessage("id");
+            var param = {};
+				param.action_flag = "w_show_edit";
+				param.sub_flag = "object";
+				param.id = id;
+				param.userId= userid;
+				tools.sendRequest(net.ObjectServlet, param, function(res) {
+					if(res.result == 1) {
+						var data =res.data;							
+				    	tools.setOlddataToform(editForm,data);
+				    	form.render('select');
+					} else {
+						if(res.message) {
+							layer.msg(res.message);
+						}
+					}
+				})
+		}
 	form.on("submit(editStructure)", function(data) {
 		//弹出loading
 		var index = top.layer.msg('数据提交中，请稍候', {
@@ -19,18 +46,18 @@ layui.use(['form', 'layer', 'tools'], function() {
 			time: false,
 			shade: 0.8
 		});
-		var param = tools.getFormallData("#editStructure");
+		var param = tools.getFormallData("#editDataform");
 		addStructureData(param, index);
 		return false;
 	})
 	//新增构筑物
 	function addStructureData(param, index) {
-		var dimension =[];
+		var dimension =[1];
 		dimension.push(param.dimensionIds);		
 		param.action_flag = "w_update";
 		param.sub_flag = "object";
 		param.dimensionIds = dimension;
-		param.userId= tools.getUsermessage("id");
+//		param.userId= tools.getUsermessage("id");
 		tools.sendRequest(net.ObjectServlet, param, function(res) {
 			if(res.result == 1) {
 				setTimeout(function() {

@@ -9,30 +9,75 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
-	<link rel="stylesheet" href="../../../layui/css/layui.css" media="all" />
-	<link rel="stylesheet" href="../../../css/public.css" media="all" />
+	<link rel="stylesheet" href="../../../../layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="../../../../css/public.css" media="all" />
 	<link rel="stylesheet" href="../../../css/base.css" media="all" />
 	<link rel="stylesheet" href="../../../css/page/objMng/common.css" media="all" />
 </head>
 <body class="childrenBody">
 <form class="layui-form" id="showDataform" style="width:80%;">
+	<input type="hidden" name="id" id="editId" value="" />
     <div class="layui-row">
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">传感器编号</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " readonly="readonly">
+				<input type="text" name="name" class="layui-input " readonly="readonly">
 			</div>
 		</div>
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">传感器类型</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " readonly="readonly">
+				<input type="text" name="sensor_typeId" class="layui-input " readonly="readonly">
 			</div>
 		</div>
     </div>
-    <div class="otherfotm" id="otherForm">
-   </div>    
+   <div class="layui-row">
+        <div class="magb15 layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">传感器名称</label>
+			<div class="layui-input-block">
+				<input type="text" name="subId" class="layui-input " readonly="readonly" >
+			</div>
+		</div>
+        <div class="layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">状态</label>
+			<div class="layui-input-block">
+				<input type="text" name="status" class="layui-input " readonly="readonly">
+			</div>
+		</div>
+    </div>	
+	<div class="layui-row">
+		<div class="magb15 layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">所属终端</label>
+			<div class="layui-input-block">
+				<input type="text" name="gatewayId" class="layui-input " readonly="readonly" >
+			</div>
+		</div>
+		<div class="magb15 layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">里程</label>
+			<div class="layui-input-block">
+				<input type="text" name="mileage" class="layui-input " readonly="readonly">
+			</div>
+		</div>		
+	</div>
+	<div class="layui-row">
+		<div class="magb15 layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">分站号</label>
+			<div class="layui-input-block">
+				<input type="text" name="subId" class="layui-input " readonly="readonly">
+			</div>
+		</div>
+			
+	</div>	
+	<div class="layui-row">
+		<div class="magb15 layui-col-md12 layui-col-xs12">
+			<label class="layui-form-label">备注</label>
+			<div class="layui-input-block">
+				<textarea class="layui-textarea "></textarea>
+			</div>
+		</div>		
+	</div> 
 </form>
-<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../js/page/objMng/editSensor.js"></script>
 </body>
 </html>

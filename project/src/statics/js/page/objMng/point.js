@@ -93,16 +93,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             type : 2,
             content : "addPoint.html",
             success : function(layero, index){
-                var body = layui.layer.getChildFrame('body', index);
-//              if(edit){
-//                  body.find(".userName").val(edit.userName);  //登录名
-//                  body.find(".userEmail").val(edit.userEmail);  //邮箱
-//                  body.find(".userSex input[value="+edit.userSex+"]").prop("checked","checked");  //性别
-//                  body.find(".userGrade").val(edit.userGrade);  //会员等级
-//                  body.find(".userStatus").val(edit.userStatus);    //用户状态
-//                  body.find(".userDesc").text(edit.userDesc);    //用户简介
-//                  form.render();
-//              }
+                var body = layui.layer.getChildFrame('body', index);            
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -120,18 +111,14 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         addItem();
     })
     //修改监测点
-    function editItem(data){
+    function editItem(id){
         var index = layui.layer.open({
             title : "编辑监测点",
             type : 2,
             content : "editPoint.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-                if(data){                   
-                    body.find(".userEmail").val(data.userEmail);  //邮箱
-                    body.find(".userSex input[value="+data.userSex+"]").prop("checked","checked");  //性别                    
-                    form.render();
-                }
+                body.find("#editId").val(id);
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -175,19 +162,39 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         var layEvent = obj.event,
             data = obj.data;
         if(layEvent === 'edit'){ //编辑
-            editItem(data);
+            editItem(data.id);
         }else if(layEvent === 'detail'){ //详情
             showItem(data);
         }else if(layEvent === 'del'){ //删除
-            layer.confirm('确定删除此信息？',{icon:3, title:'提示信息'},function(index){
-                // $.get("删除文章接口",{
-                //     newsId : data.newsId  //将需要删除的newsId作为参数传入
-                // },function(data){
-                    tableIns.reload();
-                    layer.close(index);
-                // })
-            });
+           layer.confirm('确定删除此信息？', {
+				icon: 3,
+				title: '提示信息'
+			}, function(index) {
+				delFiledata(data.id, index);
+			});
         }
     });
+    
+    //删除监测域
+	function delFiledata(id, index) {
+		var param = {};
+		param.action_flag = "w_delete";
+		param.sub_flag = "unit";
+		param.id = id;
+		param.userId= tools.getUsermessage("id");
+		tools.sendRequest(net.ObjectServlet, param, function(res) {
+			if(res.result == 1) {
+				if(res.message) {
+					layer.msg(res.message);
+				}
+				tableIns.reload();
+				layer.close(index);
+			} else {
+				if(res.message) {
+					layer.msg(res.message);
+				}
+			}
+		})
+	}   
 
 })

@@ -10,7 +10,7 @@ layui.use(['form','layer', 'tools'],function(){
         tools = layui.tools;
         var userid = tools.getUsermessage("id");
 		tools.getAllfileType("#fileType");
-        tools.getThatstructure("#Allstructuret",userid);
+        tools.getThatstructure("#allStructure",userid);
     form.on("submit(addFile)",function(data){
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
@@ -22,7 +22,7 @@ layui.use(['form','layer', 'tools'],function(){
 	function addFileData(param,index){
         param.action_flag ="w_add";
         param.sub_flag ="domain";
-        param.userId= tools.getUsermessage("id");
+//      param.id= tools.getUsermessage("id");
         tools.sendRequest(net.ObjectServlet,param,function(res){
            if(res.result == 1) {
 				setTimeout(function() {

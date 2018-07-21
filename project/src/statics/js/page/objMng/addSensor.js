@@ -1,41 +1,87 @@
-layui.use(['form','layer'],function(){
-    var form = layui.form
-        layer = parent.layer === undefined ? layui.layer : top.layer,
-        $ = layui.jquery;
-        $("#sensorType").on("change",function(){
-        	console.log(1123)
-        })
-    form.on("submit(addUser)",function(data){
-        //弹出loading
-        var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
-        // 实际使用时的提交信息
-        // $.post("上传路径",{
-        //     userName : $(".userName").val(),  //登录名
-        //     userEmail : $(".userEmail").val(),  //邮箱
-        //     userSex : data.field.sex,  //性别
-        //     userGrade : data.field.userGrade,  //会员等级
-        //     userStatus : data.field.userStatus,    //用户状态
-        //     newsTime : submitTime,    //添加时间
-        //     userDesc : $(".userDesc").text(),    //用户简介
-        // },function(res){
-        //
-        // })
-        setTimeout(function(){
-            top.layer.close(index);
-            top.layer.msg("监测点添加成功！");
-            layer.closeAll("iframe");
-            //刷新父页面
-            parent.location.reload();
-        },2000);
-        return false;
-    })
+layui.config({
+	base: "../../../js/"
+}).extend({
+	"tools": "tools"
+})
+layui.use(['form', 'layer', 'tools'], function() {
+	var form = layui.form
+	layer = parent.layer === undefined ? layui.layer : top.layer,
+		$ = layui.jquery;
+	tools = layui.tools;
+	var userId = tools.getUsermessage("id");
+	tools.getAllSensorype("#allSensor");
+	getAllTerminal("#AllTerminal",userId);
+	form.on("submit(addSensor)", function(data) {
+		var index = top.layer.msg('数据提交中，请稍候', {
+			icon: 16,
+			time: false,
+			shade: 0.8
+		});
+		var param = tools.getFormallData("#addpoint");
+		addSensorData(param, index);
+		return false;
+	})
 
-    form.on('select(sensorTypes)',function(data){
-        if(data.value == 2){
-            $(".qzyhide").hide();
-        }else{
-            $(".qzyhide").show();
-        }
-    });
+	form.on('select(sensorTypes)', function(data) {
+		if(data.value != 12) {
+			$(".qzyhide").hide();
+		} else {
+			$(".qzyhide").show();
+		}
+		form.render('select');
+	});
+	//新增
+	function addSensorData(param, index) {
+		param.action_flag = "w_add";
+		param.sub_flag = "sensor";
+		//      param.userId= tools.getUsermessage("id");
+		tools.sendRequest(net.ObjectServlet, param, function(res) {
+			if(res.result == 1) {
+				setTimeout(function() {
+					top.layer.close(index);
+					top.layer.msg("添加监测点成功");
+					layer.closeAll("iframe");
+					//刷新父页面
+					parent.location.reload();
+				}, 2000);
+			} else {
+				top.layer.close(index);
+				top.layer.msg("添加监测点失败");
+			}
+		})
+	}
+	//查询终端
+	function getAllTerminal(div, userid) {
+		var param = {};
+		param.action_flag = "w_query";
+		param.sub_flag = "gateway";
+		param.isFlur = false;
+		param.isReserve = false;
+		param.isDivide = true;
+		param.userId = userid;
+		tools.sendRequest(net.ObjectServlet, param, function(res) {
+			if(res.result == 1) {
+				var data = res.data;
+				if(data.length > 0) {
+					initTerminaloption(div, data, function() {
+						form.render('select');
+					});
+				} else {
+					layer.msg("请先新增铁路局数据");
+				};
+			}
+		})
+	}
+	//
+	function initTerminaloption(div, data,callback){
+		var str = '';
+		for(var i = 0; i < data.length; i++) {
+			str += '<option value="' + data[i].id + '">' + data[i].id + '</option>'
+		}
+		$(div).append(str);
+		if(typeof callback == 'function'){					
+			callback();
+		}
+	}
 
 })

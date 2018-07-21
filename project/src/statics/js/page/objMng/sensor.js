@@ -113,17 +113,20 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
     })
     //修改传感器
     function editItem(data){
+    	var sensorType = data.sensor_typeId;
+    	var contentUrl = "";
+    	if(sensorType != 12){
+    		contentUrl = 'editSensor.html';
+    	}else{
+    		contentUrl = 'editStation.html';
+    	}
         var index = layui.layer.open({
             title : "编辑传感器",
             type : 2,
-            content : "editSensor.html",
+            content : contentUrl,
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-                if(data){                   
-                    body.find(".userEmail").val(data.userEmail);  //邮箱
-                    body.find(".userSex input[value="+data.userSex+"]").prop("checked","checked");  //性别                    
-                    form.render();
-                }
+                body.find("editId").val(data.id);
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -139,16 +142,22 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
     }
     //查看传感器详情
     function showItem(data){
+    	var sensorType = data.sensor_typeId;
+    	var contentUrl = "";
+    	if(sensorType != 12){
+    		contentUrl = 'detailSensor.html';
+    	}else{
+    		contentUrl = 'detailStation.html';
+    	}
         var index = layui.layer.open({
             title : "传感器详情",
             type : 2,
-            content : "detailSensor.html",
+            content : contentUrl,
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-                if(data){                   
-                    body.find(".userEmail").val(data.userEmail);  //邮箱
-                    body.find(".userSex input[value="+data.userSex+"]").prop("checked","checked");  //性别                    
-                    form.render();
+                var showForm = body.find("#showDataform");
+                if(data){
+                	tools.setOlddataToform(showForm, data);
                 }
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
@@ -172,15 +181,35 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         }else if(layEvent === 'detail'){ //详情
             showItem(data);
         }else if(layEvent === 'del'){ //删除
-            layer.confirm('确定删除此信息？',{icon:3, title:'提示信息'},function(index){
-                // $.get("删除文章接口",{
-                //     newsId : data.newsId  //将需要删除的newsId作为参数传入
-                // },function(data){
-                    tableIns.reload();
-                    layer.close(index);
-                // })
-            });
+            layer.confirm('确定删除此信息？', {
+				icon: 3,
+				title: '提示信息'
+			}, function(index) {
+				delSensordata(data.id, index);
+			});
         }
     });
+    
+     //删除终端
+	function delSensordata(id, index) {
+		var param = {};
+		param.action_flag = "w_delete";
+		param.sub_flag = "sensor";
+		param.id = id;
+		param.userId= tools.getUsermessage("id");
+		tools.sendRequest(net.ObjectServlet, param, function(res) {
+			if(res.result == 1) {
+				if(res.message) {
+					layer.msg(res.message);
+				}
+				tableIns.reload();
+				layer.close(index);
+			} else {
+				if(res.message) {
+					layer.msg(res.message);
+				}
+			}
+		})
+	}
 
 })

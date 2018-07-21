@@ -27,11 +27,11 @@
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">位置</label>
 			<div class="layui-input-block">
-				<select name="position"  lay-filter="userGrade" lay-verify="required">
+				<select name="position"   lay-verify="required">
 					<option value="">请选择位置</option>
-					<option value="上行">上行</option>
-					<option value="下行">下行</option>
-					<option value="上下行">上下行</option>
+					<option value="上">上</option>
+					<option value="中">中</option>
+					<option value="下">下</option>
 				</select>
 			</div>
 		</div>
@@ -40,7 +40,7 @@
         <div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">所属构筑物</label>
 			<div class="layui-input-block">
-				<select name="objectId" id="allStructure" lay-filter="userGrade">
+				<select name="objectId" id="allStructure" lay-filter="allStructure" lay-verify="required">
 					<option value="">请选择监测点所属构筑物</option>		
 				</select>
 			</div>
@@ -56,7 +56,7 @@
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">所属监测域</label>
 			<div class="layui-input-block">
-				<select name="domainId" id="allFile" lay-verify="required">					
+				<select name="domainId" id="thatFile" lay-verify="required">					
 					<option value="">请选择所属监测域</option>
 				</select>
 			</div>
@@ -64,10 +64,8 @@
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">监测维度</label>
 			<div class="layui-input-block">
-				<select name="dimensionId" lay-verify="required">
+				<select name="dimensionId" id="dimension" lay-verify="required">
 					<option value="">请选择监测维度</option >
-					<option value="0">AAA</option>
-					<option value="1">BBB</option>
 				</select>
 			</div>
 		</div>
@@ -82,7 +80,7 @@
 		<div class="layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">对应传感器</label>
 			<div class="layui-input-block">
-				<select name="sensorId" id="Allsensor" lay-verify="required">
+				<select name="sensorId" id="thatsensor" lay-verify="required">
 					<option value="">请选择对应传感器</option>
 				</select>
 			</div>

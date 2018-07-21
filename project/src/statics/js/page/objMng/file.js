@@ -54,7 +54,6 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         cols : [[
         	{field: 'ordinal',title: '序号',width: 80,align: "center",},
 			{field: 'id',title: '序号',width: "",align: "center",},
-//          {field: 'ordinal', title: '序号', width:80, align:"center"},
             {field: 'name', title: '监测域名称', minWidth:180, align:"center"},
             {field: 'domain_typeId', title: '监测域类型', minWidth:200, align:'center'},
             {field: 'domain_typename', title: '监测域类型', minWidth:200, align:'center'},
@@ -106,20 +105,14 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         addItem();
     })
     //修改构筑物
-    function editItem(data){
+    function editItem(id){
         var index = layui.layer.open({
             title : "编辑监测域",
             type : 2,
             content : "editFile.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-                var userid = tools.getUsermessage("id");
-                if(data){ 
-                	tools.getAllfileType("#fileType");
-                	tools.getThatstructure("#Allstructuret",userid);
-                   var editForm = body.find("#editDataform");
-                	tools.setOlddataToform(editForm,data);
-                }
+                body.find("#editId").val(id); 
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -163,7 +156,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         var layEvent = obj.event,
             data = obj.data;
         if(layEvent === 'edit'){ //编辑
-            editItem(data);
+            editItem(data.id);
         }else if(layEvent === 'detail'){ //详情
             showItem(data);
         }else if(layEvent === 'del'){ //删除
@@ -180,7 +173,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 	function delFiledata(id, index) {
 		var param = {};
 		param.action_flag = "w_delete";
-		param.sub_flag = "domain_type";
+		param.sub_flag = "domain";
 		param.id = id;
 		param.userId= tools.getUsermessage("id");
 		tools.sendRequest(net.ObjectServlet, param, function(res) {
@@ -196,5 +189,5 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 				}
 			}
 		})
-	}
+	}   
 })

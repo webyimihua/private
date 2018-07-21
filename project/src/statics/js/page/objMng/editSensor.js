@@ -8,18 +8,17 @@ layui.use(['form','layer', 'tools'],function(){
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery;
         tools = layui.tools;
-        var userid = tools.getUsermessage("id");
-        tools.getAllfileType("#fileType",getThatstructure);
-        function getThatstructure(){
-        	tools.getThatstructure("#allStructure",userid,setOlddataShow);
-        }
-        function setOlddataShow(){
-        	var id = $("#editId").val();
+       	tools.getAllSensorype("#allSensor",getAllfile);
+		function getAllfile(){
+			tools.getAllfileType("#dimension",setOlddataShow);
+		}
+		function setOlddataShow(){
+			var id = $("#editId").val();
         	var editForm = $("#editDataform");
         	var userid = tools.getUsermessage("id");
             var param = {};
 				param.action_flag = "w_show_edit";
-				param.sub_flag = "domain";
+				param.sub_flag = "sensor";
 				param.id = id;
 				param.userId= userid;
 				tools.sendRequest(net.ObjectServlet, param, function(res) {
@@ -33,33 +32,33 @@ layui.use(['form','layer', 'tools'],function(){
 						}
 					}
 				})
-        }
-		
-    form.on("submit(editFile)",function(data){
+		}
+    form.on("submit(editTerminal)",function(data){
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
-       var param = tools.getFormallData("#editDataform");
-		editFileData(param, index);
+        var param = tools.getFormallData("#editDataform");
+		addTerminalData(param, index);
         return false;
     })
-    //新增监测域
-	function editFileData(param,index){
+	//修改终端
+	function addTerminalData(param,index){
         param.action_flag ="w_update";
-        param.sub_flag ="domain";
+        param.sub_flag ="gateway";
 //      param.userId= tools.getUsermessage("id");
         tools.sendRequest(net.ObjectServlet,param,function(res){
            if(res.result == 1) {
 				setTimeout(function() {
 					top.layer.close(index);
-					top.layer.msg("修改构筑域成功");
+					top.layer.msg("编辑终端成功");
 					layer.closeAll("iframe");
 					//刷新父页面
 					parent.location.reload();
 				}, 2000);
 			} else {
 				top.layer.close(index);
-				top.layer.msg("修改构筑域失败");
+				top.layer.msg("编辑终端失败");
 			}
         })
     }
+	
 })
