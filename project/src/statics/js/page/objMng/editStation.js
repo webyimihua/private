@@ -10,7 +10,8 @@ layui.use(['form','layer', 'tools'],function(){
         tools = layui.tools;
        	tools.getAllSensorype("#allSensor",getAllfile);
 		function getAllfile(){
-			tools.getAllfileType("#dimension",setOlddataShow);
+			var userId = tools.getUsermessage("id");
+			getAllTerminal("#AllTerminal",userId,setOlddataShow);
 		}
 		function setOlddataShow(){
 			var id = $("#editId").val();
@@ -43,20 +44,20 @@ layui.use(['form','layer', 'tools'],function(){
 	//修改终端
 	function addTerminalData(param,index){
         param.action_flag ="w_update";
-        param.sub_flag ="gateway";
+        param.sub_flag ="sensor";
 //      param.userId= tools.getUsermessage("id");
         tools.sendRequest(net.ObjectServlet,param,function(res){
            if(res.result == 1) {
 				setTimeout(function() {
 					top.layer.close(index);
-					top.layer.msg("编辑终端成功");
+					top.layer.msg("编辑传感器成功");
 					layer.closeAll("iframe");
 					//刷新父页面
 					parent.location.reload();
 				}, 2000);
 			} else {
 				top.layer.close(index);
-				top.layer.msg("编辑终端失败");
+				top.layer.msg("编辑传感器失败");
 			}
         })
     }
@@ -66,5 +67,29 @@ layui.use(['form','layer', 'tools'],function(){
        parent.location.reload();
         return false;
     })
-	
+	//查询终端
+	function getAllTerminal(div, userid,callback) {
+		var param = {};
+		param.action_flag = "w_query";
+		param.sub_flag = "gateway";
+		param.isFlur = false;
+		param.isReserve = false;
+		param.isDivide = true;
+		param.userId = userid;
+		tools.sendRequest(net.ObjectServlet, param, function(res) {
+			if(res.result == 1) {
+				var data = res.data;
+				if(data.length > 0) {
+					initTerminaloption(div, data, function() {
+						form.render('select');
+						if(typeof callback == 'function'){					
+							callback();
+						}
+					});
+				} else {
+					layer.msg("请先新增终端数据");
+				};
+			}
+		})
+	}
 })

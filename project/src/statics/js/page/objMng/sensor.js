@@ -47,36 +47,46 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 			dataName: 'data' //数据列表的字段名称，默认：data	
 		},
 		done: function(res, curr, count) {
-			var data = res.data;
-			if(data.length>0){
-				for(var i= 0;i<data.length;i++){
-					if(data[i].sensor_typeId == 12){
-						if(data[i].isRunning == 1){
-							$(".openitembtn").eq(i).css('display', 'none');
-						}else{
-							$(".stopitembtn").eq(i).css('display', 'none');
-						}
-					}else{
-						$(".setdatabtn").eq(i).css('display', 'none');
-						$(".settimebtn").eq(i).css('display', 'none');
-						$(".openitembtn").eq(i).css('display', 'none');
-						$(".stopitembtn").eq(i).css('display', 'none');
-					}
-				}
-			}
-			
+//			var data = res.data;
+//			if(data.length>0){
+//				for(var i= 0;i<data.length;i++){
+//					if(data[i].sensor_typeId == 12){
+//						if(data[i].isRunning == 1){
+//							$(".openitembtn").eq(i).css('display', 'none');
+//						}else{
+//							$(".stopitembtn").eq(i).css('display', 'none');
+//						}
+//					}else{
+//						$(".setdatabtn").eq(i).css('display', 'none');
+//						$(".settimebtn").eq(i).css('display', 'none');
+//						$(".openitembtn").eq(i).css('display', 'none');
+//						$(".stopitembtn").eq(i).css('display', 'none');
+//					}
+//				}
+//			}
+//			form.render();
 		},
         cols : [[
             {field: 'index', title: '序号', width:80, align:"center",type: "numbers"},
-            {field: 'id', title: '传感器编号', width:120, align:"center"},
-            {field: 'name', title: '传感器名称', width:250, align:'center'},
-            {field: 'sensor_typename', title: '传感器类型',width:180, align:'center'},
-            {field: 'gatewayname', title: '所属终端',width:180, align:'center'},
-            {field: 'subId', title: '分站号',width:100, align:'center'},
-            {field: 'mileage', title: '里程',width:100, align:'center'},
+            {field: 'id', title: '传感器编号', width:90, align:"center"},
+            {field: 'name', title: '传感器名称', width:120, align:'center'},
+            {field: 'sensor_typename', title: '传感器类型',width:130, align:'center'},
+            {field: 'gatewayname', title: '所属终端',width:130, align:'center'},
+            {field: 'subId', title: '分站号',width:90, align:'center'},
+            {field: 'mileage', title: '里程',width:90, align:'center'},
             {field: 'status', title: '状态',width:90, align:'center'},
-            {field: 'remark', title: '备注', align:'center',width:150},
-            {title: '操作', minWidth:360, templet:'#handleListBar',fixed:"right",align:"center"}
+            {field: 'remark', title: '备注', align:'center',width:120},
+            {title: '操作', minWidth:360, templet:function(data){
+            	if(data.sensor_typeId == 12){
+						if(data.isRunning == 1){
+							return '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a><a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">查看</a><a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a><a class="layui-btn layui-btn-xs setdatabtn" lay-event="setData">配置参数</a><a class="layui-btn layui-btn-xs layui-btn-normal settimebtn"  lay-event="setTime">配置时刻</a><a class="layui-btn layui-btn-xs layui-btn-danger stopitembtn" lay-event="stopItem">停止采集</a>';
+						}else{
+							return '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a><a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">查看</a><a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a><a class="layui-btn layui-btn-xs setdatabtn" lay-event="setData">配置参数</a><a class="layui-btn layui-btn-xs layui-btn-normal settimebtn"  lay-event="setTime">配置时刻</a><a class="layui-btn layui-btn-xs layui-btn openitembtn" lay-event="openItem">开始采集</a>';
+						}
+					}else{
+						return '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a><a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">查看</a><a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>';
+						          }
+					},fixed:"right",align:"center"}
         ]]
     });
 

@@ -52,7 +52,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 		})
 	}
 	//查询终端
-	function getAllTerminal(div, userid) {
+	function getAllTerminal(div, userid,callback) {
 		var param = {};
 		param.action_flag = "w_query";
 		param.sub_flag = "gateway";
@@ -66,9 +66,12 @@ layui.use(['form', 'layer', 'tools'], function() {
 				if(data.length > 0) {
 					initTerminaloption(div, data, function() {
 						form.render('select');
+						if(typeof callback == 'function'){					
+							callback();
+						}
 					});
 				} else {
-					layer.msg("请先新增铁路局数据");
+					layer.msg("请先新增终端数据");
 				};
 			}
 		})
