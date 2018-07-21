@@ -29,7 +29,7 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
         $(".userName").html(loginInfo.username);
     	var users = [
     	{name:"监测中心",oname:"监测中心",url:"page/main.html",target:"contentManagement"},
-    	{name:"消息中心",oname:"监测中心",url:"page/news/alarm.html",target:"news"}
+    	{name:"消息中心",oname:"预警消息",url:"page/news/alarm.html",target:"news"}
     	]
     	var sbs = [
     	{name:"监测中心",oname:"监测中心",url:"page/main.html",target:"contentManagement"},
