@@ -62,7 +62,7 @@ layui.use(['form','layer','tools'],function(){
         })
     }
 
-      function findMonitorDimension(){
+    function findMonitorDimension(){
         var param ={};
         param.action_flag="w_show_option";
         param.sub_flag="dimension";

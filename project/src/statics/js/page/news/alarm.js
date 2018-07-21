@@ -153,5 +153,23 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
              }
         })
     }
+     findMonitorBody()
+     function findMonitorBody(){
+        var param ={};
+        param.action_flag="w_show_option";
+        param.sub_flag="object";
+        param.id=1;
+        tools.sendRequest(net.ObjectServlet,param,function(res){
+            if(res.result){
+                  var data = res.data;
+                  var str = '<option value="">请选择监测体</option>';
+                  for(var i in data){
+                     str+='<option value="'+data[i].id+'">'+data[i].name+'</option>'
+                  }
+                  $("#monitorBody").html(str);
+                  form.render('select');
+             }
+        })
+    }
 
 })

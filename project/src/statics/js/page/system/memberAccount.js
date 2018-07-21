@@ -150,6 +150,37 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
              }
         })
     }
+    
+    findMonitorStation()
+    function findMonitorStation(){
+        var param ={};
+        param.action_flag="w_show_option";
+        param.sub_flag="bureau";
+        tools.sendRequest(net.ObjectServlet,param,function(res){
+            if(res.result){
+               var data = res.data;
+              var str = '<option value="">请选择铁路局</option>';
+              for(var i in data){
+                 str+='<option value="'+data[i].id+'">'+data[i].name+'</option>'
+              }
+              $("#MonitorStation").html(str);
+               form.render('select');
+             }
+        })
+    }
 
+
+    form.on('select(station)',function(data){
+        table.reload("itemListtable",{
+            url : 'http://47.95.13.55:8080//StructureMonitoring/SystemServlet',
+            page: {
+                pageName: 1 //重新从第 1 页开始
+            },
+            where: {
+                key: 'bureauId',
+                value: data.value,
+            }
+        })
+    });
 
 })

@@ -47,9 +47,9 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             // {type: "checkbox", fixed:"left", width:50},
             {field: 'index', title: '序号', width:60, align:"center",type:"numbers"},
             {field: 'id', title: 'id', width:1, align:"center"},
-            {field: 'time', title: '发布日期', width:200, align:"center"},
             {field: 'content', title: '发布内容', minWidth:100, align:"center"},
             {field: 'userId', title: '发布者', width:150, align:"center"},
+            {field: 'time', title: '发布日期', width:200, align:"center"},
             {title: '操作', width:120, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
@@ -151,6 +151,25 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
                  layer.msg('删除成功')
              }else{
                  layer.msg('删除失败')
+             }
+        })
+    }
+
+    findMonitorBody()
+     function findMonitorBody(){
+        var param ={};
+        param.action_flag="w_show_option";
+        param.sub_flag="object";
+        param.id=1;
+        tools.sendRequest(net.ObjectServlet,param,function(res){
+            if(res.result){
+                  var data = res.data;
+                  var str = '<option value="">请选择监测体</option>';
+                  for(var i in data){
+                     str+='<option value="'+data[i].id+'">'+data[i].name+'</option>'
+                  }
+                  $("#monitorBody").html(str);
+                  form.render('select');
              }
         })
     }

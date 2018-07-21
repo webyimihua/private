@@ -15,6 +15,10 @@ layui.use(['form','layer','tools'],function(){
         editAccountData(data,index)
        
     })
+
+    $(".cancel").click(function(){
+        return false;
+    })
    
     //修改数据
     function editAccountData(data,index){
