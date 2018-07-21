@@ -20,12 +20,6 @@
 		<form class="layui-form" id="addSensor" style="width:80%;">
 			<input type="hidden" name="status" id="status" value="正常" />
 			<div class="layui-row">
-				<div class="layui-form-item layui-col-md5 layui-col-xs12">
-					<label class="layui-form-label">传感器编号</label>
-					<div class="layui-input-block">
-						<input type="text" name="name" class="layui-input " lay-verify="required" placeholder="请填写传感器编号">
-					</div>
-				</div>
 				<div class="magb15 layui-col-md5 layui-col-xs12">
 					<label class="layui-form-label">传感器类型</label>
 					<div class="layui-input-block">
@@ -34,29 +28,18 @@
 						</select>
 					</div>
 				</div>
-			</div>
-			<div class="layui-row">
 				<div class="magb15 layui-col-md5 layui-col-xs12">
 					<label class="layui-form-label">传感器名称</label>
 					<div class="layui-input-block">
-						<input type="text" class="layui-input " lay-verify="required" placeholder="请填写监测点里程">
-					</div>
-				</div>
-				<div class="magb15 layui-col-md5 layui-col-xs12">
-					<label class="layui-form-label">状态</label>
-					<div class="layui-input-block">
-						<select name="status" lay-verify="required">
-							<option value="正常">正常</option>
-							<option value="故障">故障</option>
-						</select>
+						<input type="text" name="name" class="layui-input " lay-verify="required" placeholder="传感器名称">
 					</div>
 				</div>
 			</div>
-			<div class="layui-row">
+			<div class="layui-row">				
 				<div class="magb15 layui-col-md5 layui-col-xs12">
 					<label class="layui-form-label">所属终端</label>
 					<div class="layui-input-block">
-						<select name="gatewayId" id="AllTerminal" lay-filter="userGrade">
+						<select name="gatewayId" id="AllTerminal" >
 							<option >请选择终端</option>
 						</select>
 					</div>
@@ -78,35 +61,35 @@
 				<div class="magb15 layui-col-md5 layui-col-xs12 qzyhide">
 					<label class="layui-form-label">参考已知点斜距</label>
 					<div class="layui-input-block">
-						<input type="text" name="givenSlopeDistance" class="layui-input " lay-verify="required" placeholder="请填写处理模式">
+						<input type="text" name="givenSlopeDistance" class="layui-input "  placeholder="请填写处理模式">
 					</div>
 				</div>
 			</div>
-			<div class="layui-row qzyhide">
-				<div class="magb15 layui-col-md5 layui-col-xs12">
+			<div class="layui-row">				
+				<div class="magb15 layui-col-md5 layui-col-xs12 qzyhide">
 					<label class="layui-form-label">x坐标</label>
 					<div class="layui-input-block">
-						<input type="text" name="xValue" class="layui-input " lay-verify="required" placeholder="请填写x坐标">
+						<input type="text" name="xValue" class="layui-input "  placeholder="请填写x坐标">
 					</div>
 				</div>
-				<div class="magb15 layui-col-md5 layui-col-xs12">
+				<div class="magb15 layui-col-md5 layui-col-xs12 qzyhide">
 					<label class="layui-form-label">参考已知点竖直角</label>
 					<div class="layui-input-block">
-						<input type="text" name="givenVAngle" class="layui-input " lay-verify="required" placeholder="请填写参考点竖角">
+						<input type="text" name="givenVAngle" class="layui-input "  placeholder="请填写参考点竖角">
 					</div>
 				</div>
 			</div>
-			<div class="layui-row qzyhide">
+			<div class="layui-row qzyhide">	
 				<div class="magb15 layui-col-md5 layui-col-xs12">
 					<label class="layui-form-label">y坐标</label>
 					<div class="layui-input-block">
-						<input type="text" name="yValue" class="layui-input " lay-verify="required" placeholder="请填写y坐标">
+						<input type="text" name="yValue" class="layui-input "  placeholder="请填写y坐标">
 					</div>
 				</div>
 				<div class="magb15 layui-col-md5 layui-col-xs12">
 					<label class="layui-form-label">参考点与基准点已知夹角</label>
 					<div class="layui-input-block">
-						<input type="text" name="givenIntersectionAngle" class="layui-input " lay-verify="required" placeholder="请填写已知夹角">
+						<input type="text" name="givenIntersectionAngle" class="layui-input"  placeholder="请填写已知夹角">
 					</div>
 				</div>
 			</div>
@@ -114,34 +97,36 @@
 				<div class="magb15 layui-col-md5 layui-col-xs12">
 					<label class="layui-form-label">z坐标</label>
 					<div class="layui-input-block">
-						<input type="text" name="zValue" class="layui-input " lay-verify="required" placeholder="请填写z坐标">
+						<input type="text" name="zValue" class="layui-input"  placeholder="请填写z坐标">
 					</div>
 				</div>
 				<div class="magb15 layui-col-md5 layui-col-xs12">
 					<label class="layui-form-label">基准点方位角</label>
 					<div class="layui-input-block">
-						<input type="text" name="givenAzimuthAngle" class="layui-input " lay-verify="required" placeholder="请填写基准点方位角">
+						<input type="text" name="givenAzimuthAngle" class="layui-input"  placeholder="请填写基准点方位角">
 					</div>
 				</div>
 			</div>
-			<div class="layui-row">
-				<div class="magb15 layui-col-md8 layui-col-xs12">
-					<label class="layui-form-label">备注</label>
-					<div class="layui-input-block">
-						<textarea name="remark" class="layui-textarea " lay-verify="required"></textarea>
-					</div>
-				</div>
+			<div class="layui-row qzyhide">
 				<div class="magb15 layui-col-md5 layui-col-xs12 qzyhide">
 					<label class="layui-form-label">仪器高度</label>
 					<div class="layui-input-block">
-						<input type="text" name="height" class="layui-input " lay-verify="required" placeholder="请填写z坐标">
+						<input type="text" name="height" class="layui-input"  placeholder="请填写z坐标">
+					</div>
+				</div>				
+			</div>
+			<div class="layui-row">				
+				<div class="magb15 layui-col-md5 layui-col-xs12">
+					<label class="layui-form-label">备注</label>
+					<div class="layui-input-block">
+						<textarea name="remark" class="layui-textarea " lay-verify="required"></textarea>
 					</div>
 				</div>
 			</div>
 			<div class="layui-form-item layui-row layui-col-xs12">
 				<div class="layui-input-block">
 					<button class="layui-btn layui-btn-lg" lay-submit="" lay-filter="addSensor">新增传感器提交</button>
-					<button type="reset" class="layui-btn layui-btn-lg layui-btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;&nbsp;&nbsp;&nbsp;</button>
+					<button class="layui-btn layui-btn-lg layui-btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;&nbsp;&nbsp;&nbsp;</button>
 				</div>
 			</div>
 		</form>

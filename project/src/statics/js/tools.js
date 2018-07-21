@@ -151,7 +151,7 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 								callback();
 							});					
 						} else {
-							layer.msg("请先新增检测类型");
+							layer.msg("请先新增监测类型");
 						};
 					}
 				})

@@ -55,7 +55,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         cols : [[
 //          {type: "checkbox", fixed:"left", width:50},
             {field: 'index', title: '序号', width:80, align:"center",type: "numbers"},
-            {field: 'id', title: '监测点编号', minWidth:200, align:'center'},
+            {field: 'id', title: '监测点名称', minWidth:200, align:'center'},
             {field: 'objectId', title: '所属构筑物', align:'center'},
             {field: 'objectname', title: '所属构筑物', align:'center'},
             {field: 'height', title: '高度', align:'center'},

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>文章列表--layui后台管理模板 2.0</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<link rel="stylesheet" href="../../../layui/css/layui.css" media="all" />
+		<link rel="stylesheet" href="../../../css/public.css" media="all" />
+		<link rel="stylesheet" href="../../../css/base.css" media="all" />
+		<link rel="stylesheet" href="../../../css/page/objMng/common.css" media="all" />
+	</head>
+
+	<body class="childrenBody">
+		<form class="layui-form" id="stationSet" style="width:80%;">
+			<input type="hidden" id="sensorId" value="" />
+			<input type="hidden" id="setId" value="" />
+			<div class="layui-row">
+				<div class="magb15 layui-col-md5 layui-col-xs12">
+					<label class="layui-form-label layui-form-set">测回数</label>
+					<div class="layui-input-block layui-input-set">
+						<input type="text" name="roundNum" class="layui-input " lay-verify="required" placeholder="">
+					</div>
+				</div>
+				<div class="magb15 layui-col-md5 layui-col-xs12">
+					<label class="layui-form-label layui-form-set">重测次数</label>
+					<div class="layui-input-block layui-input-set">
+						<input type="text" name="repeatNum" class="layui-input " lay-verify="required" placeholder="">
+					</div>
+				</div>
+			</div>
+			<div class="layui-row">
+				<div class="magb15 layui-col-md5 layui-col-xs12">
+					<label class="layui-form-label layui-form-set">半测回归零差（秒度）</label>
+					<div class="layui-input-block layui-input-set">
+						<input type="text" name="misclosure" class="layui-input " lay-verify="required" placeholder="">
+					</div>
+				</div>
+				<div class="magb15 layui-col-md5 layui-col-xs12">
+					<label class="layui-form-label layui-form-set">同一测回不同方向2C较差（秒度）</label>
+					<div class="layui-input-block layui-input-set">
+						<input type="text" name="one2c" class="layui-input " lay-verify="required" placeholder="">
+					</div>
+				</div>				
+			</div>
+			<div class="layui-row">
+				<div class="magb15 layui-col-md5 layui-col-xs12">
+					<label class="layui-form-label layui-form-set">不同测回同一方向2C较差（秒度）</label>
+					<div class="layui-input-block layui-input-set">
+						<input type="text" name="multi2c" class="layui-input " lay-verify="required" placeholder="">
+					</div>
+				</div>
+				<div class="magb15 layui-col-md5 layui-col-xs12">
+					<label class="layui-form-label layui-form-set">竖盘指标差（秒度）</label>
+					<div class="layui-input-block layui-input-set">
+						<input type="text" name="vIndex" class="layui-input " lay-verify="required" placeholder="">
+					</div>
+				</div>		
+			</div>
+			<div class="layui-row">
+				<div class="magb15 layui-col-md5 layui-col-xs12">
+					<label class="layui-form-label layui-form-set">不同测回同一方向均差（秒度）</label>
+					<div class="layui-input-block layui-input-set">
+						<input type="text" name="oneAverage" class="layui-input " lay-verify="required" placeholder="">
+					</div>
+				</div>		
+				<div class="magb15 layui-col-md5 layui-col-xs12">
+					<label class="layui-form-label layui-form-set">不同测回竖直方向均差（秒度）</label>
+					<div class="layui-input-block layui-input-set">
+						<input type="text" name="vAverage" class="layui-input " lay-verify="required" placeholder="">
+					</div>
+				</div>		
+			</div>
+			<div class="layui-row">
+				<div class="magb15 layui-col-md5 layui-col-xs12">
+					<label class="layui-form-label layui-form-set">同一测回斜距差（mm）</label>
+					<div class="layui-input-block layui-input-set">
+						<input type="text" name="oneDistance" class="layui-input "  placeholder="">
+					</div>
+				</div>
+				<div class="magb15 layui-col-md5 layui-col-xs12">
+					<label class="layui-form-label layui-form-set">不同测回个点斜距差（mm）</label>
+					<div class="layui-input-block layui-input-set ">
+						<input type="text" name="multiDistance" class="layui-input "  placeholder="">
+					</div>
+				</div>
+			</div>			
+			<div class="layui-form-item layui-row layui-col-xs12">
+				<div class="layui-input-block">
+					<button class="layui-btn layui-btn-lg" lay-submit="" lay-filter="stationSet">测量参数配置提交</button>
+					<button type="reset" class="layui-btn layui-btn-lg layui-btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;&nbsp;&nbsp;&nbsp;</button>
+				</div>
+			</div>
+		</form>
+		<script type="text/javascript" src="../../../layui/layui.js"></script>
+		<script type="text/javascript" src="../../../js/page/objMng/setStation.js"></script>
+	</body>
+
+</html>

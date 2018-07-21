@@ -49,17 +49,16 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 		done: function(res, curr, count) {
 		},
         cols : [[
-//          {type: "checkbox", fixed:"left", width:50},
             {field: 'index', title: '序号', width:80, align:"center",type: "numbers"},
-            {field: 'id', title: '传感器编号', width:100, align:"center"},
-            {field: 'name', title: '传感器名称', minWidth:100, align:'center'},
-            {field: 'sensor_typeId', title: '传感器类型', align:'center'},
-            {field: 'gatewayId', title: '所属终端', align:'center'},
-            {field: 'subId', title: '分站号', align:'center'},
-            {field: 'mileage', title: '里程', align:'center'},
-            {field: 'isRunning', title: '状态', align:'center'},
-            {field: 'remark', title: '备注', align:'center',minWidth:150},
-            {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
+            {field: 'id', title: '传感器编号', width:120, align:"center"},
+            {field: 'name', title: '传感器名称', width:250, align:'center'},
+            {field: 'sensor_typename', title: '传感器类型',width:180, align:'center'},
+            {field: 'gatewayname', title: '所属终端',width:180, align:'center'},
+            {field: 'subId', title: '分站号',width:100, align:'center'},
+            {field: 'mileage', title: '里程',width:100, align:'center'},
+            {field: 'status', title: '状态',width:90, align:'center'},
+            {field: 'remark', title: '备注', align:'center',width:150},
+            {title: '操作', minWidth:360, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
 
@@ -140,6 +139,56 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             layui.layer.full(index);
         })
     }
+    //设置全站仪传感器参数
+    function setData(data){
+    	var sensorId = data.id;
+    	var sensorName = data.name;
+    	var otitle = "全站仪测量参数配置     -   "+sensorName;
+        var index = layui.layer.open({
+            title : otitle,
+            type : 2,
+            content : "setStation.html",
+            success : function(layero, index){
+                var body = layui.layer.getChildFrame('body', index);
+                body.find("#sensorId").val(sensorId);
+                setTimeout(function(){
+                    layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
+                        tips: 3
+                    });
+                },500)
+            }
+        })
+        layui.layer.full(index);
+        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+        $(window).on("resize",function(){
+            layui.layer.full(index);
+        })
+    }
+    //设置全站仪时间参数
+    function setTime(data){
+    	var sensorId = data.id;
+    	var sensorName = data.name;
+    	var otitle = "时间参数配置     -   "+sensorName;
+        var index = layui.layer.open({
+            title : otitle,
+            type : 2,
+            content : "setTime.html",
+            success : function(layero, index){
+                var body = layui.layer.getChildFrame('body', index);
+                body.find("#sensorId").val(sensorId);
+                setTimeout(function(){
+                    layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
+                        tips: 3
+                    });
+                },500)
+            }
+        })
+        layui.layer.full(index);
+        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+        $(window).on("resize",function(){
+            layui.layer.full(index);
+        })
+    }
     //查看传感器详情
     function showItem(data){
     	var sensorType = data.sensor_typeId;
@@ -180,6 +229,12 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             editItem(data);
         }else if(layEvent === 'detail'){ //详情
             showItem(data);
+        }else if(layEvent === 'setData'){ //详情
+            setData(data);
+        }else if(layEvent === 'setTime'){ //详情
+            setTime(data);
+        }else if(layEvent === 'openItem'){ //详情
+            openItem(data);
         }else if(layEvent === 'del'){ //删除
             layer.confirm('确定删除此信息？', {
 				icon: 3,
