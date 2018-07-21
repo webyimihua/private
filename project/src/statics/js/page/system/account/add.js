@@ -16,6 +16,13 @@ layui.use(['form','layer','tools'],function(){
         
         return false;
     })
+    
+    $(".cancel").click(function(){
+       layer.closeAll("iframe");
+                    //刷新父页面
+       parent.location.reload();
+        return false;
+    })
 
      // 新增数据
      function addUserData(data,index){
