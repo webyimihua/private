@@ -17,6 +17,7 @@
 <body class="childrenBody">
 <form class="layui-form" id="editDataform" style="width:80%;">
 	<input type="hidden" name="id" id="editId" value="" />
+	<input type="hidden" name="status" value="正常" />
     <div class="layui-row">
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">终端 ID</label>
@@ -50,7 +51,7 @@
 			<label class="layui-form-label">所属监测体</label>
 			<div class="layui-input-block">
 				<select name="objectId" id="allStructure" lay-filter="userStatus">
-					<option value="">请选择检测体</option>
+					<option value="">请选择监测体</option>
 				</select>
 			</div>
 		</div>
@@ -60,19 +61,7 @@
 				<input type="text" name="portForOther" class="layui-input " lay-verify="required">
 			</div>
 		</div>
-    </div>
-    <div class="layui-row layui-form-item">
-        <div class="layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">终端状态</label>
-			<div class="layui-input-block">
-				<select name="status"  lay-verify="required">
-					<option value="正常">正常</option>
-					<option value="故障">故障</option>
-				</select>
-			</div>
-		</div>		
-    </div>  
-	
+   </div>
 	<div class="layui-form-item layui-row layui-col-xs12">
 		<div class="layui-input-block">
 			<button class="layui-btn layui-btn-lg" lay-submit="" lay-filter="editTerminal">编辑终端提交</button>

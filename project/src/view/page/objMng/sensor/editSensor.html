@@ -17,13 +17,8 @@
 <body class="childrenBody">
 <form class="layui-form" style="width:80%;">
 	<input type="hidden" name="id" id="editId" value="" />
-    <div class="layui-row">
-        <div class="layui-form-item layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">传感器编号</label>
-			<div class="layui-input-block">
-				<input type="text" class="layui-input " lay-verify="required">
-			</div>
-		</div>
+	<input type="hidden" name="status" id="status" value="正常" />
+    <div class="layui-row">       
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">传感器类型</label>
 			<div class="layui-input-block">
@@ -33,25 +28,14 @@
 				</select>
 			</div>
 		</div>
-    </div>
-   <div class="layui-row">
-        <div class="magb15 layui-col-md5 layui-col-xs12">
+		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">传感器名称</label>
 			<div class="layui-input-block">
 				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写监测点里程">
 			</div>
 		</div>
-        <div class="layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">状态</label>
-			<div class="layui-input-block">
-				<select name="userGrade" class="userGrade" lay-filter="userGrade">
-					<option value="正常">正常</option>
-					<option value="故障">故障</option>			
-				</select>
-			</div>
-		</div>
-    </div>	
-	<div class="layui-row">
+    </div>
+   <div class="layui-row">       
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">网关号</label>
 			<div class="layui-input-block">
@@ -63,9 +47,9 @@
 			<div class="layui-input-block">
 				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写里程">
 			</div>
-		</div>		
-	</div>
-	<div class="layui-row">
+		</div>	
+    </div>	
+	<div class="layui-row">	
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">分站号</label>
 			<div class="layui-input-block">
@@ -78,9 +62,9 @@
 				<input type="text" class="layui-input " lay-verify="required" placeholder="请填写z坐标">
 			</div>
 		</div>		
-	</div>	
+	</div>
 	<div class="layui-row">
-		<div class="magb15 layui-col-md12 layui-col-xs12">
+		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">备注</label>
 			<div class="layui-input-block">
 				<textarea class="layui-textarea "></textarea>
