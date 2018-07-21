@@ -10,7 +10,9 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         laytpl = layui.laytpl,
         table = layui.table;
         tools = layui.tools;
-
+	var userid = tools.getUsermessage("id");
+	tools.getThatstructure("#structureOption",userid);
+	tools.getAllSensorype("#sensorOption");
    //查找构筑物列表	
    	var userid = tools.getUsermessage("id");
 	var tableIns = table.render({
@@ -47,30 +49,16 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 			dataName: 'data' //数据列表的字段名称，默认：data	
 		},
 		done: function(res, curr, count) {
-//			var data = res.data;
-//			if(data.length>0){
-//				for(var i= 0;i<data.length;i++){
-//					if(data[i].sensor_typeId == 12){
-//						if(data[i].isRunning == 1){
-//							$(".openitembtn").eq(i).css('display', 'none');
-//						}else{
-//							$(".stopitembtn").eq(i).css('display', 'none');
-//						}
-//					}else{
-//						$(".setdatabtn").eq(i).css('display', 'none');
-//						$(".settimebtn").eq(i).css('display', 'none');
-//						$(".openitembtn").eq(i).css('display', 'none');
-//						$(".stopitembtn").eq(i).css('display', 'none');
-//					}
-//				}
-//			}
-//			form.render();
+			$("[data-field='sensor_typeId']").css('display', 'none');
+			$("[data-field='gatewayId']").css('display', 'none');
 		},
         cols : [[
             {field: 'index', title: '序号', width:80, align:"center",type: "numbers"},
             {field: 'id', title: '传感器编号', width:90, align:"center"},
             {field: 'name', title: '传感器名称', width:120, align:'center'},
+            {field: 'sensor_typeId', title: '传感器类型',width:130, align:'center'},
             {field: 'sensor_typename', title: '传感器类型',width:130, align:'center'},
+            {field: 'gatewayId', title: '所属终端',width:130, align:'center'},
             {field: 'gatewayname', title: '所属终端',width:130, align:'center'},
             {field: 'subId', title: '分站号',width:90, align:'center'},
             {field: 'mileage', title: '里程',width:90, align:'center'},
@@ -90,21 +78,28 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         ]]
     });
 
-    //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
-    $(".search_btn").on("click",function(){
-        if($(".searchVal").val() != ''){
-            table.reload("newsListTable",{
-                page: {
-                    curr: 1 //重新从第 1 页开始
-                },
-                where: {
-                    key: $(".searchVal").val()  //搜索的关键字
-                }
-            })
-        }else{
-            layer.msg("请输入搜索的内容");
-        }
-    });
+    form.on('select(findstructure)', function(data) {
+		table.reload("itemListtable", {
+			url : net.baseurl + "/" + net.ObjectServlet,
+			page: {
+				curr: 1 
+			},
+			where: {
+				objectId: data.value,
+			}
+		})
+	});
+    form.on('select(findsensor)', function(data) {
+		table.reload("itemListtable", {
+			url : net.baseurl + "/" + net.ObjectServlet,
+			page: {
+				curr: 1 
+			},
+			where: {
+				sensor_typeId: data.value,
+			}
+		})
+	});
 
    //添加传感器
     function addItem(){

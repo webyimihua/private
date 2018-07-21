@@ -237,7 +237,7 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 //					}
 //				})
 //			},
-//			//9查询当前用户所有的构筑域
+//			//9查询当前用户所有的构筑体
 			getThatstructure:function(div,id,callback){
 				var param = {};
 				param.action_flag = "w_show_option";

@@ -9,8 +9,11 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         $ = layui.jquery,
         laytpl = layui.laytpl,
         table = layui.table;
-         tools = layui.tools;
-
+        tools = layui.tools;
+        
+    tools.getWatchdimension("#dimensionOption"); 
+	var userid = tools.getUsermessage("id");
+	tools.getThatstructure("#structureOption",userid);
    //查找构筑物列表	
    	var userid = tools.getUsermessage("id");
 	var tableIns = table.render({
@@ -70,21 +73,28 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         ]]
     });
 
-    //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
-    $(".search_btn").on("click",function(){
-        if($(".searchVal").val() != ''){
-            table.reload("newsListTable",{
-                page: {
-                    curr: 1 //重新从第 1 页开始
-                },
-                where: {
-                    key: $(".searchVal").val()  //搜索的关键字
-                }
-            })
-        }else{
-            layer.msg("请输入搜索的内容");
-        }
-    });
+   form.on('select(findstructure)', function(data) {
+		table.reload("itemListtable", {
+			url : net.baseurl + "/" + net.ObjectServlet,
+			page: {
+				curr: 1 
+			},
+			where: {
+				objectId: data.value,
+			}
+		})
+	});
+   form.on('select(finddimension)', function(data) {
+		table.reload("itemListtable", {
+			url : net.baseurl + "/" + net.ObjectServlet,
+			page: {
+				curr: 1 
+			},
+			where: {
+				dimensionId: data.value,
+			}
+		})
+	});
 
     //添加监测点
     function addItem(){

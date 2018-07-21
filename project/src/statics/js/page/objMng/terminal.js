@@ -11,6 +11,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         table = layui.table;
         tools = layui.tools; 
     var userid = tools.getUsermessage("id");
+	tools.getThatstructure("#structureOption",userid);
 	var tableIns = table.render({
 		elem: '#itemListtable',
 		url: net.baseurl + "/" + net.ObjectServlet,
@@ -60,22 +61,17 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
-
-    //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
-    $(".search_btn").on("click",function(){
-        if($(".searchVal").val() != ''){
-            table.reload("newsListTable",{
-                page: {
-                    curr: 1 //重新从第 1 页开始
-                },
-                where: {
-                    key: $(".searchVal").val()  //搜索的关键字
-                }
-            })
-        }else{
-            layer.msg("请输入搜索的内容");
-        }
-    });
+	form.on('select(findstructure)', function(data) {
+		table.reload("itemListtable", {
+			url : net.baseurl + "/" + net.ObjectServlet,
+			page: {
+				curr: 1 
+			},
+			where: {
+				objectId: data.value,
+			}
+		})
+	});
 
     //添加终端
     function addItem(){
