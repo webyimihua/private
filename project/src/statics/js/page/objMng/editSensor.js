@@ -8,6 +8,7 @@ layui.use(['form','layer', 'tools'],function(){
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery;
         tools = layui.tools;
+        $(".qzyhide").hide();
        	tools.getAllSensorype("#allSensor",getAllfile);
 		function getAllfile(){
 			var userId = tools.getUsermessage("id");
@@ -34,6 +35,14 @@ layui.use(['form','layer', 'tools'],function(){
 					}
 				})
 		}
+	form.on('select(sensorTypes)', function(data) {
+		if(data.value != 12) {
+			$(".qzyhide").hide();
+		} else {
+			$(".qzyhide").show();
+		}
+		form.render('select');
+	});	
     form.on("submit(editSensor)",function(data){
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
@@ -91,5 +100,15 @@ layui.use(['form','layer', 'tools'],function(){
 				};
 			}
 		})
+	}
+	function initTerminaloption(div, data,callback){
+		var str = '';
+		for(var i = 0; i < data.length; i++) {
+			str += '<option value="' + data[i].id + '">' + data[i].id + '</option>'
+		}
+		$(div).append(str);
+		if(typeof callback == 'function'){					
+			callback();
+		}
 	}
 })

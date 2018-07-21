@@ -92,4 +92,14 @@ layui.use(['form','layer', 'tools'],function(){
 			}
 		})
 	}
+	function initTerminaloption(div, data,callback){
+		var str = '';
+		for(var i = 0; i < data.length; i++) {
+			str += '<option value="' + data[i].id + '">' + data[i].id + '</option>'
+		}
+		$(div).append(str);
+		if(typeof callback == 'function'){					
+			callback();
+		}
+	}
 })

@@ -15,7 +15,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 	var tableIns = table.render({
 		elem: '#itemListtable',
 		url: net.baseurl + "/" + net.ObjectServlet,
-		cellMinWidth: 95,
+//		cellMinWidth: 95,
 		page: true,
 		height: "full-125",
 		limits: [10, 15, 20, 25],
