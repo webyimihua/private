@@ -48,8 +48,8 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             {field: 'objectName', title: '所属构筑物', align:'center'},
             {field: 'dimensionName', title: '检测物维度', align:'center'},
             {field: 'dimensionName', title: '监测点名称', align:'center'},
-            {field: 'lowValue', title: '初级预警值',width:100, align:'center'},
-            {field: 'highValue', title: '高级预警值',width:100, align:'center'},
+            {field: 'lowLevel', title: '初级预警值',width:100, align:'center'},
+            {field: 'highLevel', title: '高级预警值',width:100, align:'center'},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
@@ -69,7 +69,33 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             layer.msg("请输入搜索的内容");
         }
     });
-  
+
+     //添加构筑物
+    function addItem(){
+        var index = layui.layer.open({
+            title : "新增预警参数配置",
+            type : 2,
+            content : "addWarn.html",
+            success : function(layero, index){
+                var body = layui.layer.getChildFrame('body', index);
+                setTimeout(function(){
+                    layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
+                        tips: 3
+                    });
+                },500)
+            }
+        })
+        layui.layer.full(index);
+        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+        $(window).on("resize",function(){
+            layui.layer.full(index);
+        })
+    }
+    
+    $(".addItem_btn").click(function(){
+        addItem();
+    })
+
     //列表操作
     table.on('tool(itemList)', function(obj){
         var layEvent = obj.event,

@@ -1,9 +1,15 @@
-layui.use(['form','layer','table','laytpl'],function(){
+layui.config({
+    base : "../../../js/"
+}).extend({
+    "tools" : "tools"
+})
+layui.use(['form','layer','table','laytpl','tools'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
         laytpl = layui.laytpl,
         table = layui.table;
+        tools = layui.tools;
     //列表
     var tableIns = table.render({
          elem: '#itemListtable',
@@ -69,15 +75,6 @@ layui.use(['form','layer','table','laytpl'],function(){
             content : "add.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-//              if(edit){
-//                  body.find(".userName").val(edit.userName);  //登录名
-//                  body.find(".userEmail").val(edit.userEmail);  //邮箱
-//                  body.find(".userSex input[value="+edit.userSex+"]").prop("checked","checked");  //性别
-//                  body.find(".userGrade").val(edit.userGrade);  //会员等级
-//                  body.find(".userStatus").val(edit.userStatus);    //用户状态
-//                  body.find(".userDesc").text(edit.userDesc);    //用户简介
-//                  form.render();
-//              }
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -103,8 +100,11 @@ layui.use(['form','layer','table','laytpl'],function(){
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(data){                   
-                    body.find(".userEmail").val(data.userEmail);  //邮箱
-                    body.find(".userSex input[value="+data.userSex+"]").prop("checked","checked");  //性别                    
+                    body.find(".username").val(data.username);  
+                    body.find(".phoneNum").val(data.phoneNum); 
+                    body.find(".roleId").val(data.roleId);     
+                    body.find(".ids").val(data.id);   
+                    body.find(".bureauIds").val(data.bureauId);                     
                     form.render();
                 }
                 setTimeout(function(){
@@ -131,15 +131,25 @@ layui.use(['form','layer','table','laytpl'],function(){
             showItem(data);
         }else if(layEvent === 'del'){ //删除
             layer.confirm('确定删除此信息？',{icon:3, title:'提示信息'},function(index){
-                // $.get("删除文章接口",{
-                //     newsId : data.newsId  //将需要删除的newsId作为参数传入
-                // },function(data){
-                    tableIns.reload();
-                    layer.close(index);
-                // })
+                deleteAccountData(data)
             });
         }
     });
+
+    function deleteAccountData(data){
+        var param ={};
+        param.action_flag="w_delete";
+        param.sub_flag="user";
+        param.id=data.id;
+        tools.sendRequest(net.SystemServlet,param,function(res){
+            if(res.result){
+                 tableIns.reload();
+                 layer.msg('删除用户成功')
+             }else{
+                 layer.msg('删除用户失败')
+             }
+        })
+    }
 
 
 })

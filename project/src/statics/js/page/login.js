@@ -10,7 +10,7 @@ layui.use(['form','layer','jquery','tools'],function(){
         tools = layui.tools;
     //登录按钮
     //清除缓存
-    window.localStorage.clear();
+    window.sessionStorage.clear();
     form.on("submit(login)",function(data){
         userLogin(data.field)
         return false;
@@ -25,7 +25,7 @@ layui.use(['form','layer','jquery','tools'],function(){
         tools.sendRequest(net.LoginServlet,param,function(res){
             if(res.result){
                var mesInfo = JSON.stringify(res.data)
-               localStorage.setItem('login',mesInfo)
+               sessionStorage.setItem('login',mesInfo)
                layer.msg(res.message)
                setTimeout(function(){
                   window.location.href="../../index.html";
