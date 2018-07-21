@@ -25,6 +25,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             action_flag:"w_query",
             sub_flag:"alarm",
             userId:1,
+            isDivide:true,
         },
         request: {
           pageName: 'pageNum', //页码的参数名称，默认：page
@@ -41,14 +42,14 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
           $("[data-field='id']").css('display','none');
         },
         cols : [[
-            {field: 'index', title: '序号', width:80, align:"center"},
-            {field: 'id', title: '序号', width:1, align:"center"},
-            {field: 'itemNum', title: '监测点编号', minWidth:200, align:'center'},
-            {field: 'itemStructure', title: '所属构筑物', align:'center'},
-            {field: 'itemType', title: '检测物维度', align:'center'},
-            {field: 'itemName', title: '监测点名称', align:'center'},
-            {field: 'warnMin', title: '初级预警值', align:'center'},
-            {field: 'warnMax', title: '高级预警值', align:'center'},
+            {field: 'index', title: '序号', width:40, align:"center",type:"numbers"},
+            {field: 'id', title: 'id', width:1, align:"center"},
+            {field: 'unitId', title: '监测点编号', minWidth:100, align:'center'},
+            {field: 'objectName', title: '所属构筑物', align:'center'},
+            {field: 'dimensionName', title: '检测物维度', align:'center'},
+            {field: 'dimensionName', title: '监测点名称', align:'center'},
+            {field: 'lowValue', title: '初级预警值',width:100, align:'center'},
+            {field: 'highValue', title: '高级预警值',width:100, align:'center'},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
@@ -129,6 +130,18 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             },
             where: {
                 dimensionId: data.value //搜索的关键字
+            }
+        })
+    });
+
+    form.on('select(monitorBody)',function(data){
+        table.reload("itemListtable",{
+            url : 'http://47.95.13.55:8080//StructureMonitoring/AlarmServlet',
+            page: {
+                pageName: 1 //重新从第 1 页开始
+            },
+            where: {
+                objectId: data.value //搜索的关键字
             }
         })
     });
