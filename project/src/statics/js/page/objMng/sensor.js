@@ -143,8 +143,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             content : contentUrl,
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-                console.log(data.id)
-                body.find("editId").val(data.id);
+                body.find("#editId").val(data.id);
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
