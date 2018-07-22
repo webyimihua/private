@@ -276,7 +276,7 @@ $(function(){
              if(ress.result == 1){
                 var data = ress.data;
                 if(data.length > 0){
-                  openDetails(res,dimensionId,ids)
+                  openDetails(res,dimensionId,ids,idss)
                 }else{
                   layer.msg('监测体没有绑定监测域，请绑定后点击！！！');
                 }
@@ -285,7 +285,7 @@ $(function(){
   }
 
 
-   function openDetails(data,dimensionId,ids){
+   function openDetails(data,dimensionId,ids,idss){
       var index = layui.layer.open({
           title : false,
           type : 2,
@@ -295,6 +295,7 @@ $(function(){
               var body = layui.layer.getChildFrame('body', index);
               body.find(".brageIds").val(data);
               body.find(".selbrageIds").val(ids); 
+              body.find(".selbrageidss").val(idss); 
               selectDimensionId(dimensionId,body)
               setTimeout(function(){
                   layui.layer.tips('点击此处返回', '.layui-layer-setwin .layui-layer-close', {

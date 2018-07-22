@@ -177,8 +177,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
                 pageName: 1 //重新从第 1 页开始
             },
             where: {
-                key: 'bureauId',
-                value: data.value,
+                bureauId: data.value,
             }
         })
     });
