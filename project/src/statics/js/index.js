@@ -136,10 +136,10 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 
 	//隐藏左侧导航
 	$(".hideMenu").click(function(){
-		if($(".topLevelMenus li.layui-this a").data("url")){
-			layer.msg("此栏目状态下左侧菜单不可展开");  //主要为了避免左侧显示的内容与顶部菜单不匹配
-			return false;
-		}
+		// if($(".topLevelMenus li.layui-this a").data("url")){
+		// 	layer.msg("此栏目状态下左侧菜单不可展开");  //主要为了避免左侧显示的内容与顶部菜单不匹配
+		// 	return false;
+		// }
 		$(".layui-layout-admin").toggleClass("showMenu");
 		//渲染顶部窗口
 		tab.tabMove();
@@ -149,12 +149,12 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 	getData("contentManagement");
 
 	//手机设备的简单适配
-    $('.site-tree-mobile').on('click', function(){
-		$('body').addClass('site-mobile');
-	});
-    $('.site-mobile-shade').on('click', function(){
-		$('body').removeClass('site-mobile');
-	});
+ //    $('.site-tree-mobile').on('click', function(){
+	// 	$('body').addClass('site-mobile');
+	// });
+ //    $('.site-mobile-shade').on('click', function(){
+	// 	$('body').removeClass('site-mobile');
+	// });
 
 	// 添加新窗口
 	$("body").on("click",".layui-nav .layui-nav-item a:not('.mobileTopLevelMenus .layui-nav-item a')",function(){

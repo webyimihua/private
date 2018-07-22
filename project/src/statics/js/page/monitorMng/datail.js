@@ -13,12 +13,14 @@ layui.use(['element','layer','jquery','tools'],function(){
 	})
 
 	$(function(){
-		findBridgeLists(JSON.parse($(".brageIds").val()))
+		// findBridgeLists(JSON.parse($(".brageIds").val()))
 		$("#selectAreas").change(function(){
 			var dimensionId = $(this).val();
 			var ids = $(".selbrageIds").val();
 			findBridgeSelectList(ids,dimensionId)
 		})
+		findBridgeSelectList($(".selbrageIds").val(),$(".selbrageidss").val());
+		findMonitorPointMes();
 	})
 
 
@@ -33,6 +35,19 @@ layui.use(['element','layer','jquery','tools'],function(){
                findBridgeLists(ress)
              }
          })
+    }
+
+
+    function findMonitorPointMes(){
+        var param ={};
+        param.action_flag="m_get_units";
+        param.objectId=$(".selbrageIds").val();
+        param.dimensionId=$(".selbrageidss").val();
+        tools.sendRequest(net.DataServlet,param,function(res){
+            if(res.result){
+                console.log(res.data)
+             }
+        })
     }
 
 

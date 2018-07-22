@@ -24,7 +24,6 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         where: {
         	action_flag:"w_query",
             sub_flag:"railway_line",
-            isFlur:false,
             isReserve:false,
             isDivide:true,
             hasForeign:false,
@@ -61,7 +60,8 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
                     pageName: 1 //重新从第 1 页开始
                 },
                 where: {
-                    key: $(".searchVal").val()  //搜索的关键字
+                    isFlur:true,
+                    name: $(".searchVal").val()  //搜索的关键字
                 }
             })
         }else{

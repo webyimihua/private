@@ -47,9 +47,10 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             // {type: "checkbox", fixed:"left", width:50},
             {field: 'index', title: '序号', width:60, align:"center",type:"numbers"},
             {field: 'id', title: 'id', width:1, align:"center"},
-            {field: 'time', title: '发布日期', width:200, align:"center"},
-            {field: 'content', title: '发布内容', minWidth:100, align:"center"},
-            {field: 'objectId', title: '预警对象', width:150, align:"center"}
+            {field: 'content', title: '预警内容', minWidth:100, align:"center"},
+            {field: 'objectId', title: '预警监测体', width:150, align:"center"},
+            {field: 'time', title: '预警时刻', width:200, align:"center"},
+           
         ]]
     });
 
