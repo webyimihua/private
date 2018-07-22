@@ -59,6 +59,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 			}
 		})
 	}
+	
 	//处理时间页面
 	function readerTabledata(data) {
 		$("#setTimeList").html("");
