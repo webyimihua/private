@@ -10,8 +10,10 @@ layui.use(['form', 'layer', 'tools'], function() {
 	tools = layui.tools;
 	tools.getAllstation("#allStation");
 	tools.getAllLine("#addLine");
-	tools.getAllWatchtype("#watchtype");	
-	tools.getWatchdimension("#dimension");	
+	tools.getAllWatchtype("#watchtype");
+//	tools.getWatchdimension("#dimension");	
+// $("select[name=dimensionIds]").val(["4","5"]);
+    form.render();
 	form.on("submit(addStructure)", function(data) {
 		//弹出loading
 		var index = top.layer.msg('数据提交中，请稍候', {

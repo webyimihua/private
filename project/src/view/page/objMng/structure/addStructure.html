@@ -65,8 +65,16 @@
 		<div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">监测维度</label>
 			<div class="layui-input-block">
-				<select name="dimensionIds" id="dimension"  lay-verify="required">
+				<select multiple="multiple" lay-filter="dimensionIds"  name="dimensionIds"  id="dimension"  lay-verify="required">
 					<option value="">请选择要进行的监测维度</option>
+					<option value="1">沉降监测</option>
+					<option value="2">相对位移监测</option>
+					<option value="3">温度监测</option>
+					<option value="4">湿度监测</option>
+					<option value="5">水平位移监测</option>
+					<option value="6">姿态变化监测</option>
+					<option value="7">气压监测</option>
+					<option value="8">风速风向监测</option>
 				</select>
 			</div>
 		</div>
@@ -114,5 +122,6 @@
 </form>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
 <script type="text/javascript" src="../../../js/page/objMng/addStructure.js"></script>
+
 </body>
 </html>
