@@ -52,7 +52,6 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 	    });
 	//搜索
     $(".search_btn").on("click",function(){
-        if($(".searchVal").val() != ''){
             table.reload("itemListtable",{
                 url : 'http://47.95.13.55:8080//StructureMonitoring/SystemServlet',
                 page: {
@@ -63,9 +62,6 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
                     name: $(".searchVal").val()  //搜索的关键字
                 }
             })
-        }else{
-            layer.msg("请输入搜索的内容");
-        }
     });
 	//添加构筑物
 	function addItem() {

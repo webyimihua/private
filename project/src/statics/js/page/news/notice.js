@@ -13,7 +13,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
     //列表
     var tableIns = table.render({
         elem: '#itemListtable',
-        url : 'http://47.95.13.55:8080//StructureMonitoring/SystemServlet',
+        url : 'http://47.95.13.55:8080//StructureMonitoring/MessageServlet',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
@@ -28,6 +28,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             isReserve:false,
             isDivide:true,
             hasForeign:false,
+            userId:9,
         },
         request: {
           pageName: 'pageNum', //页码的参数名称，默认：page
