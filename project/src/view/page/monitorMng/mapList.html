@@ -159,16 +159,17 @@
 					var name =arrdate.name;
           var ids = arrdate.id;
           var dimensionId = arrdate.dimensionId;
+          var station = arrdate.bureauname;
 					html+="<div class='overlays1 bubble' dimensionI='"+dimensionId+"' id='"+ids+"' lng='"+lng+"' lat='"+lat+"'>";
 					     html+="<p class='pName'>"+name+"</p>";
 					     html+="<ul class='detail_hide_box'>";
 					            html+="<li>"+name+"</li>";
 					            html+="<li>延西线</li>";
-					            html+="<li>西安铁路局</li>";
+					            html+="<li>"+station+"</li>";
 					            html+="<li>"+arrdate.direction+"</li>";
 					            html+="<li><span>起始里程</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class='green'>"+arrdate.startMileage+"</span></li>";
 					            html+="<li><span>结束里程</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class='green'>"+arrdate.endMileage+"</span></li>";
-					            html+="<li><span class='blue'>E 125.332145</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class='blue'>E 125.332145</span></li>";
+					            html+="<li><span class='blue'>E "+lng+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class='blue'>E "+lat+"</span></li>";
 					            html+="<li class='orange'>橙色预警1个</li>";
 					            html+="<li class='red'>红色预警1个</li>";
 					     html+="</ul>"
