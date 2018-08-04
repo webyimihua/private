@@ -1,83 +1,101 @@
 {
 	"contentManagement": [
 		{
-			"tit": "GISµ¼º½¼à²â",
+			"tit": "GISå¯¼èˆªç›‘æµ‹",
 			"icon": "icon-text",
-			"href": "page/monitorMng/detail.html",
+			"href": "page/monitorMng/mapList.html",
 			"spread": false
 		}
 	],
 	"memberCenter": [
 		{
-			"tit": "¹¹ÖşÎï¹ÜÀí",
+			"tit": "æ„ç­‘ç‰©ç®¡ç†",
 			"icon": "&#xe612;",
-			"href": "page/objMng/structure.html",
+			"href": "page/objMng/structure/structureList.html",
 			"spread": false
 		},
 		{
-			"tit": "¼à²âµã¹ÜÀí",
+			"tit": "ç›‘æµ‹ç‚¹ç®¡ç†",
 			"icon": "&#xe612;",
-			"href": "page/user/userList.html",
+			"href": "page/objMng/point/pointList.html",
 			"spread": false
 		},
 		{
-			"tit": "¼à²âÓò¹ÜÀí",
+			"tit": "ç›‘æµ‹åŸŸç®¡ç†",
 			"icon": "&#xe612;",
-			"href": "page/user/userList.html",
+			"href": "page/objMng/file/fileList.html",
 			"spread": false
 		},
 		{
-			"tit": "ÖÕ¶Ë¹ÜÀí",
+			"tit": "ç»ˆç«¯",
 			"icon": "&#xe612;",
-			"href": "page/user/userList.html",
+			"href": "page/objMng/terminal/terminalList.html",
 			"spread": false
 		},
 		{
-			"tit": "´«¸ĞÆ÷¹ÜÀí",
+			"tit": "ä¼ æ„Ÿå™¨",
 			"icon": "&#xe612;",
-			"href": "page/user/userList.html",
+			"href": "page/objMng/sensor/sensorList.html",
 			"spread": false
 		}
 	],
 	"memberyujing": [
 		{
-			"tit": "Ô¤¾¯²ÎÊıÅäÖÃ",
+			"tit": "é…ç½®é¢„è­¦å‚æ•°",
 			"icon": "&#xe631;",
-			"href": "page/systemSetting/basicParameter.html",
-			"spread": false
-		},
-		{
-			"tit": "Ô¤¾¯²ÎÊıĞŞ¸Ä",
-			"icon": "&#xe631;",
-			"href": "page/systemSetting/basicParameter.html",
+			"href": "page/warnSet/warnList.html",
 			"spread": false
 		}
 	],
 	"news": [
 		{
-			"tit": "Ô¤¾¯ÏûÏ¢",
+			"tit": "é¢„è­¦æ¶ˆæ¯",
 			"icon": "&#xe631;",
-			"href": "page/systemSetting/basicParameter.html",
+			"href": "page/news/alarm.html",
 			"spread": false
 		},
 		{
-			"tit": "Æ½Ì¨¹«¸æ",
+			"tit": "å¹³å°å…¬å‘Š",
 			"icon": "&#xe631;",
-			"href": "page/systemSetting/basicParameter.html",
+			"href": "page/news/notice.html",
 			"spread": false
 		}
 	],
 	"systemeSttings": [
 		{
-			"tit": "ÕË»§Á¥ÊôÉèÖÃ",
+			"tit": "è´¦æˆ·ç®¡ç†",
 			"icon": "&#xe631;",
-			"href": "page/systemSetting/basicParameter.html",
+			"href": "page/systemSetting/account/memberAccount.html",
 			"spread": false
 		},
 		{
-			"tit": "ÕË»§¹ÜÀí",
+			"tit": "é“è·¯çº¿ç®¡ç†",
 			"icon": "&#xe631;",
-			"href": "page/systemSetting/basicParameter.html",
+			"href": "page/systemSetting/line/railwayLine.html",
+			"spread": false
+		},
+		{
+			"tit": "é“è·¯å±€ç®¡ç†",
+			"icon": "&#xe631;",
+			"href": "page/systemSetting/station/railwayStation.html",
+			"spread": false
+		},
+		{
+			"tit": "ç›‘æµ‹ä½“ç±»å‹ç®¡ç†",
+			"icon": "&#xe631;",
+			"href": "page/systemSetting/body/monitorBody.html",
+			"spread": false
+		},
+		{
+			"tit": "ç›‘æµ‹åŸŸç±»å‹ç®¡ç†",
+			"icon": "&#xe631;",
+			"href": "page/systemSetting/area/monitorArea.html",
+			"spread": false
+		},
+		{
+			"tit": "ä¼ æ„Ÿå™¨ç±»å‹ç®¡ç†",
+			"icon": "&#xe631;",
+			"href": "page/systemSetting/sensor/sensorType.html",
 			"spread": false
 		}
 	]

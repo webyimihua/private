@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>文章列表--layui后台管理模板 2.0</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<link rel="stylesheet" href="../../../layui/css/layui.css" media="all" />
+		<link rel="stylesheet" href="../../../css/public.css" media="all" />
+		<link rel="stylesheet" href="../../../css/base.css" media="all" />
+		<link rel="stylesheet" href="../../../css/page/objMng/common.css" media="all" />
+	</head>
+
+	<body class="childrenBody">
+		<input type="hidden" id="sensorId" value="" />
+		<button class="layui-btn layui-btn-lg addItem_btn">添加时刻</button>
+		<table class="settimetable" id="setTimeList">
+			<tr class="listtop">
+				<th class="tritem" width="120">序号</th>
+				<th class="tritem" width="500">测量时刻（小时：分钟）</th>
+				<th class="tritem" width="200">操作</th>
+			</tr>	
+			<tr class="listitem" tabindex="' + i + '">
+				<td class="tritem">1</td>
+				<td class="tritem">12:00</td>
+				<td class="tritem delitem"><span class="delbtn layui-btn layui-btn">删除</span></td>
+			</tr>
+			
+		</table>
+		<div class="addtimebox">
+			<div class="made"></div>
+			<div class="timebox">
+				<span class="title">选择时间</span>
+				<div class="timeitem">
+					<input type="text" class="addtime" id="timedate" readonly="readonly" value="" placeholder="选择时刻"/>
+				</div>
+				<div class="timeitem">
+					<button class="layui-btn layui-btn addTimebtn">添加</button>
+					<button class="layui-btn layui-btn cancelBtn">取消</button>
+				</div>
+			</div>
+		</div>	
+		<script type="text/javascript" src="../../../layui/layui.js"></script>
+		<script type="text/javascript" src="../../../js/page/objMng/setTime.js"></script>
+		<script>
+			layui.use('laydate', function() {
+				var laydate = layui.laydate;
+				laydate.render({ 
+				 	elem: '#timedate'
+			    	,type: 'time'
+			    	,format:'HH:mm'
+				})
+			});
+		</script>
+	</body>
+
+</html>

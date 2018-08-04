@@ -16,13 +16,90 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 			url : "json/topnav.json" //获取菜单json地址
 		});
 
+	 $("#signOut").click(function(){
+         localStorage.removeItem('login');
+         parent.window.location.href="../page/login/login.html"
+     })
+
+    var loginInfo = JSON.parse(sessionStorage.getItem('login'));
+    if(!loginInfo){
+        parent.window.location.href="../page/login/login.html"
+    }else{
+        $(".adminName").html(loginInfo.username);
+        $(".userName").html(loginInfo.username);
+    	var users = [
+    	{name:"监测中心",oname:"监测中心",url:"page/main.html",target:"contentManagement"},
+    	{name:"消息中心",oname:"预警消息",url:"page/news/alarm.html",target:"news"}
+    	]
+    	var sbs = [
+    	{name:"监测中心",oname:"监测中心",url:"page/main.html",target:"contentManagement"},
+    	{name:"对象管理中心",oname:"构筑物管理",url:"page/objMng/structure/structureList.html",target:"memberCenter"},
+    	{name:"预警配置中心",oname:"配置预警参数",url:"page/warnSet/warnList.html",target:"memberyujing"},
+    	{name:"消息中心",oname:"预警消息",url:"page/news/alarm.html",target:"news"}
+    	]             
+    	var sys = [
+    	{name:"监测中心",oname:"监测中心",url:"page/main.html",target:"contentManagement"},
+    	{name:"对象管理中心",oname:"构筑物管理",url:"page/objMng/structure/structureList.html",target:"memberCenter"},
+    	{name:"预警配置中心",oname:"配置预警参数",url:"page/warnSet/warnList.html",target:"memberyujing"},
+    	{name:"消息中心",oname:"预警消息",url:"page/news/alarm.html",target:"news"},
+    	{name:"系统设置中心",oname:"账户管理",url:"page/systemSetting/account/memberAccount.html",target:"systemeSttings"}
+    	]
+    	var str = '';
+    	if(loginInfo.roleId == 3){
+    		for(var i in users){
+                    if(i == 0){
+                        str+='<li class="layui-nav-item layui-this" data-menu="'+users[i].target+'">';
+                    }else{
+                        str+='<li class="layui-nav-item" data-menu="'+users[i].target+'">';
+                    }
+					str+='<a href="javascript:;" data-url="'+users[i].url+'">';
+					  str+='<i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i>';
+                      str+='<span>'+users[i].name+'</span>';
+					  str+='<cite style="display:none;">'+users[i].oname+'</cite>';
+					str+='</a>';
+				str+='</li>';
+    		}
+    		$("#topLevelMenus").html(str);
+    	}else if(loginInfo.roleId == 2){
+            for(var i in sbs){
+    			    if(i == 0){
+                        str+='<li class="layui-nav-item layui-this" data-menu="'+sbs[i].target+'">';
+                    }else{
+                        str+='<li class="layui-nav-item" data-menu="'+sbs[i].target+'">';
+                    }
+					str+='<a href="javascript:;" data-url="'+sbs[i].url+'">';
+					  str+='<i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i>';
+					  str+='<span>'+sbs[i].name+'</span>';
+                      str+='<cite style="display:none;">'+sbs[i].oname+'</cite>';
+					str+='</a>';
+				str+='</li>';
+    		}
+    		$("#topLevelMenus").html(str);
+    	}else if(loginInfo.roleId == 1){
+            for(var i in sys){
+    			   if(i == 0){
+                        str+='<li class="layui-nav-item layui-this" data-menu="'+sys[i].target+'">';
+                    }else{
+                        str+='<li class="layui-nav-item" data-menu="'+sys[i].target+'">';
+                    }
+					str+='<a href="javascript:;" data-url="'+sys[i].url+'">';
+					  str+='<i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i>';
+					  str+='<span>'+sys[i].name+'</span>';
+                      str+='<cite style="display:none;">'+sys[i].oname+'</cite>';
+					str+='</a>';
+				str+='</li>';
+    		}
+    		$("#topLevelMenus").html(str);
+    	}
+    }
+
 	//通过顶部菜单获取左侧二三级菜单   注：此处只做演示之用，实际开发中通过接口传参的方式获取导航数据
 	function getData(json){
 		$.get("../../json/topnav.json",function(data){
 			if(json == "contentManagement"){
-				dataStr = data.contentManagement;
+				// dataStr = data.contentManagement;
 				//重新渲染左侧菜单
-				tab.render();
+				// tab.render();
 			}else if(json == "memberCenter"){
 				dataStr = data.memberCenter;
 				//重新渲染左侧菜单
@@ -59,10 +136,10 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 
 	//隐藏左侧导航
 	$(".hideMenu").click(function(){
-		if($(".topLevelMenus li.layui-this a").data("url")){
-			layer.msg("此栏目状态下左侧菜单不可展开");  //主要为了避免左侧显示的内容与顶部菜单不匹配
-			return false;
-		}
+		// if($(".topLevelMenus li.layui-this a").data("url")){
+		// 	layer.msg("此栏目状态下左侧菜单不可展开");  //主要为了避免左侧显示的内容与顶部菜单不匹配
+		// 	return false;
+		// }
 		$(".layui-layout-admin").toggleClass("showMenu");
 		//渲染顶部窗口
 		tab.tabMove();
@@ -72,12 +149,12 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 	getData("contentManagement");
 
 	//手机设备的简单适配
-    $('.site-tree-mobile').on('click', function(){
-		$('body').addClass('site-mobile');
-	});
-    $('.site-mobile-shade').on('click', function(){
-		$('body').removeClass('site-mobile');
-	});
+ //    $('.site-tree-mobile').on('click', function(){
+	// 	$('body').addClass('site-mobile');
+	// });
+ //    $('.site-mobile-shade').on('click', function(){
+	// 	$('body').removeClass('site-mobile');
+	// });
 
 	// 添加新窗口
 	$("body").on("click",".layui-nav .layui-nav-item a:not('.mobileTopLevelMenus .layui-nav-item a')",function(){
@@ -147,13 +224,3 @@ function addTab(_this){
 	tab.tabAdd(_this);
 }
 
-//图片管理弹窗
-function showImg(){
-    $.getJSON('json/images.json', function(json){
-        var res = json;
-        layer.photos({
-            photos: res,
-            anim: 5
-        });
-    });
-}
