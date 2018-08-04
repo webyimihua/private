@@ -94,7 +94,7 @@ layui.use(['element','layer','jquery','tools'],function(){
         	$(".canvas-contai").html(str);
         	var winWidth = $(window).width();
 			var b_nums = data.length;
-			if( b_nums*160 > winWidth){
+			if( b_nums*140 > winWidth){
 		         $(".canvas-contai").width(140*b_nums + "px");
 			}else{
 				 $(".canvas-contai").width(winWidth);

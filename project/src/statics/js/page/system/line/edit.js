@@ -24,7 +24,6 @@ layui.use(['form','layer','tools'],function(){
         param.name=data.name;
         param.id=data.id;
         tools.sendRequest(net.SystemServlet,param,function(res){
-            console.log(res.result)
            if(res.result == 1){
                 top.layer.close(index);
                 top.layer.msg("修改铁路线成功");
