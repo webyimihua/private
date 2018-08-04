@@ -7,12 +7,11 @@ layui.use(['element','layer','jquery','laydate'],function(){
         parent.layui.layer.close(index);
     })
 
-    $(function(){
-    	laydate.render({
-		  elem: '#pointData'
-		  ,range: true
-		});
-    })
+	laydate.render({
+	  elem: '#pointData'
+	  ,range:true
+      ,max: 0
+	});
     
 	
 })
@@ -25,12 +24,14 @@ $(function(){
 
 
 function getTemperatureData(){
+	var endDate = getNowFormatDate();
+	var startDate = getHistoryData(30);
 	$.post('http://47.95.13.55:8080/StructureMonitoring/DataServlet',{
       action_flag:"w_get_data",
       sub_flag:"temperature",
       unitId:"001-00001-02-16",
-      startDate:"2018-4-21",
-      endDate:"2018-5-21",
+      startDate:startDate,
+      endDate:endDate,
     },function(res){
    	  var data = JSON.parse(res);
    	  var obj = data.data[0].data;
@@ -48,6 +49,41 @@ function getTemperatureData(){
    	  }
    	  drawTemperaturLine(time,temperature,temperatureForDay,temperatureForWeek,temperatureForMonth)
     })
+}
+
+// 获取当前日期
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = year + seperator1 + month + seperator1 + strDate;
+    return currentdate;
+}
+
+// 日期往前推30天
+function getHistoryData(days){
+	var date = new Date();
+	date.setDate(date.getDate()- days);  
+	var seperator1 = "-";
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var historudate = year + seperator1 + month + seperator1 + strDate;
+    return historudate;
 }
 
 
