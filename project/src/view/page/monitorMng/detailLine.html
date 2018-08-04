@@ -4,7 +4,7 @@
 	  <meta charset="UTF-8">
 	  <title>Document</title>
 	  <meta charset="utf-8">
-	  <title>用户中心--layui后台管理模板 2.0</title>
+	  <title>信息点查看页</title>
 	  <meta name="renderer" content="webkit">
 	  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -15,15 +15,24 @@
 	  <link rel="stylesheet" href="../../../css/public.css" media="all" />
 	  <link rel="stylesheet" href="../../css/base.css">
 	  <link rel="stylesheet" href="../../css/page/detailLine.css">
+	  <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
 	</head>
 	<body>
 		<div class="top-box">
-		     <div class="close_btn">x</div>
+		    <div class="layui-form-item" style="float:left;">
+	            <div class="layui-inline">
+	              <label class="layui-form-label">日期范围</label>
+	              <div class="layui-input-inline">
+	                <input type="text" class="layui-input" id="pointData" placeholder=" - " lay-key="7">
+	              </div>
+	            </div>
+	          </div>
+		     <div class="close_btn close_point_btn">x</div>
 		</div>
-		<div class="detail-line-box">
-			11255552
-		</div>
+		<div class="detail-line-box" id="container"></div>
 	</body>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../layui/layui.js"></script>
+	<script type="text/javascript" src="../../layui/lay/modules/laydate.js"></script>
     <script src="../../js/page/monitorMng/detailLine.js"></script>
 </html>

@@ -7,7 +7,7 @@ var $ ;
 layui.use(['element','layer','jquery','tools'],function(){
 	$ = layui.$;
 	 tools = layui.tools;
-	$(".close_btn").click(function(){
+	$(".close_bre_btn").click(function(){
 		var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
         parent.layer.close(index)
 	})
@@ -19,7 +19,11 @@ layui.use(['element','layer','jquery','tools'],function(){
 			var ids = $(".selbrageIds").val();
 			findBridgeSelectList(ids,dimensionId)
 		})
-		findBridgeSelectList($(".selbrageIds").val(),$(".selbrageidss").val());
+
+		setTimeout(function(){
+            findBridgeSelectList($(".selbrageIds").val(),$(".selbrageidss").val());
+        },200)
+
 		findMonitorPointMes();
 	})
 
@@ -45,7 +49,7 @@ layui.use(['element','layer','jquery','tools'],function(){
         param.dimensionId=$(".selbrageidss").val();
         tools.sendRequest(net.DataServlet,param,function(res){
             if(res.result){
-                console.log(res.data)
+                // console.log(res.data)
              }
         })
     }
@@ -64,27 +68,27 @@ layui.use(['element','layer','jquery','tools'],function(){
 	                    for(var j in point){
 	                    	if(point[j].position == "上"){
 	                    		if(point[j].alarmLevel == 1){
-	                    			str+='<li class="top sel_green circle" title="'+point[j].name+'"></li>';
+	                    			str+='<li class="top sel_green circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
 	                    		}else if(point[j].alarmLevel == 2){
-                                    str+='<li class="top sel_orange circle" title="'+point[j].name+'"></li>';
+                                    str+='<li class="top sel_orange circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
 	                    		}else{
-                                    str+='<li class="top sel_red circle" title="'+point[j].name+'"></li>';
+                                    str+='<li class="top sel_red circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
 	                    		}
 	                    	}else if(point[j].position == "中"){
 	                    		if(point[j].alarmLevel == 1){
-	                    			str+='<li class="middle sel_green circle" title="'+point[j].name+'"></li>';
+	                    			str+='<li class="middle sel_green circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
 	                    		}else if(point[j].alarmLevel == 2){
-                                    str+='<li class="middle sel_orange circle" title="'+point[j].name+'"></li>';
+                                    str+='<li class="middle sel_orange circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
 	                    		}else{
-                                    str+='<li class="middle sel_red circle" title="'+point[j].name+'"></li>';
+                                    str+='<li class="middle sel_red circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
 	                    		}
 	                    	}else if(point[j].position == "下"){
 	                    		if(point[j].alarmLevel == 1){
-	                    			str+='<li class="bottom sel_green circle" title="'+point[j].name+'"></li>';
+	                    			str+='<li class="bottom sel_green circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
 	                    		}else if(point[j].alarmLevel == 2){
-                                    str+='<li class="bottom sel_orange circle" title="'+point[j].name+'"></li>';
+                                    str+='<li class="bottom sel_orange circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
 	                    		}else{
-                                    str+='<li class="bottom sel_red circle" title="'+point[j].name+'"></li>';
+                                    str+='<li class="bottom sel_red circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
 	                    		}
 	                    	}
 	                    }
@@ -100,5 +104,32 @@ layui.use(['element','layer','jquery','tools'],function(){
 				 $(".canvas-contai").width(winWidth);
 			}
 	}
+
+
+	function pointMes(){
+        var index = layui.layer.open({
+            title : false,
+            type : 2,
+           closeBtn: 0,
+            content : "detailLine.html",
+            success : function(layero, index){
+                var body = layui.layer.getChildFrame('body', index);
+                setTimeout(function(){
+                    layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
+                        tips: 3
+                    });
+                },500)
+            }
+        })
+        layui.layer.full(index);
+        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+        $(window).on("resize",function(){
+            layui.layer.full(index);
+        })
+    }
+    $(document).on("click",".splot-box>.circle",function(){
+       pointMes();
+       $(this).unbind();
+    })
 
 })

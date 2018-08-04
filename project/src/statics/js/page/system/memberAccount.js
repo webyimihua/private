@@ -140,9 +140,9 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         tools.sendRequest(net.SystemServlet,param,function(res){
             if(res.result){
                  tableIns.reload();
-                 layer.msg('删除用户成功')
+                 layer.msg('删除用户成功');
              }else{
-                 layer.msg('删除用户失败')
+                 layer.msg(res.message);
              }
         })
     }

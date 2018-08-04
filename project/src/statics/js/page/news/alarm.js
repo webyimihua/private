@@ -10,10 +10,11 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         laytpl = layui.laytpl,
         table = layui.table;
         tools = layui.tools;
+        var userid = tools.getUsermessage("id");
     //列表
     var tableIns = table.render({
         elem: '#itemListtable',
-        url : 'http://47.95.13.55:8080//StructureMonitoring/SystemServlet',
+        url : 'http://47.95.13.55:8080//StructureMonitoring/MessageServlet',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
@@ -28,6 +29,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             isReserve:false,
             isDivide:true,
             hasForeign:false,
+            userId:userid,
         },
         request: {
           pageName: 'pageNum', //页码的参数名称，默认：page
@@ -48,7 +50,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             {field: 'index', title: '序号', width:60, align:"center",type:"numbers"},
             {field: 'id', title: 'id', width:1, align:"center"},
             {field: 'content', title: '预警内容', minWidth:100, align:"center"},
-            {field: 'objectId', title: '预警监测体', width:150, align:"center"},
+            {field: 'objectname', title: '预警监测体', width:150, align:"center"},
             {field: 'time', title: '预警时刻', width:200, align:"center"},
            
         ]]

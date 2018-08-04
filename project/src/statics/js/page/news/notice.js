@@ -10,6 +10,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         laytpl = layui.laytpl,
         table = layui.table;
         tools = layui.tools;
+        var userid = tools.getUsermessage("id");
     //列表
     var tableIns = table.render({
         elem: '#itemListtable',
@@ -28,7 +29,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             isReserve:false,
             isDivide:true,
             hasForeign:false,
-            userId:9,
+            userId:userid,
         },
         request: {
           pageName: 'pageNum', //页码的参数名称，默认：page
@@ -49,7 +50,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             {field: 'index', title: '序号', width:60, align:"center",type:"numbers"},
             {field: 'id', title: 'id', width:1, align:"center"},
             {field: 'content', title: '发布内容', minWidth:100, align:"center"},
-            {field: 'userId', title: '发布者', width:150, align:"center"},
+            {field: 'username', title: '发布者', width:150, align:"center"},
             {field: 'time', title: '发布日期', width:200, align:"center"},
             {title: '操作', width:120, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
@@ -144,14 +145,14 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
     function deleterailwayLineData(data){
         var param ={};
         param.action_flag="w_delete";
-        param.sub_flag="railway_line";
+        param.sub_flag="notice";
         param.id=data.id;
         tools.sendRequest(net.SystemServlet,param,function(res){
             if(res.result){
                  tableIns.reload();
-                 layer.msg('删除成功')
+                 layer.msg('删除成功');
              }else{
-                 layer.msg('删除失败')
+                 layer.msg(res.message);
              }
         })
     }

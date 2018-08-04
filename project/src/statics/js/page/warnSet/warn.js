@@ -106,15 +106,28 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             showItem(data);
         }else if(layEvent === 'del'){ //删除
             layer.confirm('确定删除此信息？',{icon:3, title:'提示信息'},function(index){
-                // $.get("删除文章接口",{
-                //     newsId : data.newsId  //将需要删除的newsId作为参数传入
-                // },function(data){
-                    tableIns.reload();
-                    layer.close(index);
-                // })
+               deleteWarnData(data)
+                tableIns.reload();
+                layer.close(index); 
             });
         }
     });
+
+
+    function deleteWarnData(data){
+        var param ={};
+        param.action_flag="w_delete";
+        param.sub_flag="alarm";
+        param.id=data.id;
+        tools.sendRequest(net.SystemServlet,param,function(res){
+            if(res.result){
+                 tableIns.reload();
+                 layer.msg('删除成功')
+             }else{
+                 layer.msg(res.message)
+             }
+        })
+    }
     
     $(function(){
          findMonitorDimension()
