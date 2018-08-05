@@ -50,6 +50,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 			dataName: 'data' //数据列表的字段名称，默认：data	
 		},
 		done: function(res, curr, count) {
+			$("[data-field='id']").css('display', 'none');
 			$("[data-field='objectId']").css('display', 'none');
 			$("[data-field='domainId']").css('display', 'none');
 			$("[data-field='dimensionId']").css('display', 'none');
@@ -58,7 +59,8 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         cols : [[
 //          {type: "checkbox", fixed:"left", width:50},
             {field: 'index', title: '序号', width:80, align:"center",type: "numbers"},
-            {field: 'id', title: '监测点名称', minWidth:200, align:'center'},
+            {field: 'id', align:'center'},
+            {field: 'name', title: '监测点名称', minWidth:200, align:'center'},
             {field: 'objectId', title: '所属构筑物', align:'center'},
             {field: 'objectname', title: '所属构筑物', align:'center'},
             {field: 'height', title: '高度', align:'center'},

@@ -9,7 +9,7 @@ layui.use(['form','layer', 'tools'],function(){
         $ = layui.jquery;
 		tools = layui.tools;
 		var userid = tools.getUsermessage("id");
-		tools.getThatstructure("#fileOption",userid);
+		tools.getThatstructure("#fileOption,#allStructure",userid);
 		tools.getWatchdimension("#dimension");
 		form.on("select(allStructure)",function(data){
 	        var strid = data.value;

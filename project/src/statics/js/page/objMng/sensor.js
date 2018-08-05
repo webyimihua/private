@@ -49,17 +49,16 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 			dataName: 'data' //数据列表的字段名称，默认：data	
 		},
 		done: function(res, curr, count) {
+			$("[data-field='id']").css('display', 'none');
 			$("[data-field='sensor_typeId']").css('display', 'none');
-			$("[data-field='gatewayId']").css('display', 'none');
 		},
         cols : [[
             {field: 'index', title: '序号', width:80, align:"center",type: "numbers"},
             {field: 'id', title: '传感器编号', width:90, align:"center"},
             {field: 'name', title: '传感器名称', width:120, align:'center'},
             {field: 'sensor_typeId', title: '传感器类型',width:130, align:'center'},
-            {field: 'sensor_typename', title: '传感器类型',width:130, align:'center'},
-            {field: 'gatewayId', title: '所属终端',width:130, align:'center'},
-            {field: 'gatewayname', title: '所属终端',width:130, align:'center'},
+            {field: 'sensor_typename', title: '传感器类型', align:'center'},
+            {field: 'gatewayId', title: '所属终端', align:'center'},
             {field: 'subId', title: '分站号',width:90, align:'center'},
             {field: 'mileage', title: '里程',width:90, align:'center'},
             {field: 'status', title: '状态',width:90, align:'center'},

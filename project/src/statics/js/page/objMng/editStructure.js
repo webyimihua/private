@@ -30,8 +30,10 @@ layui.use(['form', 'layer', 'tools'], function() {
 				tools.sendRequest(net.ObjectServlet, param, function(res) {
 					if(res.result == 1) {
 						var data =res.data;							
-				    	tools.setOlddataToform(editForm,data);
-				    	form.render('select');
+				    	tools.setOlddataToform(editForm,data);				    	
+				    	form.render();
+				    	//处理监测维度多选
+				    	 setDbselectData(data.dimensionIds)
 					} else {
 						if(res.message) {
 							layer.msg(res.message);
@@ -39,6 +41,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 					}
 				})
 		}
+	var owatchtype = [];
 	form.on("submit(editStructure)", function(data) {
 		//弹出loading
 		var index = top.layer.msg('数据提交中，请稍候', {
@@ -47,6 +50,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 			shade: 0.8
 		});
 		var param = tools.getFormallData("#editDataform");
+		param.dimensionIds = owatchtype;
 		addStructureData(param, index);
 		return false;
 	})
@@ -78,6 +82,57 @@ layui.use(['form', 'layer', 'tools'], function() {
        //刷新父页面
        parent.location.reload();
         return false;
-    })
+   })
+	//处理监测维度多选
+	function setDbselectData(data){
+		var texts = [];
+		var idsbox = $("input:checkbox[name='dimensionIds']");
+		var idsnum = idsbox.size();
+		
+		for(var i=0; i<data.length;i++){		
+			for(var j = 0; j < idsnum; j++) {
+				if(data[i] == idsbox.eq(j).val()){
+					texts.push(idsbox.eq(j).attr("title")); 
+					idsbox.eq(j).parent("dd").find(".layui-form-checkbox").addClass("layui-form-checked");
+				}
+				
+			}
+		}
+	var textsstr = texts.join(',')	
+	$("#editdimensionIds").val(textsstr);	
+	if(data){
+			owatchtype = data;
+		}
+	}
+	//处理监测维度多选
+	$(".downpanel").on("click", ".layui-select-title", function(e) {
+		var otext = [];
+		var $select = $(this).parents(".layui-form-select");
+		$(".layui-form-select").not($select).removeClass("layui-form-selected");
+		$select.addClass("layui-form-selected");
+		e.stopPropagation();
+	}).on("click", ".layui-form-checkbox", function(e) {		
+		getSelectdata();
+		e.stopPropagation();
+	});
+
+	function getSelectdata() {
+		var ids = [];
+		var texts = [];
+		var idsbox = $("input:checkbox[name='dimensionIds']:checked");
+		var idsnum = idsbox.size();
+		for(var i = 0; i < idsnum; i++) {
+			ids.push(idsbox.eq(i).val()); 
+			texts.push(idsbox.eq(i).attr("title")); 
+		}
+		var idstr = ids.join(',')
+		var textsstr = texts.join(',')
+		if(idstr){
+			owatchtype = idstr;
+		}else{
+			layer.msg('监测维度不能为空')
+		}
+		$("#editdimensionIds").val(textsstr);
+	}
 	
 })
