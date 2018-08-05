@@ -29,7 +29,7 @@ $(function(){
         }else{
             $("#temperature_box").html("暂时没有数据！！！")
         }
-    },500)
+    },200)
     
     $("#searchTemData").click(function(){
          var endTime = $("#pointData2").val();
@@ -50,7 +50,7 @@ function getTemperatureData(endTime,startTime){
 	$.post('http://47.95.13.55:8080/StructureMonitoring/DataServlet',{
       action_flag:"w_get_data",
       sub_flag:"temperature",
-      unitId:"001-00001-02-16",
+      unitId:$("#pointIds").val(),
       startDate:startDate,
       endDate:endDate,
     },function(res){

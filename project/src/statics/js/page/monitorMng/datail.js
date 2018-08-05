@@ -107,7 +107,7 @@ layui.use(['element','layer','jquery','tools'],function(){
 	}
 
 
-	function pointMes(){
+	function pointMes(ids){
         var index = layui.layer.open({
             title : false,
             type : 2,
@@ -115,7 +115,8 @@ layui.use(['element','layer','jquery','tools'],function(){
             content : "detailLine.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-                body.find("#pointTypes").val($(".selbrageidss").val())
+                body.find("#pointTypes").val($(".selbrageidss").val());
+                body.find("#pointIds").val(ids);
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -130,7 +131,8 @@ layui.use(['element','layer','jquery','tools'],function(){
         })
     }
     $(document).on("click",".splot-box>.circle",function(){
-        pointMes();
+        var ids = $(this).attr("ids");
+        pointMes(ids);
         $(this).unbind();
     })
 
