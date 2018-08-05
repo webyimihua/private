@@ -10,16 +10,16 @@ html,body{
 	 padding-left:0px;
 	 padding-bottom:0px;
 	.canvas-contai{
-	   padding:20px;
-	   overflow:auto;
-	   background-image:url(../../images/mapdetail/water.gif);
-		 background-size:100% 30%;
-		 background-repeat:no-repeat;
-		 background-position:left bottom;
+	    padding:20px;
+	    overflow:auto;
+	    background-image:url(../../images/mapdetail/water.gif);
+		background-size:100% 28%;
+		background-repeat:no-repeat;
+		background-position:left bottom;
 	   .bradge-items{
 	      float:left;
 	      width:140px;
-	      height:310px;
+	      height:300px;
 	      background-image:url(../../images/mapdetail/bradge.png);
 	      background-repeat:no-repeat;
 	      background-size:100%;
@@ -46,10 +46,10 @@ html,body{
 	           user-select:none;
 	        }
 	        .top{
-	           top:5px;
+	           top:-10px;
 	        }
 	        .middle{
-	           top:70px;
+	           top:65px;
 	        }
 	        .bottom{
 	           top:140px;
