@@ -20,7 +20,17 @@ layui.use(['element','layer','jquery','laydate'],function(){
 
 $(function(){
 	$(".detail-line-box").height($(window).height() - 60);
-	getTemperatureData(getNowFormatDate(),getHistoryData(15))
+    setTimeout(function(){
+        if($("#pointTypes").val() == 3){
+            $("#temperature_box").load("temperature.html",function(){
+              $(".search_btns").attr("id","searchTemData");
+              getTemperatureData(getNowFormatDate(),getHistoryData(15))
+            })
+        }else{
+            $("#temperature_box").html("暂时没有数据！！！")
+        }
+    },500)
+    
     $("#searchTemData").click(function(){
          var endTime = $("#pointData2").val();
          var startTime = $("#pointData1").val();

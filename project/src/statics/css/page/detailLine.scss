@@ -34,6 +34,10 @@ html,body{
 .detail-line-box{
   margin-top:60px;
   overflow:auto;
+  .temperature_box{
+     width:100%;
+     height:100%;
+  }
   .line_picture{
      margin:auto;
      margin-top:30px;

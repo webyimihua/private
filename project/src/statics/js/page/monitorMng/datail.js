@@ -16,6 +16,7 @@ layui.use(['element','layer','jquery','tools'],function(){
 		// findBridgeLists(JSON.parse($(".brageIds").val()))
 		$("#selectAreas").change(function(){
 			var dimensionId = $(this).val();
+            $(".selbrageidss").val(dimensionId);
 			var ids = $(".selbrageIds").val();
 			findBridgeSelectList(ids,dimensionId)
 		})
@@ -114,6 +115,7 @@ layui.use(['element','layer','jquery','tools'],function(){
             content : "detailLine.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
+                body.find("#pointTypes").val($(".selbrageidss").val())
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -128,8 +130,8 @@ layui.use(['element','layer','jquery','tools'],function(){
         })
     }
     $(document).on("click",".splot-box>.circle",function(){
-       pointMes();
-       $(this).unbind();
+        pointMes();
+        $(this).unbind();
     })
 
 })
