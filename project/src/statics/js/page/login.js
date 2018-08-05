@@ -12,6 +12,8 @@ layui.use(['form','layer','jquery','tools'],function(){
     //清除缓存
     window.sessionStorage.clear();
     form.on("submit(login)",function(data){
+        var password = data.field.password;
+        sessionStorage.setItem('spPsw',password);
         userLogin(data.field)
         return false;
     })
