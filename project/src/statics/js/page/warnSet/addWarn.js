@@ -11,14 +11,37 @@ layui.use(['form','layer','tools'],function(){
 
     form.on("submit(addAlarm)",function(data){
         var data = data.field;
-        var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
-        addAlarmData(data,index)
+        addAlarmData(data)
         return false;
     })
 
     // 新增数据
-     function addAlarmData(data,index){
-        console.log(data)
+     function addAlarmData(data){
+        if(data.jcwdType != ''){
+           if(data.jcwdType == "沉降监测"){
+               if(data.param != "altZ" && data.param != "rateZ"){
+                 layer.msg('请填入合法的沉降监测名称！');
+                 return ;
+               }
+           }else if(data.jcwdType == "水平位移监测"){
+               if(data.param != "altX" && data.param != "rateX" && data.param != "altY" && data.param != "rateY"){
+                 layer.msg('请填入合法的水平位移监测名称！');
+                 return ;
+               }
+           }else if(data.jcwdType == "相对位移监测"){
+               if(data.param != "altX" && data.param != "rateX" && data.param != "altY" && data.param != "rateY" && data.param != "altZ" && data.param != "rateZ"){
+                 layer.msg('请填入合法的相对位移监测名称！');
+                 return ;
+               }
+           }
+        }else if(data.unitId == ''){
+          layer.msg('请选择监测点！');
+          return ;
+        }else{
+          layer.msg('请选择监测维度！');
+          return ;
+        }
+        var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
         var param ={};
         param.action_flag ="w_add";
         param.sub_flag ="alarm";
@@ -69,13 +92,15 @@ layui.use(['form','layer','tools'],function(){
         tools.sendRequest(net.ObjectServlet,param,function(res){
             if(res.result){
                var data = res.data;
-              var str = '<option value="">请选择监测维度</option>';
-              for(var i in data){
-                 str+='<option value="'+data[i].id+'">'+data[i].name+'</option>'
+               var str = '<option value="">请选择监测维度</option>';
+               for(var i in data){
+                    if(data[i].name == "沉降监测" || data[i].name == "相对位移监测" || data[i].name == "水平位移监测"){
+                      str+='<option value="'+data[i].name+'">'+data[i].name+'</option>'
+                    }
+                }
               }
               $("#addMonitorDes").html(str);
-               form.render('select');
-             }
+              form.render('select');
         })
     }
 
