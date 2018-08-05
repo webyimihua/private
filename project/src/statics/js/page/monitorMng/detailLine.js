@@ -8,9 +8,11 @@ layui.use(['element','layer','jquery','laydate'],function(){
     })
 
 	laydate.render({
-	  elem: '#pointData'
-	  ,range:true
+	   elem: '#pointData1'
       ,max: 0
+      ,done: function(value, date){
+          $("#pointData2").val(getHisSelTime(value,15))
+       }
 	});
     
 	
@@ -18,14 +20,23 @@ layui.use(['element','layer','jquery','laydate'],function(){
 
 $(function(){
 	$(".detail-line-box").height($(window).height() - 60);
-	getTemperatureData()
-	    
+	getTemperatureData(getNowFormatDate(),getHistoryData(15))
+    $("#searchTemData").click(function(){
+         var endTime = $("#pointData2").val();
+         var startTime = $("#pointData1").val();
+         if(startTime != ''){
+            getTemperatureData(endTime,startTime);
+         }else{
+            layer.msg('请选择开始日期！');
+         }
+         
+    })
 })
 
 
-function getTemperatureData(){
-	var endDate = getNowFormatDate();
-	var startDate = getHistoryData(30);
+function getTemperatureData(endTime,startTime){
+	var endDate = endTime;
+	var startDate = startTime;
 	$.post('http://47.95.13.55:8080/StructureMonitoring/DataServlet',{
       action_flag:"w_get_data",
       sub_flag:"temperature",
@@ -49,6 +60,28 @@ function getTemperatureData(){
    	  }
    	  drawTemperaturLine(time,temperature,temperatureForDay,temperatureForWeek,temperatureForMonth)
     })
+}
+
+// 判断时间选择器
+function getHisSelTime(time,days){
+    var nowdata = new Date();
+    var date = new Date(time);
+    date.setDate(date.getDate() + days);
+    if(date  >= nowdata){
+        date = nowdata;
+    }
+    var seperator1 = "-";
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var getHisTime = year + seperator1 + month + seperator1 + strDate;
+    return getHisTime; 
 }
 
 // 获取当前日期
@@ -89,7 +122,7 @@ function getHistoryData(days){
 
 // 绘制折线图
 function drawTemperaturLine(time,temperature,temperatureForDay,temperatureForWeek,temperatureForMonth){
-	var dom = document.getElementById("container");
+	var dom = document.getElementById("tem_container");
     var myChart = echarts.init(dom);
     var app = {};
     option = null;
@@ -104,14 +137,51 @@ function drawTemperaturLine(time,temperature,temperatureForDay,temperatureForWee
             data:['温度','日均温度','周均温度','月均温度']
         },
         toolbox: {
-            show: true,
+            // show: true,
             feature: {
-                dataZoom: {
-                    yAxisIndex: 'none'
+                // dataZoom: {
+                //     yAxisIndex: 'none'
+                // },
+                dataView: {
+                    show: true,
+                    title: '数据视图',
+                    // readOnly:true,
+                    lang: ['数据视图', '关闭', '导出Excel'],
+                    contentToOption: function (opts) {
+                        drawExcelData()
+                        return false;
+                    },
+                    optionToContent: function (opt) {
+                       // console.log(opt);
+                       var axisData = opt.xAxis[0].data; //坐标数据
+                       var series = opt.series; //折线图数据
+                       var tdHeads = '<td  style="padding: 0 10px">时间</td>'; //表头第一列
+                        var tdBodys = ''; //表数据
+                        //组装表头
+                        var nameData = new Array('温度', '日均温度', '周均温度', '月均温度');
+                        for (var i = 0; i < nameData.length; i++) {
+                            tdHeads += '<td style="padding: 0 10px">' + nameData[i] + '</td>';
+                        }
+                        var table = '<table id="tableExcel_Day" border="1" class="table-bordered table-striped" style="width:100%;text-align:center" ><tbody><tr>' + tdHeads + ' </tr>';
+                        //组装表数据
+                        for (var i = 0; i < axisData.length; i++) {
+                            for (var j = 0; j < series.length ; j++) {                          
+                                var temp = series[j].data[i];
+                                if (temp != null && temp != undefined) {                                     
+                                    tdBodys += '<td>' + temp.toFixed(2) + '</td>';      
+                                } else {
+                                    tdBodys += '<td></td>';
+                                }
+                            }
+                            table += '<tr><td style="padding: 0 10px">' + axisData[i] + '</td>' + tdBodys + '</tr>';
+                            tdBodys = '';
+                        }
+                        table += '</tbody></table>';  
+                        return table;
+                    }
                 },
-                dataView: {readOnly: false},
-                magicType: {type: ['line', 'bar']},
-                restore: {},
+                // magicType: {type: ['line', 'bar']},
+                // dataZoom: { show: true, title: { zoom: '区域缩放', back: '区域缩放还原' } },
                 saveAsImage: {}
             }
         },
@@ -130,98 +200,38 @@ function drawTemperaturLine(time,temperature,temperatureForDay,temperatureForWee
             {
                 name:'温度',
                 type:'line',
-                data:temperature,
-                itemStyle : {  
-                    normal : {  
-                        lineStyle:{  
-                            color:'#ff6600'  
-                        }  
-                    }  
-                },
-                markPoint: {
-                    data: [
-                        {type: 'max', name: '最大值'},
-                        {type: 'min', name: '最小值'}
-                    ]
-                },
-                markLine: {
-                    data: [
-                        {type: 'average', name: '平均值'}
-                    ]
-                }
+                data:temperature
             },
             {
                 name:'日均温度',
                 type:'line',
-                data:temperatureForDay,
-                itemStyle : {  
-                    normal : {  
-                        lineStyle:{  
-                            color:'#333333'  
-                        }  
-                    }  
-                },
-                markPoint: {
-                    data: [
-                        {type: 'max', name: '最大值'},
-                        {type: 'min', name: '最小值'}
-                    ]
-                },
-                markLine: {
-                    data: [
-                        {type: 'average', name: '平均值'}
-                    ]
-                }
+                data:temperatureForDay
             },
             {
                 name:'周均温度',
                 type:'line',
-                data:temperatureForWeek,
-                itemStyle : {  
-                    normal : {  
-                        lineStyle:{  
-                            color:'green'  
-                        }  
-                    }  
-                },
-                markPoint: {
-                    data: [
-                        {type: 'max', name: '最大值'},
-                        {type: 'min', name: '最小值'}
-                    ]
-                },
-                markLine: {
-                    data: [
-                        {type: 'average', name: '平均值'}
-                    ]
-                }
+                data:temperatureForWeek
             },
              {
                 name:'月均温度',
                 type:'line',
-                data:temperatureForMonth,
-                itemStyle : {  
-                    normal : {  
-                        lineStyle:{  
-                            color:'blue'  
-                        }  
-                    }  
-                },
-                markPoint: {
-                    data: [
-                        {type: 'max', name: '最大值'},
-                        {type: 'min', name: '最小值'}
-                    ]
-                },
-                markLine: {
-                    data: [
-                        {type: 'average', name: '平均值'}
-                    ]
-                }
+                data:temperatureForMonth
             }
         ]
     };
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }
+}
+
+
+function drawExcelData(){
+    $("#tableExcel_Day").table2excel({
+        exclude: ".noExl",
+        name: "Excel Document Name",
+        filename: "温度表" + new Date().toISOString().replace(/[\-\:\.]/g, ""),
+        exclude_img: true,
+        exclude_links: true,
+        exclude_inputs: true
+    });
 }

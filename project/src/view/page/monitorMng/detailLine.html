@@ -15,23 +15,22 @@
 	  <link rel="stylesheet" href="../../../css/public.css" media="all" />
 	  <link rel="stylesheet" href="../../css/base.css">
 	  <link rel="stylesheet" href="../../css/page/detailLine.css">
-	  <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
 	</head>
 	<body>
 		<div class="top-box">
-		    <div class="layui-form-item" style="float:left;">
-	            <div class="layui-inline">
-	              <label class="layui-form-label">日期范围</label>
-	              <div class="layui-input-inline">
-	                <input type="text" class="layui-input" id="pointData" placeholder="日期范围" lay-key="7">
-	              </div>
-	            </div>
-	          </div>
+            <input type="text" class="layui-input selinputtext selinputtextleft" id="pointData1" placeholder="开始日期">
+            <span class="selinputgd"> &nbsp;&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <input type="text" class="layui-input selinputtext" readonly id="pointData2" placeholder="结束日期">
+            <div class="search_btns" id="searchTemData">查询</div>
 		     <div class="close_btn close_point_btn">x</div>
 		</div>
-		<div class="detail-line-box" id="container"></div>
+		<div class="detail-line-box">
+              <div class="line_picture" id="tem_container"></div>
+		</div>
 	</body>
 	<script type="text/javascript" src="../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../layui/layui.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="../../js/table_excle.js"></script>
     <script src="../../js/page/monitorMng/detailLine.js"></script>
 </html>
