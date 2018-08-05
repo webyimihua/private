@@ -65,7 +65,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
     //添加构筑物
     function addItem(){
         var index = layui.layer.open({
-            title : "新增监测体",
+            title : "新增监测体类型",
             type : 2,
             content : "add.html",
             success : function(layero, index){

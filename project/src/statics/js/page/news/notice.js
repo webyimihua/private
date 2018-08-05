@@ -76,7 +76,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
     //添加构筑物
     function addItem(){
         var index = layui.layer.open({
-            title : "新增铁路线",
+            title : "发布新公告",
             type : 2,
             content : "add.html",
             success : function(layero, index){

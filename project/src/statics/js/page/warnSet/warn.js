@@ -44,9 +44,9 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         cols : [[
             {field: 'index', title: '序号', width:40, align:"center",type:"numbers"},
             {field: 'id', title: 'id', width:1, align:"center"},
-            {field: 'unitId', title: '监测点编号', minWidth:100, align:'center'},
+            {field: 'param', title: '预警值名称', minWidth:100, align:'center'},
             {field: 'objectName', title: '所属构筑物', align:'center'},
-            {field: 'dimensionName', title: '检测物维度', align:'center'},
+            {field: 'dimensionName', title: '监测维度', align:'center'},
             {field: 'dimensionName', title: '监测点名称', align:'center'},
             {field: 'lowLevel', title: '初级预警值',width:100, align:'center'},
             {field: 'highLevel', title: '高级预警值',width:100, align:'center'},

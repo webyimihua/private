@@ -1,7 +1,7 @@
 {
 	"contentManagement": [
 		{
-			"tit": "GIS导航监测",
+			"tit": "监测中心",
 			"icon": "icon-text",
 			"href": "page/monitorMng/mapList.html",
 			"spread": false
