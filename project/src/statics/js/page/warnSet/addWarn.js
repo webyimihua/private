@@ -33,6 +33,11 @@ layui.use(['form','layer','tools'],function(){
                  layer.msg('请填入合法的相对位移监测名称！');
                  return ;
                }
+           }else if(data.jcwdType == "姿态变化监测"){
+               if(data.param != "altX" && data.param != "rateX" && data.param != "altY" && data.param != "rateY"){
+                 layer.msg('请填入合法的姿态变化监测名称！');
+                 return ;
+               }
            }
         }else if(data.unitId == ''){
           layer.msg('请选择监测点！');
@@ -94,7 +99,7 @@ layui.use(['form','layer','tools'],function(){
                var data = res.data;
                var str = '<option value="">请选择监测维度</option>';
                for(var i in data){
-                    if(data[i].name == "沉降监测" || data[i].name == "相对位移监测" || data[i].name == "水平位移监测"){
+                    if(data[i].name == "沉降监测" || data[i].name == "相对位移监测" || data[i].name == "水平位移监测" || data[i].name == "姿态变化监测"){
                       str+='<option value="'+data[i].name+'">'+data[i].name+'</option>'
                     }
                 }
