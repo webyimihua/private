@@ -1,4 +1,5 @@
 html,body{
+  height:100%;
   overflow:hidden;
 }
 .top-box{
@@ -33,6 +34,7 @@ html,body{
 }
 .detail-line-box{
   margin-top:60px;
+  height:95%;
   overflow:auto;
   .temperature_box{
      width:100%;

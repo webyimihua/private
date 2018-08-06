@@ -19,7 +19,6 @@ layui.use(['element','layer','jquery','laydate'],function(){
 })
 
 $(function(){
-	$(".detail-line-box").height($(window).height() - 60);
     setTimeout(function(){
         if($("#pointTypes").val() == 3){
             $("#temperature_box").load("temperature.html",function(){
