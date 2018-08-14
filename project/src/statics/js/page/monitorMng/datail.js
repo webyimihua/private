@@ -14,6 +14,7 @@ layui.use(['element','layer','jquery','tools'],function(){
 
 	$(function(){
 		// findBridgeLists(JSON.parse($(".brageIds").val()))
+        // $(".bradge-box").height($(".childrenBody").height() - 180);
 		$("#selectAreas").change(function(){
 			var dimensionId = $(this).val();
             $(".selbrageidss").val(dimensionId);

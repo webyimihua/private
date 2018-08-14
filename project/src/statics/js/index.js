@@ -28,21 +28,21 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
         $(".adminName").html(loginInfo.username);
         $(".userName").html(loginInfo.username);
     	var users = [
-    	{name:"监测中心",oname:"监测中心",url:"page/main.html",target:"contentManagement"},
-    	{name:"消息中心",oname:"预警消息",url:"page/news/alarm.html",target:"news"}
+    	{name:"监测中心",oname:"监测中心",url:"page/main.html",target:"contentManagement",icon:"&#xe629"},
+    	{name:"消息中心",oname:"预警消息",url:"page/news/alarm.html",target:"news",icon:"&#xe667;"}
     	]
     	var sbs = [
-    	{name:"监测中心",oname:"监测中心",url:"page/main.html",target:"contentManagement"},
-    	{name:"对象管理中心",oname:"构筑物管理",url:"page/objMng/structure/structureList.html",target:"memberCenter"},
-    	{name:"预警配置中心",oname:"配置预警参数",url:"page/warnSet/warnList.html",target:"memberyujing"},
-    	{name:"消息中心",oname:"预警消息",url:"page/news/alarm.html",target:"news"}
+    	{name:"监测中心",oname:"监测中心",url:"page/main.html",target:"contentManagement",icon:"&#xe629"},
+    	{name:"对象管理中心",oname:"构筑物管理",url:"page/objMng/structure/structureList.html",target:"memberCenter",icon:"&#xe653;"},
+    	{name:"预警配置中心",oname:"配置预警参数",url:"page/warnSet/warnList.html",target:"memberyujing",icon:"&#xe702;"},
+    	{name:"消息中心",oname:"预警消息",url:"page/news/alarm.html",target:"news",icon:"&#xe667;"}
     	]             
     	var sys = [
-    	{name:"监测中心",oname:"监测中心",url:"page/main.html",target:"contentManagement"},
-    	{name:"对象管理中心",oname:"构筑物管理",url:"page/objMng/structure/structureList.html",target:"memberCenter"},
-    	{name:"预警配置中心",oname:"配置预警参数",url:"page/warnSet/warnList.html",target:"memberyujing"},
-    	{name:"消息中心",oname:"预警消息",url:"page/news/alarm.html",target:"news"},
-    	{name:"系统设置中心",oname:"账户管理",url:"page/systemSetting/account/memberAccount.html",target:"systemeSttings"}
+    	{name:"监测中心",oname:"监测中心",url:"page/main.html",target:"contentManagement",icon:"&#xe629"},
+    	{name:"对象管理中心",oname:"构筑物管理",url:"page/objMng/structure/structureList.html",target:"memberCenter",icon:"&#xe653;"},
+    	{name:"预警配置中心",oname:"配置预警参数",url:"page/warnSet/warnList.html",target:"memberyujing",icon:"&#xe702;"},
+    	{name:"消息中心",oname:"预警消息",url:"page/news/alarm.html",target:"news",icon:"&#xe667;"},
+    	{name:"系统设置中心",oname:"账户管理",url:"page/systemSetting/account/memberAccount.html",target:"systemeSttings",icon:"&#xe614;"}
     	]
     	var str = '';
     	if(loginInfo.roleId == 3){
@@ -53,7 +53,7 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
                         str+='<li class="layui-nav-item" data-menu="'+users[i].target+'">';
                     }
 					str+='<a href="javascript:;" data-url="'+users[i].url+'">';
-					  str+='<i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i>';
+					  str+='<i class="layui-icon" data-icon="'+users[i].icon+'">'+users[i].icon+'</i>';
                       str+='<span>'+users[i].name+'</span>';
 					  str+='<cite style="display:none;">'+users[i].oname+'</cite>';
 					str+='</a>';
@@ -68,7 +68,7 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
                         str+='<li class="layui-nav-item" data-menu="'+sbs[i].target+'">';
                     }
 					str+='<a href="javascript:;" data-url="'+sbs[i].url+'">';
-					  str+='<i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i>';
+					  str+='<i class="layui-icon" data-icon="'+sbs[i].icon+'">'+sbs[i].icon+'</i>';
 					  str+='<span>'+sbs[i].name+'</span>';
                       str+='<cite style="display:none;">'+sbs[i].oname+'</cite>';
 					str+='</a>';
@@ -83,7 +83,7 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
                         str+='<li class="layui-nav-item" data-menu="'+sys[i].target+'">';
                     }
 					str+='<a href="javascript:;" data-url="'+sys[i].url+'">';
-					  str+='<i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i>';
+					  str+='<i class="layui-icon" data-icon="'+sys[i].icon+'">'+sys[i].icon+'</i>';
 					  str+='<span>'+sys[i].name+'</span>';
                       str+='<cite style="display:none;">'+sys[i].oname+'</cite>';
 					str+='</a>';
@@ -93,7 +93,7 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
     	}
     }
 
-	//通过顶部菜单获取左侧二三级菜单   注：此处只做演示之用，实际开发中通过接口传参的方式获取导航数据
+	//通过顶部菜单获取左侧二三级菜单 
 	function getData(json){
 		$.get("../../json/topnav.json",function(data){
 			if(json == "contentManagement"){
@@ -127,7 +127,7 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 		}else{
 			$(".mobileTopLevelMenus dd").eq($(this).index()).addClass("layui-this").siblings().removeClass("layui-this");
 		}
-		$(".layui-layout-admin").removeClass("showMenu");
+//		$(".layui-layout-admin").removeClass("showMenu");
 		$("body").addClass("site-mobile");
 		getData($(this).data("menu"));
 		//渲染顶部窗口

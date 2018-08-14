@@ -17,25 +17,26 @@ layui.use(['form','layer','tools'],function(){
 
     // 新增数据
      function addAlarmData(data){
-        if(data.jcwdType != ''){
-           if(data.jcwdType == "沉降监测"){
+     	console.log(data)
+        if(data.jcwdType){
+           if(data.jcwdType == 1){
                if(data.param != "altZ" && data.param != "rateZ"){
-                 layer.msg('请填入合法的沉降监测名称！');
+                 layer.msg('请填入合法的沉降监测预警值名称！');
                  return ;
                }
-           }else if(data.jcwdType == "水平位移监测"){
+           }else if(data.jcwdType == 5){
                if(data.param != "altX" && data.param != "rateX" && data.param != "altY" && data.param != "rateY"){
-                 layer.msg('请填入合法的水平位移监测名称！');
+                 layer.msg('请填入合法的水平位移监测预警值名称！');
                  return ;
                }
-           }else if(data.jcwdType == "相对位移监测"){
+           }else if(data.jcwdType == 2){
                if(data.param != "altX" && data.param != "rateX" && data.param != "altY" && data.param != "rateY" && data.param != "altZ" && data.param != "rateZ"){
-                 layer.msg('请填入合法的相对位移监测名称！');
+                 layer.msg('请填入合法的相对位移监测预警值名称！');
                  return ;
                }
-           }else if(data.jcwdType == "姿态变化监测"){
+           }else if(data.jcwdType == 6){
                if(data.param != "altX" && data.param != "rateX" && data.param != "altY" && data.param != "rateY"){
-                 layer.msg('请填入合法的姿态变化监测名称！');
+                 layer.msg('请填入合法的姿态变化监测预警值名称！');
                  return ;
                }
            }
@@ -70,7 +71,6 @@ layui.use(['form','layer','tools'],function(){
     
     findMonitorBody()
     findMonitorDimension()
-    findMonitorPoint()
 
      function findMonitorBody(){
         var param ={};
@@ -100,7 +100,7 @@ layui.use(['form','layer','tools'],function(){
                var str = '<option value="">请选择监测维度</option>';
                for(var i in data){
                     if(data[i].name == "沉降监测" || data[i].name == "相对位移监测" || data[i].name == "水平位移监测" || data[i].name == "姿态变化监测"){
-                      str+='<option value="'+data[i].name+'">'+data[i].name+'</option>'
+                      str+='<option value="'+data[i].id+'">'+data[i].name+'</option>'
                     }
                 }
               }
@@ -108,10 +108,21 @@ layui.use(['form','layer','tools'],function(){
               form.render('select');
         })
     }
-
-     function findMonitorPoint(){
+     
+     var MonitorPoint= new Object;
+     function findMonitorPoint(MonitorPoint){
+     	if(MonitorPoint.objectId && !MonitorPoint.dimensionId){
+     		layer.msg('请选择监测维度匹配监测点！');
+     		return ;
+     	}else if(MonitorPoint.dimensionId && !MonitorPoint.objectId){
+     		layer.msg('请选择监测对象匹配监测点！')
+     		return ;
+     	}
         var param ={};
         param.action_flag="w_query_for_dropbox";
+        param.sub_flag="alarm";
+        param.objectId=MonitorPoint.objectId;
+        param.dimensionId=MonitorPoint.dimensionId;
         tools.sendRequest(net.AlarmServlet,param,function(res){
             if(res.result){
               var data = res.data;
@@ -124,6 +135,16 @@ layui.use(['form','layer','tools'],function(){
              }
         })
     }
+     
+     
+    form.on('select(addMonitorBody)',function(data){
+    	MonitorPoint['objectId'] = data.value;
+        findMonitorPoint(MonitorPoint)
+    });
+    form.on('select(addMonitorDes)',function(data){
+       MonitorPoint['dimensionId'] = data.value;
+       findMonitorPoint(MonitorPoint)
+    });
     
 
 })

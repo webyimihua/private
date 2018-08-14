@@ -2,13 +2,16 @@ html,body{
 	width:100%;
 	padding:0;
 	margin:0;
+	overflow:auto;
 }
 .bradge-box{
-	width:100%;
-	 padding:20px;
-	 padding-top:140px;
-	 padding-left:0px;
-	 padding-bottom:0px;
+	 width:100%;
+	 overflow:auto;
+	 box-sizing:border-box;
+	 position:fixed;
+	 bottom:0px;
+	 left:0;
+	 padding-bottom:40px;
 	.canvas-contai{
 	    padding:20px;
 	    overflow:auto;
