@@ -2,7 +2,7 @@
 	"contentManagement": [
 		{
 			"tit": "监测中心",
-			"icon": "icon-text",
+			"icon": "&#xe629;",
 			"href": "page/monitorMng/mapList.html",
 			"spread": false
 		}
@@ -10,31 +10,31 @@
 	"memberCenter": [
 		{
 			"tit": "构筑物管理",
-			"icon": "&#xe612;",
+			"icon": "&#xe62a;",
 			"href": "page/objMng/structure/structureList.html",
 			"spread": false
 		},
 		{
 			"tit": "监测点管理",
-			"icon": "&#xe612;",
+			"icon": "&#xe643;",
 			"href": "page/objMng/point/pointList.html",
 			"spread": false
 		},
 		{
 			"tit": "监测域管理",
-			"icon": "&#xe612;",
+			"icon": "&#xe63f;",
 			"href": "page/objMng/file/fileList.html",
 			"spread": false
 		},
 		{
 			"tit": "终端",
-			"icon": "&#xe612;",
+			"icon": "&#xe628;",
 			"href": "page/objMng/terminal/terminalList.html",
 			"spread": false
 		},
 		{
 			"tit": "传感器",
-			"icon": "&#xe612;",
+			"icon": "&#xe674;",
 			"href": "page/objMng/sensor/sensorList.html",
 			"spread": false
 		}
@@ -50,13 +50,13 @@
 	"news": [
 		{
 			"tit": "预警消息",
-			"icon": "&#xe631;",
+			"icon": "&#xe667;",
 			"href": "page/news/alarm.html",
 			"spread": false
 		},
 		{
 			"tit": "平台公告",
-			"icon": "&#xe631;",
+			"icon": "&#xe645;",
 			"href": "page/news/notice.html",
 			"spread": false
 		}
@@ -64,37 +64,37 @@
 	"systemeSttings": [
 		{
 			"tit": "账户管理",
-			"icon": "&#xe631;",
+			"icon": "&#xe770;",
 			"href": "page/systemSetting/account/memberAccount.html",
 			"spread": false
 		},
 		{
 			"tit": "铁路线管理",
-			"icon": "&#xe631;",
+			"icon": "&#xe64f;",
 			"href": "page/systemSetting/line/railwayLine.html",
 			"spread": false
 		},
 		{
 			"tit": "铁路局管理",
-			"icon": "&#xe631;",
+			"icon": "&#xe670;",
 			"href": "page/systemSetting/station/railwayStation.html",
 			"spread": false
 		},
 		{
 			"tit": "监测体类型管理",
-			"icon": "&#xe631;",
+			"icon": "&#xe62a;",
 			"href": "page/systemSetting/body/monitorBody.html",
 			"spread": false
 		},
 		{
 			"tit": "监测域类型管理",
-			"icon": "&#xe631;",
+			"icon": "&#xe63f;",
 			"href": "page/systemSetting/area/monitorArea.html",
 			"spread": false
 		},
 		{
 			"tit": "传感器类型管理",
-			"icon": "&#xe631;",
+			"icon": "&#xe674;",
 			"href": "page/systemSetting/sensor/sensorType.html",
 			"spread": false
 		}

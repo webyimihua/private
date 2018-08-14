@@ -44,9 +44,9 @@ layui.define(["element","jquery"],function(exports){
                 ulHtml += '<a>';
                 if(data[i].icon != undefined && data[i].icon != ''){
                     if(data[i].icon.indexOf("icon-") != -1){
-                        ulHtml += '<i class="seraph '+data[i].icon+'" data-icon="'+data[i].icon+'"></i>';
+//                      ulHtml += '<i class="seraph '+data[i].icon+'" data-icon="'+data[i].icon+'"></i>';
                     }else{
-                        ulHtml += '<i class="layui-icon" data-icon="'+data[i].icon+'">'+data[i].icon+'</i>';
+//                      ulHtml += '<i class="layui-icon" data-icon="'+data[i].icon+'">'+data[i].icon+'</i>';
                     }
                 }
                 ulHtml += '<cite>'+data[i].tit+'</cite>';
@@ -61,9 +61,9 @@ layui.define(["element","jquery"],function(exports){
                     }
                     if(data[i].children[j].icon != undefined && data[i].children[j].icon != ''){
                         if(data[i].children[j].icon.indexOf("icon-") != -1){
-                            ulHtml += '<i class="seraph '+data[i].children[j].icon+'" data-icon="'+data[i].children[j].icon+'"></i>';
+//                          ulHtml += '<i class="seraph '+data[i].children[j].icon+'" data-icon="'+data[i].children[j].icon+'"></i>';
                         }else{
-                            ulHtml += '<i class="layui-icon" data-icon="'+data[i].children[j].icon+'">'+data[i].children[j].icon+'</i>';
+//                          ulHtml += '<i class="layui-icon" data-icon="'+data[i].children[j].icon+'">'+data[i].children[j].icon+'</i>';
                         }
                     }
                     ulHtml += '<cite>'+data[i].children[j].tit+'</cite></a></dd>';
@@ -92,7 +92,6 @@ layui.define(["element","jquery"],function(exports){
 	Tab.prototype.render = function() {
 		//显示左侧菜单
 		var _this = this;
-		console.log(dataStr)
 		$(".navBar ul").html(_this.navBar(dataStr)).height($(window).height()-210);
 		element.init();  //初始化页面元素
 		$(window).resize(function(){
@@ -344,10 +343,16 @@ layui.define(["element","jquery"],function(exports){
 	$(".refresh").on("click",function(){  //此处添加禁止连续点击刷新一是为了降低服务器压力，另外一个就是为了防止超快点击造成chrome本身的一些js文件的报错(不过貌似这个问题还是存在，不过概率小了很多)
 		if($(this).hasClass("refreshThis")){
 			$(this).removeClass("refreshThis");
-			$(".clildFrame .layui-tab-item.layui-show").find("iframe")[0].contentWindow.location.reload();
+			if($(this).hasClass("menurefresh")){
+				setTimeout(function(){
+					$(".clildFrame .layui-tab-item.layui-show").find("iframe")[0].contentWindow.location.reload();
+				},400)
+			}else{
+				$(".clildFrame .layui-tab-item.layui-show").find("iframe")[0].contentWindow.location.reload();
+			}
 			setTimeout(function(){
 				$(".refresh").addClass("refreshThis");
-			},2000)
+			},1000)
 		}else{
 			layer.msg("您点击的速度超过了服务器的响应速度，还是等两秒再刷新吧！");
 		}
@@ -355,7 +360,7 @@ layui.define(["element","jquery"],function(exports){
 
 	//关闭其他
 	$(".closePageOther").on("click",function(){
-		if($("#top_tabs li").length>2 && $("#top_tabs li.layui-this cite").text()!="后台首页"){
+		if($("#top_tabs li").length>2 && $("#top_tabs li.layui-this cite").text()!="监测中心"){
 			var menu = JSON.parse(window.sessionStorage.getItem("menu"));
 			$("#top_tabs li").each(function(){
 				if($(this).attr("lay-id") != '' && !$(this).hasClass("layui-this")){
@@ -369,7 +374,7 @@ layui.define(["element","jquery"],function(exports){
 					}
 				}
 			})
-		}else if($("#top_tabs li.layui-this cite").text()=="后台首页" && $("#top_tabs li").length>1){
+		}else if($("#top_tabs li.layui-this cite").text()=="监测中心" && $("#top_tabs li").length>1){
 			$("#top_tabs li").each(function(){
 				if($(this).attr("lay-id") != '' && !$(this).hasClass("layui-this")){
 					element.tabDelete("bodyTab",$(this).attr("lay-id")).init();

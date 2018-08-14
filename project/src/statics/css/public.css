@@ -93,11 +93,21 @@ h2.method{ font-size:18px; line-height:45px; padding-left:5px;}
 /*登录*/
 .loginHtml,.loginBody{ height:100%;}
 .loginBody{
-	background:linear-gradient(135deg, rgba(153, 102, 255, 1) 0%, rgba(153, 102, 255, 1) 0%, rgba(26, 160, 148, 1) 60%, rgba(26, 160, 148, 1) 100%);
+	background:url(../../../images/login_bg.jpg) no-repeat center;
+	background-size:cover;
 }
-.loginBody form.layui-form{ padding:0 20px; width:300px; height:335px; position:absolute; left:50%; top:50%; margin:-150px 0 0 -150px; -webkit-box-sizing:border-box;-moz-box-sizing:border-box; -o-box-sizing:border-box; box-sizing:border-box; background:#fff;-webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px; box-shadow:0 0 50px #009688;}
-.login_face{background: #fff; margin:-55px auto 20px; width:100px; height:100px; -webkit-border-radius:50%; -moz-border-radius:50%; border-radius:50%; border:5px solid #fff; overflow:hidden;box-shadow:0 0 30px #009688;}
+.loginBody form.layui-form{ padding:0 20px; width:300px; height:335px; position:absolute; left:50%; top:50%; margin:-150px 0 0 -150px; -webkit-box-sizing:border-box;-moz-box-sizing:border-box; -o-box-sizing:border-box; box-sizing:border-box; background:#fff;-webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px;}
+.login_face{background: #fff; margin:-55px auto 20px; width:100px; height:100px; -webkit-border-radius:50%; -moz-border-radius:50%; border-radius:50%; border:5px solid #fff; overflow:hidden;box-shadow:0 0 30px #999;}
 .login_face img{ width:100%;}
+.company_bq{
+	position:absolute;
+	left:-350px;
+	bottom:-80px;
+	color:#fff;
+	font-size:12px;
+	width:1000px;
+	text-align:center;
+}
 .loginBody .layui-form-item{ position:relative;}
 .loginBody .layui-form-item label{ position:absolute; color:#757575; left:10px; top:9px; line-height:20px; background:#fff; padding:0 5px; font-size:14px; cursor:text;}
 .loginBody .layui-form-item.layui-input-focus label{ top:-10px; font-size:12px; color:#ff6700;}
@@ -170,4 +180,41 @@ h2.method{ font-size:18px; line-height:45px; padding-left:5px;}
     .layui-col-xs12 .layui-input-inline{ left:0 !important; width:auto !important;}
     .noFind{ padding-top:0;}
     *[pc]{ display:none;}
+}
+
+.warmtips_icon{
+	position:absolute;
+	display:block;
+	width:25px;
+	height:25px;
+	top:5px;
+	right:-40px;
+	background:url(../../images/tips.png) no-repeat center;
+}
+
+.warmtips_icon .tips_box{
+	width:180px;
+	height:200px;
+	background:#eee;
+	box-shadow:1px 1px 10px rgba(0,0,0,0.8);
+	padding:10px;
+	border-radius:3px;
+	margin-top:30px;
+	display:none;
+}
+
+.warmtips_icon:hover .tips_box{
+	display:block;
+}
+
+.warmtips_icon .tips_box .tops{
+	font-size:12px;
+	color:#000;
+	font-weight:bold;
+	margin-bottom:15px;
+}
+.warmtips_icon .tips_box .list_item{
+	font-size:12px;
+	color:#333;
+	margin-bottom:10px;
 }
