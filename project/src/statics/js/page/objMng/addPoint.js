@@ -27,7 +27,6 @@ layui.use(['form','layer', 'tools'],function(){
 	function addPointData(param,index){
         param.action_flag ="w_add";
         param.sub_flag ="unit";
-//      param.userId= tools.getUsermessage("id");
         tools.sendRequest(net.ObjectServlet,param,function(res){
            if(res.result == 1) {
 				setTimeout(function() {

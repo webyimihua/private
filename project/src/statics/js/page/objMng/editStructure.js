@@ -56,12 +56,12 @@ layui.use(['form', 'layer', 'tools'], function() {
 	})
 	//新增构筑物
 	function addStructureData(param, index) {
-		var dimension =[1];
+		var dimension =[];
 		dimension.push(param.dimensionIds);		
 		param.action_flag = "w_update";
 		param.sub_flag = "object";
 		param.dimensionIds = dimension;
-//		param.userId= tools.getUsermessage("id");
+		param.userId= tools.getUsermessage("id");
 		tools.sendRequest(net.ObjectServlet, param, function(res) {
 			if(res.result == 1) {
 				setTimeout(function() {

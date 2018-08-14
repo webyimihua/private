@@ -18,17 +18,18 @@
 
 	<body class="childrenBody">
 		<input type="hidden" id="sensorId" value="" />
-		<button class="layui-btn layui-btn-lg addItem_btn">添加时刻</button>
+		<button class="layui-btn layui-btn-lg">添加时刻</button>
 		<table class="settimetable" id="setTimeList">
 			<tr class="listtop">
 				<th class="tritem" width="120">序号</th>
 				<th class="tritem" width="500">测量时刻（小时：分钟）</th>
-				<th class="tritem" width="200">操作</th>
+				<th class="tritem" width="300">操作</th>
 			</tr>	
-			<tr class="listitem" tabindex="' + i + '">
+			<tr class="listitem" tabindex="1">
 				<td class="tritem">1</td>
-				<td class="tritem">12:00</td>
-				<td class="tritem delitem"><span class="delbtn layui-btn layui-btn">删除</span></td>
+				<td class="tritem"><input type="text" name="" maxlength="" id="" value="" />
+				</td>
+				<td class="tritem delitem"><span class="delbtn delbtnitem layui-btn layui-btn">删除</span><span class="delbtn addbtn layui-btn layui-btn">增行</span><span class="delbtn cutbtn layui-btn layui-btn">减行</span></td>
 			</tr>
 			
 		</table>
