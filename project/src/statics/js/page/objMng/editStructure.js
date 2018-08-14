@@ -87,8 +87,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 	function setDbselectData(data){
 		var texts = [];
 		var idsbox = $("input:checkbox[name='dimensionIds']");
-		var idsnum = idsbox.size();
-		
+		var idsnum = idsbox.size();		
 		for(var i=0; i<data.length;i++){		
 			for(var j = 0; j < idsnum; j++) {
 				if(data[i] == idsbox.eq(j).val()){
