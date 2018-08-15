@@ -11,6 +11,10 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         table = layui.table;
         tools = layui.tools;
         var userid = tools.getUsermessage("id");
+        if(tools.getUsermessage("roleId") == 3){
+        	$("#remove_notice_btn").remove();
+        }
+        
     //列表
     var tableIns = table.render({
         elem: '#itemListtable',
