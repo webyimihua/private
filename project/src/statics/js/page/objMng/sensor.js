@@ -66,9 +66,9 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             {title: '操作', minWidth:360, templet:function(data){
             	if(data.sensor_typeId == 12){
 						if(data.isRunning == 1){
-							return '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a><a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">查看</a><a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a><a class="layui-btn layui-btn-xs setdatabtn" lay-event="setData">配置参数</a><a class="layui-btn layui-btn-xs layui-btn-normal settimebtn"  lay-event="setTime">配置时刻</a><a class="layui-btn layui-btn-xs layui-btn-danger stopitembtn" lay-event="stopItem">停止采集</a>';
+							return '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a><a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">查看</a><a class="layui-btn layui-btn-xs setdatabtn" lay-event="setData">配置参数</a><a class="layui-btn layui-btn-xs layui-btn-normal settimebtn"  lay-event="setTime">配置时刻</a><a class="layui-btn layui-btn-xs layui-btn-danger stopitembtn" lay-event="stopItem">停止采集</a><a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>';
 						}else{
-							return '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a><a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">查看</a><a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a><a class="layui-btn layui-btn-xs setdatabtn" lay-event="setData">配置参数</a><a class="layui-btn layui-btn-xs layui-btn-normal settimebtn"  lay-event="setTime">配置时刻</a><a class="layui-btn layui-btn-xs layui-btn openitembtn" lay-event="openItem">开始采集</a>';
+							return '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a><a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">查看</a><a class="layui-btn layui-btn-xs setdatabtn" lay-event="setData">配置参数</a><a class="layui-btn layui-btn-xs layui-btn-normal settimebtn"  lay-event="setTime">配置时刻</a><a class="layui-btn layui-btn-xs layui-btn openitembtn" lay-event="openItem">开始采集</a><a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>';
 						}
 					}else{
 						return '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a><a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">查看</a><a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>';

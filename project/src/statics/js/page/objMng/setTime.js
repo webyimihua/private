@@ -89,9 +89,24 @@ layui.use(['form', 'layer', 'tools'], function() {
 			});
 		});
 	}
-	$(".delbtn").on("click",function(){
+	//增行操作
+	function addThatitem(el) {
+		var index = Number($(el).parents(".listitem").attr('tabindex'))+1;
+		var str ='';
+		str += '<tr class="listitem" tabindex="' + index + '">';
+		str += '<td class="tritem">' + index + '</td>';
+		str += '<td class="tritem"><input type="text" class = "times" maxlength="5"/></td>';
+		str += '<td class="tritem delitem"><span class="delbtn addbtn layui-btn layui-btn">增行</span><span class="delbtn cutbtn layui-btn layui-btn">减行</span><span class="delbtn delbtnitem layui-btn layui-btn">删除</span></td>';
+		str += '</tr>';
+		$(el).parents(".listitem").after(str);
+	}
+	$(".delbtnitem").on("click",function(){
        var odiv = $(this);
        delThatitem(odiv);
+  })
+	$(document).on("click",".addbtn",function(){
+       var odiv = $(this);
+       addThatitem(odiv);
    })
 	$(".addItem_btn").click(function(){
        $(".addtimebox").fadeIn();

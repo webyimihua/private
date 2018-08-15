@@ -80,8 +80,6 @@ layui.use(['form', 'layer', 'tools'], function() {
 			layer.msg('监测维度不能为空')
 		}
 		$("#dimensionIds").val(textsstr);
-		console.log(idstr)
-		console.log(textsstr)
 	}
 
 })
