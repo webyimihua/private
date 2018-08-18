@@ -40,14 +40,14 @@ layui.use(['form', 'layer', 'tools'], function() {
 			if(res.result == 1) {
 				setTimeout(function() {
 					top.layer.close(index);
-					top.layer.msg("添加监测点成功");
+					top.layer.msg("添加传感器成功");
 					layer.closeAll("iframe");
 					//刷新父页面
 					parent.location.reload();
 				}, 2000);
 			} else {
 				top.layer.close(index);
-				top.layer.msg("添加监测点失败");
+				top.layer.msg("添加传感器失败");
 			}
 		})
 	}

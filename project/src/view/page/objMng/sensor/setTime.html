@@ -18,7 +18,6 @@
 
 	<body class="childrenBody">
 		<input type="hidden" id="sensorId" value="" />
-		<button class="layui-btn layui-btn-lg">添加时刻</button>
 		<table class="settimetable" id="setTimeList">
 			<tr class="listtop">
 				<th class="tritem" width="120">序号</th>
@@ -27,13 +26,13 @@
 			</tr>	
 			<tr class="listitem" tabindex="1">
 				<td class="tritem">1</td>
-				<td class="tritem"><input type="text" name="" maxlength="" id="" value="" />
+				<td class="tritem"><input class="timeset" type="text" name="" maxlength="" id="" value="" />
 				</td>
-				<td class="tritem delitem"><span class="delbtn delbtnitem layui-btn layui-btn">删除</span><span class="delbtn addbtn layui-btn layui-btn">增行</span><span class="delbtn cutbtn layui-btn layui-btn">减行</span></td>
+				<td class="tritem delitem"><span class="delbtn addbtn layui-btn layui-btn">增行</span><span class="delbtn delbtnitem layui-btn layui-btn">删除</span></td>
 			</tr>
 			
 		</table>
-		<div class="addtimebox">
+		<!--<div class="addtimebox">
 			<div class="made"></div>
 			<div class="timebox">
 				<span class="title">选择时间</span>
@@ -45,7 +44,10 @@
 					<button class="layui-btn layui-btn cancelBtn">取消</button>
 				</div>
 			</div>
-		</div>	
+		</div>	-->
+		
+		<button class="layui-btn layui-btn-lg saveTimebtn">保存时刻配置</button>
+		<button class="layui-btn layui-btn-lg cancel">&nbsp;&nbsp;&nbsp;&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;&nbsp;&nbsp;&nbsp;</button>
 		<script type="text/javascript" src="../../../layui/layui.js"></script>
 		<script type="text/javascript" src="../../../js/page/objMng/setTime.js"></script>
 		<script>
