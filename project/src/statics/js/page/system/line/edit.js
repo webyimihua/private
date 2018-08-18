@@ -8,6 +8,7 @@ layui.use(['form','layer','tools'],function(){
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery;
         tools = layui.tools;
+        var userId = tools.getUsermessage("id");
     form.on("submit(editUser)",function(data){
          var data = data.field;
         //弹出loading

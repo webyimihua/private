@@ -20,7 +20,7 @@ layui.use(['element','layer','jquery','laydate'],function(){
 
 $(function(){
     setTimeout(function(){
-        if($("#pointTypes").val() == 3){
+        if($("#pointTypes").val()){
             $("#temperature_box").load("temperature.html",function(){
               $(".search_btns").attr("id","searchTemData");
               getTemperatureData(getNowFormatDate(),getHistoryData(15))
@@ -54,6 +54,10 @@ function getTemperatureData(endTime,startTime){
       endDate:endDate,
     },function(res){
    	  var data = JSON.parse(res);
+   	 if(data.data[0].data.length == 0){
+   	 	 $("#temperature_box").html("暂时没有数据！！！")
+   	 	 return ;
+   	 }
    	  var obj = data.data[0].data;
    	  var temperature = new Array;
    	  var temperatureForDay = new Array;
@@ -62,10 +66,10 @@ function getTemperatureData(endTime,startTime){
    	  var time = new Array;
    	  for(var i in obj){
    	  	time.push(obj[i].time);
-   	  	temperature.push(obj[i].temperature);
-   	  	temperatureForDay.push(obj[i].temperatureForDay);
-   	  	temperatureForWeek.push(obj[i].temperatureForWeek);
-   	  	temperatureForMonth.push(obj[i].temperatureForMonth)
+   	  	temperature.push(obj[i].base);
+   	  	temperatureForDay.push(obj[i].forDay);
+   	  	temperatureForWeek.push(obj[i].forWeek);
+   	  	temperatureForMonth.push(obj[i].forMonth)
    	  }
    	  drawTemperaturLine(time,temperature,temperatureForDay,temperatureForWeek,temperatureForMonth)
     })
