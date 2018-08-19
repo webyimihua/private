@@ -102,8 +102,6 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             data = obj.data;
         if(layEvent === 'edit'){ //编辑
             editItem(data);
-        }else if(layEvent === 'detail'){ //详情
-            showItem(data);
         }else if(layEvent === 'del'){ //删除
             layer.confirm('确定删除此信息？',{icon:3, title:'提示信息'},function(index){
                deleteWarnData(data)
@@ -112,6 +110,37 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             });
         }
     });
+    
+     function editItem(data){
+        var index = layui.layer.open({
+            title : "编辑传感器类型",
+            type : 2,
+            content : "editWarn.html",
+            success : function(layero, index){
+                var body = layui.layer.getChildFrame('body', index);
+                if(data){                   
+                    body.find("#alarmIds").val(data.id);  
+                    body.find(".param").val(data.param);  
+                    body.find(".lowLevelss").val(data.lowLevel);                 
+                    body.find(".highLevel").val(data.highLevel); 
+                    editfindMonitorBody(data.objectId,body);
+                    editMonitorDimension(data.dimensionId,body);
+                    editMonitorPoint(data.objectId,data.dimensionId,data.unitId,body);
+                    form.render();
+                }
+                setTimeout(function(){
+                    layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
+                        tips: 3
+                    });
+                },500)
+            }
+        })
+        layui.layer.full(index);
+        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+        $(window).on("resize",function(){
+            layui.layer.full(index);
+        })
+    }
 
 
     function deleteWarnData(data){
@@ -133,6 +162,25 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
          findMonitorDimension()
          findMonitorBody()
     })
+    
+    function editMonitorPoint(objectId,dimensionId,ids,body){
+        var param ={};
+        param.action_flag="w_query_for_dropbox";
+        param.sub_flag="alarm";
+        param.objectId=objectId;
+        param.dimensionId=dimensionId;
+        tools.sendRequest(net.AlarmServlet,param,function(res){
+            if(res.result){
+              var data = res.data;
+              var str = '<option value="">请选择监测点</option>';
+              for(var i in data){
+                 str+='<option value="'+data[i].id+'">'+data[i].name+'</option>'
+              }
+               body.find("#editMonitorPoint").html(str);
+               body.find(".editMonitorPoint").val(ids);
+             }
+        })
+    }
      
     function findMonitorBody(){
         var param ={};
@@ -144,6 +192,45 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
                  tools.initOptionitem("#monitorBody", res.data,function(){
                     form.render('select');
                 });
+             }
+        })
+    }
+    
+    function editfindMonitorBody(ids,body){
+        var param ={};
+        param.action_flag="w_show_option";
+        param.sub_flag="object";
+        param.id=1;
+        tools.sendRequest(net.ObjectServlet,param,function(res){
+            if(res.result){
+                 var str = '';
+                 var data = res.data;
+				for(var i = 0; i < data.length; i++) {
+					str += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
+				}
+				body.find("#editMonitorBody").html(str); 
+				body.find(".editobjectIds").val(ids); 
+				form.render('select');
+             }
+        })
+    }
+    
+    function editMonitorDimension(ids,body){
+        var param ={};
+        param.action_flag="w_show_option";
+        param.sub_flag="dimension";
+        tools.sendRequest(net.ObjectServlet,param,function(res){
+            if(res.result){
+                var str = '';
+                var data = res.data;
+				for(var i = 0; i < data.length; i++) {
+					if(data[i].id == 1 || data[i].id == 2 || data[i].id == 5 || data[i].id == 6){
+						str += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+					}
+				}
+				body.find("#editDimension").html(str); 
+				body.find(".editDimensions").val(ids); 
+				form.render('select');
              }
         })
     }
