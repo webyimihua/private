@@ -61,7 +61,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 		param.action_flag = "w_update";
 		param.sub_flag = "object";
 		param.dimensionIds = dimension;
-		param.userId= tools.getUsermessage("id");
+//		param.userId= tools.getUsermessage("id");
 		tools.sendRequest(net.ObjectServlet, param, function(res) {
 			if(res.result == 1) {
 				setTimeout(function() {

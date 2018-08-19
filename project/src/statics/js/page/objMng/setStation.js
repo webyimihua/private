@@ -10,7 +10,6 @@ layui.use(['form','layer', 'tools'],function(){
         tools = layui.tools;
         setOlddataShow();
     function setOlddataShow(){
-    	console.log(111)
 			var id = $("#sensorId").val();
         	var editForm = $("#stationSet");
         	var userid = tools.getUsermessage("id");
@@ -18,7 +17,7 @@ layui.use(['form','layer', 'tools'],function(){
 				param.action_flag = "w_show_threshold";
 				param.sub_flag = "threshold";
 				param.id = id;
-				param.userId= userid;
+//				param.userId= userid;
 				tools.sendRequest(net.ObjectServlet, param, function(res) {
 					if(res.result == 1) {
 						var data =res.data;
@@ -58,7 +57,7 @@ layui.use(['form','layer', 'tools'],function(){
 			param.action_flag ="w_add";
         	param.sub_flag ="threshold";
 		} 
-		param.userId= userid;
+//		param.userId= userid;
         tools.sendRequest(net.ObjectServlet,param,function(res){
            if(res.result == 1) {
 				setTimeout(function() {
@@ -74,5 +73,10 @@ layui.use(['form','layer', 'tools'],function(){
 			}
         })
     }
-	
+	$(".cancel").click(function(){
+       layer.closeAll("iframe");
+       //刷新父页面
+       parent.location.reload();
+        return false;
+    })
 })
