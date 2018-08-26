@@ -54,7 +54,7 @@ layui.use(['form','layer', 'tools'],function(){
 	function addTerminalData(param,index){
         param.action_flag ="w_update";
         param.sub_flag ="sensor";
-//      param.userId= tools.getUsermessage("id");
+		param.id = $("#editId").val();
         tools.sendRequest(net.ObjectServlet,param,function(res){
            if(res.result == 1) {
 				setTimeout(function() {

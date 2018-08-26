@@ -297,8 +297,17 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 					}
 				})
 			},
-			
-			
+			//处理select选中
+			setOPtiondataCheck:function(div,val){
+				var optionEle = $(div).find("option");
+				var leng = optionEle.size();
+				for(var i = 0; i<leng;i++){
+					if(optionEle.eq(i).val()==val){
+						optionEle.eq(i).attr("selected","selected");
+					}
+				}
+				form.render('select');
+			}
 		};
 	exports("tools", Tools);
 });

@@ -12,7 +12,6 @@ layui.use(['form', 'layer', 'tools'], function() {
 
 	function setOlddataShow() {		
 		var id = $("#sensorId").val();
-		//		var userid = tools.getUsermessage("id");
 		var param = {};
 		param.action_flag = "w_show_schedule";
 		param.sub_flag = "schedule";
@@ -38,7 +37,8 @@ layui.use(['form', 'layer', 'tools'], function() {
 		var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
 		var param = {};
 		var sensorId = $("#sensorId").val();
-		param.times = getAllitemData();
+		var times= getAllitemData().join(",");
+		param.times = times;
 		if(param.times) {
 			param.action_flag = "w_update";
 			param.sub_flag = "schedule";
@@ -75,10 +75,11 @@ layui.use(['form', 'layer', 'tools'], function() {
 		if(data) {
 			var str = '<tr class="listtop"><th class="tritem" width="120">序号</th><th class="tritem" width="500">测量时刻（小时：分钟）</th><th class="tritem" width="200">操作</th></tr>';
 			for(var i = 0; i < data.length; i++) {
-				str += '<tr class="listitem" tabindex="' + i + 1 + '">';
-				str += '<td class="tritem num">' + i + 1 + '</td>';
-				str += '<td class="tritem">' + data[i] + '</td>';
-				str += '<td class="tritem delitem"><span class="delbtn layui-btn layui-btn">删除</span></td>';
+				var index = Number(i + 1);
+				str += '<tr class="listitem" tabindex="' + index +'">';
+				str += '<td class="tritem num">' + index +'</td>';
+				str += '<td class="tritem"><input class ="timeset" type="text" value = "'+ data[i] + '" maxlength=5/></td>';
+				str += '<td class="tritem delitem"><span class="delbtn addbtn layui-btn layui-btn">增行</span><span class="delbtn delbtnitem layui-btn layui-btn">删除</span></td>';
 				str += '</tr>';
 			}
 			$("#setTimeList").html(str);
@@ -86,8 +87,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 		}
 	}
 	//删除时间提示
-	function delThatitem(el) {
-		console.log($(el).parents(".listitem").index())
+	function delThatitem(el) {		
 		if($(el).parents(".listitem").index() != 1) {
 			layui.use('layer', function() {
 				var layer = layui.layer;
@@ -107,7 +107,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 		var str = '';
 		str += '<tr class="listitem" tabindex="' + index + '">';
 		str += '<td class="tritem num">' + index + '</td>';
-		str += '<td class="tritem"><input class ="timeset" type="text" class = "times" maxlength=5/></td>';
+		str += '<td class="tritem"><input class ="timeset" type="text" maxlength=5/></td>';
 		str += '<td class="tritem delitem"><span class="delbtn addbtn layui-btn layui-btn">增行</span><span class="delbtn delbtnitem layui-btn layui-btn">删除</span></td>';
 		str += '</tr>';
 		$(el).parents(".listitem").after(str);
@@ -138,26 +138,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 	$(".saveTimebtn").click(function() {
 		addSettimeData();
 	})
-	//	$(".addItem_btn").click(function(){
-	//     $(".addtimebox").fadeIn();
-	// })
-	//	
-	//	$(".addTimebtn").click(function(){
-	//		var oval = $("#timedate").val();
-	//		if(oval){
-	//			var param ={};
-	//			var olddata = [];
-	//			olddata.push(oval);
-	//			param.times = olddata;
-	//			addSettimeData(param);
-	//			$(".addtimebox").fadeOut();
-	//		}else{
-	//			layer.msg('请选择时间')
-	//		}
-	//  })
-	//	$(".cancelBtn").click(function(){
-	//    $(".addtimebox").fadeOut();
-	// })
+	
 	$(".cancel").click(function(){
        layer.closeAll("iframe");
        //刷新父页面

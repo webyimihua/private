@@ -25,7 +25,15 @@ layui.use(['form','layer', 'tools'],function(){
 				tools.sendRequest(net.ObjectServlet, param, function(res) {
 					if(res.result == 1) {
 						var data =res.data;							
-				    	tools.setOlddataToform(editForm,data);
+				    	tools.setOlddataToform(editForm,data,function(){
+				    		var strid = data.objectId;
+					        tools.getThatstructureFile("#thatFile",strid,function(){
+					        	tools.setOPtiondataCheck("#thatFile",data.domainId);
+					        });
+							tools.getThatpointSensor("#thatsensor",strid,function(){
+								tools.setOPtiondataCheck("#thatsensor",data.sensorId);
+							});
+				    	});
 				    	form.render('select');
 					} else {
 						if(res.message) {
