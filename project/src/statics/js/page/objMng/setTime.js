@@ -41,7 +41,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 		var timesArr= JSON.stringify(getAllitemData());
 		param.times = timesArr;
 		if(param.times) {
-			param.action_flag = "w_add";
+			param.action_flag = "update";
 			param.sub_flag = "schedule";
 			param.sensorId = sensorId;
 			tools.sendRequest(net.ObjectServlet, param, function(res) {
