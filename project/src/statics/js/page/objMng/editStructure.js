@@ -88,6 +88,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 			for(var j = 0; j < idsnum; j++) {
 				if(data[i] == idsbox.eq(j).val()){
 					texts.push(idsbox.eq(j).attr("title")); 
+					idsbox.eq(j).attr("checked","checked");
 					idsbox.eq(j).parent("dd").find(".layui-form-checkbox").addClass("layui-form-checked");
 				}
 				
