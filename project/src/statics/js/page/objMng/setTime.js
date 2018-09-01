@@ -33,28 +33,31 @@ layui.use(['form', 'layer', 'tools'], function() {
 		})
 	}
 	//新增时间配置
+	var timesArr = [];
 	function addSettimeData() {
 		var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
 		var param = {};
 		var sensorId = $("#sensorId").val();
-		var times= getAllitemData().join(",");
-		param.times = times;
+		var timesArr= JSON.stringify(getAllitemData());
+		param.times = timesArr;
 		if(param.times) {
-			param.action_flag = "w_update";
+			param.action_flag = "w_add";
 			param.sub_flag = "schedule";
 			param.sensorId = sensorId;
 			tools.sendRequest(net.ObjectServlet, param, function(res) {
 				if(res.result == 1) {
 					setTimeout(function() {
 						top.layer.close(index);
-						top.layer.msg("参数配置成功");
+						top.layer.msg(res.message);
 						setOlddataShow();
 					}, 2000);
 				} else {
 					top.layer.close(index);
-					top.layer.msg("参数配置失败");
+					top.layer.msg(res.message);
 				}
 			})
+		}else{
+			top.layer.msg("时间不能为空");
 		}
 	}
 	//获取页面时间
@@ -145,4 +148,11 @@ layui.use(['form', 'layer', 'tools'], function() {
        parent.location.reload();
         return false;
     })
+	//编辑变色
+	$(document).on("focus",".timeset",function(){
+		$(this).addClass("edittip");
+	})
+	$(document).on("blur",".timeset",function(){
+		$(".timeset").removeClass("edittip");
+	})
 })

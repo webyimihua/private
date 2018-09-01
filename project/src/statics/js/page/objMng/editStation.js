@@ -50,14 +50,14 @@ layui.use(['form','layer', 'tools'],function(){
            if(res.result == 1) {
 				setTimeout(function() {
 					top.layer.close(index);
-					top.layer.msg("编辑传感器成功");
+					top.layer.msg(res.message);
 					layer.closeAll("iframe");
 					//刷新父页面
 					parent.location.reload();
 				}, 2000);
 			} else {
 				top.layer.close(index);
-				top.layer.msg("编辑传感器失败");
+				top.layer.msg(res.message);
 			}
         })
     }
@@ -87,7 +87,7 @@ layui.use(['form','layer', 'tools'],function(){
 						}
 					});
 				} else {
-					layer.msg("请先新增终端数据");
+					layer.msg(res.message);
 				};
 			}
 		})

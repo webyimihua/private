@@ -256,7 +256,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         }else if(layEvent === 'setTime'){ //详情
             setTime(data);
         }else if(layEvent === 'openItem'){ //详情
-            openItem(data);
+            openItem(data.id,data.isRunning);
         }else if(layEvent === 'del'){ //删除
             layer.confirm('确定删除此信息？', {
 				icon: 3,
@@ -288,5 +288,32 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 			}
 		})
 	}
+	
+	//开启自动采集  是否运行 0 1
+	function openItem(id,isRun){
+		var param = {};
+		if(isRun == 0){
+			param.action_flag = "w_start_timing_collection";
+		}else if(isRun== 1){
+			param.action_flag = "w_end_timing_collection";
+		}		
+		param.id = id;
+		tools.sendRequest(net.ObjectServlet, param, function(res) {
+			if(res.result == 1) {
+				if(res.message) {
+					layer.msg(res.message);
+				}
+				tableIns.reload();
+			} else {
+				if(res.message) {
+					layer.msg(res.message);
+				}
+			}
+		})
+	}
+	
+	
+	
+	
 
 })
