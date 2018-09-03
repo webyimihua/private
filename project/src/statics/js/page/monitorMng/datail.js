@@ -31,6 +31,9 @@ layui.use(['element','layer','jquery','tools'],function(){
 
 
 	function findBridgeSelectList(ids,dimensionId){
+		if(!dimensionId){
+			var dimensionId = 1;
+		}
          $.post('http://47.95.13.55:8080/StructureMonitoring/DataServlet',{
             action_flag:"get_drawing_data",
             objectId:ids,
