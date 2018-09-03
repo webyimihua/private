@@ -112,6 +112,22 @@
           border-radius: 3px;
           box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
         }
+        .mapTabs{
+        	width:65px;
+        	height:65px;
+        	position:absolute;
+        	bottom:5px;
+        	right:5px;
+        	border-radius:50%;
+        	cursor:pointer;
+        	background:#FFFFFF;
+        }
+        .mapTabs>.bgs{
+        	width:100%;
+        	height:100%;
+        	background-repeat:no-repeat;
+        	background-position:center;
+        }
 	</style>
 </head>
 <body class="childrenBody" style="position:relative;">
@@ -119,10 +135,14 @@
        <option value="">请选择构筑物</option> 
   </select>
 	<div id="allmap"></div>	
+	<ul class="mapTabs">
+	   <li class="bgs"></li>
+	</ul>
 </body>
 <script type="text/javascript" src="../layui/layui.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
 <script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/jQuery.cookie.js"></script>
 <script type="text/javascript">
 
 $(function(){
@@ -137,6 +157,22 @@ $(function(){
      }
      
   })
+  
+  $(".mapTabs").click(function(){
+  	if($.cookie("mapTypes") != 2){
+  		$.cookie("mapTypes","2");
+  	}else{
+  		$.cookie("mapTypes","1");
+  	}
+  	window.location.reload();
+  })
+  
+  if($.cookie("mapTypes") == 2){
+	$(".mapTabs>.bgs").css("backgroundImage","url(../../images/map.png)");
+  }else{
+	$(".mapTabs>.bgs").css("backgroundImage","url(../../images/bal.png)");
+  }
+  
 })
 
 	// 百度地图API功能
@@ -144,6 +180,17 @@ $(function(){
 	map.centerAndZoom("重庆",6);          // 设置地图显示的城市 此项是必须设置的
 	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
 	map.disableDoubleClickZoom()  //禁止鼠标双击放大地图
+	//设置地图类型
+	//BMAP_NORMAL_MAP    此地图类型展示普通街道视图
+	//BMAP_PERSPECTIVE_MAP    此地图类型展示透视图像视图
+	//BMAP_SATELLITE_MAP    此地图类型展示卫星视图
+	//BMAP_HYBRID_MAP    此地图类型展示卫星和路网的混合视图
+	if($.cookie("mapTypes") == 2){
+		map.setMapType(BMAP_HYBRID_MAP);
+	}else{
+		map.setMapType(BMAP_NORMAL_MAP);
+	}
+	
 
 	//1、定义构造函数并继承Overlay
 //定义自定义覆盖物的构造函数  
