@@ -25,8 +25,8 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         where: {
         	action_flag:"w_query",
             sub_flag:"object_alarm",
-            isFlur:false,
-            isReserve:false,
+            isFlur:true,
+            isReserve:true,
             isDivide:true,
             hasForeign:false,
             userId:userid,
@@ -49,28 +49,24 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             // {type: "checkbox", fixed:"left", width:50},
             {field: 'index', title: '序号', width:60, align:"center",type:"numbers"},
             {field: 'id', title: 'id', width:1, align:"center"},
+            {field: 'objectname', title: '预警监测体', width:200, align:"center"},
             {field: 'content', title: '预警内容', minWidth:100, align:"center"},
-            {field: 'objectname', title: '预警监测体', width:150, align:"center"},
             {field: 'time', title: '预警时刻', width:200, align:"center"},
            
         ]]
     });
 
-    //搜索
-    $(".search_btn").on("click",function(){
-        if($(".searchVal").val() != ''){
-            table.reload("itemListtable",{
-                url : 'http://47.95.13.55:8080//StructureMonitoring/SystemServlet',
-                page: {
-                    pageName: 1 //重新从第 1 页开始
-                },
-                where: {
-                    key: $(".searchVal").val()  //搜索的关键字
-                }
-            })
-        }else{
-            layer.msg("请输入搜索的内容");
-        }
+    
+    form.on('select(stations)',function(data){
+        table.reload("itemListtable",{
+            url : 'http://47.95.13.55:8080//StructureMonitoring/MessageServlet',
+            page: {
+                pageName: 1 //重新从第 1 页开始
+            },
+            where: {
+                key: data.value //搜索的关键字
+            }
+        })
     });
     
     //添加构筑物
@@ -160,12 +156,11 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
      function findMonitorBody(){
         var param ={};
         param.action_flag="w_show_option";
-        param.sub_flag="object";
-        param.id=1;
+        param.sub_flag="bureau";
         tools.sendRequest(net.ObjectServlet,param,function(res){
             if(res.result){
                   var data = res.data;
-                  var str = '<option value="">请选择监测体</option>';
+                  var str = '<option value="">请选择铁路局</option>';
                   for(var i in data){
                      str+='<option value="'+data[i].id+'">'+data[i].name+'</option>'
                   }
