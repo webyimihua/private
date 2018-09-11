@@ -182,18 +182,23 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 				icon: 3,
 				title: '提示信息'
 			}, function(index) {
-				delFiledata(data.id, index);
+				delFiledata(data.id, index,0);
 			});
         }
     });
     
     //删除监测域
-	function delFiledata(id, index) {
+	function delFiledata(id, index,type) {
 		var param = {};
 		param.action_flag = "w_delete";
 		param.sub_flag = "unit";
 		param.id = id;
 		param.userId= tools.getUsermessage("id");
+		if(type == 0){
+			param.isConfirm = false;	
+		}else{
+			param.isConfirm = 'true';
+		}
 		tools.sendRequest(net.ObjectServlet, param, function(res) {
 			if(res.result == 1) {
 				if(res.message) {
@@ -202,9 +207,13 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 				tableIns.reload();
 				layer.close(index);
 			} else {
-				if(res.message) {
-					layer.msg(res.message);
-				}
+				var mess = res.message;
+				layer.confirm(mess, {
+				icon: 3,
+				title: '确认删除'
+			}, function(index) {
+				delFiledata(id, index,1);
+			});
 			}
 		})
 	}   
