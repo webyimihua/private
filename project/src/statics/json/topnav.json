@@ -100,13 +100,13 @@
 		},
 		{
 			"tit": "终端类型管理",
-			"icon": "&#xe674;",
+			"icon": "&#xe63b;",
 			"href": "page/systemSetting/terminal/terminalist.html",
 			"spread": false
 		},
 		{
 			"tit": "通道关系管理",
-			"icon": "&#xe674;",
+			"icon": "&#xe64c;",
 			"href": "page/systemSetting/channel/channellist.html",
 			"spread": false
 		}
