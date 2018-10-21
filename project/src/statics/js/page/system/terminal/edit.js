@@ -8,33 +8,31 @@ layui.use(['form','layer','tools'],function(){
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery;
         tools = layui.tools;
-    form.on("submit(editSensor)",function(data){
+    form.on("submit(editStation)",function(data){
          var data = data.field;
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
-        updataSensorData(data,index)
+        updataLineData(data,index)
        
     })
    
     //修改数据
-     function updataSensorData(data,index){
+     function updataLineData(data,index){
         var param ={};
         param.action_flag ="w_update";
-        param.sub_flag ="sensor_type";
+        param.sub_flag ="gateway_type";
         param.name=data.name;
-        param.samplingFreq=data.samplingFreq;
+        param.channelNum=data.channelNum;
         param.id=data.id;
         tools.sendRequest(net.SystemServlet,param,function(res){
-            console.log(res.result)
            if(res.result == 1){
                 top.layer.close(index);
-                top.layer.msg("修改传感器成功");
+                top.layer.msg(res.message);
                 layer.closeAll("iframe");
                 //刷新父页面
                 parent.location.reload();
-            }else{
-                top.layer.close(index);
-                top.layer.msg("修改传感器失败");
+           }else{
+                top.layer.msg(res.message);
             }
         })
     }

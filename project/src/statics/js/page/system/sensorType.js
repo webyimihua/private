@@ -45,7 +45,8 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         cols : [[
             {field: 'index', title: '序号', width:80, align:"center",type:"numbers"},
             {field: 'id', title: '序号', width:1, align:"center"},
-            {field: 'name', title: '传感器类型', minWidth:280, align:"center"},
+            {field: 'name', title: '传感器类型名称', minWidth:280, align:"center"},
+            {field: 'samplingFreq', title: '传感器采样频率', minWidth:280, align:"center"},
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });
@@ -96,6 +97,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
                 var body = layui.layer.getChildFrame('body', index);
                 if(data){                   
                     body.find(".sensorName").val(data.name);  
+                    body.find(".samplingFreq").val(data.samplingFreq);  
                     body.find(".ids").val(data.id);                    
                     form.render();
                 }

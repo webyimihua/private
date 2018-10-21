@@ -11,34 +11,34 @@
 	<meta name="format-detection" content="telephone=no">
 	<link rel="stylesheet" href="../../../layui/css/layui.css" media="all" />
 	<link rel="stylesheet" href="../../../css/public.css" media="all" />
-	<style>
-        .layui-form-label{
-           width:104px;
-        }
-        .layui-input-block{
-           margin-left:138px;
-        }
-	</style>
 </head>
 <body class="childrenBody">
 <form class="layui-form" style="width:80%;">
     <div class="layui-row layui-form-item">
-        <div class="layui-col-md6 layui-col-xs12">
-			<label class="layui-form-label">监测体类型名称</label>
+        <div class="layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">终端名称</label>
 			<div class="layui-input-block">
 			    <input type="hidden" name="id" class="ids">
-				<input name="name" type="text" class="layui-input bodyName" lay-verify="required" placeholder="监测体类型名称" autocomplete="off">
+				<input name="name" type="text" class="layui-input stationName" lay-verify="required" placeholder="终端名称" autocomplete="off">
+			</div>
+		</div>
+   </div>
+    <div class="layui-row layui-form-item">
+        <div class="layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">通道数量</label>
+			<div class="layui-input-block">
+				<input name="channelNum" type="text" class="layui-input stationNames" lay-verify="required" placeholder="通道数量" autocomplete="off">
 			</div>
 		</div>
    </div>
 	<div class="layui-form-item layui-row layui-col-xs12">
 		<div class="layui-input-block">
-			<button type="button" class="layui-btn layui-btn" lay-submit="" lay-filter="editBody">提交</button>
+			<button type="button" class="layui-btn layui-btn" lay-submit="" lay-filter="editStation">提交</button>
 			<button type="reset" class="layui-btn layui-btn layui-btn-primary">取消</button>
 		</div>
 	</div>
 </form>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
-<script type="text/javascript" src="../../../js/page/system/body/edit.js"></script>
+<script type="text/javascript" src="../../../js/page/system/terminal/edit.js"></script>
 </body>
 </html>
