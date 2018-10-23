@@ -4,6 +4,7 @@ layui.config({
 	"tools": "tools"
 })
 var owatchtype = [];
+var ouserlist = [];
 layui.use(['form', 'layer', 'tools'], function() {
 	var form = layui.form
 	layer = parent.layer === undefined ? layui.layer : top.layer,
@@ -12,7 +13,10 @@ layui.use(['form', 'layer', 'tools'], function() {
 	tools.getAllstation("#allStation");
 	tools.getAllLine("#addLine");
 	tools.getAllWatchtype("#watchtype");
-	//	tools.getWatchdimension("#dimension");	
+	form.on("select(bureauId)",function(data){
+	        var strid = data.value;
+	        tools.getAllallowperson("#allAllowperson",strid);
+    	})	
 	form.render();
 	form.on("submit(addStructure)", function(data) {
 		//弹出loading
@@ -59,27 +63,49 @@ layui.use(['form', 'layer', 'tools'], function() {
 		$select.addClass("layui-form-selected");
 		e.stopPropagation();
 	}).on("click", ".layui-form-checkbox", function(e) {		
-		getSelectdata();
+		getSelectdata(1);
+		e.stopPropagation();
+	});
+	//处理白名单多选
+	$(document).on("click", ".userdownpanel .layui-select-title", function(e) {
+		var otext = [];
+		var $select = $(this).parents(".layui-form-select");
+		$(".layui-form-select").not($select).removeClass("layui-form-selected");
+		$select.addClass("layui-form-selected");
+		e.stopPropagation();
+	}).on("click", ".layui-form-checkbox", function(e) {	
+		console.log(121)
+		getSelectdata(2);
 		e.stopPropagation();
 	});
 
-	function getSelectdata() {
+	function getSelectdata(type) {
 		var ids = [];
 		var texts = [];
-		var idsbox = $("input:checkbox[name='dimensionIds']:checked");
+		if(type == 1){
+			var idsbox = $("input:checkbox[name='dimensionIds']:checked");
+		}else{
+			var idsbox = $("input:checkbox[name='userIds']:checked");
+		}		
 		var idsnum = idsbox.size();
 		for(var i = 0; i < idsnum; i++) {
 			ids.push(idsbox.eq(i).val()); 
 			texts.push(idsbox.eq(i).attr("title")); 
 		}
-		var idstr = ids.join(',')
-		var textsstr = texts.join(',')
-		if(idstr){
-			owatchtype = idstr;
+		var idstr = ids.join(',');
+		var textsstr = texts.join(',');
+		if(type == 1){
+			if(idstr){
+				owatchtype = idstr;
+			}else{
+				layer.msg('监测维度不能为空')
+			}
+			$("#dimensionIds").val(textsstr);
 		}else{
-			layer.msg('监测维度不能为空')
+			if(idstr){
+				ouserlist = idstr;
+			}
+			$("#userIds").val(textsstr);
 		}
-		$("#dimensionIds").val(textsstr);
 	}
-
 })

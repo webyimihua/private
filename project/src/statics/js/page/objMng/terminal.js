@@ -47,17 +47,16 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
 		},
 		done: function(res, curr, count) {
 			$("[data-field='objectId']").css('display', 'none');
+			$("[data-field='gateway_typeId']").css('display', 'none');
 		},
         cols : [[           
             {field: 'index', title: '序号', width:80, align:"center",type: "numbers"},
-            {field: 'id', title: '终端编号', minWidth:200, align:'center'},
-            {field: 'sampleInterval', title: '采样间隔', align:'center'},
+            {field: 'id', title: '终端ID', minWidth:200, align:'center'},
+            {field: 'gateway_typeId', title: '终端类型', align:'center'},
+            {field: 'gateway_typename', title: '终端类型', align:'center'},
             {field: 'objectId', title: '所属监测体', align:'center'},
             {field: 'objectname', title: '所属监测体', align:'center'},
-            {field: 'ip', title: 'IP地址', align:'center'},
-            {field: 'portForStation', title: '端口号(全站仪)', align:'center'},
-            {field: 'portForOther', title: '端口号(其他)', align:'center'},
-            {field: 'status', title: '状态', align:'center',minWidth:150},
+            {field: 'ip', title: 'IP地址', align:'center'},           
             {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
         ]]
     });

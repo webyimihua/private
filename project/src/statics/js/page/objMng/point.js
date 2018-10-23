@@ -65,13 +65,11 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
             {field: 'objectname', title: '所属构筑物', align:'center'},
             {field: 'height', title: '高度', align:'center'},
             {field: 'domainId', title: '所属监测域', align:'center'},
-            {field: 'domainname', title: '所属监测域', align:'center'},
-            {field: 'sensorname', title: '对应传感器', align:'center'},
-            {field: 'sUnitId', title: '对应传感器', align:'center'},
+            {field: 'domainname', title: '所属监测域', align:'center'},           
             {field: 'mileage', title: '里程', align:'center'},
             {field: 'dimensionId', title: '监测维度', align:'center',minWidth:150},
             {field: 'dimensionname', title: '监测维度', align:'center',minWidth:150},
-            {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
+            {title: '操作', minWidth:175, templet:'#handleListBar',align:"center"}
         ]]
     });
 

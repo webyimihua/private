@@ -9,7 +9,7 @@ layui.use(['form','layer', 'tools'],function(){
         $ = layui.jquery;
         tools = layui.tools;
        	var userId = tools.getUsermessage("id");
-		tools.getThatstructure("#allStructure",userId,setOlddataShow);
+		tools.getThatstructure("#allStructure",userId,setOlddataShow);		
 		function setOlddataShow(){
 			var id = $("#editId").val();
         	var editForm = $("#editDataform");
@@ -22,7 +22,12 @@ layui.use(['form','layer', 'tools'],function(){
 				tools.sendRequest(net.ObjectServlet, param, function(res) {
 					if(res.result == 1) {
 						var data =res.data;							
-				    	tools.setOlddataToform(editForm,data);
+				    	tools.setOlddataToform(editForm,data,function(){
+				    		var strid = data.objectId;
+					        tools.getThatgateWay("#allTerminal",strid,function(){
+					        	tools.setOPtiondataCheck("#allTerminal",data.gateway_typeId);
+					        });
+				    	});
 				    	form.render('select');
 					} else {
 						if(res.message) {

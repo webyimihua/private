@@ -10,6 +10,10 @@ layui.use(['form','layer', 'tools'],function(){
         tools = layui.tools;
         var userid = tools.getUsermessage("id");
         tools.getThatstructure("#allStructure",userid);
+        form.on("select(allStructure)",function(data){
+	        var strid = data.value;
+	        tools.getThatgateWay("#allTerminal",strid);
+    	})		
     form.on("submit(addTerminal)",function(data){
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});

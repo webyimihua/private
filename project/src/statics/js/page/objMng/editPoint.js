@@ -29,10 +29,7 @@ layui.use(['form','layer', 'tools'],function(){
 				    		var strid = data.objectId;
 					        tools.getThatstructureFile("#thatFile",strid,function(){
 					        	tools.setOPtiondataCheck("#thatFile",data.domainId);
-					        });
-							tools.getThatpointSensor("#thatsensor",strid,function(){
-								tools.setOPtiondataCheck("#thatsensor",data.sensorId);
-							});
+					        });							
 				    	});
 				    	form.render('select');
 					} else {
@@ -44,10 +41,7 @@ layui.use(['form','layer', 'tools'],function(){
 		}
 		form.on("select(allStructure)",function(data){
 	        var strid = data.value;
-	        tools.getThatstructureFile("#thatFile",strid,getThatpointSensor);
-	        function getThatpointSensor(){
-				tools.getThatpointSensor("#thatsensor",strid,setOlddataShow);
-			}
+	        tools.getThatstructureFile("#thatFile",strid);	        
     	})	
 		
     form.on("submit(editPoint)",function(data){

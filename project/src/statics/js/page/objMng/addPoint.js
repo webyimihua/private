@@ -14,7 +14,6 @@ layui.use(['form','layer', 'tools'],function(){
 		form.on("select(allStructure)",function(data){
 	        var strid = data.value;
 	        tools.getThatstructureFile("#thatFile",strid);
-			tools.getThatpointSensor("#thatsensor",strid);
     	})		
     form.on("submit(addpoint)",function(data){
         //弹出loading

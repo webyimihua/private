@@ -39,7 +39,7 @@
         <div class="magb15 layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">所属铁路局</label>
 			<div class="layui-input-block">
-				<select name="bureauId" id="allStation"  lay-verify="required">
+				<select name="bureauId" id="allStation" lay-filter="bureauId"  lay-verify="required">
 					<option value="">请选择所属铁路局</option>
 				</select>
 			</div>
@@ -78,7 +78,6 @@
                     <dd><input type="checkbox" name="dimensionIds" title="姿态变化监测" value="6"  lay-skin="primary" ></dd>
                     <dd><input type="checkbox" name="dimensionIds" title="气压监测" value="7"  lay-skin="primary" ></dd>
                     <dd><input type="checkbox" name="dimensionIds" title="风速风向监测" value="8"  lay-skin="primary" ></dd>
-
                 </dl>
            </div>
            </div>
@@ -111,7 +110,22 @@
 				<input type="text" name="endMileage" class="layui-input " lay-verify="required" placeholder="请填写构筑物的结束里程">
 			</div>
 		</div>
-  </div> 
+  </div>
+  <div class="layui-row">		
+		<div class="magb15 layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">用户白名单</label>
+			<div class="layui-input-block">			
+			 <div class="layui-unselect layui-form-select userdownpanel cs">
+                <div class="layui-select-title">
+                    <input type="text" placeholder="请选择要加入的用户白名单（非必填）" name="userIds" id="userIds" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i>
+                </div>
+                <dl class="layui-anim layui-anim-upbit" id="allAllowperson" style="" lay-filter="userIds">
+                    <!--<dd><input type="checkbox" name="userIds" title="沉降监测" value="1" lay-skin="primary" ></dd>-->
+                </dl>
+           </div>
+           </div>
+		</div>
+	</div>
 	<!--<div class="layui-form-item layui-row layui-col-xs12">
 		<div class="layui-input-block">
 			<input type="hidden" name="image" id="imageUrl" value="" />
