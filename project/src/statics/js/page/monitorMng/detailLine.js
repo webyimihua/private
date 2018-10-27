@@ -21,10 +21,8 @@ layui.use(['element','layer','jquery','laydate'],function(){
 $(function(){
     setTimeout(function(){
         if($("#pointTypes").val()){
-            $(".temperature_box").load("temperature.html",function(){
               $(".search_btns").attr("id","searchTemData");
               getTemperatureData(getNowFormatDate(),getHistoryData(15))
-            })
         }else{
             $("#temperature_box").html("暂时没有数据！！！")
         }
@@ -73,7 +71,8 @@ function getTemperatureData(endTime,startTime){
       endDate:endDate,
    },function(res,indexclose){
    	  var data = JSON.parse(res);
-   	 if(data.data[0].data.length == 0){
+   	  console.log(data)
+   	 if(!data.data[0].data){
    	 	 $("#temperature_box").html("没有数据！！！")
    	 	 return ;
    	 }
