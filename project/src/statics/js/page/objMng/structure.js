@@ -99,13 +99,13 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 				{
 					field: 'startMileage',
 					title: '起始里程',
-					minWidth: 200,
+					minWidth: 120,
 					align: 'center'
 				},
 				{
 					field: 'endMileage',
 					title: '结束里程',
-					minWidth: 200,
+					minWidth: 120,
 					align: 'center'
 				},
 				{

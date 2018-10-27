@@ -297,6 +297,60 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 					}
 				})
 			},
+			//12查询终端类型
+			getThatgateWay:function(div,id,callback){
+				var param = {};
+				param.action_flag = "w_show_option";
+				param.sub_flag = "gateway_type";
+				param.id = id;
+				tools.sendRequest(net.ObjectServlet, param, function(res) {
+					if(res.result == 1) {
+						var data = res.data;
+						if(data.length > 0) {
+							tools.initOptionitem(div,data,function(){
+								form.render('select');
+								if(typeof callback == 'function'){					
+									callback();
+								}
+							});					
+						}
+					}
+				})
+			},
+			//13查询用户白名单
+			getAllallowperson:function(div,id,callback){
+				var param = {};
+				param.action_flag = "w_show_option";
+				param.sub_flag = "user";
+				param.id = id;
+				tools.sendRequest(net.ObjectServlet, param, function(res) {
+					if(res.result == 1) {
+						var data = res.data;
+						if(data.length > 0) {
+							tools.initAllperson(div,data,function(){
+								form.render('select');
+								if(typeof callback == 'function'){					
+									callback();
+								}
+							});					
+						}
+					}
+				})
+			},
+			//初始化下拉数据
+			initAllperson: function(div,data,callback) {
+				if(data){
+					$(div).html("");
+					var str = '';
+					for(var i = 0; i < data.length; i++) {
+						str += '<dd><input type="checkbox" name="userIds" title="'+ data[i].name +'" value="'+data[i].id+'" lay-skin="primary" ><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>'+ data[i].name +'</span><i class="layui-icon"></i></div></dd>'
+					}
+					$(div).html(str);
+					if(typeof callback == 'function'){					
+						callback();
+					}
+				}				
+			},
 			//处理select选中
 			setOPtiondataCheck:function(div,val){
 				var optionEle = $(div).find("option");

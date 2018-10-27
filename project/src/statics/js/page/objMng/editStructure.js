@@ -18,6 +18,10 @@ layui.use(['form', 'layer', 'tools'], function() {
 	function getWatchdimension(){
 		tools.getWatchdimension("#dimension",setOlddataShow);
 	}
+	form.on("select(bureauId)",function(data){
+	        var strid = data.value;
+	        tools.getAllallowperson("#allAllowperson",strid);
+    	})	
 	function setOlddataShow(){
 			var id = $("#editId").val();
         	var editForm = $("#editDataform");
@@ -42,6 +46,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 				})
 		}
 	var owatchtype = [];
+	var ouserlist = [];
 	form.on("submit(editStructure)", function(data) {
 		//弹出loading
 		var index = top.layer.msg('数据提交中，请稍候', {
@@ -111,24 +116,46 @@ layui.use(['form', 'layer', 'tools'], function() {
 		getSelectdata();
 		e.stopPropagation();
 	});
+	//处理监测维度多选
+	$(".userdownpanel").on("click", ".layui-select-title", function(e) {
+		var otext = [];
+		var $select = $(this).parents(".layui-form-select");
+		$(".layui-form-select").not($select).removeClass("layui-form-selected");
+		$select.addClass("layui-form-selected");
+		e.stopPropagation();
+	}).on("click", ".layui-form-checkbox", function(e) {		
+		getSelectdata();
+		e.stopPropagation();
+	});
 
-	function getSelectdata() {
+	function getSelectdata(type) {
 		var ids = [];
 		var texts = [];
-		var idsbox = $("input:checkbox[name='dimensionIds']:checked");
+		if(type == 1){
+			var idsbox = $("input:checkbox[name='dimensionIds']:checked");
+		}else{
+			var idsbox = $("input:checkbox[name='userIds']:checked");
+		}		
 		var idsnum = idsbox.size();
 		for(var i = 0; i < idsnum; i++) {
 			ids.push(idsbox.eq(i).val()); 
 			texts.push(idsbox.eq(i).attr("title")); 
 		}
-		var idstr = ids.join(',')
-		var textsstr = texts.join(',')
-		if(idstr){
-			owatchtype = idstr;
+		var idstr = ids.join(',');
+		var textsstr = texts.join(',');
+		if(type == 1){
+			if(idstr){
+				owatchtype = idstr;
+			}else{
+				layer.msg('监测维度不能为空')
+			}
+			$("#dimensionIds").val(textsstr);
 		}else{
-			layer.msg('监测维度不能为空')
+			if(idstr){
+				ouserlist = idstr;
+			}
+			$("#userIds").val(textsstr);
 		}
-		$("#editdimensionIds").val(textsstr);
 	}
 	
 })
