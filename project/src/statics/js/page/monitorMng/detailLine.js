@@ -195,7 +195,6 @@ function drawTemperaturLine(time,temperature,temperatureForDay,temperatureForWee
                         return false;
                     },
                     optionToContent: function (opt) {
-                       // console.log(opt);
                        var axisData = opt.xAxis[0].data; //坐标数据
                        var series = opt.series; //折线图数据
                        var tdHeads = '<td  style="padding: 0 10px">时间</td>'; //表头第一列
@@ -210,8 +209,8 @@ function drawTemperaturLine(time,temperature,temperatureForDay,temperatureForWee
                         for (var i = 0; i < axisData.length; i++) {
                             for (var j = 0; j < series.length ; j++) {                          
                                 var temp = series[j].data[i];
-                                if (temp != null && temp != undefined) {                                     
-                                    tdBodys += '<td>' + temp.toFixed(2) + '</td>';      
+                                if (temp != null && temp != undefined) {
+                                    tdBodys += '<td>' + temp.toFixed(10) + '</td>';      
                                 } else {
                                     tdBodys += '<td></td>';
                                 }
