@@ -380,13 +380,13 @@ $(function(){
      var target = JSON.parse(dimensionId);
      var selArry = [];
      var initArry = [
-     {id:"1",name:"沉降监测"},
-     {id:"2",name:"相对位移监测"},
-     {id:"3",name:"温度监测"},
-     {id:"4",name:"湿度监测"},
+     {id:"1",name:"温度监测"},
+     {id:"2",name:"湿度监测"},
+     {id:"3",name:"气压监测"},
+     {id:"4",name:"沉降监测"},
      {id:"5",name:"水平位移监测"},
-     {id:"6",name:"姿态变化监测"},
-     {id:"7",name:"气压监测"},
+     {id:"6",name:"相对位移监测"},
+     {id:"7",name:"姿态变化监测"},
      {id:"8",name:"风速风向监测"},
      ]
      for(var i in initArry){
@@ -396,8 +396,8 @@ $(function(){
           }
        }
      }
-     for(var i in selArry){
-        str+='<option value="'+selArry[i].id+'">'+selArry[i].name+'</option>';
+     for(var i in initArry){
+        str+='<option value="'+initArry[i].id+'">'+initArry[i].name+'</option>';
      }
      body.find("#selectAreas").html(str);
 

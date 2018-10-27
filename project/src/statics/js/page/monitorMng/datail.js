@@ -41,7 +41,7 @@ layui.use(['element','layer','jquery','tools'],function(){
          },function(res){
              var ress = JSON.parse(res);
              if(ress.result == 1){
-               findBridgeLists(ress)
+               findBridgeLists(ress,dimensionId)
              }
          })
     }
@@ -60,7 +60,7 @@ layui.use(['element','layer','jquery','tools'],function(){
     }
 
 
-	function findBridgeLists(data){
+	function findBridgeLists(data,dimensionId){
 		    $(".canvas-contai").html('');
 		    var str = '';
         	var res = data;
@@ -73,27 +73,27 @@ layui.use(['element','layer','jquery','tools'],function(){
 	                    for(var j in point){
 	                    	if(point[j].position == "上"){
 	                    		if(point[j].alarmLevel == 1){
-	                    			str+='<li class="top sel_green circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
+	                    			str+='<li class="top sel_green circle" ids="'+point[j].id+'" type="'+dimensionId+'" title="'+point[j].name+'"></li>';
 	                    		}else if(point[j].alarmLevel == 2){
-                                    str+='<li class="top sel_orange circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
+                                    str+='<li class="top sel_orange circle" ids="'+point[j].id+'" type="'+dimensionId+'" title="'+point[j].name+'"></li>';
 	                    		}else{
-                                    str+='<li class="top sel_red circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
+                                    str+='<li class="top sel_red circle" ids="'+point[j].id+'" type="'+dimensionId+'" title="'+point[j].name+'"></li>';
 	                    		}
 	                    	}else if(point[j].position == "中"){
 	                    		if(point[j].alarmLevel == 1){
-	                    			str+='<li class="middle sel_green circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
+	                    			str+='<li class="middle sel_green circle" ids="'+point[j].id+'" type="'+dimensionId+'" title="'+point[j].name+'"></li>';
 	                    		}else if(point[j].alarmLevel == 2){
-                                    str+='<li class="middle sel_orange circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
+                                    str+='<li class="middle sel_orange circle" ids="'+point[j].id+'" type="'+dimensionId+'" title="'+point[j].name+'"></li>';
 	                    		}else{
-                                    str+='<li class="middle sel_red circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
+                                    str+='<li class="middle sel_red circle" ids="'+point[j].id+'" type="'+dimensionId+'" title="'+point[j].name+'"></li>';
 	                    		}
 	                    	}else if(point[j].position == "下"){
 	                    		if(point[j].alarmLevel == 1){
-	                    			str+='<li class="bottom sel_green circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
+	                    			str+='<li class="bottom sel_green circle" ids="'+point[j].id+'" type="'+dimensionId+'" title="'+point[j].name+'"></li>';
 	                    		}else if(point[j].alarmLevel == 2){
-                                    str+='<li class="bottom sel_orange circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
+                                    str+='<li class="bottom sel_orange circle" ids="'+point[j].id+'" type="'+dimensionId+'" title="'+point[j].name+'"></li>';
 	                    		}else{
-                                    str+='<li class="bottom sel_red circle" ids="'+point[j].id+'" title="'+point[j].name+'"></li>';
+                                    str+='<li class="bottom sel_red circle" ids="'+point[j].id+'" type="'+dimensionId+'" title="'+point[j].name+'"></li>';
 	                    		}
 	                    	}
 	                    }
@@ -102,16 +102,18 @@ layui.use(['element','layer','jquery','tools'],function(){
         	}
         	$(".canvas-contai").html(str);
         	var winWidth = $(window).width();
+        	var winheight = $(window).height();
 			var b_nums = data.length;
+			 $(".canvas-contai").height(winheight - 220);
 			if( b_nums*140 > winWidth){
 		         $(".canvas-contai").width(140*b_nums + "px");
 			}else{
-				 $(".canvas-contai").width(winWidth);
+				 $(".canvas-contai").width(winWidth - 40);
 			}
 	}
 
 
-	function pointMes(ids){
+	function pointMes(ids,types){
         var index = layui.layer.open({
             title : false,
             type : 2,
@@ -121,6 +123,7 @@ layui.use(['element','layer','jquery','tools'],function(){
                 var body = layui.layer.getChildFrame('body', index);
                 body.find("#pointTypes").val($(".selbrageidss").val());
                 body.find("#pointIds").val(ids);
+                body.find("#pointTyp").val(types);
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回构筑物列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -136,7 +139,8 @@ layui.use(['element','layer','jquery','tools'],function(){
     }
     $(document).on("click",".splot-box>.circle",function(){
         var ids = $(this).attr("ids");
-        pointMes(ids);
+        var types = $(this).attr("type");
+        pointMes(ids,types);
         $(this).unbind();
     })
 
