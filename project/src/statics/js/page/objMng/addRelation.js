@@ -11,8 +11,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 		$ = layui.jquery;
 	tools = layui.tools;
 	tools.getAllstation("#allStation");
-	tools.getAllLine("#addLine");
-	tools.getAllWatchtype("#watchtype");
+	
 	form.on("select(bureauId)",function(data){
 	        var strid = data.value;
 	        tools.getAllallowperson("#allAllowperson",strid);
@@ -30,7 +29,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 		addStructureData(param, index);
 		return false;
 	})
-	//新增构筑物
+	//新增关系管理
 	function addStructureData(param, index) {
 		param.action_flag = "w_add";
 		param.sub_flag = "object";
@@ -55,57 +54,5 @@ layui.use(['form', 'layer', 'tools'], function() {
 		parent.location.reload();
 		return false;
 	})
-	//处理监测维度多选
-	$(".downpanel").on("click", ".layui-select-title", function(e) {
-		var otext = [];
-		var $select = $(this).parents(".layui-form-select");
-		$(".layui-form-select").not($select).removeClass("layui-form-selected");
-		$select.addClass("layui-form-selected");
-		e.stopPropagation();
-	}).on("click", ".layui-form-checkbox", function(e) {		
-		getSelectdata(1);
-		e.stopPropagation();
-	});
-	//处理白名单多选
-	$(document).on("click", ".userdownpanel .layui-select-title", function(e) {
-		var otext = [];
-		var $select = $(this).parents(".layui-form-select");
-		$(".layui-form-select").not($select).removeClass("layui-form-selected");
-		$select.addClass("layui-form-selected");
-		e.stopPropagation();
-	}).on("click", ".layui-form-checkbox", function(e) {	
-		console.log(121)
-		getSelectdata(2);
-		e.stopPropagation();
-	});
-
-	function getSelectdata(type) {
-		var ids = [];
-		var texts = [];
-		if(type == 1){
-			var idsbox = $("input:checkbox[name='dimensionIds']:checked");
-		}else{
-			var idsbox = $("input:checkbox[name='userIds']:checked");
-		}		
-		var idsnum = idsbox.size();
-		for(var i = 0; i < idsnum; i++) {
-			ids.push(idsbox.eq(i).val()); 
-			texts.push(idsbox.eq(i).attr("title")); 
-		}
-		var idstr = ids.join(',');
-		var textsstr = texts.join(',');
-		if(type == 1){
-			if(idstr){
-				owatchtype = idstr;
-			}else{
-				layer.msg('监测维度不能为空')
-			}
-			$("#dimensionIds").val(textsstr);
-		}else{
-			if(idstr){
-				ouserlist = idstr;
-			}
-			$("#userIds").val(textsstr);
-		}
-	}
+	
 })

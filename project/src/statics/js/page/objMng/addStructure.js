@@ -56,13 +56,13 @@ layui.use(['form', 'layer', 'tools'], function() {
 		return false;
 	})
 	//处理监测维度多选
-	$(".downpanel").on("click", ".layui-select-title", function(e) {
+	$(document).on("click", ".downpanel .layui-select-title", function(e) {
 		var otext = [];
 		var $select = $(this).parents(".layui-form-select");
 		$(".layui-form-select").not($select).removeClass("layui-form-selected");
 		$select.addClass("layui-form-selected");
 		e.stopPropagation();
-	}).on("click", ".layui-form-checkbox", function(e) {		
+	}).on("click", ".downpanel .layui-form-checkbox", function(e) {		
 		getSelectdata(1);
 		e.stopPropagation();
 	});
@@ -73,8 +73,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 		$(".layui-form-select").not($select).removeClass("layui-form-selected");
 		$select.addClass("layui-form-selected");
 		e.stopPropagation();
-	}).on("click", ".layui-form-checkbox", function(e) {	
-		console.log(121)
+	}).on("click", ".userdownpanel .layui-form-checkbox", function(e) {	
 		getSelectdata(2);
 		e.stopPropagation();
 	});
