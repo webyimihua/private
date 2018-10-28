@@ -21,10 +21,8 @@ layui.use(['element','layer','jquery','laydate'],function(){
 $(function(){
     setTimeout(function(){
         if($("#pointTypes").val()){
-            $("#temperature_box").load("temperature.html",function(){
               $(".search_btns").attr("id","searchTemData");
               getTemperatureData(getNowFormatDate(),getHistoryData(15))
-            })
         }else{
             $("#temperature_box").html("暂时没有数据！！！")
         }
@@ -42,36 +40,65 @@ $(function(){
     })
 })
 
-
+ var indexclose = null;
 function getTemperatureData(endTime,startTime){
 	var endDate = endTime;
 	var startDate = startTime;
+	var sub_flag = "temperature";
+	 if($("#pointTyp").val() == 1){
+      	sub_flag = "temperature";
+      }else if($("#pointTyp").val() == 2){
+      	sub_flag = "humidity";
+      }else if($("#pointTyp").val() == 3){
+      	sub_flag = "pressure";
+      }else if($("#pointTyp").val() == 4){
+      	sub_flag = "settlement";
+      }else if($("#pointTyp").val() == 5){
+      	sub_flag = "horizontalShift";
+      }else if($("#pointTyp").val() == 6){
+      	sub_flag = "relative";
+      }else if($("#pointTyp").val() == 7){
+      	sub_flag = "gesture";
+      }else if($("#pointTyp").val() == 8){
+      	sub_flag = "wind";
+      }
+      indexclose = layer.load(2, {time:10*1000});
 	$.post('http://47.95.13.55:8080/StructureMonitoring/DataServlet',{
       action_flag:"w_get_data",
-      sub_flag:"temperature",
+      sub_flag:sub_flag,
       unitId:$("#pointIds").val(),
       startDate:startDate,
       endDate:endDate,
-    },function(res){
+   },function(res,indexclose){
    	  var data = JSON.parse(res);
-   	 if(data.data[0].data.length == 0){
-   	 	 $("#temperature_box").html("暂时没有数据！！！")
+   	  console.log(data)
+   	 if(!data.data[0].data){
+   	 	 $("#temperature_box").html("没有数据！！！")
    	 	 return ;
    	 }
-   	  var obj = data.data[0].data;
-   	  var temperature = new Array;
-   	  var temperatureForDay = new Array;
-   	  var temperatureForWeek = new Array;
-   	  var temperatureForMonth = new Array;
-   	  var time = new Array;
-   	  for(var i in obj){
-   	  	time.push(obj[i].time);
-   	  	temperature.push(obj[i].base);
-   	  	temperatureForDay.push(obj[i].forDay);
-   	  	temperatureForWeek.push(obj[i].forWeek);
-   	  	temperatureForMonth.push(obj[i].forMonth)
-   	  }
-   	  drawTemperaturLine(time,temperature,temperatureForDay,temperatureForWeek,temperatureForMonth)
+   	 var tar = data.data;
+   	 for(var i=0; i<tar.length; i++){
+   	 	  var obj = tar[i].data;
+	   	  var temperature = new Array;
+	   	  var temperatureForDay = new Array;
+	   	  var temperatureForWeek = new Array;
+	   	  var temperatureForMonth = new Array;
+	   	  var tit = new Array;
+	   	  var time = new Array;
+	   	  tit.push(tar[i].chartName)
+	   	  tit.push(tar[i].forDayName)
+	   	  tit.push(tar[i].forWeekName)
+	   	  tit.push(tar[i].forMonthName)
+	   	  for(var j in obj){
+	   	  	time.push(obj[j].time);
+	   	  	temperature.push(obj[j].base);
+	   	  	temperatureForDay.push(obj[j].forDay);
+	   	  	temperatureForWeek.push(obj[j].forWeek);
+	   	  	temperatureForMonth.push(obj[j].forMonth)
+	   	  }
+	   	  drawTemperaturLine(time,temperature,temperatureForDay,temperatureForWeek,temperatureForMonth,tit,i)
+   	 }
+   	  
     })
 }
 
@@ -134,20 +161,22 @@ function getHistoryData(days){
 
 
 // 绘制折线图
-function drawTemperaturLine(time,temperature,temperatureForDay,temperatureForWeek,temperatureForMonth){
-	var dom = document.getElementById("tem_container");
+function drawTemperaturLine(time,temperature,temperatureForDay,temperatureForWeek,temperatureForMonth,tit,nums){
+	layer.close(indexclose);  
+	var dom = document.getElementById("temperature_box"+nums+"");
+	$(dom).show();
     var myChart = echarts.init(dom);
     var app = {};
     option = null;
     option = {
         title: {
-            text: '温度监测',
+            text: '',
         },
         tooltip: {
             trigger: 'axis'
         },
         legend: {
-            data:['温度','日均温度','周均温度','月均温度']
+            data:[tit[0],tit[1],tit[2],tit[3]]
         },
         toolbox: {
             // show: true,
@@ -165,13 +194,12 @@ function drawTemperaturLine(time,temperature,temperatureForDay,temperatureForWee
                         return false;
                     },
                     optionToContent: function (opt) {
-                       // console.log(opt);
                        var axisData = opt.xAxis[0].data; //坐标数据
                        var series = opt.series; //折线图数据
                        var tdHeads = '<td  style="padding: 0 10px">时间</td>'; //表头第一列
                         var tdBodys = ''; //表数据
                         //组装表头
-                        var nameData = new Array('温度', '日均温度', '周均温度', '月均温度');
+                        var nameData = new Array(tit[0], tit[1], tit[2], tit[3]);
                         for (var i = 0; i < nameData.length; i++) {
                             tdHeads += '<td style="padding: 0 10px">' + nameData[i] + '</td>';
                         }
@@ -180,8 +208,8 @@ function drawTemperaturLine(time,temperature,temperatureForDay,temperatureForWee
                         for (var i = 0; i < axisData.length; i++) {
                             for (var j = 0; j < series.length ; j++) {                          
                                 var temp = series[j].data[i];
-                                if (temp != null && temp != undefined) {                                     
-                                    tdBodys += '<td>' + temp.toFixed(2) + '</td>';      
+                                if (temp != null && temp != undefined) {
+                                    tdBodys += '<td>' + temp.toFixed(10) + '</td>';      
                                 } else {
                                     tdBodys += '<td></td>';
                                 }
@@ -211,22 +239,22 @@ function drawTemperaturLine(time,temperature,temperatureForDay,temperatureForWee
         },
         series: [
             {
-                name:'温度',
+                name:tit[0],
                 type:'line',
                 data:temperature
             },
             {
-                name:'日均温度',
+                name:tit[1],
                 type:'line',
                 data:temperatureForDay
             },
             {
-                name:'周均温度',
+                name:tit[2],
                 type:'line',
                 data:temperatureForWeek
             },
              {
-                name:'月均温度',
+                name:tit[3],
                 type:'line',
                 data:temperatureForMonth
             }
@@ -242,7 +270,7 @@ function drawExcelData(){
     $("#tableExcel_Day").table2excel({
         exclude: ".noExl",
         name: "Excel Document Name",
-        filename: "温度表" + new Date().toISOString().replace(/[\-\:\.]/g, ""),
+        filename: "表" + new Date().toISOString().replace(/[\-\:\.]/g, ""),
         exclude_img: true,
         exclude_links: true,
         exclude_inputs: true
