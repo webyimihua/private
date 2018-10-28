@@ -22,15 +22,6 @@ layui.use(['form', 'layer', 'tools'], function() {
 		addSensorData(param, index);
 		return false;
 	})
-
-	form.on('select(sensorTypes)', function(data) {
-		if(data.value != 12) {
-			$(".qzyhide").hide();
-		} else {
-			$(".qzyhide").show();
-		}
-		form.render('select');
-	});
 	//新增
 	function addSensorData(param, index) {
 		param.action_flag = "w_add";
