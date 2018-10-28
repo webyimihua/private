@@ -16,8 +16,12 @@ layui.use(['form', 'layer', 'tools'], function() {
 		tools.getAllWatchtype("#watchtype",getWatchdimension);
 	}
 	function getWatchdimension(){
-		tools.getWatchdimension("#dimension",setOlddataShow);
-	}
+		tools.getWatchdimension("#dimension",getAllperson);
+	}	
+	function getAllperson(){
+		var  id = $("#allStation").val();
+		tools.getAllallowperson("#allAllowperson",id,setOlddataShow);
+	}	
 	form.on("select(bureauId)",function(data){
 	        var strid = data.value;
 	        tools.getAllallowperson("#allAllowperson",strid);
@@ -38,6 +42,8 @@ layui.use(['form', 'layer', 'tools'], function() {
 				    	form.render();
 				    	//处理监测维度多选
 				    	 setDbselectData(data.dimensionIds)
+				    	//处理监测维度多选
+				    	 setDbselectData(data.userIds)
 					} else {
 						if(res.message) {
 							layer.msg(res.message);
@@ -117,14 +123,25 @@ layui.use(['form', 'layer', 'tools'], function() {
 		e.stopPropagation();
 	});
 	//处理监测维度多选
-	$(".userdownpanel").on("click", ".layui-select-title", function(e) {
+	$(document).on("click", ".downpanel .layui-select-title", function(e) {
 		var otext = [];
 		var $select = $(this).parents(".layui-form-select");
 		$(".layui-form-select").not($select).removeClass("layui-form-selected");
 		$select.addClass("layui-form-selected");
 		e.stopPropagation();
-	}).on("click", ".layui-form-checkbox", function(e) {		
-		getSelectdata();
+	}).on("click", ".downpanel .layui-form-checkbox", function(e) {		
+		getSelectdata(1);
+		e.stopPropagation();
+	});
+	//处理白名单多选
+	$(document).on("click", ".userdownpanel .layui-select-title", function(e) {
+		var otext = [];
+		var $select = $(this).parents(".layui-form-select");
+		$(".layui-form-select").not($select).removeClass("layui-form-selected");
+		$select.addClass("layui-form-selected");
+		e.stopPropagation();
+	}).on("click", ".userdownpanel .layui-form-checkbox", function(e) {	
+		getSelectdata(2);
 		e.stopPropagation();
 	});
 
