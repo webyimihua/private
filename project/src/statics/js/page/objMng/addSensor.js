@@ -8,7 +8,6 @@ layui.use(['form', 'layer', 'tools'], function() {
 	layer = parent.layer === undefined ? layui.layer : top.layer,
 		$ = layui.jquery;
 	tools = layui.tools;
-	$(".qzyhide").hide();
 	var userId = tools.getUsermessage("id");
 	tools.getAllSensorype("#allSensor");
 	getAllTerminal("#AllTerminal",userId);

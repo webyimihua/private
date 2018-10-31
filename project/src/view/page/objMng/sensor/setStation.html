@@ -22,71 +22,57 @@
 			<input type="hidden" id="setId" value="" />
 			<div class="layui-row">
 				<div class="magb15 layui-col-md5 layui-col-xs12">
-					<label class="layui-form-label layui-form-set">测回数</label>
+					<label class="layui-form-label layui-form-set">仪器高度</label>
 					<div class="layui-input-block layui-input-set">
-						<input type="text" name="roundNum" class="layui-input " lay-verify="required" placeholder="">
+						<input type="text" name="height" class="layui-input " lay-verify="required" placeholder="">
 					</div>
 				</div>
 				<div class="magb15 layui-col-md5 layui-col-xs12">
-					<label class="layui-form-label layui-form-set">重测次数</label>
+					<label class="layui-form-label layui-form-set">空间X坐标</label>
 					<div class="layui-input-block layui-input-set">
-						<input type="text" name="repeatNum" class="layui-input " lay-verify="required" placeholder="">
+						<input type="text" name="xValue" class="layui-input " lay-verify="required" placeholder="">
 					</div>
 				</div>
 			</div>
 			<div class="layui-row">
 				<div class="magb15 layui-col-md5 layui-col-xs12">
-					<label class="layui-form-label layui-form-set">半测回归零差（秒度）</label>
+					<label class="layui-form-label layui-form-set">空间Y坐标</label>
 					<div class="layui-input-block layui-input-set">
-						<input type="text" name="misclosure" class="layui-input " lay-verify="required" placeholder="">
+						<input type="text" name="yValue" class="layui-input " lay-verify="required" placeholder="">
 					</div>
 				</div>
 				<div class="magb15 layui-col-md5 layui-col-xs12">
-					<label class="layui-form-label layui-form-set">同一测回不同方向2C较差（秒度）</label>
+					<label class="layui-form-label layui-form-set">空间Z坐标</label>
 					<div class="layui-input-block layui-input-set">
-						<input type="text" name="one2c" class="layui-input " lay-verify="required" placeholder="">
+						<input type="text" name="zValue" class="layui-input " lay-verify="required" placeholder="">
 					</div>
 				</div>				
 			</div>
 			<div class="layui-row">
 				<div class="magb15 layui-col-md5 layui-col-xs12">
-					<label class="layui-form-label layui-form-set">不同测回同一方向2C较差（秒度）</label>
+					<label class="layui-form-label layui-form-set">参考点已知斜距</label>
 					<div class="layui-input-block layui-input-set">
-						<input type="text" name="multi2c" class="layui-input " lay-verify="required" placeholder="">
+						<input type="text" name="givenSlopeDistance" class="layui-input " lay-verify="required" placeholder="">
 					</div>
 				</div>
 				<div class="magb15 layui-col-md5 layui-col-xs12">
-					<label class="layui-form-label layui-form-set">竖盘指标差（秒度）</label>
+					<label class="layui-form-label layui-form-set">参考点已知竖直角</label>
 					<div class="layui-input-block layui-input-set">
-						<input type="text" name="vIndex" class="layui-input " lay-verify="required" placeholder="">
+						<input type="text" name="givenVAngle" class="layui-input " lay-verify="required" placeholder="">
 					</div>
 				</div>		
-			</div>
+			</div>			
 			<div class="layui-row">
 				<div class="magb15 layui-col-md5 layui-col-xs12">
-					<label class="layui-form-label layui-form-set">不同测回同一方向均差（秒度）</label>
+					<label class="layui-form-label layui-form-set">参考点与基准点已知夹角</label>
 					<div class="layui-input-block layui-input-set">
-						<input type="text" name="oneAverage" class="layui-input " lay-verify="required" placeholder="">
-					</div>
-				</div>		
-				<div class="magb15 layui-col-md5 layui-col-xs12">
-					<label class="layui-form-label layui-form-set">不同测回竖直方向均差（秒度）</label>
-					<div class="layui-input-block layui-input-set">
-						<input type="text" name="vAverage" class="layui-input " lay-verify="required" placeholder="">
-					</div>
-				</div>		
-			</div>
-			<div class="layui-row">
-				<div class="magb15 layui-col-md5 layui-col-xs12">
-					<label class="layui-form-label layui-form-set">同一测回斜距差（mm）</label>
-					<div class="layui-input-block layui-input-set">
-						<input type="text" name="oneDistance" class="layui-input "  placeholder="">
+						<input type="text" name="givenIntersectionAngle" class="layui-input "  placeholder="">
 					</div>
 				</div>
 				<div class="magb15 layui-col-md5 layui-col-xs12">
-					<label class="layui-form-label layui-form-set">不同测回个点斜距差（mm）</label>
+					<label class="layui-form-label layui-form-set">基准点方位角</label>
 					<div class="layui-input-block layui-input-set ">
-						<input type="text" name="multiDistance" class="layui-input "  placeholder="">
+						<input type="text" name="givenAzimuthAngle" class="layui-input "  placeholder="">
 					</div>
 				</div>
 			</div>			
