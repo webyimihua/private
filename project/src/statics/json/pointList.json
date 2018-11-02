@@ -11,7 +11,7 @@
       "fileName" : "#34墩",
       "sensor" : "**",
       "distance" : "12.3",
-      "watchType" : "温度检测"
+      "watchType" : "温度监测"
     },{
       "index": "2",     
       "pointNo": "JCE12039239",      
@@ -20,7 +20,7 @@
       "fileName" : "#34墩",
       "sensor" : "**",
       "distance" : "12.3",
-      "watchType" : "温度检测"
+      "watchType" : "温度监测"
     }    
   ]
 }

@@ -9,7 +9,10 @@ layui.use(['form', 'layer', 'tools'], function() {
 		$ = layui.jquery;
 	tools = layui.tools;
 	tools.getAllstation("#allStation", getAllLine);
-
+	form.on("select(bureauId)", function(data) {
+		var strid = data.value;
+		tools.getAllallowperson("#allAllowperson", strid);
+	})
 	function getAllLine() {
 		tools.getAllLine("#addLine", getAllWatchtype);
 	}
@@ -24,12 +27,8 @@ layui.use(['form', 'layer', 'tools'], function() {
 
 	function getAllperson(callback) {
 		var id = $("#allStation").val();
-		tools.getAllallowperson("#allAllowperson", id, callback);
+		tools.getAllallowperson("#allAllowperson",id, callback);
 	}
-	form.on("select(bureauId)", function(data) {
-		var strid = data.value;
-		tools.getAllallowperson("#allAllowperson", strid);
-	})
 
 	function setOlddataShow() {
 		var id = $("#editId").val();
@@ -48,11 +47,11 @@ layui.use(['form', 'layer', 'tools'], function() {
 				//处理监测维度多选
 				setDbselectData(data.dimensionIds,1);
 				var userdata = data.userIds;
-				getAllperson(function(userdata){
-					//处理人员白名单多选
-					setDbselectData(data,2);
+				getAllperson(function(){
+				//处理人员白名单多选
+				setDbselectData(userdata,2);
+				form.render();					
 				})
-
 			} else {
 				if(res.message) {
 					layer.msg(res.message);
@@ -71,6 +70,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 		});
 		var param = tools.getFormallData("#editDataform");
 		param.dimensionIds = owatchtype;
+		param.userIds = ouserlist;
 		addStructureData(param, index);
 		return false;
 	})
@@ -105,7 +105,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 		if(type == 1) {
 			var idsbox = $("input:checkbox[name='dimensionIds']");
 		} else {
-			var idsbox = $("input:checkbox[name='userIds']:checked");
+			var idsbox = $("input:checkbox[name='userIds']");
 		}
 		var idsnum = idsbox.size();
 		for(var i = 0; i < data.length; i++) {
@@ -115,7 +115,6 @@ layui.use(['form', 'layer', 'tools'], function() {
 					idsbox.eq(j).attr("checked", "checked");
 					idsbox.eq(j).parent("dd").find(".layui-form-checkbox").addClass("layui-form-checked");
 				}
-
 			}
 		}
 		var textsstr = texts.join(',');
@@ -123,6 +122,8 @@ layui.use(['form', 'layer', 'tools'], function() {
 			$("#editdimensionIds").val(textsstr);
 			if(data) {
 				owatchtype = data;
+			}else{
+				layer.msg('监测维度不能为空');
 			}
 		} else {
 			$("#userIds").val(textsstr);

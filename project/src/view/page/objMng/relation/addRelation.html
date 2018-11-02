@@ -17,43 +17,43 @@
 <form class="layui-form" id="addStructure" lay-filter="addStructure"  style="width:80%;">	
 	<div class="layui-row">
 		<div class="magb15 layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">检测体</label>
+			<label class="layui-form-label">监测体</label>
 			<div class="layui-input-block">
-				<select name="objectId" id="Allobject"  lay-verify="required">
-					<option value="">请选择检测体</option>					
+				<select name="objectId" id="Allobject" lay-filter="Allobject"  lay-verify="required">
+					<option value="">请选择监测体</option>					
 				</select>
 			</div>
 		</div>
 		<div class="magb15 layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">检测域</label>
+			<label class="layui-form-label">监测域</label>
 			<div class="layui-input-block">
 				<select name="domainId" id="Alldomain"  lay-verify="required">
-					<option value="">请选择检测域</option>					
+					<option value="">请选择监测域</option>					
 				</select>
 			</div>
 		</div>		
 	</div>
 	<div class="layui-row">
 		<div class="magb15 layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">检测点</label>
+			<label class="layui-form-label">监测点</label>
 			<div class="layui-input-block">
-				<select name="unitId" id="addLine"  lay-verify="required">
-					<option value="">请选择检测点</option>					
+				<select name="unitId" id="Allunit"  lay-verify="required">
+					<option value="">请选择监测点</option>					
 				</select>
 			</div>
 		</div>
 		<div class="magb15 layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">终端</label>
+			<label class="layui-form-label">传感器</label>
 			<div class="layui-input-block">
-				<select name="railway_lineId" id="addLine"  lay-verify="required">
-					<option value="">请选择检终端</option>					
+				<select name="railway_lineId" id="addSensor"  lay-verify="required">
+					<option value="">请选择检传感器</option>					
 				</select>
 			</div>
 		</div>
 	</div>
 	<div class="layui-form-item layui-row layui-col-xs12">
 		<div class="layui-input-block">
-			<button class="layui-btn layui-btn" lay-submit="" lay-filter="addStructure">新增关系管理</button>
+			<button class="layui-btn layui-btn-lg" lay-submit="" lay-filter="addStructure">新增关系管理</button>
 			<button class="layui-btn layui-btn-lg cancel">&nbsp;&nbsp;&nbsp;&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;&nbsp;&nbsp;&nbsp;</button>
 		</div>
 	</div>

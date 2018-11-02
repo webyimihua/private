@@ -27,6 +27,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 		});
 		var param = tools.getFormallData("#addStructure");
 		param.dimensionIds = owatchtype;
+		param.userIds = ouserlist;
 		addStructureData(param, index);
 		return false;
 	})

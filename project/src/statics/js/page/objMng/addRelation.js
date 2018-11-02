@@ -10,13 +10,19 @@ layui.use(['form', 'layer', 'tools'], function() {
 	layer = parent.layer === undefined ? layui.layer : top.layer,
 		$ = layui.jquery;
 	tools = layui.tools;
-	tools.getAllstation("#allStation");
-	
-	form.on("select(bureauId)",function(data){
+	var userid = tools.getUsermessage("id");
+	tools.getThatstructure("#Allobject",userid);	
+	form.on("select(Allobject)",function(data){
 	        var strid = data.value;
-	        tools.getAllallowperson("#allAllowperson",strid);
+	        tools.getThatstructureFile("#Alldomain",strid);
     	})	
+	form.on("select(Alldomain)",function(data){
+	        var strid = data.value;
+//	        tools.getAllallowperson("#Allunit",strid);
+    	})	
+    tools.getThatpointSensor("#addSensor",userid);		
 	form.render();
+	
 	form.on("submit(addStructure)", function(data) {
 		//弹出loading
 		var index = top.layer.msg('数据提交中，请稍候', {

@@ -10,7 +10,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		laytpl = layui.laytpl,
 		table = layui.table;
 		tools = layui.tools;
-	//查找构筑物列表
+	//查找关系列表
 	tools.getAllstation("#stationOPtion");
 	var userid = tools.getUsermessage("id");
 	var tableIns = table.render({
@@ -25,7 +25,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		method: 'post',
 		where: {
 			action_flag: "w_query",
-			sub_flag: "object",
+			sub_flag: "sensor_unit",
 			isFlur: false,
 			isReserve: false,
 			isDivide: true,
@@ -47,7 +47,8 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 			dataName: 'data' //数据列表的字段名称，默认：data	
 		},
 		done: function(res, curr, count) {
-			
+			$("[data-field='sensorId']").css('display', 'none');
+			$("[data-field='unitId']").css('display', 'none');
 		},
 		cols: [
 			[
@@ -65,14 +66,26 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 					align: "center",
 				},
 				{
-					field: 'name',
-					title: '监测点名称',
+					field: 'sensorId',
+					title: '传感器ID',
 					minWidth: 180,
 					align: "center"
 				},
 				{
-					field: 'bureauId',
-					title: '终端名称',
+					field: 'sensorname',
+					title: '传感器名称',
+					minWidth: 180,
+					align: "center"
+				},
+				{
+					field: 'unitId',
+					title: '监测点ID',
+					width: "",
+					align: 'center'
+				},	
+				{
+					field: 'unitname',
+					title: '监测点名称',
 					width: "",
 					align: 'center'
 				},			
@@ -121,7 +134,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 	$(".addItem_btn").click(function() {
 		addItem();
 	})
-	//修改构筑物
+	//修改关系
 	function editItem(id) {
 		var index = layui.layer.open({
 			title: "编辑关系管理",
@@ -143,7 +156,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 			layui.layer.full(index);
 		})
 	}
-	//查看构筑物详情
+	//查看关系详情
 	function showItem(data) {
 		var index = layui.layer.open({
 			title: "关系管理详情",
@@ -186,7 +199,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 		}
 	});
 	
-	//删除构筑物
+	//删除关系
 	function delStructuredata(id, index) {
 		var param = {};
 		param.action_flag = "w_delete";
