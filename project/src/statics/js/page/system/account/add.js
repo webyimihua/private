@@ -8,6 +8,8 @@ layui.use(['form','layer','tools'],function(){
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery;
         tools = layui.tools;
+        var userid = tools.getUsermessage("id");
+        tools.getAllallboodys("#allBodyss",userid);
     form.on("submit(addUser)",function(data){
         var data = data.field;
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
@@ -71,5 +73,39 @@ layui.use(['form','layer','tools'],function(){
             }
         })
     }
+    
+    
+    //处理监测维度多选
+	$(document).on("click", ".userdownpanel .layui-select-title", function(e) {
+		var otext = [];
+		var $select = $(this).parents(".layui-form-select");
+		$(".layui-form-select").not($select).removeClass("layui-form-selected");
+		$select.addClass("layui-form-selected");
+		e.stopPropagation();
+	}).on("click", ".layui-form-checkbox", function(e) {
+		$(this).addClass("layui-form-checked");
+		getSelectdata()
+		e.stopPropagation();
+	});
+	
+	function getSelectdata() {
+		var ids = [];
+		var texts = [];
+		var idsbox = $("input:checkbox[name='userIds']:checked");
+		console.log(idsbox)
+		var idsnum = idsbox.size();
+		for(var i = 0; i < idsnum; i++) {
+			ids.push(idsbox.eq(i).val()); 
+			texts.push(idsbox.eq(i).attr("title")); 
+		}
+		var idstr = ids.join(',');
+		var textsstr = texts.join(',');
+		if(idstr){
+			owatchtype = idstr;
+		}else{
+			layer.msg('监测维度不能为空')
+		}
+		$("#dimensionIds").val(textsstr);
+	}
 
 })

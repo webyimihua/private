@@ -54,7 +54,21 @@
 				<input name="password" type="text" class="layui-input " lay-verify="required" placeholder="初始化密码" autocomplete="off">
 			</div>
 		</div>
+		<div class="magb15 layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">用户白名单</label>
+			<div class="layui-input-block">			
+			 <div class="layui-unselect layui-form-select userdownpanel cs">
+                <div class="layui-select-title">
+                    <input type="text" placeholder="请选择要加入的白名单" name="userIds" id="userIds" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i>
+                </div>
+                <dl class="layui-anim layui-anim-upbit" id="allBodyss" style="" lay-filter="userIds">
+                    <!--<dd><input type="checkbox" name="userIds" title="沉降监测" value="1" lay-skin="primary" ></dd>-->
+                </dl>
+           </div>
+           </div>
+		</div>
    </div>
+   <div></div>
 	<div class="layui-form-item layui-row layui-col-xs12">
 		<div class="layui-input-block">
 			<button type="button" class="layui-btn layui-btn" lay-submit="" lay-filter="addUser">提交</button>

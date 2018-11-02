@@ -10,6 +10,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         laytpl = layui.laytpl,
         table = layui.table;
         tools = layui.tools;
+        var userid = tools.getUsermessage("id");
     //用户列表
     var tableIns = table.render({
        elem: '#itemListtable',
@@ -24,7 +25,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         where: {
             action_flag:"w_query",
             sub_flag:"alarm",
-            userId:1,
+            userId:userid,
             isDivide:true,
         },
         request: {

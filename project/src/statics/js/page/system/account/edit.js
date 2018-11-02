@@ -8,6 +8,7 @@ layui.use(['form','layer','tools'],function(){
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery;
         tools = layui.tools;
+        var userid = tools.getUsermessage("id");
     form.on("submit(editUser)",function(data){
          var data = data.field;
         //弹出loading
@@ -48,6 +49,7 @@ layui.use(['form','layer','tools'],function(){
 
 
     findMonitorStation()
+    getAllBodyname()
     function findMonitorStation(){
         var param ={};
         param.action_flag="w_show_option";
@@ -63,6 +65,26 @@ layui.use(['form','layer','tools'],function(){
                   $("#editMonitorStation").val($(".bureauIds").val());
                    form.render('select');
              }
+        })
+    }
+    
+     //初始化查询构筑物下拉菜单
+    function getAllBodyname() {
+        var param = {};
+        param.action_flag = "w_show_option";
+        param.sub_flag = "object";
+        param.id = userid;
+        tools.sendRequest(net.ObjectServlet, param, function(res) {
+            if(res.result == 1) {
+              var data = res.data;
+              var str = '<option value="">请选择白名单</option>';
+              for(var i in data){
+                 str+='<option value="'+data[i].id+'">'+data[i].name+'</option>'
+              }
+              $("#editBodyname").html(str);
+              $("#editBodyname").val($(".bureauIds").val());
+              form.render('select');
+            }
         })
     }
 

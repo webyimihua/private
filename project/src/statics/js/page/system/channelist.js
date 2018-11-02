@@ -40,14 +40,16 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 			  ,dataName: 'data' //数据列表的字段名称，默认：data	
 	        },
 	        done: function(res, curr, count){
-	          $("[data-field='id']").css('display','none');
+	          $("[data-field='gateway_typeId']").css('display','none');
+	          $("[data-field='sensor_typeId']").css('display','none');
 	        },
 	        cols : [[
 	            // {type: "checkbox", fixed:"left", width:50},
 	            {field: 'index', title: '序号', width:80, align:"center",type:"numbers"},
-	            {field: 'id', title: '序号', width:1, align:"center"},
-	            {field: 'sensor_typeId', title: '传感器类型ID', minWidth:280, align:"center"},
-	            {field: 'gateway_typeId', title: '终端类型ID', minWidth:280, align:"center"},
+	            {field: 'gateway_typeId', title: '序号', width:1, align:"center"},
+	            {field: 'sensor_typeId', title: '序号', width:1, align:"center"},
+	            {field: 'sensor_typename', title: '传感器类型', minWidth:280, align:"center"},
+	            {field: 'gateway_typename', title: '终端类型', minWidth:280, align:"center"},
 	            {field: 'remark', title: '备注', minWidth:280, align:"center"},
 	            {title: '操作', minWidth:175, templet:'#handleListBar',fixed:"right",align:"center"}
 	        ]]
@@ -89,7 +91,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 	$(".addItem_btn").click(function() {
 		addItem();
 	})
-	//修改构筑物
+	//编辑通道关系
 	function editItem(data) {
 		var index = layui.layer.open({
 			title: "编辑通道关系",

@@ -337,6 +337,26 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 					}
 				})
 			},
+			//1查询构筑物白名单
+			getAllallboodys:function(div,id,callback){
+				var param = {};
+				param.action_flag = "w_show_option";
+                param.sub_flag = "object";
+				param.id = id;
+				tools.sendRequest(net.ObjectServlet, param, function(res) {
+					if(res.result == 1) {
+						var data = res.data;
+						if(data.length > 0) {
+							tools.initAllperson(div,data,function(){
+								form.render('select');
+								if(typeof callback == 'function'){					
+									callback();
+								}
+							});					
+						}
+					}
+				})
+			},
 			//初始化下拉数据
 			initAllperson: function(div,data,callback) {
 				if(data){
