@@ -326,9 +326,10 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 				tools.sendRequest(net.ObjectServlet, param, function(res) {
 					if(res.result == 1) {
 						var data = res.data;
+						$(div).html("");
 						if(data.length > 0) {
 							tools.initAllperson(div,data,function(){
-								form.render('select');
+								form.render();
 								if(typeof callback == 'function'){					
 									callback();
 								}

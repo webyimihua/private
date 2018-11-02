@@ -27,15 +27,21 @@
 			"spread": false
 		},
 		{
-			"tit": "终端",
+			"tit": "终端管理",
 			"icon": "&#xe628;",
 			"href": "page/objMng/terminal/terminalList.html",
 			"spread": false
 		},
 		{
-			"tit": "传感器",
+			"tit": "传感器管理",
 			"icon": "&#xe674;",
 			"href": "page/objMng/sensor/sensorList.html",
+			"spread": false
+		},
+		{
+			"tit": "关系管理",
+			"icon": "&#xe64c;",
+			"href": "page/objMng/relation/relationList.html",
 			"spread": false
 		}
 	],

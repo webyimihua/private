@@ -8,7 +8,6 @@ layui.use(['form', 'layer', 'tools'], function() {
 	layer = parent.layer === undefined ? layui.layer : top.layer,
 		$ = layui.jquery;
 	tools = layui.tools;
-	$(".qzyhide").hide();
 	var userId = tools.getUsermessage("id");
 	tools.getAllSensorype("#allSensor");
 	getAllTerminal("#AllTerminal",userId);
@@ -22,15 +21,6 @@ layui.use(['form', 'layer', 'tools'], function() {
 		addSensorData(param, index);
 		return false;
 	})
-
-	form.on('select(sensorTypes)', function(data) {
-		if(data.value != 12) {
-			$(".qzyhide").hide();
-		} else {
-			$(".qzyhide").show();
-		}
-		form.render('select');
-	});
 	//新增
 	function addSensorData(param, index) {
 		param.action_flag = "w_add";
