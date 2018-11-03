@@ -15,76 +15,34 @@
 </head>
 <body class="childrenBody">
 <form class="layui-form" id="showDataform" style="width:80%;">
-    <div class="layui-row">
-        <div class="layui-form-item layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">构筑物名称</label>
-			<div class="layui-input-block">
-				<input type="text" name="name" class="layui-input noborder" readonly="readonly" value="" >
-			</div>
-		</div>
-		<div class="magb15 layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">行别</label>
-			<div class="layui-input-block">
-				<input type="text" name="direction" class="layui-input noborder" readonly="readonly" value="">
-			</div>
-		</div>
-    </div>
-    <div class="layui-row">
-        <div class="magb15 layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">所属铁路局</label>
-			<div class="layui-input-block">
-				<input type="text" name="bureauname" class="layui-input noborder" readonly="readonly" value="">
-			</div>
-		</div>
-        <div class="layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">类型</label>
-			<div class="layui-input-block">
-				<input type="text" name="object_typename" class="layui-input noborder" readonly="readonly" value="">
-			</div>
-		</div>
-    </div>
 	<div class="layui-row">
 		<div class="magb15 layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">所属铁路线</label>
+			<label class="layui-form-label">监测体</label>
 			<div class="layui-input-block">
-				<input type="text" name="railway_linename" class="layui-input noborder" readonly="readonly" value="">
+				<input type="text" name="objectId" class="layui-input noborder" readonly="readonly">				
 			</div>
 		</div>
 		<div class="magb15 layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">监测维度</label>
+			<label class="layui-form-label">监测域</label>
 			<div class="layui-input-block">
-				<input type="text" name="dimensionIds" class="layui-input noborder" readonly="readonly"  value="">
+				<input type="text" name="objectId" class="layui-input noborder" readonly="readonly">				
+			</div>
+		</div>		
+	</div>
+	<div class="layui-row">
+		<div class="magb15 layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">监测点</label>
+			<div class="layui-input-block">
+				<input type="text" name="unitId" class="layui-input noborder" readonly="readonly">				
+			</div>
+		</div>
+		<div class="magb15 layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">传感器</label>
+			<div class="layui-input-block">
+				<input type="text" name="railway_lineId" class="layui-input noborder" readonly="readonly">
 			</div>
 		</div>
 	</div>
-	<div class="layui-row layui-form-item">
-        <div class="layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">经度</label>
-			<div class="layui-input-block">
-				<input type="text"  name="longitude" class="layui-input noborder" readonly="readonly"  value="">
-			</div>
-		</div>
-		<div class="layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">起始里程</label>
-			<div class="layui-input-block">
-				<input type="text" name="startMileage" class="layui-input noborder" readonly="readonly"  value="">
-			</div>
-		</div>
-    </div>
-    <div class="layui-row layui-form-item">
-        <div class="layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">纬度</label>
-			<div class="layui-input-block">
-				<input type="text" name="latitude" class="layui-input noborder" readonly="readonly"  value="">
-			</div>
-		</div>
-		<div class="layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label">结束里程</label>
-			<div class="layui-input-block">
-				<input type="text" name="endMileage" class="layui-input noborder" readonly="readonly"  value="">
-			</div>
-		</div>
-   </div>	
 </form>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
 </body>

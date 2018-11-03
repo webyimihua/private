@@ -42,14 +42,17 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 			},
 			//初始化下拉数据
 			initOptionitem: function(div,data,callback) {
-				var str = '';
-				for(var i = 0; i < data.length; i++) {
-					str += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
-				}
-				$(div).append(str);
-				if(typeof callback == 'function'){					
-					callback();
-				}
+				$(div).html("");
+				if(data){
+					var str = '';				
+					for(var i = 0; i < data.length; i++) {
+						str += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
+					}
+					$(div).append(str);
+					if(typeof callback == 'function'){					
+						callback();
+					}
+				}				
 			},
 			//根据name覆盖老数据修改、详情使用(不适合多选、单选)
 			setOlddataToform: function(div, data,callback){
@@ -273,6 +276,9 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 									callback();
 								}
 							});					
+						}else{
+							$(div).html("");
+							form.render('select');
 						}
 					}
 				})
@@ -327,6 +333,7 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 					if(res.result == 1) {
 						var data = res.data;
 						$(div).html("");
+						form.render('select');
 						if(data.length > 0) {
 							tools.initAllperson(div,data,function(){
 								form.render();

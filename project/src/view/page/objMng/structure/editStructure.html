@@ -15,7 +15,6 @@
 </head>
 <body class="childrenBody">
 <form class="layui-form" id="editDataform" lay-filter="editStructure" style="width:80%;">
-	<input type="hidden" name="alarmStatus" value="正常" />
 	<input type="hidden" name="id" id="editId" value="" />
     <div class="layui-row">
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
@@ -119,7 +118,7 @@
 			<div class="layui-input-block">				
 			 <div class="layui-unselect layui-form-select userdownpanel cs">
                 <div class="layui-select-title">
-                    <input type="text" placeholder="请选择要加入的用户白名单（非必填）" name="userIds" id="userIds" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i>
+                    <input type="text" placeholder="请选择要加入的用户白名单（非必填）" id="userIds" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i>
                 </div>
                 <dl class="layui-anim layui-anim-upbit" id="allAllowperson" style="" lay-filter="userIds">
                     <!--<dd><input type="checkbox" name="userIds" title="沉降监测" value="1" lay-skin="primary" ></dd>-->
