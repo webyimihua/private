@@ -37,7 +37,7 @@ layui.use(['form','layer','tools'],function(){
         param.roleId=data.roleId;
         param.bureauId=data.bureauId;
         param.phoneNum=data.phoneNum;
-       	param.userIds = ouserlist;
+       	param.objectIds = ouserlist;
         tools.sendRequest(net.SystemServlet,param,function(res){
            if(res.result == 1){
                     top.layer.close(index);

@@ -9,6 +9,7 @@ layui.use(['form','layer','tools'],function(){
         $ = layui.jquery;
         tools = layui.tools;
         var userid = tools.getUsermessage("id");
+        tools.getAllallboodys("#allBodyss",userid);
     form.on("submit(editUser)",function(data){
          var data = data.field;
         //弹出loading
@@ -87,6 +88,18 @@ layui.use(['form','layer','tools'],function(){
             }
         })
     }
+    
+    //处理监测维度多选
+	$(document).on("click", ".downpanel .layui-select-title", function(e) {
+		var otext = [];
+		var $select = $(this).parents(".layui-form-select");
+		$(".layui-form-select").not($select).removeClass("layui-form-selected");
+		$select.addClass("layui-form-selected");
+		e.stopPropagation();
+	}).on("click", ".downpanel .layui-form-checkbox", function(e) {	
+		getSelectdata();
+		e.stopPropagation();
+	});
 
     
 
