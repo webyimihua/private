@@ -103,7 +103,7 @@ layui.use(['form', 'layer', 'tools'], function() {
 			$("#dimensionIds").val(textsstr);
 		}else{
 			if(idstr){
-				ouserlist = idstr;
+				ouserlist = idstr;				
 			}
 			$("#userIds").val(textsstr);
 		}
