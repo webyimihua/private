@@ -76,36 +76,35 @@ layui.use(['form','layer','tools'],function(){
     
     
     //处理监测维度多选
-	$(document).on("click", ".userdownpanel .layui-select-title", function(e) {
+	$(document).on("click", ".downpanel .layui-select-title", function(e) {
 		var otext = [];
 		var $select = $(this).parents(".layui-form-select");
 		$(".layui-form-select").not($select).removeClass("layui-form-selected");
 		$select.addClass("layui-form-selected");
 		e.stopPropagation();
-	}).on("click", ".layui-form-checkbox", function(e) {
-		$(this).addClass("layui-form-checked");
-		getSelectdata()
+	}).on("click", ".downpanel .layui-form-checkbox", function(e) {		
+		getSelectdata(1);
 		e.stopPropagation();
 	});
 	
 	function getSelectdata() {
-		var ids = [];
-		var texts = [];
-		var idsbox = $("input:checkbox[name='userIds']:checked");
-		console.log(idsbox)
-		var idsnum = idsbox.size();
-		for(var i = 0; i < idsnum; i++) {
-			ids.push(idsbox.eq(i).val()); 
-			texts.push(idsbox.eq(i).attr("title")); 
-		}
-		var idstr = ids.join(',');
-		var textsstr = texts.join(',');
-		if(idstr){
-			owatchtype = idstr;
-		}else{
-			layer.msg('监测维度不能为空')
-		}
-		$("#dimensionIds").val(textsstr);
+//		var ids = [];
+//		var texts = [];
+//		var idsbox = $("input:checkbox[name='userIds']:checked");
+//		console.log(idsbox)
+//		var idsnum = idsbox.size();
+//		for(var i = 0; i < idsnum; i++) {
+//			ids.push(idsbox.eq(i).val()); 
+//			texts.push(idsbox.eq(i).attr("title")); 
+//		}
+//		var idstr = ids.join(',');
+//		var textsstr = texts.join(',');
+//		if(idstr){
+//			owatchtype = idstr;
+//		}else{
+//			layer.msg('监测维度不能为空')
+//		}
+//		$("#dimensionIds").val(textsstr);
 	}
 
 })
