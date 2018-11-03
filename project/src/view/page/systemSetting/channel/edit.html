@@ -14,20 +14,26 @@
 </head>
 <body class="childrenBody">
 <form class="layui-form" style="width:90%;">
+	<input type="hidden" class="sensor_typeId" name="" id="" value="" />
+	<input type="hidden" class="gateway_typeId" name="" id="" value="" />
+	<input type="hidden" class="ids" name="id" id="" value="" />
     <div class="layui-row layui-form-item">
-        <div class="layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label" style="width:88px;">传感器类型ID</label>
+        <div class="magb15 layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">传感器</label>
 			<div class="layui-input-block">
-				<input type="hidden" name="id" class="ids" id="ids" value="" />
-				<input name="sensor_typeId" style="width:98%;" type="text" class="layui-input sensor_typeId" lay-verify="required" placeholder="传感器类型ID" autocomplete="off">
+				<select name="sensor_typeId" id="thatPoints" lay-verify="required">					
+					<!--<option value="">请选择终端类型</option>-->
+				</select>
 			</div>
 		</div>
    </div>
     <div class="layui-row layui-form-item">
-        <div class="layui-col-md5 layui-col-xs12">
-			<label class="layui-form-label" style="width:88px;">终端类型ID</label>
+        <div class="magb15 layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">终端类型</label>
 			<div class="layui-input-block">
-				<input name="gateway_typeId" style="width:98%;" type="text" class="layui-input gateway_typeId" lay-verify="required" placeholder="终端类型ID" autocomplete="off">
+				<select name="gateway_typeId" id="thatFile" lay-verify="required">					
+					<option value="">请选择终端类型</option>
+				</select>
 			</div>
 		</div>
    </div>

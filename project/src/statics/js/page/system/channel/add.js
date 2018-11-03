@@ -8,6 +8,7 @@ layui.use(['form','layer','tools'],function(){
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery;
         tools = layui.tools;
+         var userid = tools.getUsermessage("id");
     form.on("submit(addStation)",function(data){
         var data = data.field;
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
@@ -32,6 +33,40 @@ layui.use(['form','layer','tools'],function(){
             }else{
                 top.layer.close(index);
                 top.layer.msg(res.message);
+            }
+        })
+    }
+    getAllStationname("#thatFile")
+    getAllPointname("#thatPoints")
+     //初始化数据
+    function getAllStationname(div) {
+        var param = {};
+        param.action_flag = "w_show_option";
+        param.sub_flag = "gateway_type";
+        tools.sendRequest(net.ObjectServlet, param, function(res) {
+            if(res.result == 1) {
+                var data = res.data;
+                if(data.length > 0) {
+                    tools.initOptionitem(div,data,function(){
+                        form.render('select');
+                    });                 
+                } else {
+                    layer.msg("请先新增铁路局数据");
+                };
+            }
+        })
+    }
+     //初始化数据
+    function getAllPointname(div) {
+        var param = {};
+        param.action_flag = "w_show_option";
+        param.sub_flag = "sensor_type";
+        tools.sendRequest(net.ObjectServlet, param, function(res) {
+            if(res.result == 1) {
+                var data = res.data;
+                tools.initOptionitem(div,data,function(){
+                    form.render('select');
+                });
             }
         })
     }

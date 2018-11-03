@@ -38,6 +38,43 @@ layui.use(['form','layer','tools'],function(){
             }
         })
     }
+     
+    getAllStationname("#thatFile")
+    getAllPointname("#thatPoints")
+     //初始化数据
+    function getAllStationname(div) {
+        var param = {};
+        param.action_flag = "w_show_option";
+        param.sub_flag = "gateway_type";
+        tools.sendRequest(net.ObjectServlet, param, function(res) {
+            if(res.result == 1) {
+                var data = res.data;
+                if(data.length > 0) {
+                    tools.initOptionitem(div,data,function(){
+                    	$("#thatFile").val($(".gateway_typeId").val());
+                        form.render('select');
+                    });                 
+                } else {
+                    layer.msg("请先新增铁路局数据");
+                };
+            }
+        })
+    }
+     //初始化数据
+    function getAllPointname(div) {
+        var param = {};
+        param.action_flag = "w_show_option";
+        param.sub_flag = "sensor_type";
+        tools.sendRequest(net.ObjectServlet, param, function(res) {
+            if(res.result == 1) {
+                var data = res.data;
+                tools.initOptionitem(div,data,function(){
+                	$("#thatPoints").val($(".sensor_typeId").val());
+                    form.render('select');
+                });
+            }
+        })
+    }
 
 
 })

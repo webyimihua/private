@@ -83,14 +83,14 @@ layui.use(['form','layer','tools'],function(){
 		$select.addClass("layui-form-selected");
 		e.stopPropagation();
 	}).on("click", ".downpanel .layui-form-checkbox", function(e) {		
-		getSelectdata(1);
+		console.log($("input:checkbox[name='userIds']:checked"))
 		e.stopPropagation();
 	});
 	
 	function getSelectdata() {
 //		var ids = [];
 //		var texts = [];
-//		var idsbox = $("input:checkbox[name='userIds']:checked");
+		var idsbox = $("input:checkbox[name='userIds']:checked");
 //		console.log(idsbox)
 //		var idsnum = idsbox.size();
 //		for(var i = 0; i < idsnum; i++) {

@@ -44,7 +44,7 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 			initOptionitem: function(div,data,callback) {
 				$(div).html("");
 				if(data){
-					var str = '';				
+					var str = '<option value="">请先选择下拉数据</option>';				
 					for(var i = 0; i < data.length; i++) {
 						str += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
 					}
