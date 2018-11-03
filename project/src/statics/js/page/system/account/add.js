@@ -3,6 +3,7 @@ layui.config({
 }).extend({
     "tools" : "tools"
 })
+var ouserlist = [];
 layui.use(['form','layer','tools'],function(){
     var form = layui.form
         layer = parent.layer === undefined ? layui.layer : top.layer,
@@ -36,6 +37,7 @@ layui.use(['form','layer','tools'],function(){
         param.roleId=data.roleId;
         param.bureauId=data.bureauId;
         param.phoneNum=data.phoneNum;
+       	param.userIds = ouserlist;
         tools.sendRequest(net.SystemServlet,param,function(res){
            if(res.result == 1){
                     top.layer.close(index);
@@ -82,29 +84,26 @@ layui.use(['form','layer','tools'],function(){
 		$(".layui-form-select").not($select).removeClass("layui-form-selected");
 		$select.addClass("layui-form-selected");
 		e.stopPropagation();
-	}).on("click", ".downpanel .layui-form-checkbox", function(e) {		
-		console.log($("input:checkbox[name='userIds']:checked"))
+	}).on("click", ".downpanel .layui-form-checkbox", function(e) {	
+		getSelectdata();
 		e.stopPropagation();
 	});
 	
 	function getSelectdata() {
-//		var ids = [];
-//		var texts = [];
+		var ids = [];
+		var texts = [];
 		var idsbox = $("input:checkbox[name='userIds']:checked");
-//		console.log(idsbox)
-//		var idsnum = idsbox.size();
-//		for(var i = 0; i < idsnum; i++) {
-//			ids.push(idsbox.eq(i).val()); 
-//			texts.push(idsbox.eq(i).attr("title")); 
-//		}
-//		var idstr = ids.join(',');
-//		var textsstr = texts.join(',');
-//		if(idstr){
-//			owatchtype = idstr;
-//		}else{
-//			layer.msg('监测维度不能为空')
-//		}
-//		$("#dimensionIds").val(textsstr);
+		var idsnum = idsbox.size();
+		for(var i = 0; i < idsnum; i++) {
+			ids.push(idsbox.eq(i).val()); 
+			texts.push(idsbox.eq(i).attr("title")); 
+		}
+		var idstr = ids.join(',');
+		var textsstr = texts.join(',');
+		if(idstr){
+			ouserlist = idstr;
+		}
+		$("#userIds").val(textsstr);
 	}
 
 })
