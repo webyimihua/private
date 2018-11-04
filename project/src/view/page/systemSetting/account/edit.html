@@ -13,10 +13,11 @@
 	<link rel="stylesheet" href="../../../css/public.css" media="all" />
 </head>
 <body class="childrenBody">
-<form class="layui-form" style="width:80%;">
+<form class="layui-form" id="editDataform" style="width:80%;">
     <div class="layui-row">
         <input type="hidden" name="id" class="ids">
         <input type="hidden" class="bureauIds">
+        <input type="hidden" class="selbodys">
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">用户名</label>
 			<div class="layui-input-block">
@@ -39,7 +40,7 @@
         <div class="layui-form-item layui-col-md5 layui-col-xs12">
 			<label class="layui-form-label">手机号</label>
 			<div class="layui-input-block">
-				<input name="phoneNum" type="text" class="layui-input phoneNum" lay-verify="required" placeholder="请填写构筑物的名称" autocomplete="off">
+				<input name="phoneNum" type="text" class="layui-input phoneNum" maxlength="11" lay-verify="required" placeholder="请填写构筑物的名称" autocomplete="off">
 			</div>
 		</div>
 		<div class="magb15 layui-col-md5 layui-col-xs12">

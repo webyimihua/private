@@ -356,6 +356,7 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 						var data = res.data;
 						$(div).html("");
 						form.render();
+						console.log(data)
 						if(data.length > 0) {
 							tools.initAllperson(div,data,function(){
 								form.render();
