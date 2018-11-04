@@ -143,9 +143,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'tools'], function() {
 					body.find(".ids").val(data.id);
 					body.find(".bureauIds").val(data.bureauId);
 					var userdata = data.objectIds;	
-					var leng = (userdata.length)-2; 
-					var userdataArr = userdata.substr(1,leng);					
-					body.find(".selbodys").val(userdataArr);
+					body.find(".selbodys").val(userdata);
 					form.render();
 				}
 				setTimeout(function() {

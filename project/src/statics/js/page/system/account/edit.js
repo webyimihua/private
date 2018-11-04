@@ -84,22 +84,24 @@ layui.use(['form', 'layer', 'tools'], function() {
 	})
 	//  处理白的名单
 	function setDbselectData(data) {
+		var ids = [];
 		var texts = [];
 		var idsbox = $("#allBodyss input:checkbox[name='userIds']");
 		var idsnum = idsbox.size();
 		for(var i = 0; i < data.length; i++) {
 			for(var j = 0; j < idsnum; j++) {
 				if(data[i] == idsbox.eq(j).val()) {
-					console.log(data[i])
+					ids.push(idsbox.eq(i).val()); 
 					texts.push(idsbox.eq(j).attr("title"));
 					idsbox.eq(j).attr("checked", "checked");
 					idsbox.eq(j).parent("dd").find(".layui-form-checkbox").addClass("layui-form-checked");
 				}
 			}
 		}
+		var idstr = ids.join(',');
 		var textsstr = texts.join(',');
 		$("#userIds").val(textsstr);
-		ouserlist = texts;
+		ouserlist = idstr;
 	}
 	//初始化查询构筑物下拉菜单
 	function getAllBodyname() {

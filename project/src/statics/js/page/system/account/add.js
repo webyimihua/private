@@ -37,7 +37,7 @@ layui.use(['form','layer','tools'],function(){
         param.roleId=data.roleId;
         param.bureauId=data.bureauId;
         param.phoneNum=data.phoneNum;
-       	param.objectIds = JSON.stringify(ouserlist);
+       	param.objectIds = ouserlist;
         tools.sendRequest(net.SystemServlet,param,function(res){
            if(res.result == 1){
                     top.layer.close(index);
@@ -101,7 +101,7 @@ layui.use(['form','layer','tools'],function(){
 		var idstr = ids.join(',');
 		var textsstr = texts.join(',');
 		if(idstr){
-			ouserlist = ids;
+			ouserlist = idstr;
 		}
 		$("#userIds").val(textsstr);
 	}
