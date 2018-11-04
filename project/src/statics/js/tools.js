@@ -269,6 +269,7 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 				tools.sendRequest(net.ObjectServlet, param, function(res) {
 					if(res.result == 1) {
 						var data = res.data;
+						console.log(data)
 						if(data.length > 0) {
 							tools.initOptionitem(div,data,function(){
 								form.render('select');
@@ -300,6 +301,9 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 									callback();
 								}
 							});					
+						}else{
+							$(div).html("");
+							form.render('select');
 						}
 					}
 				})
