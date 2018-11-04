@@ -18,11 +18,10 @@ layui.use(['form', 'layer', 'tools'], function() {
     	})	
 	form.on("select(Alldomain)",function(data){
 	        var strid = data.value;
-//	        tools.getAllallowperson("#Allunit",strid);
+	        tools.getAllallowperson("#Allunit",strid);
+	        console.log(111)
     	})	
-    tools.getThatpointSensor("#addSensor",userid);		
-	form.render();
-	
+	form.render();	
 	form.on("submit(addStructure)", function(data) {
 		//弹出loading
 		var index = top.layer.msg('数据提交中，请稍候', {

@@ -17,11 +17,10 @@ layui.use(['form', 'layer', 'tools'], function() {
 			tools.getThatstructureFile("#Alldomain", strid);
 		})
 	}
-
-	form.on("select(Alldomain)", function(data) {
-		var strid = data.value;
-		//	        tools.getAllallowperson("#Allunit",strid);
-	})
+	form.on("select(Alldomain)",function(data){
+	        var strid = data.value;
+	        tools.getAllallowperson("#Allunit",strid);
+    	})	
 	tools.getThatpointSensor("#addSensor", userid);
 
 	function setOlddataShow() {

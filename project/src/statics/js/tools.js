@@ -283,15 +283,16 @@ layui.define(["form", "element", "layer", "jquery"], function(exports) {
 					}
 				})
 			},
-			//11查询某一监测体的所有传感器列表
-			getThatpointSensor:function(div,id,callback){
+			//11查询某一监测域的所有监测点列表
+			getThatFilepoint:function(div,id,callback){
 				var param = {};
 				param.action_flag = "w_show_option";
-				param.sub_flag = "sensor";
+				param.sub_flag = "unit";
 				param.id = id;
 				tools.sendRequest(net.ObjectServlet, param, function(res) {
 					if(res.result == 1) {
 						var data = res.data;
+						console.log(data)
 						if(data.length > 0) {
 							tools.initOptionitem(div,data,function(){
 								form.render('select');
