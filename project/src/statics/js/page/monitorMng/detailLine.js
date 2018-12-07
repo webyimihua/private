@@ -11,18 +11,27 @@ layui.use(['element','layer','jquery','laydate'],function(){
 	   elem: '#pointData1'
       ,max: 0
       ,done: function(value, date){
-          $("#pointData2").val(getHisSelTime(value,15))
+          // $("#pointData2").val(getHisSelTime(value,15))
        }
 	});
+  laydate.render({
+     elem: '#pointData2'
+      ,max: 0
+      ,done: function(value, date){
+          // $("#pointData2").val(getHisSelTime(value,15))
+       }
+  });
     
 	
 })
 
 $(function(){
+    $("#pointData2").val(getNowFormatDate());
+    $("#pointData1").val(getHistoryData(30));
     setTimeout(function(){
         if($("#pointTypes").val()){
               $(".search_btns").attr("id","searchTemData");
-              getTemperatureData(getNowFormatDate(),getHistoryData(15))
+              getTemperatureData(getNowFormatDate(),getHistoryData(30))
         }else{
             $("#temperature_box").html("暂时没有数据！！！")
         }
@@ -31,8 +40,12 @@ $(function(){
     $("#searchTemData").click(function(){
          var endTime = $("#pointData2").val();
          var startTime = $("#pointData1").val();
-         if(startTime != ''){
-            getTemperatureData(endTime,startTime);
+         if(startTime != '' && endTime != ''){
+            if(startTime <= endTime){
+              getTemperatureData(endTime,startTime);
+            }else{
+              layer.msg('开始日期不能大于结束日期');
+            }
          }else{
             layer.msg('请选择开始日期！');
          }
@@ -71,7 +84,6 @@ function getTemperatureData(endTime,startTime){
       endDate:endDate,
    },function(res,indexclose){
    	  var data = JSON.parse(res);
-   	  console.log(data)
    	 if(!data.data[0].data){
    	 	 $("#temperature_box").html("没有数据！！！")
    	 	 return ;
