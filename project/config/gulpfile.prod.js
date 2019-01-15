@@ -62,10 +62,13 @@ function prod(){
 		    .pipe(connect.reload())
 		});
 		//打包APP
-		gulp.task('APP', function() {  
-		  return gulp.src('src/view/resource/*.apk')
-		    .pipe(gulp.dest('dist/resource'))
-		});
+		 gulp.task('resource', function() {  
+	        return gulp.src(configUrl.resource.src)
+	          // .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
+	          .pipe(gulp.dest(configUrl.resource.dest))
+	      //  .pipe(notify({ message: 'Images task complete' }))
+	          .pipe(connect.reload())
+	     });
 
 		//打包APP
 		gulp.task('ffr', function() {  
@@ -174,6 +177,7 @@ function prod(){
 		    ['buildstyles', 'buildsass','buildscripts','buildimages','jsplugins','layui'],
 		    'revHtml', 
 		    'json',
+		    'resource',
 		    'webserver',
 		    cb
 		    );
