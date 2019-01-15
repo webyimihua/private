@@ -42,6 +42,10 @@ var configUrl={
 	img:{
 		src:'src/statics/images/**/*',
 		dest:'dist/images'
+	},
+	resource:{
+		src:'./src/view/**/*.apk',
+		dest:'dist/'
 	}
 }
 
@@ -95,6 +99,14 @@ function dev(){
       //  .pipe(notify({ message: 'Images task complete' }))
           .pipe(connect.reload())
       });
+      // APP资源包
+      gulp.task('resource', function() {  
+        return gulp.src(configUrl.resource.src)
+          // .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
+          .pipe(gulp.dest(configUrl.resource.dest))
+      //  .pipe(notify({ message: 'Images task complete' }))
+          .pipe(connect.reload())
+      });
 
       /*************************@@公共部分***********************************/
       // 启动前清理dist项目
@@ -131,7 +143,7 @@ function dev(){
         condition = false;
            runSequence(
           'clean', 
-          ['styles', 'sass','scripts','images','layui','json'],  //模板处理
+          ['styles', 'sass','scripts','images','layui','json','resource'],  //模板处理
           'html',  //开发中HTML模板
           cb
           );

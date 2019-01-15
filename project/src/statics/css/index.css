@@ -157,3 +157,24 @@ iframe{ position:absolute; height:100%; width:100%; border:none;}
 .header .layui-nav .layui-nav-item,.header .layui-nav .layui-nav-item>a,.header,.logo{ line-height:50px !important; max-height:50px; !important;}
 .mobileTopLevelMenus{ float:left;}
 .hideMenu{ margin-top: 10px;}
+.functionSrtting_boxs .left_sm{
+	float:left;
+	width:50%;
+	font-size:14px;
+	color:#333;
+	margin-top:20px;
+	line-height:20px;
+	letter-spacing:4px;
+	padding:0 10px;
+}
+.functionSrtting_boxs .right_erweima{
+	float:left;
+	margin-left:20px;
+	width:130px;
+	height:130px;
+}
+.functionSrtting_boxs .right_erweima img{
+	width:100%;
+	height:100%;
+	margin-top:22px;
+}

@@ -161,7 +161,7 @@ layui.use(['form','layer','table','laytpl','tools'],function(){
         var param ={};
         param.action_flag="w_show_option";
         param.sub_flag="bureau";
-        param.id=1;
+        param.id=userid;
         tools.sendRequest(net.ObjectServlet,param,function(res){
             if(res.result){
                   var data = res.data;

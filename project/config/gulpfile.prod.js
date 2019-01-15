@@ -27,20 +27,24 @@ var configUrl={
 		dest:'dist/'
 	},
 	css:{
-		src:'./src/statics/style/**/*.css',
-		dest:'dist/style'
+		src:'./src/statics/css/**/*.css',
+		dest:'dist/css'
 	},
 	scss:{
-		src:'src/statics/style/**/*.scss',
-		dest:'dist/style'
+		src:'src/statics/css/**/*.scss',
+		dest:'dist/css'
 	},
 	js:{
-		src:'src/statics/script/**/*.js',
-		dest:'dist/script'
+		src:'src/statics/js/**/*.js',
+		dest:'dist/js'
 	},
 	img:{
 		src:'src/statics/images/**/*',
 		dest:'dist/images'
+	},
+	resource:{
+		src:'./src/view/**/*.apk',
+		dest:'dist/'
 	}
 }
 /*************************@@公共部分***********************************/
@@ -107,10 +111,10 @@ function prod(){
 		});
 		// css样式刷新，压缩
 		gulp.task('buildstyles', function() {  
-		  return gulp.src('./src/statics/style/**/*.css')
+		  return gulp.src('./src/statics/css/**/*.css')
 		  .pipe(rev())    
 		  .pipe(minifycss())
-		  .pipe(gulp.dest('dist/style'))
+		  .pipe(gulp.dest('dist/css'))
 		});
 		// sass样式刷新，压缩
 		gulp.task('buildsass', function() {  
@@ -136,15 +140,29 @@ function prod(){
 		//  .pipe(notify({ message: 'Images task complete' }))
 		    .pipe(connect.reload())
 		});
-		 //打包画图工具
-	      gulp.task('draw', function() {  
-	        return gulp.src('src/view/draw/**')
-	          .pipe(gulp.dest('dist/draw'))
+
+		 // layui插件
+	      gulp.task('layui', function() {  
+	        return gulp.src('src/statics/layui/**/*')
+	          .pipe(gulp.dest('dist/layui'))
+	          .pipe(rename({suffix: '.min'}))
+	          .pipe(connect.reload())
 	      });
-	      //打包APP
-	      gulp.task('sound', function() {  
-	        return gulp.src('src/view/sound/*')
-	          .pipe(gulp.dest('dist/sound'))
+
+	       // json插件
+	      gulp.task('json', function() {  
+	        return gulp.src('src/statics/json/**/*.json')
+	          .pipe(gulp.dest('dist/json'))
+	      });
+
+		  //创建本地服务器
+	      gulp.task('webserver',function () {
+	          connect.server({
+	            port:3001,
+	            livereload:false,            
+	            // host:"192.168.0.14",
+	            root:['dist/', 'dist/']
+	          });
 	      });
 
 		//上产上线环境
@@ -153,8 +171,10 @@ function prod(){
 		     runSequence(
 		    'clean', 
 		    ['revsty','revsass','revjs'],  
-		    ['buildstyles', 'buildsass','buildscripts','buildimages','jsplugins','sound','draw'],
+		    ['buildstyles', 'buildsass','buildscripts','buildimages','jsplugins','layui'],
 		    'revHtml', 
+		    'json',
+		    'webserver',
 		    cb
 		    );
 		});

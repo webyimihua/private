@@ -92,55 +92,27 @@ layui.use(['form','jquery',"layer"],function() {
     //功能设定
     $(".functionSetting").click(function(){
         layer.open({
-            title: "功能设定",
+            title: "下位机一键同步",
+            area: ["580px", "400px"],
+            type:2,
+            content :'page/ocs.html',
+        })
+    })
+    
+    //app下载
+    $(".functionLoad").click(function(){
+        layer.open({
+            title: "移动端APP下载",
             area: ["380px", "280px"],
             type: "1",
-            content :  '<div class="functionSrtting_box">'+
-                            '<form class="layui-form">'+
-                                '<div class="layui-form-item">'+
-                                    '<label class="layui-form-label">开启Tab缓存</label>'+
-                                    '<div class="layui-input-block">'+
-                                        '<input type="checkbox" name="cache" lay-skin="switch" lay-text="开|关">'+
-                                        '<div class="layui-word-aux">开启后刷新页面不关闭打开的Tab页</div>'+
-                                    '</div>'+
-                                '</div>'+
-                                '<div class="layui-form-item">'+
-                                    '<label class="layui-form-label">Tab切换刷新</label>'+
-                                    '<div class="layui-input-block">'+
-                                        '<input type="checkbox" name="changeRefresh" lay-skin="switch" lay-text="开|关">'+
-                                        '<div class="layui-word-aux">开启后切换窗口刷新当前页面</div>'+
-                                    '</div>'+
-                                '</div>'+
-                                '<div class="layui-form-item skinBtn">'+
-                                    '<a href="javascript:;" class="layui-btn layui-btn-sm layui-btn-normal" lay-submit="" lay-filter="settingSuccess">设定完成</a>'+
-                                    '<a href="javascript:;" class="layui-btn layui-btn-sm layui-btn-primary" lay-submit="" lay-filter="noSetting">取消</a>'+
-                                '</div>'+
-                            '</form>'+
+            content :  '<div class="functionSrtting_boxs">'+
+                            '<div class="left_sm">目前支持安卓版本APP下载使用，请使用手机QQ扫码工具扫描右侧的二维码进行安装包下载，下载完成后直接安装即可</div>'+
+                            '<div class="right_erweima">'+
+                               '<img src="../images/load.png" alt="二维码下载"/>'+
+                            '</div>'+
                         '</div>',
             success : function(index, layero){
-                //如果之前设置过，则设置它的值
-                $(".functionSrtting_box input[name=cache]").prop("checked",cacheStr=="true" ? true : false);
-                $(".functionSrtting_box input[name=changeRefresh]").prop("checked",changeRefreshStr=="true" ? true : false);
-                $(".functionSrtting_box input[name=oneLogin]").prop("checked",oneLoginStr=="true" ? true : false);
-                //设定
-                form.on("submit(settingSuccess)",function(data){
-                    window.sessionStorage.setItem("cache",data.field.cache=="on" ? "true" : "false");
-                    window.sessionStorage.setItem("changeRefresh",data.field.changeRefresh=="on" ? "true" : "false");
-                    window.sessionStorage.setItem("oneLogin",data.field.oneLogin=="on" ? "true" : "false");
-                    window.sessionStorage.removeItem("menu");
-                    window.sessionStorage.removeItem("curmenu");
-                    location.reload();
-                    return false;
-                });
-                //取消设定
-                form.on("submit(noSetting)",function(){
-                    layer.closeAll("page");
-                });
-                //单一登陆提示
-                form.on('switch(multipleLogin)', function(data){
-                    layer.tips('温馨提示：此功能需要开发配合，所以没有功能演示，敬请谅解', data.othis,{tips: 1})
-                });
-                form.render();  //表单渲染
+                
             }
         })
     })
