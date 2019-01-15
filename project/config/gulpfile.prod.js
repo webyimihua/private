@@ -159,7 +159,7 @@ function prod(){
 	      });
 
 		  //创建本地服务器
-	      gulp.task('webserver',function () {
+	      gulp.task('buildwebserver',function () {
 	          connect.server({
 	            port:3001,
 	            livereload:false,            
@@ -178,7 +178,7 @@ function prod(){
 		    'revHtml', 
 		    'json',
 		    'resource',
-		    'webserver',
+		    'buildwebserver',
 		    cb
 		    );
 		});
