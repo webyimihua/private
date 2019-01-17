@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>文章列表--layui后台管理模板 2.0</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../../../layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="../../../css/public.css" media="all" />
+</head>
+<body class="childrenBody">
+<form class="layui-form" style="width:90%;">
+	<input type="hidden" class="sensor_typeId" name="" id="" value="" />
+	<input type="hidden" class="gateway_typeId" name="" id="" value="" />
+	<input type="hidden" class="ids" name="id" id="" value="" />
+    <div class="layui-row layui-form-item">
+        <div class="magb15 layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">传感器</label>
+			<div class="layui-input-block">
+				<select name="sensor_typeId" id="thatPoints" lay-verify="required">					
+					<!--<option value="">请选择终端类型</option>-->
+				</select>
+			</div>
+		</div>
+   </div>
+    <div class="layui-row layui-form-item">
+        <div class="magb15 layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">终端类型</label>
+			<div class="layui-input-block">
+				<select name="gateway_typeId" id="thatFile" lay-verify="required">					
+					<option value="">请选择终端类型</option>
+				</select>
+			</div>
+		</div>
+   </div>
+    <div class="layui-row layui-form-item">
+        <div class="layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label" style="width:88px;">备注</label>
+			<div class="layui-input-block">
+				<input name="remark" style="width:98%;" type="text" class="layui-input remark"  placeholder="备注" autocomplete="off" maxlength="50">
+			</div>
+		</div>
+   </div>
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<div class="layui-input-block">
+			<button type="button" class="layui-btn layui-btn" lay-submit="" lay-filter="editStation">提交</button>
+			<button type="reset" class="layui-btn layui-btn layui-btn-primary">取消</button>
+		</div>
+	</div>
+</form>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../js/page/system/channel/edit.js"></script>
+</body>
+</html>

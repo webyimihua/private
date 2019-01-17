@@ -1,0 +1,22 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 2,
+  "data": [
+    {
+      "ordinal": "1",     
+      "name": "#32墩",
+      "domain_typeId": "桥墩",
+      "objectId": "凤凰山特大桥",
+      "startMileage": "765.236",
+      "endMileage" : "775.365"
+    },{
+      "ordinal": "2",     
+      "name": "#34墩",
+      "domain_typeId": "桥墩",
+      "objectId": "凤凰山特大桥",
+      "startMileage": "715.236",
+      "endMileage" : "725.325"
+    }    
+  ]
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>文章列表--layui后台管理模板 2.0</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../../../layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="../../../css/public.css" media="all" />
+</head>
+<body class="childrenBody">
+<form class="layui-form" id="editDataform" style="width:80%;">
+    <div class="layui-row">
+        <input type="hidden" name="id" class="ids">
+        <input type="hidden" class="bureauIds">
+        <input type="hidden" class="selbodys">
+        <div class="layui-form-item layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">用户名</label>
+			<div class="layui-input-block">
+				<input name="username" type="text" class="layui-input username" lay-verify="required" placeholder="请填写构筑物的名称" autocomplete="off">
+			</div>
+		</div>
+		<div class="magb15 layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">账户等级</label>
+			<div class="layui-input-block">
+				<select name="roleId" class="roleId" lay-filter="userGrade">
+					<option value="">账户等级</option>
+					<option value="1">系统管理员</option>
+					<option value="2">设备管理员</option>
+					<option value="3">普通用户</option>
+				</select>
+			</div>
+		</div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">手机号</label>
+			<div class="layui-input-block">
+				<input name="phoneNum" type="text" class="layui-input phoneNum" maxlength="11" lay-verify="required" placeholder="请填写构筑物的名称" autocomplete="off">
+			</div>
+		</div>
+		<div class="magb15 layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">所属铁路局</label>
+			<div class="layui-input-block">
+				<select name="bureauId" class="userGrade" lay-filter="userGrade" id="editMonitorStation"></select>
+			</div>
+		</div>
+    </div>
+    <div class="layui-row layui-form-item">
+        <div class="layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">重置密码</label>
+			<div class="layui-input-block">
+				<input name="password" autocomplete="off" type="text" class="layui-input " lay-verify="required" placeholder="重置密码">
+			</div>
+		</div>
+		<div class="magb15 layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">用户白名单</label>
+			<div class="layui-input-block">			
+			 <div class="layui-unselect layui-form-select downpanel cs">
+                <div class="layui-select-title">
+                    <input type="text" placeholder="请选择要加入的白名单"  id="userIds" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i>
+                </div>
+                <dl class="layui-anim layui-anim-upbit" id="allBodyss" style="" lay-filter="userIds">
+                    <!--<dd><input type="checkbox" name="userIds" title="沉降监测" value="1" lay-skin="primary" ></dd>-->
+                </dl>
+           </div>
+           </div>
+		</div>
+   </div>
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<div class="layui-input-block">
+			<button type="button" class="layui-btn layui-btn" lay-submit="" lay-filter="editUser">提交</button>
+			<button type="reset" class="layui-btn layui-btn layui-btn-primary">取消</button>
+		</div>
+	</div>
+</form>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../js/page/system/account/edit.js"></script>
+</body>
+</html>

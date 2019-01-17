@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>首页--layui后台管理模板 2.0</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=OYyGNuI7pYKHbTaZlHsE1mZhKLIGs9Ey"></script>
+	<style>
+	    html,body{
+	    	margin:0;
+	    	padding:0;
+	    	height:100%;
+	    }
+	    ul,li{
+	    	padding: 0;
+	    	margin: 0;
+	    	list-style:none;
+	    }
+        #allmap{
+        	width:100%;
+        	height:100%;
+        }
+        .labelBubble .bubble{
+        	position: relative;
+        	width:80px;
+        	height:80px;
+        	border-radius:50%;
+        	background:url(../../images/mapdetail/marks.png) no-repeat;
+        	color: #000;
+        	font-size:14px;
+        	font-weight: bold;
+        	text-align: center;
+        	line-height:80px;
+          cursor: default;
+        }
+        .labelBubble .bubble .pName{
+          position: absolute;
+          top:60px;
+          right:-30px;
+        	width:140px;
+          height: 40px;
+        	text-overflow:ellipsis;
+        	overflow: hidden;
+        	white-space: nowrap;
+          line-height:40px;
+          margin-left: -30px;
+        }
+        .detail_hide_box{
+        	display:none;
+        	position: absolute;
+        	padding: 15px;
+        	top:-10px;
+        	right:-228px;
+        	width:180px;
+        	height: 230px;
+        	background: #fff;
+        	box-shadow: 1px 1px  5px #000;
+        	border-radius: 10px;
+        	color: #333;
+        	font-size: 12px;
+        	z-index: 999999999999;
+        }
+        .detail_hide_box .brageImgbox{
+          width: 100%;
+          height:80px;
+        }
+        .detail_hide_box .brageImgbox img{
+          width: 100%;
+          height: 100%;
+        }
+        .labelBubble .bubble:hover .detail_hide_box{
+        	display:block;
+        }
+        .detail_hide_box li{
+           width: 100%
+           height:12px;
+           line-height:15px;
+           text-align: left;
+           margin-bottom:4px;
+        }
+        .green{
+        	color:green;
+        }
+        .blue{
+        	color:blue;
+          font-size: 12px;
+          font-weight: normal;
+        }
+        .orange{
+        	color:orange;
+        }
+        .red{
+        	color:red;
+        }
+        .mapselect{
+          position: absolute;
+          z-index: 9999;
+          left: 20px;
+          top:20px;
+          width:200px;
+          height:35px;
+          border:1px solid #333;
+          line-height: 35px;
+          color: #333;
+          font-size: 16px;
+          outline:0;
+          border-radius: 3px;
+          box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+        }
+        .mapTabs{
+        	width:65px;
+        	height:65px;
+        	position:absolute;
+        	bottom:5px;
+        	right:5px;
+        	border-radius:50%;
+        	cursor:pointer;
+        	background:#FFFFFF;
+        }
+        .mapTabs>.bgs{
+        	width:100%;
+        	height:100%;
+        	background-repeat:no-repeat;
+        	background-position:center;
+        }
+	</style>
+</head>
+<body class="childrenBody" style="position:relative;">
+  <select class="mapselect" id="mapselect">
+       <option value="">请选择构筑物</option> 
+  </select>
+	<div id="allmap"></div>	
+	<ul class="mapTabs">
+	   <li class="bgs"></li>
+	</ul>
+</body>
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/main.js"></script>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/jQuery.cookie.js"></script>
+<script type="text/javascript">
+
+$(function(){
+  $("#mapselect").change(function(){
+     var target = $(this).val();
+     map.setZoom(10);
+     if(target){
+        var arrays = target.split(",");
+        map.panTo(new BMap.Point(arrays[0],arrays[1]));
+     }else{
+        layer.msg('请选择构筑物')
+     }
+     
+  })
+  
+  $(".mapTabs").click(function(){
+  	if($.cookie("mapTypes") != 2){
+  		$.cookie("mapTypes","2");
+  	}else{
+  		$.cookie("mapTypes","1");
+  	}
+  	window.location.reload();
+  })
+  
+  if($.cookie("mapTypes") == 2){
+	$(".mapTabs>.bgs").css("backgroundImage","url(../../images/map.png)");
+  }else{
+	$(".mapTabs>.bgs").css("backgroundImage","url(../../images/bal.png)");
+  }
+  
+})
+
+	// 百度地图API功能
+	var map = new BMap.Map("allmap",{minZoom:5});    // 创建Map实例
+	map.centerAndZoom("重庆",6);          // 设置地图显示的城市 此项是必须设置的
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+	map.disableDoubleClickZoom()  //禁止鼠标双击放大地图
+	//设置地图类型
+	//BMAP_NORMAL_MAP    此地图类型展示普通街道视图
+	//BMAP_PERSPECTIVE_MAP    此地图类型展示透视图像视图
+	//BMAP_SATELLITE_MAP    此地图类型展示卫星视图
+	//BMAP_HYBRID_MAP    此地图类型展示卫星和路网的混合视图
+	if($.cookie("mapTypes") == 2){
+		map.setMapType(BMAP_HYBRID_MAP);
+	}else{
+		map.setMapType(BMAP_NORMAL_MAP);
+	}
+	
+
+	//1、定义构造函数并继承Overlay
+//定义自定义覆盖物的构造函数  
+	function SquareOverlay(center,length,html,lng,lat){
+			this._center=center;
+			this._length=length;
+			this._html=html;
+			this._lng=lng;
+			this._lat=lat;
+	}
+
+ // 继承API的BMap.Overlay  
+    SquareOverlay.prototype = new BMap.Overlay();
+
+//2、初始化自定义覆盖物
+   //实现初始化方法
+	SquareOverlay.prototype.initialize=function(map){
+		this._map=map;
+		var div=document.createElement("div");
+		div.className="labelBubble";
+		div.style.position="absolute";
+		div.innerHTML=this._html;
+		map.getPanes().markerPane.appendChild(div);
+		this._div=div;
+		return div;
+	}
+	
+
+    //3、绘制覆盖物
+    // 实现绘制方法  
+    SquareOverlay.prototype.draw = function () {
+        // 根据地理坐标转换为像素坐标，并设置给容器 
+          var position = this._map.pointToOverlayPixel(this._center);
+          this._div.style.left = position.x - this._length / 2 + "px";
+          this._div.style.top = position.y - this._length / 2 + "px";       
+    }
+
+    //4、显示和隐藏覆盖物
+    // 实现显示方法  
+    SquareOverlay.prototype.show = function () {
+        if (this._div) {
+            this._div.style.display = "";
+        }
+    }
+    // 实现隐藏方法  
+    SquareOverlay.prototype.hide = function () {
+        if (this._div) {
+            this._div.style.display = "none";
+        }
+    }
+
+    //6、自定义覆盖物添加事件方法
+    SquareOverlay.prototype.addEventListener = function (event, fun) {
+        this._div['on' + event] = fun;
+    }
+
+	//添加覆盖物
+	function firstMap(arry){
+		map.clearOverlays();		
+		var arr=arry || [];
+		//添加覆盖物
+		for(var i=0;i<arr.length;i++){
+			var arrdate=arr[i];
+				(function(){
+					var html = '';
+					var lng=arrdate.longitude;
+					var lat=arrdate.latitude;
+					var name =arrdate.name;
+          var ids = arrdate.id;
+          var dimensionId = arrdate.dimensionIds;
+          var station = arrdate.bureauname;
+          var line = arrdate.railway_linename;
+          var direction = arrdate.direction;
+          var alarmStatus = arrdate.alarmStatus;
+					html+="<div class='overlays1 bubble' dimensionId='"+dimensionId+"' id='"+ids+"' lng='"+lng+"' lat='"+lat+"'>";
+					    html+="<p class='pName'>"+name+"</p>";
+					    html+="<ul class='detail_hide_box'>";
+                  html+="<li class='brageImgbox'><img src='../images/bridge.jpg' alt='大桥图片'></li>";
+			            html+="<li>"+name+"</li>";
+			            html+="<li>"+line+"</li>";
+			            html+="<li>"+station+"</li>";
+			            html+="<li>"+direction+"</li>";
+			            html+="<li><span>起始里程</span>&nbsp;&nbsp;&nbsp;<span class='green'>"+arrdate.startMileage+"</span></li>";
+			            html+="<li><span>结束里程</span>&nbsp;&nbsp;<span class='green'>"+arrdate.endMileage+"</span></li>";
+			            html+="<li><span class='blue'>E "+lng+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class='blue'>E "+lat+"</span></li>";
+			            html+="<li class='orange'>"+alarmStatus+"</li>";
+			            // html+="<li class='red'>红色预警1个</li>";
+					     html+="</ul>"
+					html+="</div>";
+					var point=new BMap.Point(lng,lat);
+					var mySquare=new SquareOverlay(point,90,html,lng,lat);
+					map.addOverlay(mySquare);
+					mySquare.addEventListener("dblclick",function(){
+            var ids = $(this).find(".bubble").attr("id");
+            var dimensionId = $(this).find(".bubble").attr("dimensionId");
+						var lng = $(this).find(".bubble").attr("lng");
+						var lat = $(this).find(".bubble").attr("lat");
+						map.panTo(new BMap.Point(lng,lat));
+             findBridgeList(ids,dimensionId)
+             return false;
+					});
+
+          mySquare.addEventListener("click",function(){
+            var lng = $(this).find(".bubble").attr("lng");
+            var lat = $(this).find(".bubble").attr("lat");
+            map.panTo(new BMap.Point(lng,lat));
+            return false;
+          });
+
+				})();
+		}
+	};
+   
+   $.post('http://47.95.13.55:8080/StructureMonitoring/DataServlet',{
+      action_flag:"w_query",
+      sub_flag:"object",
+      isFlur:"false",
+      isReserve:"false",
+      isDivide:"false",
+      hasForeign:"ture",
+      fKey:"{'object':['name']}",
+      userId:"1",
+   },function(res){
+   	  var data = JSON.parse(res)
+      firstMap(data.data);
+      pullSelectList(data.data)
+   })
+
+   function pullSelectList(data){
+      var str = '<option value="">请选择构筑物</option>';
+      for(var i in data){
+         str+='<option value="'+data[i].longitude+','+data[i].latitude+'">'+data[i].name+'</option>'
+      }
+      $("#mapselect").html(str);
+   }
+
+
+   function findBridgeList(ids,dimensionId){
+         var idss = JSON.parse(dimensionId)[0]
+         $.post('http://47.95.13.55:8080/StructureMonitoring/DataServlet',{
+            action_flag:"get_drawing_data",
+            objectId:ids,
+            dimensionId:idss,
+         },function(res){
+             var ress = JSON.parse(res)
+             if(ress.result == 1){
+                var data = ress.data;
+                if(data.length > 0){
+                  openDetails(res,dimensionId,ids,idss)
+                }else{
+                  layer.msg('监测体没有绑定监测域，请绑定后点击！！！');
+                }
+             }
+         })
+  }
+
+
+   function openDetails(data,dimensionId,ids,idss){
+      var index = layui.layer.open({
+          title : false,
+          type : 2,
+          closeBtn: 0,
+          content : "monitorMng/detail.html",
+          success : function(layero, index){
+              var body = layui.layer.getChildFrame('body', index);
+              body.find(".brageIds").val(data);
+              body.find(".selbrageIds").val(ids); 
+              body.find(".selbrageidss").val(idss); 
+              selectDimensionId(dimensionId,body)
+              setTimeout(function(){
+                  layui.layer.tips('点击此处返回', '.layui-layer-setwin .layui-layer-close', {
+                      tips: 3
+                  });
+              },500)
+          }
+      })
+      layui.layer.full(index);
+      //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+      $(window).on("resize",function(){
+          layui.layer.full(index);
+      })
+  }
+
+
+  function selectDimensionId(dimensionId,body){
+     var str = '';
+     var target = JSON.parse(dimensionId);
+     var selArry = [];
+     var initArry = [
+     {id:"1",name:"温度监测"},
+     {id:"2",name:"湿度监测"},
+     {id:"3",name:"气压监测"},
+     {id:"4",name:"沉降监测"},
+     {id:"5",name:"水平位移监测"},
+     {id:"6",name:"相对位移监测"},
+     {id:"7",name:"姿态变化监测"},
+     {id:"8",name:"风速风向监测"},
+     ]
+     for(var i in initArry){
+       for(var j in target){
+          if(initArry[i].id == target[j]){
+           selArry.push(initArry[i]);
+          }
+       }
+     }
+     for(var i in initArry){
+        str+='<option value="'+initArry[i].id+'">'+initArry[i].name+'</option>';
+     }
+     body.find("#selectAreas").html(str);
+
+  }
+
+
+</script>
+</html>

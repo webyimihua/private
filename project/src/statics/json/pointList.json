@@ -1,0 +1,26 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 3,
+  "data": [
+    {
+      "index": "1",     
+      "pointNo": "JCE12039239",      
+      "structureName": "黄河山特高桥",
+      "height": "76",
+      "fileName" : "#34墩",
+      "sensor" : "**",
+      "distance" : "12.3",
+      "watchType" : "温度监测"
+    },{
+      "index": "2",     
+      "pointNo": "JCE12039239",      
+      "structureName": "黄河山特高桥",
+      "height": "76",
+      "fileName" : "#34墩",
+      "sensor" : "**",
+      "distance" : "12.3",
+      "watchType" : "温度监测"
+    }    
+  ]
+}

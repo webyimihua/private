@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+  <meta charset="utf-8">
+  <title>拟物绘制</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" href="../../../layui/css/layui.css" media="all" />
+  <link rel="stylesheet" href="../../../css/public.css" media="all" />
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/page/detail.css">
+</head>
+<body>
+  <input type="hidden" class="brageIds" />
+  <input type="hidden" class="selbrageIds" />
+  <input type="hidden" class="selbrageidss" />
+	<div class="top-box">
+       <div class="sel_box">
+          <span class="tips">西安特大桥</span>
+          <select name="" id="selectAreas"></select>
+       </div>
+	     <div class="close_btn close_bre_btn">x</div>
+	</div>
+  <ul class="top_title_box">
+  	  <dl style="float:left;">
+  		 <li class="list_item">
+	         <span class="tips">延西线</span>
+	         <span>西安铁路局</span>
+	         <span>上下行</span>
+	      </li>
+	      <li class="list_item">
+	         <span class="tips">起始里程</span>
+	         <span>K125+100</span>
+	         <span class="tips">结束里程</span>
+	         <span>K125+100</span>
+	         <span>橙色预警1个</span>
+	      </li>
+	      <li class="list_item">
+	         <span class="tips">起始里程</span>
+	         <span>K125+100</span>
+	         <span class="tips">结束里程</span>
+	         <span>K125+100</span>
+	         <span>红色严重预警1个</span>
+	      </li>
+  	  </dl>
+      <dl style="float:left;margin-left:200px;margin-top:15px;">
+      	 <ul class="point_box">
+		     <li class="point">
+		         <span class="circles green"></span>
+		         <em>正常运行</em>
+		     </li>
+		     <li class="point">
+		        <span class="circles red"></span>
+		        <em>严重预警</em>
+		     </li>
+		     <li class="point">
+		        <span class="circles orange"></span>
+		        <em>初级预警</em>
+		     </li>
+		  </ul>
+      </dl>
+   </ul>
+	<div class="bradge-box">
+        <ul class="canvas-contai">
+        </ul>
+	</div>
+</body>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script src="../../js/page/monitorMng/datail.js"></script>
+</html>

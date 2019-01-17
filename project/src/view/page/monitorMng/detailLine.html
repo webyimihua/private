@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <meta charset="UTF-8">
+	  <title>Document</title>
+	  <meta charset="utf-8">
+	  <title>信息点查看页</title>
+	  <meta name="renderer" content="webkit">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	  <meta name="apple-mobile-web-app-capable" content="yes">
+	  <meta name="format-detection" content="telephone=no">
+	  <link rel="stylesheet" href="../../../layui/css/layui.css" media="all" />
+	  <link rel="stylesheet" href="../../../css/public.css" media="all" />
+	  <link rel="stylesheet" href="../../css/base.css">
+	  <link rel="stylesheet" href="../../css/page/detailLine.css">
+	</head>
+	<body>
+	    <input type="hidden" id="pointTypes">
+	    <input type="hidden" id="pointIds">
+	    <input type="hidden" id="pointTyp">
+		<div class="top-box">
+            <input type="text" class="layui-input selinputtext selinputtextleft" id="pointData1" placeholder="开始日期">
+            <span class="selinputgd"> &nbsp;&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <input type="text" class="layui-input selinputtext" readonly id="pointData2" placeholder="结束日期">
+            <div class="search_btns" id="searchTemData">查询</div>
+		     <div class="close_btn close_point_btn">x</div>
+		</div>
+		<div class="detail-line-box">
+		    <div id="temperature_box0" class="temperature_box">
+		    	<div class="line_picture" id="tem_container"></div>
+		    </div>
+		    <div id="temperature_box1" class="temperature_box">
+		    	<div class="line_picture" id="tem_container"></div>
+		    </div>
+		    <div id="temperature_box2" class="temperature_box">
+		    	<div class="line_picture" id="tem_container"></div>
+		    </div>
+		    <div id="temperature_box3" class="temperature_box">
+		    	<div class="line_picture" id="tem_container"></div>
+		    </div>
+		    <div id="temperature_box4" class="temperature_box">
+		    	<div class="line_picture" id="tem_container"></div>
+		    </div>
+		    <div id="temperature_box5" class="temperature_box">
+		    	<div class="line_picture" id="tem_container"></div>
+		    </div>
+		    <div id="temperature_box6" class="temperature_box">
+		    	<div class="line_picture" id="tem_container"></div>
+		    </div>
+		    <div id="temperature_box7" class="temperature_box">
+		    	<div class="line_picture" id="tem_container"></div>
+		    </div>
+		    <div id="temperature_box8" class="temperature_box">
+		    	<div class="line_picture" id="tem_container"></div>
+		    </div>
+		    <div id="temperature_box9" class="temperature_box">
+		    	<div class="line_picture" id="tem_container"></div>
+		    </div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../layui/layui.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="../../js/table_excle.js"></script>
+    <script src="../../js/page/monitorMng/detailLine.js"></script>
+</html>

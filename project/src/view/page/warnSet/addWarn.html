@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>预警新增页面</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../../../layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="../../../css/public.css" media="all" />
+	<link rel="stylesheet" href="../../../css/base.css" media="all" />
+</head>
+<body class="childrenBody">
+<form class="layui-form" style="width:80%;">
+    <div class="layui-row">       
+		<div class="magb15 layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">监测体</label>
+			<div class="layui-input-block">
+				<select class="userGrade" lay-filter="addMonitorBody" id="addMonitorBody"></select>
+			</div>
+		</div>
+		 <div class="layui-col-md5 layui-col-xs12" style="position: relative;">
+			<label class="layui-form-label">预警值名称</label>
+			<div class="layui-input-block">
+				<input name="param" type="text" class="layui-input " lay-verify="required" placeholder="请填写预警值名称" autocomplete="off">
+			</div>
+			<div class="warmtips_icon">
+				<ul class="tips_box">
+					<li class="tops">不同维度的预警值名称，请严格按照下列名称填写</li>
+					<li class="list_item">
+						沉降监测：</br>
+						altZ, rateZ
+					</li>
+					<li class="list_item">
+						相对位移监测：</br>
+						altX, rateX, altY, rateY, altZ, rateZ
+					</li>
+					<li class="list_item">
+						水平位移监测：</br>
+						altX, rateX, altY, rateY
+					</li>
+					<li class="list_item">
+						姿态变化监测：</br>
+						altX, rateX, altY, rateY
+					</li>
+				</ul>
+			</div>
+		</div>
+    </div>
+    <div class="layui-row">
+        <div class="magb15 layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">监测维度</label>
+			<div class="layui-input-block">
+				<select name="jcwdType"  class="userGrade" lay-filter="addMonitorDes" id="addMonitorDes"></select>
+			</div>
+		</div>
+         <div class="layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">初级预定值</label>
+			<div class="layui-input-block">
+				<input name="lowlevel" type="text" class="layui-input " lay-verify="required" placeholder="初级预定值" autocomplete="off">
+			</div>
+		</div>
+    </div>
+	<div class="layui-form-item layui-row">
+		<div class="layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">监测点</label>
+			<div class="layui-input-block">
+				<select name="unitId" class="userGrade" lay-filter="userGrade" id="addMonitorPoint"></select>
+			</div>
+		</div>
+		 <div class="layui-col-md5 layui-col-xs12">
+			<label class="layui-form-label">高级预警值</label>
+			<div class="layui-input-block">
+				<input name="highLevel" type="text" class="layui-input " lay-verify="required" placeholder="高级预警值" autocomplete="off">
+			</div>
+		</div>
+	</div>	
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<div class="layui-input-block">
+			<button type="button" class="layui-btn layui-btn-lg" lay-submit="" lay-filter="addAlarm">新增提交</button>
+			<button type="reset" class="layui-btn layui-btn-lg layui-btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;取消&nbsp;&nbsp;&nbsp;&nbsp;</button>
+		</div>
+	</div>
+</form>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../js/page/warnSet/addWarn.js"></script>
+</body>
+</html>
